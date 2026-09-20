@@ -1,0 +1,2736 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>طابقي كل طفل مع صاروخه</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Arial,
+        sans-serif;
+
+    direction: rtl;
+}
+
+body {
+    background: #dff5ff;
+}
+
+
+/* =========================================================
+   الصفحة
+========================================================= */
+
+.game-page {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   الخلفية
+========================================================= */
+
+.background {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    z-index: 1;
+
+    pointer-events: none;
+    user-select: none;
+}
+
+
+/* =========================================================
+   طبقة اللعبة
+========================================================= */
+
+.game-layer {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   الهيدر
+========================================================= */
+
+.header {
+    position: absolute;
+
+    top: 18px;
+
+    left: 25px;
+    right: 25px;
+
+    height: 92px;
+
+    display: grid;
+
+    grid-template-columns:
+        155px
+        1fr
+        170px;
+
+    gap: 14px;
+
+    align-items: center;
+
+    direction: ltr;
+
+    z-index: 100;
+
+    pointer-events: auto;
+}
+
+
+/* =========================================================
+   السابق
+========================================================= */
+
+.previous-btn {
+    width: 155px;
+    height: 60px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #e4f2ff;
+
+    color: #55718b;
+
+    font-family: inherit;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 15px rgba(0,0,0,.10);
+
+    transition: .2s ease;
+}
+
+.previous-btn:hover {
+    background: #d8edfc;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   عنوان المرحلة
+========================================================= */
+
+.title-box {
+    height: 82px;
+
+    background: #e4f2ff;
+
+    border:
+        3px solid #75a9d6;
+
+    border-radius: 24px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    direction: rtl;
+
+    box-shadow:
+        0 6px 15px rgba(0,0,0,.10);
+}
+
+.title-main {
+    font-size: 27px;
+
+    font-weight: 900;
+
+    color: #315b87;
+
+    line-height: 1;
+}
+
+.title-sub {
+    margin-top: 8px;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    color: #000;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   النجوم
+========================================================= */
+
+.score-box {
+    width: 170px;
+    height: 82px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    border:
+        3px solid #7ba6cc;
+
+    border-radius: 22px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.stars {
+    display: flex;
+
+    direction: ltr;
+
+    gap: 2px;
+}
+
+.star {
+    font-size: 27px;
+
+    line-height: 1;
+
+    color: #8d96a3;
+}
+
+.star.active {
+    color: #ffc107;
+}
+
+.score {
+    margin-top: 4px;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    color: #243b64;
+}
+
+
+/* =========================================================
+   السؤال
+========================================================= */
+
+.instruction {
+    position: absolute;
+
+    top: 125px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 570px;
+
+    min-height: 70px;
+
+    padding:
+        12px 28px;
+
+    background:
+        rgba(255,255,255,.94);
+
+    border-radius: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    font-size: 25px;
+
+    font-weight: 900;
+
+    color: #243b64;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,.08);
+
+    z-index: 90;
+
+    pointer-events: none;
+}
+
+.instruction.success {
+    color: #2e9b4b;
+}
+
+
+/* =========================================================
+   الأطفال
+========================================================= */
+
+.children-area {
+    position: absolute;
+
+    top: 215px;
+
+    left: 4%;
+    right: 4%;
+
+    height: 43%;
+
+    z-index: 50;
+
+    overflow: visible;
+
+    pointer-events: none;
+}
+
+.child-slot {
+    position: absolute;
+
+    top: 0;
+
+    width: 30%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    pointer-events: none;
+}
+
+.child-slot.one {
+    left: 2%;
+}
+
+.child-slot.two {
+    left: 35%;
+}
+
+.child-slot.three {
+    right: 2%;
+}
+
+
+/* =========================================================
+   صور الأطفال
+========================================================= */
+
+.child {
+    position: relative;
+
+    width: 205px;
+    height: 265px;
+
+    object-fit: contain;
+
+    object-position: center bottom;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    touch-action: none;
+
+    cursor: grab;
+
+    pointer-events: auto;
+
+    z-index: 100;
+
+    transform-origin:
+        center bottom;
+
+    animation:
+        childIdle
+        3.2s
+        ease-in-out
+        infinite;
+
+    transition:
+        opacity .15s ease,
+        transform .45s ease;
+}
+
+@keyframes childIdle {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    25% {
+        transform:
+            translateY(-4px)
+            rotate(-1deg);
+    }
+
+    50% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    75% {
+        transform:
+            translateY(-3px)
+            rotate(1deg);
+    }
+
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+}
+
+.child.dragging {
+    animation: none;
+
+    z-index: 999999 !important;
+
+    cursor: grabbing;
+
+    filter:
+        drop-shadow(
+            0 10px 12px
+            rgba(0,0,0,.20)
+        );
+
+    transition: none;
+}
+
+.child.matched {
+    pointer-events: none;
+
+    animation: none;
+
+    opacity: 0 !important;
+
+    visibility: hidden;
+}
+
+
+/* =========================================================
+   منطقة الصواريخ
+========================================================= */
+
+.cars-row {
+    position: absolute;
+
+    left: 3%;
+    right: 3%;
+
+    bottom: 18.5%;
+
+    height: 215px;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    align-items: center;
+
+    direction: ltr;
+
+    z-index: 80;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   مكان الصاروخ
+========================================================= */
+
+.car-target {
+    position: relative;
+
+    width: 31%;
+    height: 205px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 30px;
+
+    pointer-events: auto;
+
+    transition:
+        transform .2s ease,
+        background .2s ease;
+}
+
+.car-target.hovering {
+    transform:
+        scale(1.07);
+
+    background:
+        rgba(255,255,255,.15);
+}
+
+
+/* =========================================================
+   الصاروخ
+========================================================= */
+
+.car {
+    width: 700px;
+    height: 700px;
+
+    object-fit: contain;
+
+    object-position: center;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    pointer-events: none;
+
+    animation:
+        rocketIdle
+        2.8s
+        ease-in-out
+        infinite;
+
+    transform-origin:
+        center center;
+
+    transition:
+        opacity .2s ease;
+}
+
+
+/* =========================================================
+   حركة الصاروخ
+========================================================= */
+
+@keyframes rocketIdle {
+
+    0% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-6px)
+            rotate(1deg);
+    }
+
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+}
+
+
+/* =========================================================
+   🚀 انطلاق الصاروخ إلى الأعلى
+========================================================= */
+
+.car.moving {
+    animation:
+        rocketLaunch
+        1.7s
+        cubic-bezier(.25,.8,.25,1)
+        forwards;
+}
+
+@keyframes rocketLaunch {
+
+    0% {
+        transform:
+            translateY(0)
+            scale(1);
+
+        opacity: 1;
+    }
+
+    15% {
+        transform:
+            translateY(15px)
+            scale(1.03);
+
+        opacity: 1;
+    }
+
+    35% {
+        transform:
+            translateY(-100px)
+            scale(1.06);
+
+        opacity: 1;
+    }
+
+    60% {
+        transform:
+            translateY(-330px)
+            scale(1.08);
+
+        opacity: 1;
+    }
+
+    82% {
+        transform:
+            translateY(-650px)
+            scale(.95);
+
+        opacity: .95;
+    }
+
+    100% {
+        transform:
+            translateY(-1100px)
+            scale(.72);
+
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   نار الصاروخ
+========================================================= */
+
+.car-target.launching::after {
+
+    content: "🔥";
+
+    position: absolute;
+
+    bottom: 5px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 38px;
+
+    z-index: 2;
+
+    animation:
+        firePulse
+        .25s
+        ease-in-out
+        infinite alternate;
+}
+
+@keyframes firePulse {
+
+    from {
+        transform:
+            translateX(-50%)
+            scale(.85);
+    }
+
+    to {
+        transform:
+            translateX(-50%)
+            scale(1.15);
+    }
+}
+
+
+/* =========================================================
+   زر التالي
+========================================================= */
+
+.next-btn {
+    position: fixed !important;
+
+    right: 40px !important;
+
+    bottom: 35px !important;
+
+    top: auto !important;
+    left: auto !important;
+
+    width: 165px;
+    height: 62px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background: #e4f2ff;
+
+    color: #55718b;
+
+    font-family: inherit;
+
+    font-size: 24px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    z-index: 10000;
+
+    opacity: .5;
+
+    pointer-events: none;
+
+    box-shadow:
+        0 7px 18px
+        rgba(0,0,0,.10);
+
+    transition:
+        .2s ease;
+}
+
+.next-btn.ready {
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.next-btn.ready:hover {
+    background: #d8edfc;
+
+    transform:
+        translateY(-3px);
+}
+
+
+/* =========================================================
+   شاشة النجاح
+========================================================= */
+
+.success-overlay {
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    background:
+        rgba(255,255,255,.75);
+
+    backdrop-filter:
+        blur(7px);
+
+    -webkit-backdrop-filter:
+        blur(7px);
+
+    z-index: 50000;
+
+    overflow: hidden;
+}
+
+.success-overlay.show {
+    display: flex;
+}
+
+
+/* =========================================================
+   صواريخ الاحتفال
+========================================================= */
+
+.car-balloons {
+    position: absolute;
+
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+.balloon-car {
+    position: absolute;
+
+    bottom: -180px;
+
+    width: 115px;
+    height: 82px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 60px;
+
+    filter:
+        drop-shadow(
+            0 8px 6px
+            rgba(0,0,0,.15)
+        );
+
+    animation:
+        balloonUp
+        var(--duration)
+        ease-in-out
+        forwards;
+
+    animation-delay:
+        var(--delay);
+}
+
+.balloon-car::after {
+    content: "";
+
+    position: absolute;
+
+    top: 70px;
+
+    left: 50%;
+
+    width: 2px;
+    height: 130px;
+
+    background:
+        rgba(80,80,80,.45);
+
+    transform:
+        translateX(-50%);
+}
+
+@keyframes balloonUp {
+
+    0% {
+        bottom: -180px;
+
+        transform:
+            translateX(0)
+            rotate(-5deg);
+
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    50% {
+        transform:
+            translateX(30px)
+            rotate(5deg);
+    }
+
+    100% {
+        bottom: 110%;
+
+        transform:
+            translateX(-25px)
+            rotate(-5deg);
+
+        opacity: .95;
+    }
+}
+
+.balloon1 {
+    left: 3%;
+    --duration: 5.2s;
+    --delay: 0s;
+}
+
+.balloon2 {
+    left: 19%;
+    --duration: 5.8s;
+    --delay: .2s;
+}
+
+.balloon3 {
+    left: 36%;
+    --duration: 5.1s;
+    --delay: .45s;
+}
+
+.balloon4 {
+    left: 54%;
+    --duration: 5.9s;
+    --delay: .15s;
+}
+
+.balloon5 {
+    left: 72%;
+    --duration: 5.4s;
+    --delay: .35s;
+}
+
+.balloon6 {
+    left: 88%;
+    --duration: 6.1s;
+    --delay: .6s;
+}
+
+
+/* =========================================================
+   بطاقة النجاح
+========================================================= */
+
+.success-card {
+    position: relative;
+
+    width:
+        min(650px, 88vw);
+
+    padding:
+        35px 45px 40px;
+
+    background: white;
+
+    border-radius: 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.18);
+
+    z-index: 50001;
+
+    animation:
+        successPop
+        .45s
+        ease;
+}
+
+@keyframes successPop {
+
+    from {
+        transform:
+            scale(.7);
+
+        opacity: 0;
+    }
+
+    to {
+        transform:
+            scale(1);
+
+        opacity: 1;
+    }
+}
+
+.success-emoji {
+    font-size: 65px;
+
+    line-height: 1;
+}
+
+.success-title {
+    margin-top: 8px;
+
+    font-size: 38px;
+
+    font-weight: 900;
+
+    color: #243b64;
+}
+
+.success-stars {
+    margin-top: 8px;
+
+    font-size: 35px;
+
+    letter-spacing: 2px;
+}
+
+.success-text {
+    margin-top: 15px;
+
+    font-size: 24px;
+
+    font-weight: 900;
+
+    color: #000;
+}
+
+.success-description {
+    margin-top: 9px;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    font-weight: 700;
+
+    color: #000;
+}
+
+
+/* =========================================================
+   زر النجاح
+========================================================= */
+
+.stage-next-btn {
+    margin-top: 27px;
+
+    width: 270px;
+    height: 70px;
+
+    border: none;
+
+    border-radius: 24px;
+
+    background: #e4f2ff;
+
+    color: #55718b;
+
+    font-family: inherit;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(0,0,0,.08);
+
+    transition:
+        .2s ease;
+}
+
+.stage-next-btn:hover {
+    background: #d8edfc;
+
+    transform:
+        translateY(-3px);
+}
+
+
+/* =========================================================
+   الخطأ
+========================================================= */
+
+.wrong {
+    animation:
+        wrongShake
+        .45s
+        ease !important;
+}
+
+@keyframes wrongShake {
+
+    0%,
+    100% {
+        transform:
+            translateX(0);
+    }
+
+    25% {
+        transform:
+            translateX(-10px);
+    }
+
+    50% {
+        transform:
+            translateX(10px);
+    }
+
+    75% {
+        transform:
+            translateX(-7px);
+    }
+}
+
+
+/* =========================================================
+   iPad Portrait
+========================================================= */
+
+@media
+(min-width: 768px)
+and (max-width: 1100px) {
+
+    .header {
+
+        top: 14px;
+
+        left: 18px;
+        right: 18px;
+
+        grid-template-columns:
+            145px
+            1fr
+            158px;
+
+        gap: 11px;
+    }
+
+    .previous-btn {
+
+        width: 145px;
+
+        height: 58px;
+
+        font-size: 20px;
+    }
+
+    .title-box {
+        height: 78px;
+    }
+
+    .title-main {
+        font-size: 25px;
+    }
+
+    .title-sub {
+        font-size: 17px;
+    }
+
+    .score-box {
+
+        width: 158px;
+
+        height: 78px;
+    }
+
+    .instruction {
+
+        top: 115px;
+
+        width: 530px;
+
+        font-size: 23px;
+    }
+
+    .children-area {
+
+        top: 195px;
+
+        height: 44%;
+    }
+
+    .child {
+
+        width: 195px;
+
+        height: 255px;
+    }
+
+    .cars-row {
+
+        bottom: 18%;
+
+        height: 215px;
+    }
+
+    .car {
+
+        width: 700px;
+
+        height: 700px;
+    }
+
+    .next-btn {
+
+        right: 35px !important;
+
+        bottom: 30px !important;
+    }
+
+}
+
+
+/* =========================================================
+   شاشات أصغر
+========================================================= */
+
+@media
+(max-width: 767px) {
+
+    .header {
+
+        top: 8px;
+
+        left: 8px;
+        right: 8px;
+
+        height: 75px;
+
+        grid-template-columns:
+            105px
+            1fr
+            115px;
+
+        gap: 6px;
+    }
+
+    .previous-btn {
+
+        width: 105px;
+
+        height: 50px;
+
+        font-size: 16px;
+    }
+
+    .title-box {
+        height: 64px;
+    }
+
+    .title-main {
+        font-size: 19px;
+    }
+
+    .title-sub {
+        font-size: 12px;
+    }
+
+    .score-box {
+
+        width: 115px;
+
+        height: 64px;
+    }
+
+    .star {
+        font-size: 19px;
+    }
+
+    .score {
+        font-size: 15px;
+    }
+
+    .instruction {
+
+        top: 95px;
+
+        width: 90%;
+
+        min-height: 55px;
+
+        font-size: 17px;
+
+        padding:
+            8px 15px;
+    }
+
+    .children-area {
+
+        top: 155px;
+
+        left: 0;
+        right: 0;
+
+        height: 42%;
+    }
+
+    .child {
+
+        width: 120px;
+
+        height: 175px;
+    }
+
+    .cars-row {
+
+        bottom: 17%;
+
+        height: 160px;
+    }
+
+    .car {
+
+        width: 145px;
+
+        height: 145px;
+    }
+
+    .next-btn {
+
+        width: 135px;
+
+        height: 55px;
+
+        right: 20px !important;
+
+        bottom: 20px !important;
+
+        font-size: 19px;
+    }
+
+    .success-card {
+        padding: 25px;
+    }
+
+    .success-title {
+        font-size: 30px;
+    }
+
+    .success-text {
+        font-size: 21px;
+    }
+
+    .success-description {
+        font-size: 16px;
+    }
+
+    .stage-next-btn {
+
+        width: 230px;
+
+        height: 60px;
+
+        font-size: 21px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="game-page">
+
+
+    <!-- الخلفية -->
+
+    <img
+        src="images/spaa.jpeg"
+        class="background"
+        alt="">
+
+
+    <div class="game-layer">
+
+
+        <!-- =================================================
+             الهيدر
+        ================================================== -->
+
+        <div class="header">
+
+
+            <button
+                class="previous-btn"
+                onclick="goPrevious()">
+
+                ← السابق
+
+            </button>
+
+
+            <div class="title-box">
+
+                <div class="title-main">
+
+                    المرحلة الثالثة
+
+                </div>
+
+
+                <div class="title-sub">
+
+                    طابقي كل طفل مع صاروخه 🚀
+
+                </div>
+
+            </div>
+
+
+            <div class="score-box">
+
+                <div class="stars">
+
+                    <span
+                        class="star"
+                        id="star1">
+
+                        ☆
+
+                    </span>
+
+                    <span
+                        class="star"
+                        id="star2">
+
+                        ☆
+
+                    </span>
+
+                    <span
+                        class="star"
+                        id="star3">
+
+                        ☆
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="score"
+                    id="score">
+
+                    0 / 3
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- السؤال -->
+
+        <div
+            class="instruction"
+            id="instruction">
+
+            اسحبي كل طفل إلى صاروخه 🚀
+
+        </div>
+
+
+
+        <!-- =================================================
+             الأطفال
+        ================================================== -->
+
+        <div class="children-area">
+
+
+            <!-- الطفل الأصفر -->
+
+            <div class="child-slot one">
+
+                <img
+                    src="images/Cary.png"
+                    class="child"
+                    id="child-yellow"
+                    data-color="yellow"
+                    draggable="false"
+                    alt="الطفل الأصفر">
+
+            </div>
+
+
+
+            <!-- الطفل الأحمر -->
+
+            <div class="child-slot two">
+
+                <img
+                    src="images/carre.png"
+                    class="child"
+                    id="child-red"
+                    data-color="red"
+                    draggable="false"
+                    alt="الطفل الأحمر">
+
+            </div>
+
+
+
+            <!-- الطفل الأزرق -->
+
+            <div class="child-slot three">
+
+                <img
+                    src="images/carb.png"
+                    class="child"
+                    id="child-blue"
+                    data-color="blue"
+                    draggable="false"
+                    alt="الطفل الأزرق">
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             الصواريخ
+        ================================================== -->
+
+        <div
+            class="cars-row"
+            id="carsRow">
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- زر التالي -->
+
+    <button
+        class="next-btn"
+        id="nextBtn"
+        onclick="finishActivity()">
+
+        التالي ➜
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     شاشة النجاح
+========================================================== -->
+
+<div
+    class="success-overlay"
+    id="successOverlay">
+
+
+    <div class="car-balloons">
+
+        <div class="balloon-car balloon1">
+            🚀
+        </div>
+
+        <div class="balloon-car balloon2">
+            🚀
+        </div>
+
+        <div class="balloon-car balloon3">
+            🚀
+        </div>
+
+        <div class="balloon-car balloon4">
+            🚀
+        </div>
+
+        <div class="balloon-car balloon5">
+            🚀
+        </div>
+
+        <div class="balloon-car balloon6">
+            🚀
+        </div>
+
+    </div>
+
+
+
+    <div class="success-card">
+
+
+        <div class="success-emoji">
+            🚀
+        </div>
+
+
+        <div class="success-title">
+            أحسنتِ! 🌟
+        </div>
+
+
+        <div class="success-stars">
+            ⭐⭐⭐
+        </div>
+
+
+        <div class="success-text">
+            رائع جدًا! 👏
+        </div>
+
+
+        <div class="success-description">
+            طابقتِ الأطفال مع صواريخهم وانطلقت جميع الصواريخ إلى الفضاء! 🚀🌌
+        </div>
+
+
+        <button
+            class="stage-next-btn"
+            onclick="goNextStage()">
+
+            التالي ➜
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   المتغيرات
+========================================================= */
+
+let score = 0;
+
+let mistakes = 0;
+
+let gameFinished = false;
+
+let draggedChild = null;
+
+let isDragging = false;
+
+let currentTarget = null;
+
+let startX = 0;
+
+let startY = 0;
+
+
+/* =========================================================
+   بيانات الصواريخ
+========================================================= */
+
+const carData = [
+
+    {
+        id: "red",
+        image: "images/a900.png"
+    },
+
+    {
+        id: "blue",
+        image: "images/a600.png"
+    },
+
+    /*
+       الصاروخ الأخضر يستخدم
+       للطفل الأصفر في هذه المرحلة
+       لأن الصور المتوفرة ثلاثة صواريخ:
+       أحمر + أزرق + أخضر
+    */
+
+    {
+        id: "yellow",
+        image: "images/a9999.png"
+    }
+
+];
+
+
+/* =========================================================
+   خلط الصواريخ
+========================================================= */
+
+function shuffleCars() {
+
+    let shuffled;
+
+    do {
+
+        shuffled =
+            [...carData]
+            .sort(
+                () =>
+                    Math.random() - 0.5
+            );
+
+    } while (
+
+        shuffled[0].id === "yellow" &&
+        shuffled[1].id === "red" &&
+        shuffled[2].id === "blue"
+
+    );
+
+    return shuffled;
+
+}
+
+
+/* =========================================================
+   إنشاء الصواريخ
+========================================================= */
+
+function renderCars() {
+
+    const row =
+        document.getElementById(
+            "carsRow"
+        );
+
+
+    row.innerHTML = "";
+
+
+    const shuffled =
+        shuffleCars();
+
+
+    shuffled.forEach(
+        function(rocket) {
+
+
+            const target =
+                document.createElement(
+                    "div"
+                );
+
+
+            target.className =
+                "car-target";
+
+
+            target.dataset.color =
+                rocket.id;
+
+
+            const image =
+                document.createElement(
+                    "img"
+                );
+
+
+            image.className =
+                "car";
+
+
+            image.src =
+                rocket.image;
+
+
+            image.alt =
+                "صاروخ";
+
+
+            image.draggable =
+                false;
+
+
+            target.appendChild(
+                image
+            );
+
+
+            row.appendChild(
+                target
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   معرفة الصاروخ تحت الإصبع
+========================================================= */
+
+function findCarAtPoint(
+    x,
+    y
+) {
+
+    if (!draggedChild) {
+
+        return null;
+
+    }
+
+
+    const oldPointerEvents =
+        draggedChild.style.pointerEvents;
+
+
+    draggedChild.style.pointerEvents =
+        "none";
+
+
+    const element =
+        document.elementFromPoint(
+            x,
+            y
+        );
+
+
+    draggedChild.style.pointerEvents =
+        oldPointerEvents;
+
+
+    if (!element) {
+
+        return null;
+
+    }
+
+
+    return element.closest(
+        ".car-target"
+    );
+
+}
+
+
+/* =========================================================
+   بداية السحب
+========================================================= */
+
+function startDrag(
+    event,
+    child
+) {
+
+    if (gameFinished) {
+        return;
+    }
+
+
+    if (
+        child.classList.contains(
+            "matched"
+        )
+    ) {
+        return;
+    }
+
+
+    event.preventDefault();
+
+
+    draggedChild =
+        child;
+
+
+    isDragging =
+        true;
+
+
+    startX =
+        event.clientX;
+
+
+    startY =
+        event.clientY;
+
+
+    child.classList.add(
+        "dragging"
+    );
+
+
+    child.style.zIndex =
+        "999999";
+
+
+    if (
+        !window.openingSpeechDone
+    ) {
+
+        speak(
+            "اسحبي كل طفل إلى صاروخه"
+        );
+
+        window.openingSpeechDone =
+            true;
+
+    }
+
+
+    try {
+
+        child.setPointerCapture(
+            event.pointerId
+        );
+
+    }
+
+    catch (e) {}
+
+}
+
+
+/* =========================================================
+   تحريك الطفل
+========================================================= */
+
+function moveDrag(
+    event,
+    child
+) {
+
+    if (
+        !isDragging ||
+        draggedChild !== child
+    ) {
+
+        return;
+
+    }
+
+
+    event.preventDefault();
+
+
+    const dx =
+        event.clientX -
+        startX;
+
+
+    const dy =
+        event.clientY -
+        startY;
+
+
+    child.style.transform =
+        `translate(${dx}px, ${dy}px) scale(1.08)`;
+
+
+    const target =
+        findCarAtPoint(
+            event.clientX,
+            event.clientY
+        );
+
+
+    document
+        .querySelectorAll(
+            ".car-target"
+        )
+        .forEach(
+            function(item) {
+
+                item.classList.remove(
+                    "hovering"
+                );
+
+            }
+        );
+
+
+    currentTarget =
+        target;
+
+
+    if (target) {
+
+        target.classList.add(
+            "hovering"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   نهاية السحب
+========================================================= */
+
+function endDrag(
+    event,
+    child
+) {
+
+    if (
+        !isDragging ||
+        draggedChild !== child
+    ) {
+
+        return;
+
+    }
+
+
+    event.preventDefault();
+
+
+    const target =
+        findCarAtPoint(
+            event.clientX,
+            event.clientY
+        );
+
+
+    document
+        .querySelectorAll(
+            ".car-target"
+        )
+        .forEach(
+            function(item) {
+
+                item.classList.remove(
+                    "hovering"
+                );
+
+            }
+        );
+
+
+    if (!target) {
+
+        returnChildToOriginalPlace(
+            child
+        );
+
+        resetDrag();
+
+        return;
+
+    }
+
+
+    checkMatch(
+        child,
+        target
+    );
+
+
+    resetDrag();
+
+}
+
+
+/* =========================================================
+   إعادة الطفل
+========================================================= */
+
+function returnChildToOriginalPlace(
+    child
+) {
+
+    child.classList.remove(
+        "dragging"
+    );
+
+
+    child.style.zIndex =
+        "100";
+
+
+    child.style.transform =
+        "translate(0, 0)";
+
+
+    void child.offsetWidth;
+
+
+    child.style.transform =
+        "translate(0, 0)";
+
+}
+
+
+/* =========================================================
+   إعادة السحب
+========================================================= */
+
+function resetDrag() {
+
+    isDragging =
+        false;
+
+    draggedChild =
+        null;
+
+    currentTarget =
+        null;
+
+}
+
+
+/* =========================================================
+   إعداد الأطفال
+========================================================= */
+
+function setupChildren() {
+
+    const children =
+        document.querySelectorAll(
+            ".child"
+        );
+
+
+    children.forEach(
+        function(child) {
+
+
+            child.addEventListener(
+                "pointerdown",
+                function(event) {
+
+                    startDrag(
+                        event,
+                        child
+                    );
+
+                }
+            );
+
+
+            child.addEventListener(
+                "pointermove",
+                function(event) {
+
+                    moveDrag(
+                        event,
+                        child
+                    );
+
+                }
+            );
+
+
+            child.addEventListener(
+                "pointerup",
+                function(event) {
+
+                    endDrag(
+                        event,
+                        child
+                    );
+
+                }
+            );
+
+
+            child.addEventListener(
+                "pointercancel",
+                function() {
+
+                    returnChildToOriginalPlace(
+                        child
+                    );
+
+                    resetDrag();
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   التحقق من المطابقة
+========================================================= */
+
+function checkMatch(
+    child,
+    target
+) {
+
+    if (gameFinished) {
+        return;
+    }
+
+
+    const childColor =
+        child.dataset.color;
+
+
+    const rocketColor =
+        target.dataset.color;
+
+
+    /* =====================================================
+       الإجابة الصحيحة
+    ====================================================== */
+
+    if (
+        childColor === rocketColor
+    ) {
+
+
+        const rocket =
+            target.querySelector(
+                ".car"
+            );
+
+
+        const childRect =
+            child.getBoundingClientRect();
+
+
+        const rocketRect =
+            target.getBoundingClientRect();
+
+
+        const childCenterX =
+            childRect.left +
+            childRect.width / 2;
+
+
+        const childCenterY =
+            childRect.top +
+            childRect.height / 2;
+
+
+        const rocketCenterX =
+            rocketRect.left +
+            rocketRect.width / 2;
+
+
+        const rocketCenterY =
+            rocketRect.top +
+            rocketRect.height / 2;
+
+
+        const moveX =
+            rocketCenterX -
+            childCenterX;
+
+
+        const moveY =
+            rocketCenterY -
+            childCenterY;
+
+
+        child.classList.remove(
+            "dragging"
+        );
+
+
+        child.style.zIndex =
+            "999999";
+
+
+        /*
+           الطفل يركب الصاروخ
+        */
+
+        child.style.transform =
+            `translate(${moveX}px, ${moveY}px) scale(.72)`;
+
+
+        score++;
+
+
+        updateScore();
+
+
+        showMessage(
+            "أحسنتِ! 👏🚀",
+            true
+        );
+
+
+        speak(
+            "أحسنتِ"
+        );
+
+
+        /*
+           بعد وصول الطفل
+           الصاروخ يبدأ بالانطلاق
+        */
+
+        setTimeout(
+            function() {
+
+                child.classList.add(
+                    "matched"
+                );
+
+
+                target.classList.add(
+                    "launching"
+                );
+
+
+                rocket.classList.add(
+                    "moving"
+                );
+
+
+                speak(
+                    "انطلق الصاروخ"
+                );
+
+            },
+            650
+        );
+
+
+        /*
+           بعد انتهاء الصاروخ
+        */
+
+        setTimeout(
+            function() {
+
+                target.style.visibility =
+                    "hidden";
+
+
+                if (
+                    score === 3
+                ) {
+
+                    finishGame();
+
+                }
+
+            },
+            2350
+        );
+
+
+    }
+
+    /* =====================================================
+       الإجابة الخاطئة
+    ====================================================== */
+
+    else {
+
+
+        mistakes++;
+
+
+        target.classList.add(
+            "wrong"
+        );
+
+
+        showMessage(
+            "هذا ليس صاروخه، حاولي مرة أخرى 🌸",
+            false
+        );
+
+
+        speak(
+            "هذا ليس صاروخه، حاولي مرة أخرى"
+        );
+
+
+        child.classList.remove(
+            "dragging"
+        );
+
+
+        child.style.zIndex =
+            "100";
+
+
+        child.style.transform =
+            "translate(0, 0)";
+
+
+        setTimeout(
+            function() {
+
+                target.classList.remove(
+                    "wrong"
+                );
+
+
+                showMessage(
+                    "اسحبي كل طفل إلى صاروخه 🚀",
+                    false
+                );
+
+            },
+            1400
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   تحديث النتيجة
+========================================================= */
+
+function updateScore() {
+
+    document
+        .getElementById(
+            "score"
+        )
+        .textContent =
+        `${score} / 3`;
+
+
+    for (
+        let i = 1;
+        i <= 3;
+        i++
+    ) {
+
+        const star =
+            document.getElementById(
+                "star" + i
+            );
+
+
+        if (
+            i <= score
+        ) {
+
+            star.textContent =
+                "⭐";
+
+
+            star.classList.add(
+                "active"
+            );
+
+        }
+
+        else {
+
+            star.textContent =
+                "☆";
+
+
+            star.classList.remove(
+                "active"
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   الرسالة
+========================================================= */
+
+function showMessage(
+    text,
+    success
+) {
+
+    const message =
+        document.getElementById(
+            "instruction"
+        );
+
+
+    message.textContent =
+        text;
+
+
+    if (success) {
+
+        message.classList.add(
+            "success"
+        );
+
+    }
+
+    else {
+
+        message.classList.remove(
+            "success"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   النطق
+========================================================= */
+
+function speak(text) {
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+
+    utterance.lang =
+        "ar-SA";
+
+
+    utterance.rate =
+        0.78;
+
+
+    utterance.pitch =
+        1.05;
+
+
+    utterance.volume =
+        1;
+
+
+    window.speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+
+/* =========================================================
+   النطق التلقائي
+========================================================= */
+
+function readOpening() {
+
+    setTimeout(
+        function() {
+
+            speak(
+                "اسحبي كل طفل إلى صاروخه"
+            );
+
+            window.openingSpeechDone =
+                true;
+
+        },
+        700
+    );
+
+}
+
+
+/* =========================================================
+   انتهاء اللعبة
+========================================================= */
+
+function finishGame() {
+
+    if (gameFinished) {
+        return;
+    }
+
+
+    gameFinished =
+        true;
+
+
+    showMessage(
+        "رائع جدًا! 🚀🎉",
+        true
+    );
+
+
+    localStorage.setItem(
+        "colorActivity3",
+        "completed"
+    );
+
+
+    localStorage.setItem(
+        "rocketMatchingCompleted",
+        "true"
+    );
+
+
+    speak(
+        "رائع جدًا! أحسنتِ! طابقتِ الأطفال مع صواريخهم وانطلقت جميع الصواريخ"
+    );
+
+
+    document
+        .getElementById(
+            "nextBtn"
+        )
+        .classList.add(
+            "ready"
+        );
+
+}
+
+
+/* =========================================================
+   زر التالي
+========================================================= */
+
+function finishActivity() {
+
+    if (!gameFinished) {
+
+        showMessage(
+            "أكملي المطابقة أولًا ⭐",
+            false
+        );
+
+
+        speak(
+            "أكملي المطابقة أولًا"
+        );
+
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "successOverlay"
+        )
+        .classList.add(
+            "show"
+        );
+
+
+    setTimeout(
+        function() {
+
+            speak(
+                "أحسنتِ! لقد أنهيتِ هذه المرحلة بنجاح"
+            );
+
+        },
+        400
+    );
+
+}
+
+
+/* =========================================================
+   الانتقال
+========================================================= */
+
+function goNextStage() {
+
+    localStorage.setItem(
+        "colorActivity3",
+        "completed"
+    );
+
+
+    localStorage.setItem(
+        "rocketMatchingCompleted",
+        "true"
+    );
+
+
+    window.location.href =
+        "s-sorting.html";
+
+}
+
+
+/* =========================================================
+   السابق
+========================================================= */
+
+function goPrevious() {
+
+    window.location.href =
+        "colors.html";
+
+}
+
+
+/* =========================================================
+   تشغيل اللعبة
+========================================================= */
+
+function startGame() {
+
+    renderCars();
+
+    setupChildren();
+
+    updateScore();
+
+    readOpening();
+
+}
+
+
+window.addEventListener(
+    "load",
+    startGame
+);
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>إنشاء حساب جديد - رفيق</title>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Tajawal", "Cairo", Arial, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .signup-container {
+            width: 90%;
+            max-width: 460px;
+            text-align: center;
+            padding: 30px 0;
+        }
+
+        /* الشعار */
+
+        .logo {
+            font-size: 42px;
+            font-weight: bold;
+            color: #6faedc;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #777;
+            font-size: 17px;
+            margin-bottom: 30px;
+        }
+
+        /* العنوان */
+
+        h1 {
+            font-size: 28px;
+            color: #444;
+            margin-bottom: 28px;
+        }
+
+        /* الحقول */
+
+        .input-group {
+            text-align: right;
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            display: block;
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .input-group input {
+            width: 100%;
+            height: 58px;
+            border: 1.5px solid #d9d9d9;
+            border-radius: 16px;
+            padding: 0 18px;
+            font-size: 17px;
+            outline: none;
+            background: #ffffff;
+            direction: rtl;
+        }
+
+        .input-group input:focus {
+            border-color: #e4f2ff;
+            box-shadow: 0 0 0 3px rgba(228, 242, 255, 0.8);
+        }
+
+        /* زر إنشاء الحساب */
+
+        .signup-button {
+            width: 100%;
+            height: 60px;
+            border: none;
+            border-radius: 18px;
+            background: #e4f2ff;
+            color: #477a9f;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: 0.2s;
+        }
+
+        .signup-button:active {
+            transform: scale(0.98);
+        }
+
+        /* العودة لتسجيل الدخول */
+
+        .login-text {
+            margin-top: 24px;
+            color: #777;
+            font-size: 15px;
+        }
+
+        .login-text a {
+            color: #6faedc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        /* رسالة الخطأ */
+
+        .message {
+            margin-top: 15px;
+            font-size: 15px;
+            color: #d66;
+            min-height: 20px;
+        }
+
+        /* الآيباد */
+
+        @media (min-width: 700px) {
+
+            .signup-container {
+                max-width: 480px;
+            }
+
+            .logo {
+                font-size: 48px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .input-group input {
+                height: 64px;
+            }
+
+            .signup-button {
+                height: 64px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="signup-container">
+
+    <div class="logo">
+        رفيق 🌈
+    </div>
+
+    <div class="subtitle">
+        رفيقك في كل خطوة
+    </div>
+
+    <h1>
+        إنشاء حساب جديد
+    </h1>
+
+
+    <!-- اسم ولي الأمر -->
+
+    <div class="input-group">
+
+        <label for="parentName">
+            اسم ولي الأمر
+        </label>
+
+        <input
+            type="text"
+            id="parentName"
+            placeholder="أدخل اسم ولي الأمر"
+            autocomplete="name">
+
+    </div>
+
+
+    <!-- البريد الإلكتروني -->
+
+    <div class="input-group">
+
+        <label for="email">
+            البريد الإلكتروني
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="أدخل البريد الإلكتروني"
+            autocomplete="email">
+
+    </div>
+
+
+    <!-- رقم الجوال -->
+
+    <div class="input-group">
+
+        <label for="phone">
+            رقم الجوال
+        </label>
+
+        <input
+            type="tel"
+            id="phone"
+            placeholder="05xxxxxxxx"
+            autocomplete="tel">
+
+    </div>
+
+
+    <!-- كلمة المرور -->
+
+    <div class="input-group">
+
+        <label for="password">
+            كلمة المرور
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="أدخل كلمة المرور"
+            autocomplete="new-password">
+
+    </div>
+
+
+    <!-- تأكيد كلمة المرور -->
+
+    <div class="input-group">
+
+        <label for="confirmPassword">
+            تأكيد كلمة المرور
+        </label>
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="أعد إدخال كلمة المرور"
+            autocomplete="new-password">
+
+    </div>
+
+
+    <!-- زر إنشاء الحساب -->
+
+    <button
+        type="button"
+        class="signup-button"
+        id="signupButton">
+
+        إنشاء الحساب
+
+    </button>
+
+
+    <div
+        class="message"
+        id="message">
+    </div>
+
+
+    <!-- العودة لتسجيل الدخول -->
+
+    <div class="login-text">
+
+        لديك حساب بالفعل؟
+
+        <a href="index.html">
+            تسجيل الدخول
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+   ===================================================== */
+
+const SUPABASE_URL =
+    "ضعي_هنا_الرابط_الخاص_بمشروعك";
+
+
+const SUPABASE_ANON_KEY =
+    "ضعي_هنا_PUBLISHABLE_KEY";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =====================================================
+   العناصر
+   ===================================================== */
+
+const signupButton =
+    document.getElementById("signupButton");
+
+const message =
+    document.getElementById("message");
+
+
+/* =====================================================
+   إنشاء الحساب
+   ===================================================== */
+
+signupButton.addEventListener("click", async function () {
+
+    const parentName =
+        document.getElementById("parentName").value.trim();
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const phone =
+        document.getElementById("phone").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const confirmPassword =
+        document.getElementById("confirmPassword").value;
+
+
+    message.textContent = "";
+    message.style.color = "#d66";
+
+
+    /* منع الضغط أكثر من مرة */
+
+    signupButton.disabled = true;
+
+    signupButton.textContent =
+        "جاري إنشاء الحساب...";
+
+
+    try {
+
+        /* =============================================
+           التحقق من البيانات
+           ============================================= */
+
+        if (
+            !parentName ||
+            !email ||
+            !phone ||
+            !password ||
+            !confirmPassword
+        ) {
+
+            throw new Error(
+                "فضلاً أكمل جميع البيانات."
+            );
+
+        }
+
+
+        /* =============================================
+           تطابق كلمة المرور
+           ============================================= */
+
+        if (password !== confirmPassword) {
+
+            throw new Error(
+                "كلمتا المرور غير متطابقتين."
+            );
+
+        }
+
+
+        /* =============================================
+           طول كلمة المرور
+           ============================================= */
+
+        if (password.length < 6) {
+
+            throw new Error(
+                "يجب أن تتكون كلمة المرور من 6 أحرف أو أرقام على الأقل."
+            );
+
+        }
+
+
+        /* =============================================
+           إنشاء الحساب في Supabase Auth
+           ============================================= */
+
+        const {
+            data: authData,
+            error: authError
+        } = await supabaseClient.auth.signUp({
+
+            email: email,
+
+            password: password
+
+        });
+
+
+        if (authError) {
+
+            throw authError;
+
+        }
+
+
+        if (!authData.user) {
+
+            throw new Error(
+                "لم يتم إنشاء الحساب."
+            );
+
+        }
+
+
+        /* =============================================
+           التأكد من وجود جلسة
+           ============================================= */
+
+        if (!authData.session) {
+
+            throw new Error(
+                "تم إنشاء الحساب، لكن تأكيد البريد الإلكتروني ما زال مفعّلًا في Supabase. أوقفي Confirm email ثم جربي مرة أخرى."
+            );
+
+        }
+
+
+        /* =============================================
+           حفظ بيانات ولي الأمر
+           ============================================= */
+
+        const {
+            error: parentError
+        } = await supabaseClient
+            .from("parents")
+            .insert([
+
+                {
+                    user_id: authData.user.id,
+
+                    parent_name: parentName,
+
+                    phone: phone
+
+                }
+
+            ]);
+
+
+        if (parentError) {
+
+            throw parentError;
+
+        }
+
+
+        /* =============================================
+           نجاح
+           ============================================= */
+
+        message.style.color = "#5a9b6d";
+
+        message.textContent =
+            "تم إنشاء الحساب بنجاح!";
+
+
+        /* الانتقال إلى تسجيل الدخول */
+
+        setTimeout(function () {
+
+            window.location.href = "index.html";
+
+        }, 1200);
+
+
+    } catch (error) {
+
+        console.error(
+            "Signup Error:",
+            error
+        );
+
+
+        message.style.color = "#d66";
+
+
+        let errorMessage =
+            error.message ||
+            "حدث خطأ أثناء إنشاء الحساب.";
+
+
+        /* رسائل Supabase بالعربي */
+
+        if (
+            errorMessage.toLowerCase()
+            .includes("already registered")
+        ) {
+
+            errorMessage =
+                "هذا البريد الإلكتروني مسجل مسبقًا.";
+
+        }
+
+
+        message.textContent =
+            errorMessage;
+
+
+    } finally {
+
+        signupButton.disabled = false;
+
+        signupButton.textContent =
+            "إنشاء الحساب";
+
+    }
+
+});
+
+</script>
+
+</body>
+
+</html>

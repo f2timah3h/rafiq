@@ -1,0 +1,3669 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>وقت التلوين - رفيق</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+/* =====================================================
+   الأساس
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    direction: rtl;
+}
+
+body {
+
+    background-color: #ffffff;
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    visibility: hidden;
+}
+
+body.theme-ready {
+
+    visibility: visible;
+}
+
+
+/* =====================================================
+   الصفحة
+===================================================== */
+
+.page {
+
+    width: 100%;
+    height: 100vh;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   زر السابق
+===================================================== */
+
+.previous-button {
+
+    position: fixed;
+
+    top: 18px;
+    left: 18px;
+
+    width: 58px;
+    height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.96);
+
+    color: #5B78B8;
+
+    font-size: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 5px 18px
+        rgba(70,110,160,0.14);
+
+    cursor: pointer;
+
+    z-index: 5000;
+
+    touch-action: manipulation;
+}
+
+.previous-button:active {
+
+    transform: scale(0.93);
+}
+
+
+/* =====================================================
+   القائمة
+===================================================== */
+
+.menu-wrapper {
+
+    position: fixed;
+
+    top: 18px;
+    right: 18px;
+
+    z-index: 5000;
+}
+
+.menu-button {
+
+    width: 58px;
+    height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.96);
+
+    color: #5B78B8;
+
+    font-size: 30px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(70,110,160,0.14);
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+.menu-button:active {
+
+    transform: scale(0.93);
+}
+
+
+.dropdown-menu {
+
+    position: absolute;
+
+    top: 67px;
+    right: 0;
+
+    width: 190px;
+
+    padding: 8px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(50,80,120,0.18);
+
+    display: none;
+}
+
+.dropdown-menu.show {
+
+    display: block;
+}
+
+.menu-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    color: #536B91;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+.menu-item:active {
+
+    background: #e4f2ff;
+}
+
+
+/* =====================================================
+   المحتوى
+===================================================== */
+
+.content {
+
+    width: 100%;
+    height: 100vh;
+
+    padding:
+        88px 30px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   العنوان
+===================================================== */
+
+.page-title {
+
+    flex-shrink: 0;
+
+    margin: 0 0 8px;
+
+    color: #5B78B8;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+    text-align: center;
+}
+
+.page-subtitle {
+
+    flex-shrink: 0;
+
+    margin: 0 0 12px;
+
+    color: #536B91;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   اختيار الرسومات
+===================================================== */
+
+.drawing-selector {
+
+    width: min(1100px, 94vw);
+
+    display: flex;
+
+    gap: 10px;
+
+    justify-content: center;
+
+    align-items: center;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+
+    padding: 4px 5px 10px;
+
+    flex-shrink: 0;
+}
+
+.drawing-selector::-webkit-scrollbar {
+
+    display: none;
+}
+
+.drawing-button {
+
+    flex-shrink: 0;
+
+    min-width: 135px;
+
+    height: 52px;
+
+    border: 3px solid #e4f2ff;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.94);
+
+    color: #536B91;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 12px
+        rgba(70,110,160,0.10);
+
+    touch-action: manipulation;
+}
+
+.drawing-button.active {
+
+    background: #e4f2ff;
+
+    border-color: #b8d9f4;
+
+    color: #4D6E9F;
+
+    transform: translateY(-2px);
+}
+
+
+/* =====================================================
+   منطقة التلوين
+===================================================== */
+
+.workspace {
+
+    width: min(1000px, 94vw);
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   ورقة الرسم
+===================================================== */
+
+.paper {
+
+    position: relative;
+
+    width: min(900px, 92vw);
+
+    height: min(48vh, 560px);
+
+    min-height: 300px;
+
+    background: white;
+
+    border-radius: 30px;
+
+    border: 5px solid rgba(255,255,255,0.95);
+
+    box-shadow:
+        0 10px 35px
+        rgba(50,80,120,0.18);
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =====================================================
+   حاوية SVG
+===================================================== */
+
+#svgContainer {
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    z-index: 2;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   SVG
+===================================================== */
+
+.coloring-svg {
+
+    width: 94%;
+
+    height: 94%;
+
+    display: block;
+
+    position: relative;
+
+    z-index: 2;
+
+    touch-action: manipulation;
+
+    pointer-events: all;
+}
+
+
+/* =====================================================
+   أجزاء الرسم القابلة للتلوين
+===================================================== */
+
+.color-part {
+
+    fill: #ffffff !important;
+
+    stroke: #536B91;
+
+    stroke-width: 4;
+
+    stroke-linejoin: round;
+
+    cursor: pointer;
+
+    pointer-events: all;
+
+    transition:
+        fill 0.15s ease;
+
+    touch-action: manipulation;
+}
+
+.color-part:hover {
+
+    filter:
+        brightness(0.98);
+}
+
+
+/* =====================================================
+   طبقة الرسم الحر
+===================================================== */
+
+.free-canvas {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 4;
+
+    pointer-events: none;
+
+    touch-action: none;
+}
+
+
+/*
+   لا تستقبل الـcanvas اللمس إلا
+   عندما يكون القلم الحر أو الممحاة الحرة مفعّلين
+*/
+
+.paper.free-mode .free-canvas {
+
+    pointer-events: auto;
+}
+
+
+/* =====================================================
+   شريط الأدوات
+===================================================== */
+
+.tools {
+
+    width: min(1000px, 94vw);
+
+    min-height: 66px;
+
+    margin-top: 9px;
+
+    padding: 7px 12px;
+
+    border-radius: 22px;
+
+    background: rgba(255,255,255,0.95);
+
+    box-shadow:
+        0 7px 25px
+        rgba(70,110,160,0.13);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+
+    overflow-x: auto;
+
+    overflow-y: hidden;
+}
+
+.tools::-webkit-scrollbar {
+
+    display: none;
+}
+
+
+/* =====================================================
+   زر الأداة
+===================================================== */
+
+.tool-button {
+
+    flex-shrink: 0;
+
+    height: 48px;
+
+    min-width: 90px;
+
+    padding: 0 15px;
+
+    border: 2px solid #e4f2ff;
+
+    border-radius: 16px;
+
+    background: white;
+
+    color: #536B91;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+.tool-button.active {
+
+    background: #e4f2ff;
+
+    border-color: #b8d9f4;
+}
+
+.tool-button:active {
+
+    transform: scale(0.95);
+}
+
+
+/* =====================================================
+   ممحاة
+===================================================== */
+
+.eraser-icon {
+
+    font-size: 22px;
+}
+
+
+/* =====================================================
+   الألوان
+===================================================== */
+
+.colors {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    flex-shrink: 0;
+}
+
+.color {
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    border: 3px solid white;
+
+    box-shadow:
+        0 2px 8px
+        rgba(0,0,0,0.16);
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    touch-action: manipulation;
+}
+
+.color.selected {
+
+    outline:
+        3px solid #5B78B8;
+
+    outline-offset: 3px;
+
+    transform: scale(1.08);
+}
+
+
+/* =====================================================
+   حجم الفرشاة
+===================================================== */
+
+.brush-size {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    flex-shrink: 0;
+}
+
+.size-button {
+
+    width: 38px;
+    height: 38px;
+
+    border: 2px solid #e4f2ff;
+
+    border-radius: 50%;
+
+    background: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+.size-dot {
+
+    display: block;
+
+    border-radius: 50%;
+
+    background: #536B91;
+}
+
+.size-small {
+
+    width: 7px;
+    height: 7px;
+}
+
+.size-medium {
+
+    width: 13px;
+    height: 13px;
+}
+
+.size-large {
+
+    width: 20px;
+    height: 20px;
+}
+
+.size-button.active {
+
+    background: #e4f2ff;
+}
+
+
+/* =====================================================
+   زر المسح
+===================================================== */
+
+.clear-button {
+
+    flex-shrink: 0;
+
+    height: 48px;
+
+    padding: 0 17px;
+
+    border: none;
+
+    border-radius: 16px;
+
+    background: #fff0f2;
+
+    color: #b85a65;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+}
+
+
+/* =====================================================
+   اسم الرسمة
+===================================================== */
+
+.current-drawing {
+
+    min-height: 26px;
+
+    margin-top: 5px;
+
+    color: #536B91;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   iPad Portrait
+===================================================== */
+
+@media (orientation: portrait) {
+
+    .content {
+
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+
+    .page-title {
+
+        font-size: 30px;
+    }
+
+    .page-subtitle {
+
+        font-size: 17px;
+    }
+
+    .paper {
+
+        height: min(46vh, 540px);
+
+        min-height: 300px;
+    }
+
+    .drawing-button {
+
+        min-width: 125px;
+    }
+
+}
+
+
+/* =====================================================
+   الشاشات الصغيرة
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .content {
+
+        padding-top: 82px;
+    }
+
+    .page-title {
+
+        font-size: 26px;
+    }
+
+    .page-subtitle {
+
+        font-size: 16px;
+
+        margin-bottom: 7px;
+    }
+
+    .paper {
+
+        width: 94vw;
+
+        height: 44vh;
+
+        min-height: 260px;
+
+        border-radius: 24px;
+    }
+
+    .tools {
+
+        justify-content: flex-start;
+    }
+
+    .drawing-button {
+
+        min-width: 115px;
+
+        height: 47px;
+
+        font-size: 15px;
+    }
+
+    .tool-button {
+
+        min-width: 82px;
+
+        padding: 0 11px;
+
+        font-size: 14px;
+    }
+
+    .color {
+
+        width: 34px;
+        height: 34px;
+    }
+
+}
+
+
+/* =====================================================
+   شاشة التحميل
+===================================================== */
+
+.loading {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(255,255,255,0.94);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    z-index: 9000;
+
+    color: #536B91;
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+.loading.hidden {
+
+    display: none;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div
+    class="loading"
+    id="loading">
+
+    جاري تجهيز وقت التلوين...
+
+</div>
+
+
+<div class="page">
+
+
+    <!-- السابق -->
+
+    <button
+        class="previous-button"
+        id="previousButton"
+        aria-label="السابق">
+
+        ‹
+
+    </button>
+
+
+    <!-- القائمة -->
+
+    <div class="menu-wrapper">
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="القائمة">
+
+            ☰
+
+        </button>
+
+
+        <div
+            class="dropdown-menu"
+            id="dropdownMenu">
+
+            <a
+                href="home.html"
+                class="menu-item">
+
+                <span>الرئيسية</span>
+
+            </a>
+
+
+            <a
+                href="reports.html"
+                class="menu-item">
+
+                <span>تقاريري</span>
+
+            </a>
+
+
+            <a
+                href="progress.html"
+                class="menu-item">
+
+                <span>تقدمي</span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- المحتوى -->
+
+    <main class="content">
+
+
+        <h1 class="page-title">
+
+            وقت التلوين
+
+        </h1>
+
+
+        <p class="page-subtitle">
+
+            اختر الرسمة ولونها بالطريقة التي تحبها
+
+        </p>
+
+
+        <!-- الرسومات -->
+
+        <div
+            class="drawing-selector"
+            id="drawingSelector">
+
+        </div>
+
+
+        <div class="workspace">
+
+
+            <!-- ورقة الرسم -->
+
+            <div
+                class="paper"
+                id="paper">
+
+                <div
+                    id="svgContainer">
+
+                </div>
+
+
+                <canvas
+                    id="freeCanvas"
+                    class="free-canvas">
+
+                </canvas>
+
+            </div>
+
+
+            <!-- الأدوات -->
+
+            <div class="tools">
+
+
+                <button
+                    class="tool-button active"
+                    id="fillTool">
+
+                    تلوين
+
+                </button>
+
+
+                <button
+                    class="tool-button"
+                    id="brushTool">
+
+                    قلم حر
+
+                </button>
+
+
+                <button
+                    class="tool-button"
+                    id="eraserTool">
+
+                    <span class="eraser-icon">
+                        ▱
+                    </span>
+
+                    ممحاة
+
+                </button>
+
+
+                <!-- الألوان -->
+
+                <div
+                    class="colors"
+                    id="colors">
+
+                </div>
+
+
+                <!-- حجم القلم -->
+
+                <div
+                    class="brush-size">
+
+                    <button
+                        class="size-button active"
+                        data-size="7">
+
+                        <span
+                            class="size-dot size-small">
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="size-button"
+                        data-size="14">
+
+                        <span
+                            class="size-dot size-medium">
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="size-button"
+                        data-size="24">
+
+                        <span
+                            class="size-dot size-large">
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <button
+                    class="clear-button"
+                    id="clearButton">
+
+                    مسح الكل
+
+                </button>
+
+            </div>
+
+
+            <div
+                class="current-drawing"
+                id="currentDrawing">
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://ciwrwmutcrarwtounelg.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =====================================================
+   الطفل الحالي
+===================================================== */
+
+function getCurrentChildId() {
+
+    return localStorage.getItem(
+        "rafiqChildId"
+    );
+
+}
+
+
+/* =====================================================
+   الثيم
+===================================================== */
+
+let childTheme = "space";
+
+let childBackground =
+    "images/af.jpeg";
+
+
+/* =====================================================
+   الرسومات - الفضاء
+   حوض الأسماك والمركبة محذوفان
+===================================================== */
+
+const spaceDrawings = [
+
+    {
+        id: "space-rocket",
+
+        name: "الصاروخ",
+
+        title: "رسمة الصاروخ",
+
+        svg: `
+
+        <svg
+            class="coloring-svg"
+            viewBox="0 0 600 500"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <path
+                class="color-part"
+                data-part="rocket-body"
+                d="
+                M300 60
+                C235 110 220 205 230 320
+                L370 320
+                C380 205 365 110 300 60
+                Z">
+
+            </path>
+
+            <circle
+                class="color-part"
+                data-part="window"
+                cx="300"
+                cy="175"
+                r="45">
+
+            </circle>
+
+            <path
+                class="color-part"
+                data-part="left-wing"
+                d="
+                M235 270
+                L135 365
+                L235 345
+                Z">
+
+            </path>
+
+            <path
+                class="color-part"
+                data-part="right-wing"
+                d="
+                M365 270
+                L465 365
+                L365 345
+                Z">
+
+            </path>
+
+            <path
+                class="color-part"
+                data-part="fire"
+                d="
+                M265 320
+                L335 320
+                L350 420
+                L300 385
+                L250 420
+                Z">
+
+            </path>
+
+        </svg>
+
+        `
+    },
+
+
+    {
+        id: "space-planet",
+
+        name: "الكوكب",
+
+        title: "رسمة الكوكب",
+
+        svg: `
+
+        <svg
+            class="coloring-svg"
+            viewBox="0 0 600 500"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <ellipse
+                class="color-part"
+                data-part="ring"
+                cx="300"
+                cy="260"
+                rx="240"
+                ry="75">
+
+            </ellipse>
+
+            <circle
+                class="color-part"
+                data-part="planet"
+                cx="300"
+                cy="260"
+                r="145">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="crater1"
+                cx="250"
+                cy="215"
+                r="25">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="crater2"
+                cx="345"
+                cy="300"
+                r="32">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="crater3"
+                cx="375"
+                cy="190"
+                r="18">
+
+            </circle>
+
+        </svg>
+
+        `
+    },
+
+
+    {
+        id: "space-astronaut",
+
+        name: "رائد الفضاء",
+
+        title: "رسمة رائد الفضاء",
+
+        svg: `
+
+        <svg
+            class="coloring-svg"
+            viewBox="0 0 600 500"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <circle
+                class="color-part"
+                data-part="helmet"
+                cx="300"
+                cy="120"
+                r="78">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="helmet-glass"
+                cx="300"
+                cy="120"
+                r="48">
+
+            </circle>
+
+            <path
+                class="color-part"
+                data-part="body"
+                d="
+                M230 205
+                Q300 175 370 205
+                L410 390
+                L190 390
+                Z">
+
+            </path>
+
+            <path
+                class="color-part"
+                data-part="left-arm"
+                d="
+                M230 220
+                L155 300
+                L190 325
+                L270 260
+                Z">
+
+            </path>
+
+            <path
+                class="color-part"
+                data-part="right-arm"
+                d="
+                M370 220
+                L445 300
+                L410 325
+                L330 260
+                Z">
+
+            </path>
+
+            <path
+                class="color-part"
+                data-part="left-leg"
+                d="
+                M220 370
+                L205 450
+                L270 450
+                L290 370
+                Z">
+
+            </path>
+
+            <path
+                class="color-part"
+                data-part="right-leg"
+                d="
+                M310 370
+                L330 450
+                L395 450
+                L380 370
+                Z">
+
+            </path>
+
+        </svg>
+
+        `
+    }
+
+];
+
+
+/* =====================================================
+   الرسومات - السيارات
+===================================================== */
+
+const carDrawings = [
+
+    {
+        id: "car-red",
+
+        name: "السيارة",
+
+        title: "رسمة السيارة",
+
+        svg: `
+
+        <svg
+            class="coloring-svg"
+            viewBox="0 0 700 500"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <path
+                class="color-part"
+                data-part="car-body"
+                d="
+                M100 320
+                L150 230
+                L250 190
+                L430 190
+                L530 230
+                L590 320
+                L570 380
+                L120 380
+                Z">
+
+            </path>
+
+            <path
+                class="color-part"
+                data-part="window-left"
+                d="
+                M190 225
+                L255 205
+                L285 280
+                L170 280
+                Z">
+
+            </path>
+
+            <path
+                class="color-part"
+                data-part="window-right"
+                d="
+                M275 205
+                L420 205
+                L470 280
+                L300 280
+                Z">
+
+            </path>
+
+            <circle
+                class="color-part"
+                data-part="wheel-left"
+                cx="200"
+                cy="375"
+                r="58">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="wheel-right"
+                cx="500"
+                cy="375"
+                r="58">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="light-left"
+                cx="135"
+                cy="310"
+                r="24">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="light-right"
+                cx="555"
+                cy="310"
+                r="24">
+
+            </circle>
+
+        </svg>
+
+        `
+    },
+
+
+    {
+        id: "race-car",
+
+        name: "سيارة السباق",
+
+        title: "رسمة سيارة السباق",
+
+        svg: `
+
+        <svg
+            class="coloring-svg"
+            viewBox="0 0 700 500"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <path
+                class="color-part"
+                data-part="race-body"
+                d="
+                M80 340
+                L150 280
+                L230 265
+                L300 200
+                L430 200
+                L500 265
+                L620 300
+                L650 350
+                L620 390
+                L100 390
+                Z">
+
+            </path>
+
+            <path
+                class="color-part"
+                data-part="race-window"
+                d="
+                M310 215
+                L420 215
+                L475 275
+                L280 275
+                Z">
+
+            </path>
+
+            <circle
+                class="color-part"
+                data-part="race-wheel1"
+                cx="190"
+                cy="390"
+                r="55">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="race-wheel2"
+                cx="520"
+                cy="390"
+                r="55">
+
+            </circle>
+
+            <path
+                class="color-part"
+                data-part="spoiler"
+                d="
+                M480 245
+                L610 245
+                L610 275
+                L480 275
+                Z">
+
+            </path>
+
+        </svg>
+
+        `
+    },
+
+
+    {
+        id: "car-wash",
+
+        name: "غسيل السيارة",
+
+        title: "رسمة غسيل السيارة",
+
+        svg: `
+
+        <svg
+            class="coloring-svg"
+            viewBox="0 0 700 500"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <rect
+                class="color-part"
+                data-part="building"
+                x="100"
+                y="100"
+                width="500"
+                height="300"
+                rx="25">
+
+            </rect>
+
+            <path
+                class="color-part"
+                data-part="car"
+                d="
+                M160 350
+                L210 275
+                L300 245
+                L430 245
+                L510 280
+                L550 350
+                Z">
+
+            </path>
+
+            <circle
+                class="color-part"
+                data-part="wheel1"
+                cx="250"
+                cy="355"
+                r="45">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="wheel2"
+                cx="465"
+                cy="355"
+                r="45">
+
+            </circle>
+
+            <path
+                class="color-part"
+                data-part="water1"
+                d="
+                M170 160
+                Q200 125 230 160
+                Q200 195 170 160
+                Z">
+
+            </path>
+
+            <path
+                class="color-part"
+                data-part="water2"
+                d="
+                M450 160
+                Q480 125 510 160
+                Q480 195 450 160
+                Z">
+
+            </path>
+
+        </svg>
+
+        `
+    },
+
+
+    {
+        id: "car-garage",
+
+        name: "المرآب",
+
+        title: "رسمة المرآب",
+
+        svg: `
+
+        <svg
+            class="coloring-svg"
+            viewBox="0 0 700 500"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <path
+                class="color-part"
+                data-part="garage"
+                d="
+                M100 180
+                L350 70
+                L600 180
+                L600 420
+                L100 420
+                Z">
+
+            </path>
+
+            <rect
+                class="color-part"
+                data-part="door"
+                x="210"
+                y="230"
+                width="280"
+                height="190">
+
+            </rect>
+
+            <path
+                class="color-part"
+                data-part="car"
+                d="
+                M240 360
+                L280 305
+                L350 285
+                L420 305
+                L460 360
+                Z">
+
+            </path>
+
+            <circle
+                class="color-part"
+                data-part="wheel1"
+                cx="300"
+                cy="365"
+                r="30">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="wheel2"
+                cx="405"
+                cy="365"
+                r="30">
+
+            </circle>
+
+        </svg>
+
+        `
+    },
+
+
+    {
+        id: "traffic",
+
+        name: "إشارة المرور",
+
+        title: "رسمة إشارة المرور",
+
+        svg: `
+
+        <svg
+            class="coloring-svg"
+            viewBox="0 0 600 500"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <rect
+                class="color-part"
+                data-part="traffic-box"
+                x="190"
+                y="70"
+                width="220"
+                height="330"
+                rx="35">
+
+            </rect>
+
+            <circle
+                class="color-part"
+                data-part="red-light"
+                cx="300"
+                cy="145"
+                r="45">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="yellow-light"
+                cx="300"
+                cy="235"
+                r="45">
+
+            </circle>
+
+            <circle
+                class="color-part"
+                data-part="green-light"
+                cx="300"
+                cy="325"
+                r="45">
+
+            </circle>
+
+            <rect
+                class="color-part"
+                data-part="pole"
+                x="275"
+                y="400"
+                width="50"
+                height="60">
+
+            </rect>
+
+        </svg>
+
+        `
+    }
+
+];
+
+
+/* =====================================================
+   الألوان
+===================================================== */
+
+const palette = [
+
+    "#EF5350",
+    "#FF7043",
+    "#FFCA28",
+    "#66BB6A",
+    "#26A69A",
+    "#42A5F5",
+    "#5C6BC0",
+    "#AB47BC",
+    "#EC407A",
+    "#8D6E63",
+    "#78909C",
+    "#263238"
+
+];
+
+let selectedColor =
+    palette[0];
+
+let currentTool =
+    "fill";
+
+let brushSize =
+    7;
+
+let currentDrawing =
+    null;
+
+
+/* =====================================================
+   عناصر الصفحة
+===================================================== */
+
+const paper =
+    document.getElementById(
+        "paper"
+    );
+
+const svgContainer =
+    document.getElementById(
+        "svgContainer"
+    );
+
+const freeCanvas =
+    document.getElementById(
+        "freeCanvas"
+    );
+
+const ctx =
+    freeCanvas.getContext(
+        "2d"
+    );
+
+const drawingSelector =
+    document.getElementById(
+        "drawingSelector"
+    );
+
+const currentDrawingText =
+    document.getElementById(
+        "currentDrawing"
+    );
+
+const loading =
+    document.getElementById(
+        "loading"
+    );
+
+
+/* =====================================================
+   تجهيز الألوان
+===================================================== */
+
+function buildPalette() {
+
+    const colors =
+        document.getElementById(
+            "colors"
+        );
+
+    colors.innerHTML = "";
+
+    palette.forEach(
+        function(color, index) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.className =
+                "color";
+
+            button.style.background =
+                color;
+
+            button.setAttribute(
+                "aria-label",
+                "لون"
+            );
+
+            if (index === 0) {
+
+                button.classList.add(
+                    "selected"
+                );
+
+            }
+
+            button.addEventListener(
+                "pointerdown",
+                function(event) {
+
+                    event.preventDefault();
+
+                    selectedColor =
+                        color;
+
+                    document
+                        .querySelectorAll(
+                            ".color"
+                        )
+                        .forEach(
+                            function(item) {
+
+                                item.classList.remove(
+                                    "selected"
+                                );
+
+                            }
+                        );
+
+                    button.classList.add(
+                        "selected"
+                    );
+
+                    setTool("fill");
+
+                }
+            );
+
+            colors.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   الحصول على الرسومات حسب الثيم
+===================================================== */
+
+function getDrawings() {
+
+    if (
+        childTheme === "car"
+    ) {
+
+        return carDrawings;
+
+    }
+
+    return spaceDrawings;
+
+}
+
+
+/* =====================================================
+   إنشاء أزرار الرسومات
+===================================================== */
+
+function buildDrawingButtons() {
+
+    drawingSelector.innerHTML = "";
+
+    const drawings =
+        getDrawings();
+
+    drawings.forEach(
+        function(drawing, index) {
+
+            const button =
+                document.createElement(
+                    "button"
+                );
+
+            button.className =
+                "drawing-button";
+
+            button.textContent =
+                drawing.name;
+
+            button.addEventListener(
+                "pointerdown",
+                function(event) {
+
+                    event.preventDefault();
+
+                    loadDrawing(
+                        drawing
+                    );
+
+                }
+            );
+
+            drawingSelector.appendChild(
+                button
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   تفعيل زر الرسمة الحالية
+===================================================== */
+
+function updateDrawingButtons() {
+
+    const buttons =
+        drawingSelector.querySelectorAll(
+            ".drawing-button"
+        );
+
+    const drawings =
+        getDrawings();
+
+    buttons.forEach(
+        function(button, index) {
+
+            if (
+                drawings[index] &&
+                currentDrawing &&
+                drawings[index].id ===
+                currentDrawing.id
+            ) {
+
+                button.classList.add(
+                    "active"
+                );
+
+            }
+
+            else {
+
+                button.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   مفتاح الحفظ
+===================================================== */
+
+function getStorageKey() {
+
+    if (!currentDrawing) {
+
+        return "";
+
+    }
+
+    const childId =
+        getCurrentChildId() ||
+        "guest";
+
+    return (
+        "rafiq_coloring_" +
+        childId +
+        "_" +
+        currentDrawing.id
+    );
+
+}
+
+
+/* =====================================================
+   حفظ الحالة
+===================================================== */
+
+function saveDrawing() {
+
+    if (!currentDrawing) {
+
+        return;
+
+    }
+
+    const parts = {};
+
+    document
+        .querySelectorAll(
+            "#svgContainer .color-part"
+        )
+        .forEach(
+            function(part) {
+
+                parts[
+                    part.dataset.part
+                ] =
+                    part.style.fill ||
+                    "#ffffff";
+
+            }
+        );
+
+    let canvasData = "";
+
+    try {
+
+        canvasData =
+            freeCanvas.toDataURL();
+
+    }
+
+    catch (error) {
+
+        canvasData = "";
+
+    }
+
+    localStorage.setItem(
+
+        getStorageKey(),
+
+        JSON.stringify({
+
+            parts:
+                parts,
+
+            canvas:
+                canvasData
+
+        })
+
+    );
+
+}
+
+
+/* =====================================================
+   تحميل الحالة المحفوظة
+===================================================== */
+
+function loadSavedDrawing() {
+
+    if (!currentDrawing) {
+
+        return;
+
+    }
+
+    const saved =
+        localStorage.getItem(
+            getStorageKey()
+        );
+
+    if (!saved) {
+
+        return;
+
+    }
+
+    try {
+
+        const state =
+            JSON.parse(
+                saved
+            );
+
+
+        if (state.parts) {
+
+            document
+                .querySelectorAll(
+                    "#svgContainer .color-part"
+                )
+                .forEach(
+                    function(part) {
+
+                        const color =
+                            state.parts[
+                                part.dataset.part
+                            ];
+
+                        if (color) {
+
+                            part.style.setProperty(
+                                "fill",
+                                color,
+                                "important"
+                            );
+
+                        }
+
+                    }
+                );
+
+        }
+
+
+        if (state.canvas) {
+
+            const image =
+                new Image();
+
+            image.onload =
+                function() {
+
+                    ctx.clearRect(
+                        0,
+                        0,
+                        freeCanvas.width,
+                        freeCanvas.height
+                    );
+
+                    ctx.drawImage(
+                        image,
+                        0,
+                        0,
+                        freeCanvas.width,
+                        freeCanvas.height
+                    );
+
+                };
+
+            image.src =
+                state.canvas;
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.warn(
+            "تعذر تحميل الرسم المحفوظ",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   تجهيز Canvas
+===================================================== */
+
+function resizeCanvas() {
+
+    const rect =
+        paper.getBoundingClientRect();
+
+    if (
+        rect.width <= 0 ||
+        rect.height <= 0
+    ) {
+
+        return;
+
+    }
+
+    let oldImage = null;
+
+    if (
+        freeCanvas.width > 0 &&
+        freeCanvas.height > 0
+    ) {
+
+        oldImage =
+            document.createElement(
+                "canvas"
+            );
+
+        oldImage.width =
+            freeCanvas.width;
+
+        oldImage.height =
+            freeCanvas.height;
+
+        oldImage
+            .getContext("2d")
+            .drawImage(
+                freeCanvas,
+                0,
+                0
+            );
+
+    }
+
+
+    freeCanvas.width =
+        Math.round(rect.width);
+
+    freeCanvas.height =
+        Math.round(rect.height);
+
+
+    if (oldImage) {
+
+        ctx.drawImage(
+            oldImage,
+            0,
+            0,
+            oldImage.width,
+            oldImage.height,
+            0,
+            0,
+            freeCanvas.width,
+            freeCanvas.height
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   تحميل رسمة
+===================================================== */
+
+function loadDrawing(
+    drawing
+) {
+
+    if (
+        currentDrawing &&
+        currentDrawing.id !== drawing.id
+    ) {
+
+        saveDrawing();
+
+    }
+
+
+    currentDrawing =
+        drawing;
+
+
+    /*
+     * تنظيف الـCanvas السابق
+     */
+
+    ctx.clearRect(
+        0,
+        0,
+        freeCanvas.width,
+        freeCanvas.height
+    );
+
+
+    /*
+     * وضع SVG الجديد
+     */
+
+    svgContainer.innerHTML =
+        drawing.svg;
+
+
+    currentDrawingText.textContent =
+        drawing.title;
+
+
+    updateDrawingButtons();
+
+
+    /*
+     * مهم:
+     * تجهيز أجزاء SVG قبل أي استرجاع
+     */
+
+    attachColorParts();
+
+
+    /*
+     * تجهيز Canvas
+     */
+
+    resizeCanvas();
+
+
+    /*
+     * استرجاع الرسم السابق
+     */
+
+    setTimeout(
+        function() {
+
+            loadSavedDrawing();
+
+        },
+        50
+    );
+
+
+    speakArabic(
+        drawing.title
+    );
+
+}
+
+
+/* =====================================================
+   ربط أجزاء SVG
+===================================================== */
+
+function attachColorParts() {
+
+    const parts =
+        document.querySelectorAll(
+            "#svgContainer .color-part"
+        );
+
+
+    parts.forEach(
+        function(part) {
+
+            /*
+             * اللون الابتدائي
+             */
+
+            if (
+                !part.style.fill
+            ) {
+
+                part.style.setProperty(
+                    "fill",
+                    "#ffffff",
+                    "important"
+                );
+
+            }
+
+
+            /*
+             * pointerdown يعمل بشكل
+             * أفضل مع اللمس في iPad
+             */
+
+            part.addEventListener(
+                "pointerdown",
+                function(event) {
+
+                    event.preventDefault();
+
+                    event.stopPropagation();
+
+
+                    /*
+                     * إذا القلم الحر مفعّل
+                     * لا نلوّن الـSVG
+                     */
+
+                    if (
+                        currentTool ===
+                        "brush"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * الممحاة
+                     */
+
+                    if (
+                        currentTool ===
+                        "eraser"
+                    ) {
+
+                        part.style.setProperty(
+                            "fill",
+                            "#ffffff",
+                            "important"
+                        );
+
+                        saveDrawing();
+
+                        return;
+
+                    }
+
+
+                    /*
+                     * التلوين
+                     */
+
+                    part.style.setProperty(
+                        "fill",
+                        selectedColor,
+                        "important"
+                    );
+
+
+                    saveDrawing();
+
+                },
+                {
+                    passive: false
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   الأدوات
+===================================================== */
+
+function setTool(
+    tool
+) {
+
+    currentTool =
+        tool;
+
+
+    document
+        .getElementById(
+            "fillTool"
+        )
+        .classList.remove(
+            "active"
+        );
+
+    document
+        .getElementById(
+            "brushTool"
+        )
+        .classList.remove(
+            "active"
+        );
+
+    document
+        .getElementById(
+            "eraserTool"
+        )
+        .classList.remove(
+            "active"
+        );
+
+
+    paper.classList.remove(
+        "free-mode"
+    );
+
+
+    /*
+     * التلوين
+     */
+
+    if (
+        tool === "fill"
+    ) {
+
+        document
+            .getElementById(
+                "fillTool"
+            )
+            .classList.add(
+                "active"
+            );
+
+        /*
+         * مهم:
+         * الـCanvas لا يستقبل اللمس
+         * حتى يصل الضغط إلى SVG
+         */
+
+        freeCanvas.style.pointerEvents =
+            "none";
+
+    }
+
+
+    /*
+     * القلم الحر
+     */
+
+    if (
+        tool === "brush"
+    ) {
+
+        document
+            .getElementById(
+                "brushTool"
+            )
+            .classList.add(
+                "active"
+            );
+
+        paper.classList.add(
+            "free-mode"
+        );
+
+        freeCanvas.style.pointerEvents =
+            "auto";
+
+    }
+
+
+    /*
+     * الممحاة
+     */
+
+    if (
+        tool === "eraser"
+    ) {
+
+        document
+            .getElementById(
+                "eraserTool"
+            )
+            .classList.add(
+                "active"
+            );
+
+        /*
+         * الممحاة على أجزاء SVG
+         * تحتاج أن يصل الضغط إلى SVG
+         */
+
+        freeCanvas.style.pointerEvents =
+            "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   أزرار الأدوات
+===================================================== */
+
+document
+    .getElementById(
+        "fillTool"
+    )
+    .addEventListener(
+        "pointerdown",
+        function(event) {
+
+            event.preventDefault();
+
+            setTool(
+                "fill"
+            );
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "brushTool"
+    )
+    .addEventListener(
+        "pointerdown",
+        function(event) {
+
+            event.preventDefault();
+
+            setTool(
+                "brush"
+            );
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "eraserTool"
+    )
+    .addEventListener(
+        "pointerdown",
+        function(event) {
+
+            event.preventDefault();
+
+            setTool(
+                "eraser"
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   أحجام الفرشاة
+===================================================== */
+
+document
+    .querySelectorAll(
+        ".size-button"
+    )
+    .forEach(
+        function(button) {
+
+            button.addEventListener(
+                "pointerdown",
+                function(event) {
+
+                    event.preventDefault();
+
+                    brushSize =
+                        Number(
+                            button.dataset.size
+                        );
+
+
+                    document
+                        .querySelectorAll(
+                            ".size-button"
+                        )
+                        .forEach(
+                            function(item) {
+
+                                item.classList.remove(
+                                    "active"
+                                );
+
+                            }
+                        );
+
+
+                    button.classList.add(
+                        "active"
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   الرسم الحر
+===================================================== */
+
+let drawingNow =
+    false;
+
+
+function getCanvasPosition(
+    event
+) {
+
+    const rect =
+        freeCanvas.getBoundingClientRect();
+
+
+    return {
+
+        x:
+            event.clientX -
+            rect.left,
+
+        y:
+            event.clientY -
+            rect.top
+
+    };
+
+}
+
+
+function startDrawing(
+    event
+) {
+
+    if (
+        currentTool !==
+        "brush"
+    ) {
+
+        return;
+
+    }
+
+    event.preventDefault();
+
+    drawingNow =
+        true;
+
+
+    try {
+
+        freeCanvas.setPointerCapture(
+            event.pointerId
+        );
+
+    }
+
+    catch (error) {}
+
+
+    const position =
+        getCanvasPosition(
+            event
+        );
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        position.x,
+        position.y
+    );
+
+}
+
+
+function draw(
+    event
+) {
+
+    if (
+        !drawingNow ||
+        currentTool !==
+        "brush"
+    ) {
+
+        return;
+
+    }
+
+    event.preventDefault();
+
+
+    const position =
+        getCanvasPosition(
+            event
+        );
+
+
+    ctx.lineWidth =
+        brushSize;
+
+    ctx.lineCap =
+        "round";
+
+    ctx.lineJoin =
+        "round";
+
+    ctx.strokeStyle =
+        selectedColor;
+
+    ctx.globalCompositeOperation =
+        "source-over";
+
+
+    ctx.lineTo(
+        position.x,
+        position.y
+    );
+
+    ctx.stroke();
+
+}
+
+
+function stopDrawing(
+    event
+) {
+
+    if (
+        !drawingNow
+    ) {
+
+        return;
+
+    }
+
+
+    drawingNow =
+        false;
+
+
+    ctx.closePath();
+
+
+    try {
+
+        freeCanvas.releasePointerCapture(
+            event.pointerId
+        );
+
+    }
+
+    catch (error) {}
+
+
+    saveDrawing();
+
+}
+
+
+freeCanvas.addEventListener(
+    "pointerdown",
+    startDrawing
+);
+
+freeCanvas.addEventListener(
+    "pointermove",
+    draw
+);
+
+freeCanvas.addEventListener(
+    "pointerup",
+    stopDrawing
+);
+
+freeCanvas.addEventListener(
+    "pointercancel",
+    stopDrawing
+);
+
+
+/* =====================================================
+   ممحاة الرسم الحر
+===================================================== */
+
+function eraseAt(
+    x,
+    y
+) {
+
+    ctx.save();
+
+    ctx.globalCompositeOperation =
+        "destination-out";
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        brushSize * 1.7,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+
+}
+
+
+function startErasing(
+    event
+) {
+
+    if (
+        currentTool !==
+        "eraser"
+    ) {
+
+        return;
+
+    }
+
+
+    /*
+     * هنا نحتاج الممحاة الحرة
+     * فقط عندما يكون الضغط على
+     * الـCanvas.
+     */
+
+    event.preventDefault();
+
+    drawingNow =
+        true;
+
+
+    try {
+
+        freeCanvas.setPointerCapture(
+            event.pointerId
+        );
+
+    }
+
+    catch (error) {}
+
+
+    const position =
+        getCanvasPosition(
+            event
+        );
+
+
+    eraseAt(
+        position.x,
+        position.y
+    );
+
+}
+
+
+function moveErasing(
+    event
+) {
+
+    if (
+        !drawingNow ||
+        currentTool !==
+        "eraser"
+    ) {
+
+        return;
+
+    }
+
+    event.preventDefault();
+
+
+    const position =
+        getCanvasPosition(
+            event
+        );
+
+
+    eraseAt(
+        position.x,
+        position.y
+    );
+
+}
+
+
+function stopErasing(
+    event
+) {
+
+    if (
+        !drawingNow ||
+        currentTool !==
+        "eraser"
+    ) {
+
+        return;
+
+    }
+
+
+    drawingNow =
+        false;
+
+
+    try {
+
+        freeCanvas.releasePointerCapture(
+            event.pointerId
+        );
+
+    }
+
+    catch (error) {}
+
+
+    saveDrawing();
+
+}
+
+
+freeCanvas.addEventListener(
+    "pointerdown",
+    startErasing
+);
+
+freeCanvas.addEventListener(
+    "pointermove",
+    moveErasing
+);
+
+freeCanvas.addEventListener(
+    "pointerup",
+    stopErasing
+);
+
+freeCanvas.addEventListener(
+    "pointercancel",
+    stopErasing
+);
+
+
+/* =====================================================
+   مسح الكل
+===================================================== */
+
+document
+    .getElementById(
+        "clearButton"
+    )
+    .addEventListener(
+        "pointerdown",
+        function(event) {
+
+            event.preventDefault();
+
+
+            if (
+                !currentDrawing
+            ) {
+
+                return;
+
+            }
+
+
+            document
+                .querySelectorAll(
+                    "#svgContainer .color-part"
+                )
+                .forEach(
+                    function(part) {
+
+                        part.style.setProperty(
+                            "fill",
+                            "#ffffff",
+                            "important"
+                        );
+
+                    }
+                );
+
+
+            ctx.clearRect(
+                0,
+                0,
+                freeCanvas.width,
+                freeCanvas.height
+            );
+
+
+            localStorage.removeItem(
+                getStorageKey()
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   النطق
+===================================================== */
+
+function speakArabic(
+    text
+) {
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+
+    speech.lang =
+        "ar-SA";
+
+    speech.rate =
+        0.82;
+
+    speech.pitch =
+        1.05;
+
+
+    window.speechSynthesis.speak(
+        speech
+    );
+
+}
+
+
+/* =====================================================
+   تحميل تخصيص الطفل
+===================================================== */
+
+async function loadChildTheme() {
+
+    const childId =
+        getCurrentChildId();
+
+
+    if (
+        !childId
+    ) {
+
+        childTheme =
+            "space";
+
+        childBackground =
+            "images/af.jpeg";
+
+        return;
+
+    }
+
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+
+                .from("children")
+
+                .select("interests")
+
+                .eq(
+                    "id",
+                    childId
+                )
+
+                .maybeSingle();
+
+
+        if (
+            error ||
+            !data
+        ) {
+
+            childTheme =
+                "space";
+
+            childBackground =
+                "images/af.jpeg";
+
+            return;
+
+        }
+
+
+        let interest =
+            data.interests;
+
+
+        if (
+            interest !== null &&
+            interest !== undefined
+        ) {
+
+            interest =
+                String(
+                    interest
+                )
+                .trim()
+                .toLowerCase();
+
+        }
+
+
+        console.log(
+            "Coloring Interest:",
+            interest
+        );
+
+
+        /* =========================
+           سيارات
+        ========================= */
+
+        if (
+
+            interest === "سيارات" ||
+
+            interest === "سيارة" ||
+
+            interest === "cars" ||
+
+            interest === "car"
+
+        ) {
+
+            childTheme =
+                "car";
+
+            childBackground =
+                "images/ak.jpeg";
+
+            return;
+
+        }
+
+
+        /* =========================
+           فضاء
+        ========================= */
+
+        if (
+
+            interest === "فضاء" ||
+
+            interest === "space"
+
+        ) {
+
+            childTheme =
+                "space";
+
+            childBackground =
+                "images/af.jpeg";
+
+            return;
+
+        }
+
+
+        /* =========================
+           الافتراضي
+        ========================= */
+
+        childTheme =
+            "space";
+
+        childBackground =
+            "images/af.jpeg";
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Coloring theme error:",
+            error
+        );
+
+
+        childTheme =
+            "space";
+
+        childBackground =
+            "images/af.jpeg";
+
+    }
+
+}
+
+
+/* =====================================================
+   تطبيق الخلفية
+===================================================== */
+
+function applyTheme() {
+
+    document.body.style.backgroundImage =
+        'url("' +
+        childBackground +
+        '")';
+
+
+    document.body.classList.add(
+        "theme-ready"
+    );
+
+}
+
+
+/* =====================================================
+   القائمة
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const dropdownMenu =
+    document.getElementById(
+        "dropdownMenu"
+    );
+
+
+menuButton.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        event.preventDefault();
+
+        event.stopPropagation();
+
+        dropdownMenu.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        if (
+            !event.target.closest(
+                ".menu-wrapper"
+            )
+        ) {
+
+            dropdownMenu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   السابق
+===================================================== */
+
+document
+    .getElementById(
+        "previousButton"
+    )
+    .addEventListener(
+        "pointerdown",
+        function(event) {
+
+            event.preventDefault();
+
+            window.location.href =
+                "colors.html";
+
+        }
+    );
+
+
+/* =====================================================
+   تغيير حجم الشاشة
+===================================================== */
+
+let resizeTimer;
+
+window.addEventListener(
+    "resize",
+    function() {
+
+        clearTimeout(
+            resizeTimer
+        );
+
+        resizeTimer =
+            setTimeout(
+                function() {
+
+                    resizeCanvas();
+
+                },
+                100
+            );
+
+    }
+);
+
+
+/* =====================================================
+   التشغيل
+===================================================== */
+
+async function initializePage() {
+
+    try {
+
+        await loadChildTheme();
+
+        applyTheme();
+
+        buildPalette();
+
+        buildDrawingButtons();
+
+
+        const drawings =
+            getDrawings();
+
+
+        if (
+            drawings.length > 0
+        ) {
+
+            loadDrawing(
+                drawings[0]
+            );
+
+        }
+
+
+        /*
+         * نبدأ على وضع التلوين
+         */
+
+        setTool(
+            "fill"
+        );
+
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Page initialization error:",
+            error
+        );
+
+
+        /*
+         * حتى لو صار خطأ في قاعدة البيانات،
+         * الصفحة لا تبقى عالقة في التحميل.
+         */
+
+        applyTheme();
+
+        buildPalette();
+
+        buildDrawingButtons();
+
+
+        const drawings =
+            getDrawings();
+
+
+        if (
+            drawings.length > 0
+        ) {
+
+            loadDrawing(
+                drawings[0]
+            );
+
+        }
+
+
+        setTool(
+            "fill"
+        );
+
+
+        loading.classList.add(
+            "hidden"
+        );
+
+    }
+
+}
+
+
+initializePage();
+
+</script>
+
+</body>
+
+</html>

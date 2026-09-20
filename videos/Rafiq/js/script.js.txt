@@ -1,0 +1,109 @@
+// ====================================
+// Rafiq Login Page
+// ====================================
+
+
+// إظهار / إخفاء كلمة المرور
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    const eye =
+        document.querySelector(".eye");
+
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+        eye.textContent = "🙈";
+
+    } else {
+
+        password.type = "password";
+
+        eye.textContent = "👁";
+    }
+}
+
+
+
+// تسجيل الدخول
+function login() {
+
+    const email =
+        document.getElementById("email")
+        .value
+        .trim();
+
+    const password =
+        document.getElementById("password")
+        .value
+        .trim();
+
+
+    if (!email) {
+
+        alert(
+            "فضلاً أدخل البريد الإلكتروني أو رقم الجوال"
+        );
+
+        return;
+    }
+
+
+    if (!password) {
+
+        alert(
+            "فضلاً أدخل كلمة المرور"
+        );
+
+        return;
+    }
+
+
+    alert(
+        "تم تسجيل الدخول بنجاح 🌈"
+    );
+}
+
+
+
+// نسيت كلمة المرور
+function forgotPassword() {
+
+    alert(
+        "سننتقل إلى صفحة استعادة كلمة المرور."
+    );
+}
+
+
+
+// Apple
+function appleLogin() {
+
+    alert(
+        "تسجيل الدخول باستخدام Apple"
+    );
+}
+
+
+
+// Google
+function googleLogin() {
+
+    alert(
+        "تسجيل الدخول باستخدام Google"
+    );
+}
+
+
+
+// إنشاء حساب
+function createAccount() {
+
+    alert(
+        "سننتقل إلى صفحة إنشاء حساب جديد."
+    );
+}

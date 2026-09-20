@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>لعبة المشاعر - رفيق</title>
+
+<style>
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:"Tahoma", Arial, sans-serif;
+}
+
+body{
+    background-image:url("images/car.jpeg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+    width:100%;
+    height:100vh;
+    position:relative;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+
+/* =========================================================
+   PREVIOUS - LEFT
+========================================================= */
+
+.top-left{
+    position:absolute;
+    top:28px;
+    left:35px;
+    z-index:30;
+}
+
+
+/* =========================================================
+   MENU - RIGHT
+========================================================= */
+
+.top-right{
+    position:absolute;
+    top:28px;
+    right:35px;
+    z-index:30;
+}
+
+
+.top-btn{
+    border:none;
+    border-radius:22px;
+
+    background:rgba(255,255,255,0.92);
+
+    padding:12px 20px;
+
+    font-size:19px;
+    font-weight:bold;
+
+    color:#444;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.10);
+
+    transition:0.2s;
+}
+
+.top-btn:active{
+    transform:scale(0.94);
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+.menu{
+    display:none;
+
+    position:absolute;
+
+    top:82px;
+    right:35px;
+
+    width:220px;
+
+    background:rgba(255,255,255,0.97);
+
+    border-radius:20px;
+
+    padding:12px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,0.15);
+
+    z-index:100;
+}
+
+
+.menu button{
+    width:100%;
+
+    border:none;
+
+    background:transparent;
+
+    padding:14px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    text-align:right;
+
+    border-radius:12px;
+
+    color:#444;
+
+    cursor:pointer;
+}
+
+
+.menu button:hover{
+    background:#e4f2ff;
+}
+
+
+/* =========================================================
+   STARS - CENTER TOP
+========================================================= */
+
+.stars{
+
+    position:absolute;
+
+    top:25px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:20;
+
+    text-align:center;
+
+    background:rgba(255,255,255,0.70);
+
+    padding:9px 18px;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.08);
+}
+
+
+.star-icons{
+
+    font-size:32px;
+
+    letter-spacing:5px;
+
+    line-height:1;
+
+    white-space:nowrap;
+}
+
+
+/* =========================================================
+   HINT BUTTON
+========================================================= */
+
+.hint-btn{
+
+    position:absolute;
+
+    top:94px;
+
+    right:35px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#fff3b8;
+
+    padding:11px 20px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.12);
+
+    z-index:30;
+
+    animation:hintFloat 2s ease-in-out infinite;
+}
+
+
+@keyframes hintFloat{
+
+    0%,
+    100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-5px);
+    }
+
+}
+
+
+.hint-btn:active{
+    transform:scale(0.95);
+}
+
+
+/* =========================================================
+   HINT BOX
+========================================================= */
+
+.hint-box{
+
+    display:none;
+
+    position:absolute;
+
+    top:145px;
+
+    right:35px;
+
+    width:300px;
+
+    background:rgba(255,255,255,0.97);
+
+    border-radius:20px;
+
+    padding:17px;
+
+    text-align:center;
+
+    font-size:17px;
+
+    line-height:1.7;
+
+    color:#444;
+
+    box-shadow:
+        0 7px 20px rgba(0,0,0,0.15);
+
+    z-index:90;
+}
+
+
+.hint-title{
+
+    font-weight:bold;
+
+    margin-bottom:6px;
+
+    font-size:20px;
+}
+
+
+/* =========================================================
+   TITLE + DESCRIPTION
+========================================================= */
+
+.title{
+
+    margin-top:145px;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    color:#444;
+
+    text-align:center;
+
+    line-height:1.3;
+}
+
+
+/* الجملة الموجودة تحت العنوان */
+
+.scene-description{
+
+    margin-top:12px;
+
+    font-size:18px;
+
+    font-weight:normal;
+
+    color:#555;
+
+    line-height:1.6;
+
+    max-width:620px;
+
+    padding:0 15px;
+
+    text-align:center;
+}
+
+
+/* =========================================================
+   VIDEO
+========================================================= */
+
+.video-container{
+
+    margin-top:18px;
+
+    width:600px;
+
+    max-width:70%;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    background:#fff;
+
+    box-shadow:
+        0 7px 22px rgba(0,0,0,0.15);
+}
+
+
+.game-video{
+
+    display:block;
+
+    width:100%;
+
+    aspect-ratio:16 / 9;
+
+    object-fit:cover;
+}
+
+
+/* =========================================================
+   QUESTION
+========================================================= */
+
+.question{
+
+    margin-top:17px;
+
+    font-size:25px;
+
+    font-weight:bold;
+
+    color:#444;
+
+    text-align:center;
+}
+
+
+/* =========================================================
+   ANSWERS
+========================================================= */
+
+.answers{
+
+    margin-top:14px;
+
+    display:flex;
+
+    flex-direction:row;
+
+    gap:18px;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+}
+
+
+.answer-btn{
+
+    min-width:145px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#e4f2ff;
+
+    padding:12px 27px;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#444;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.10);
+
+    transition:0.2s;
+}
+
+
+.answer-btn:active{
+    transform:scale(0.94);
+}
+
+
+.answer-btn:disabled{
+
+    opacity:0.60;
+
+    cursor:default;
+}
+
+
+/* =========================================================
+   RESULT
+========================================================= */
+
+.result{
+
+    min-height:40px;
+
+    margin-top:9px;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    color:#444;
+
+    text-align:center;
+}
+
+
+/* =========================================================
+   NEXT
+========================================================= */
+
+.next-btn{
+
+    margin-top:2px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#bfe3c0;
+
+    padding:11px 34px;
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    color:#444;
+
+    cursor:pointer;
+
+    opacity:0.40;
+
+    pointer-events:none;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.10);
+
+    transition:0.2s;
+}
+
+
+.next-btn.active{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+
+.next-btn:active{
+    transform:scale(0.95);
+}
+
+
+/* =========================================================
+   SOUND
+========================================================= */
+
+.sound-btn{
+
+    position:absolute;
+
+    bottom:28px;
+
+    left:35px;
+
+    width:56px;
+    height:56px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.92);
+
+    font-size:26px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.10);
+
+    z-index:30;
+}
+
+
+/* =========================================================
+   CAR BALLOON CANVAS
+========================================================= */
+
+#carBalloonCanvas{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+
+    z-index:200;
+
+    display:none;
+}
+
+
+/* =========================================================
+   IPAD PORTRAIT
+========================================================= */
+
+@media
+(min-width:801px)
+and
+(max-width:1100px){
+
+    .top-left{
+        left:28px;
+    }
+
+    .top-right{
+        right:28px;
+    }
+
+    .stars{
+        top:27px;
+    }
+
+    .title{
+        margin-top:145px;
+        font-size:29px;
+    }
+
+    .scene-description{
+        font-size:18px;
+        max-width:650px;
+    }
+
+    .video-container{
+        width:620px;
+        max-width:72%;
+    }
+
+    .question{
+        font-size:25px;
+    }
+
+    .answer-btn{
+        min-width:150px;
+        font-size:20px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALLER SCREENS
+========================================================= */
+
+@media(max-width:800px){
+
+    .top-left{
+        left:18px;
+    }
+
+    .top-right{
+        right:18px;
+    }
+
+    .top-btn{
+        font-size:16px;
+        padding:10px 15px;
+    }
+
+    .stars{
+        top:20px;
+        padding:8px 14px;
+    }
+
+    .star-icons{
+        font-size:27px;
+        letter-spacing:3px;
+    }
+
+    .hint-btn{
+        top:82px;
+        right:18px;
+        font-size:16px;
+        padding:10px 15px;
+    }
+
+    .hint-box{
+        top:130px;
+        right:18px;
+        width:270px;
+    }
+
+    .title{
+        margin-top:130px;
+        font-size:25px;
+    }
+
+    .scene-description{
+        margin-top:9px;
+        font-size:16px;
+        max-width:90%;
+    }
+
+    .video-container{
+        width:82%;
+        max-width:650px;
+        margin-top:15px;
+    }
+
+    .question{
+        margin-top:13px;
+        font-size:22px;
+    }
+
+    .answers{
+        gap:12px;
+        margin-top:11px;
+    }
+
+    .answer-btn{
+        min-width:125px;
+        font-size:18px;
+        padding:10px 18px;
+    }
+
+    .result{
+        font-size:19px;
+    }
+
+    .next-btn{
+        font-size:18px;
+        padding:10px 28px;
+    }
+
+    .sound-btn{
+        left:18px;
+        bottom:20px;
+    }
+
+}
+
+
+/* =========================================================
+   CAR BALLOON ANIMATION
+========================================================= */
+
+@keyframes dummy{
+    from{
+        opacity:1;
+    }
+
+    to{
+        opacity:1;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =====================================================
+         السابق - اليسار
+    ====================================================== -->
+
+    <div class="top-left">
+
+        <button
+            class="top-btn"
+            onclick="goBack()">
+
+            ← السابق
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         القائمة - اليمين
+    ====================================================== -->
+
+    <div class="top-right">
+
+        <button
+            class="top-btn"
+            onclick="toggleMenu()">
+
+            ☰
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+
+    <div
+        class="menu"
+        id="menu">
+
+        <button onclick="goHome()">
+            🏠 الرئيسية
+        </button>
+
+        <button onclick="goProfile()">
+            👤 ملفي
+        </button>
+
+        <button onclick="goReports()">
+            📊 تقاريري
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         النجوم
+    ====================================================== -->
+
+    <div class="stars">
+
+        <div
+            class="star-icons"
+            id="starIcons">
+
+            ☆ ☆ ☆
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         التلميح
+    ====================================================== -->
+
+    <button
+        class="hint-btn"
+        id="hintButton"
+        onclick="showHint()">
+
+        💡 تلميح
+
+    </button>
+
+
+    <!-- =====================================================
+         صندوق التلميح
+    ====================================================== -->
+
+    <div
+        class="hint-box"
+        id="hintBox">
+
+        <div class="hint-title">
+            💡 تلميح
+        </div>
+
+        <div id="hintText">
+            انظر جيدًا إلى وجوه الأطفال وحركاتهم.
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         العنوان + وصف المشهد
+    ====================================================== -->
+
+    <div class="title">
+
+        <div>
+            تعرّف على الشعور 
+        </div>
+
+        <div class="scene-description">
+
+            قضى الطفلان وقت فراغهما في اللعب بالسيارات
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         الفيديو
+    ====================================================== -->
+
+    <div class="video-container">
+
+        <video
+            id="gameVideo"
+            class="game-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto">
+
+            <source
+                src="videos/car-game.mp4"
+                type="video/mp4">
+
+            متصفحك لا يدعم تشغيل الفيديو.
+
+        </video>
+
+    </div>
+
+
+    <!-- =====================================================
+         السؤال
+    ====================================================== -->
+
+    <div class="question">
+
+        ما هو شعورهما أثناء اللعب ؟
+
+    </div>
+
+
+    <!-- =====================================================
+         الإجابات
+    ====================================================== -->
+
+    <div class="answers">
+
+        <button
+            class="answer-btn"
+            onclick="checkAnswer('happiness')">
+
+            السعادة
+
+        </button>
+
+
+        <button
+            class="answer-btn"
+            onclick="checkAnswer('sadness')">
+
+            الحزن
+
+        </button>
+
+
+        <button
+            class="answer-btn"
+            onclick="checkAnswer('anxiety')">
+
+            القلق
+
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         النتيجة
+    ====================================================== -->
+
+    <div
+        class="result"
+        id="result">
+    </div>
+
+
+    <!-- =====================================================
+         التالي
+    ====================================================== -->
+
+    <button
+        class="next-btn"
+        id="nextButton"
+        onclick="nextPage()">
+
+        التالي ➜
+
+    </button>
+
+
+    <!-- =====================================================
+         الصوت
+    ====================================================== -->
+
+    <button
+        class="sound-btn"
+        onclick="speakQuestion()">
+
+        🔊
+
+    </button>
+
+</div>
+
+
+<!-- =========================================================
+     CANVAS
+========================================================= -->
+
+<canvas id="carBalloonCanvas"></canvas>
+
+
+<script>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+const video =
+    document.getElementById("gameVideo");
+
+const result =
+    document.getElementById("result");
+
+const starIcons =
+    document.getElementById("starIcons");
+
+const nextButton =
+    document.getElementById("nextButton");
+
+const hintBox =
+    document.getElementById("hintBox");
+
+const hintText =
+    document.getElementById("hintText");
+
+
+let attempts = 0;
+
+let hintsUsed = 0;
+
+let answeredCorrectly = false;
+
+
+/* =========================================================
+   START VIDEO
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        video.play().catch(
+            function(){
+
+                console.log(
+                    "Autoplay blocked."
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+function toggleMenu(){
+
+    const menu =
+        document.getElementById("menu");
+
+
+    if(
+        menu.style.display === "block"
+    ){
+
+        menu.style.display = "none";
+
+    }else{
+
+        menu.style.display = "block";
+
+    }
+
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function goBack(){
+
+    window.location.href =
+        "emotions.html";
+
+}
+
+
+function goHome(){
+
+    window.location.href =
+        "home.html";
+
+}
+
+
+function goProfile(){
+
+    window.location.href =
+        "profile.html";
+
+}
+
+
+function goReports(){
+
+    window.location.href =
+        "reports.html";
+
+}
+
+
+/* =========================================================
+   CHECK ANSWER
+========================================================= */
+
+function checkAnswer(answer){
+
+    if(answeredCorrectly){
+        return;
+    }
+
+
+    attempts++;
+
+
+    /* =====================================================
+       CORRECT
+    ====================================================== */
+
+    if(answer === "happiness"){
+
+        answeredCorrectly = true;
+
+
+        /* إيقاف الفيديو */
+
+        video.pause();
+
+
+        /* النجوم الثلاث */
+
+        starIcons.innerHTML =
+            "⭐ ⭐ ⭐";
+
+
+        /* رسالة النجاح */
+
+        result.innerHTML =
+            "أحسنت! إجابة صحيحة 🎉";
+
+
+        /* تعطيل الأزرار */
+
+        const buttons =
+            document.querySelectorAll(
+                ".answer-btn"
+            );
+
+
+        buttons.forEach(
+            function(button){
+
+                button.disabled = true;
+
+            }
+        );
+
+
+        /* تفعيل التالي */
+
+        nextButton.classList.add(
+            "active"
+        );
+
+
+        /* إخفاء التلميح */
+
+        hintBox.style.display =
+            "none";
+
+
+        /* حفظ البيانات */
+
+        saveGameData();
+
+
+        /* الاحتفال */
+
+        createCarCelebration();
+
+
+        /* الصوت */
+
+        speak(
+            "أحسنت! إجابة صحيحة"
+        );
+
+    }
+
+
+    /* =====================================================
+       WRONG
+    ====================================================== */
+
+    else{
+
+        result.innerHTML =
+            "حاول مرة أخرى 🌈";
+
+
+        speak(
+            "حاول مرة أخرى"
+        );
+
+
+        /* الفيديو يستمر */
+
+        video.play().catch(
+            function(){}
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   HINT SYSTEM
+========================================================= */
+
+function showHint(){
+
+    if(answeredCorrectly){
+        return;
+    }
+
+
+    hintsUsed++;
+
+
+    if(hintsUsed === 1){
+
+        hintText.innerHTML =
+            "💡 انظر إلى وجوه الأطفال جيدًا... ماذا تلاحظ؟";
+
+    }
+
+
+    else if(hintsUsed === 2){
+
+        hintText.innerHTML =
+            "💡 الأطفال يلعبون معًا ويبدون مستمتعين بوقتهم.";
+
+    }
+
+
+    else{
+
+        hintText.innerHTML =
+            "💡 عندما يستمتع الشخص ويلعب ويضحك مع الآخرين، كيف يمكن أن يشعر؟";
+
+    }
+
+
+    hintBox.style.display =
+        "block";
+
+
+    saveGameData();
+
+}
+
+
+/* =========================================================
+   SAVE DATA
+========================================================= */
+
+function saveGameData(){
+
+    const oldData =
+        JSON.parse(
+            localStorage.getItem(
+                "rafiqGameData"
+            ) || "{}"
+        );
+
+
+    oldData.carEmotionGame = {
+
+        attempts:
+            attempts,
+
+        hintsUsed:
+            hintsUsed,
+
+        correct:
+            answeredCorrectly,
+
+        stars:
+            answeredCorrectly
+                ? 3
+                : 0,
+
+        updatedAt:
+            new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+        "rafiqGameData",
+        JSON.stringify(oldData)
+    );
+
+}
+
+
+/* =========================================================
+   CAR BALLOON CELEBRATION
+========================================================= */
+
+function createCarCelebration(){
+
+    const canvas =
+        document.getElementById(
+            "carBalloonCanvas"
+        );
+
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    canvas.style.display =
+        "block";
+
+
+    canvas.width =
+        window.innerWidth;
+
+
+    canvas.height =
+        window.innerHeight;
+
+
+    const carColors = [
+
+        "#E53935",
+        "#FFC107",
+        "#1E88E5",
+        "#EC407A",
+        "#9C4DCC",
+        "#26A69A"
+
+    ];
+
+
+    const cars = [
+
+        {
+            x:0.08,
+            delay:0.00,
+            size:110,
+            color:carColors[0],
+            rotation:-0.08
+        },
+
+        {
+            x:0.22,
+            delay:0.12,
+            size:95,
+            color:carColors[1],
+            rotation:0.06
+        },
+
+        {
+            x:0.38,
+            delay:0.04,
+            size:120,
+            color:carColors[2],
+            rotation:-0.05
+        },
+
+        {
+            x:0.54,
+            delay:0.18,
+            size:100,
+            color:carColors[3],
+            rotation:0.08
+        },
+
+        {
+            x:0.69,
+            delay:0.06,
+            size:115,
+            color:carColors[4],
+            rotation:-0.07
+        },
+
+        {
+            x:0.83,
+            delay:0.16,
+            size:95,
+            color:carColors[5],
+            rotation:0.05
+        }
+
+    ];
+
+
+    const startTime =
+        performance.now();
+
+
+    const duration =
+        5000;
+
+
+    function animate(currentTime){
+
+        const elapsed =
+            currentTime -
+            startTime;
+
+
+        const progress =
+            Math.min(
+                elapsed / duration,
+                1
+            );
+
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        cars.forEach(
+            function(car){
+
+                const localProgress =
+                    Math.max(
+                        0,
+                        Math.min(
+                            1,
+                            (progress - car.delay) /
+                            (1 - car.delay)
+                        )
+                    );
+
+
+                const startY =
+                    canvas.height + 150;
+
+
+                const endY =
+                    -180;
+
+
+                const y =
+                    startY +
+                    (endY - startY) *
+                    localProgress;
+
+
+                const wave =
+                    Math.sin(
+                        localProgress *
+                        Math.PI *
+                        3 +
+                        car.x * 5
+                    ) *
+                    35;
+
+
+                const x =
+                    canvas.width *
+                    car.x +
+                    wave;
+
+
+                const rotation =
+                    car.rotation +
+                    Math.sin(
+                        localProgress *
+                        Math.PI *
+                        4
+                    ) *
+                    0.05;
+
+
+                let opacity = 1;
+
+
+                if(
+                    localProgress < 0.10
+                ){
+
+                    opacity =
+                        localProgress /
+                        0.10;
+
+                }
+
+
+                if(
+                    localProgress > 0.88
+                ){
+
+                    opacity =
+                        (1 - localProgress) /
+                        0.12;
+
+                }
+
+
+                opacity =
+                    Math.max(
+                        0,
+                        Math.min(
+                            1,
+                            opacity
+                        )
+                    );
+
+
+                const scale =
+                    Math.min(
+                        Math.max(
+                            canvas.width /
+                            1024,
+                            0.65
+                        ),
+                        1.25
+                    );
+
+
+                const carSize =
+                    car.size *
+                    scale;
+
+
+                const bounce =
+                    1 +
+                    Math.sin(
+                        localProgress *
+                        Math.PI *
+                        6
+                    ) *
+                    0.035;
+
+
+                ctx.save();
+
+
+                ctx.translate(
+                    x,
+                    y
+                );
+
+
+                ctx.rotate(
+                    rotation
+                );
+
+
+                ctx.scale(
+                    bounce,
+                    bounce
+                );
+
+
+                drawBalloonCar(
+                    ctx,
+                    carSize,
+                    car.color,
+                    opacity
+                );
+
+
+                ctx.restore();
+
+            }
+        );
+
+
+        /* اللمعات */
+
+        drawSparkle(
+            ctx,
+            canvas.width * 0.12,
+            canvas.height * 0.34,
+            20,
+            progress
+        );
+
+
+        drawSparkle(
+            ctx,
+            canvas.width * 0.30,
+            canvas.height * 0.22,
+            15,
+            progress
+        );
+
+
+        drawSparkle(
+            ctx,
+            canvas.width * 0.48,
+            canvas.height * 0.38,
+            22,
+            progress
+        );
+
+
+        drawSparkle(
+            ctx,
+            canvas.width * 0.65,
+            canvas.height * 0.25,
+            17,
+            progress
+        );
+
+
+        drawSparkle(
+            ctx,
+            canvas.width * 0.88,
+            canvas.height * 0.35,
+            21,
+            progress
+        );
+
+
+        if(progress < 1){
+
+            requestAnimationFrame(
+                animate
+            );
+
+        }
+
+        else{
+
+            canvas.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    requestAnimationFrame(
+        animate
+    );
+
+}
+
+
+/* =========================================================
+   DRAW CAR
+========================================================= */
+
+function drawBalloonCar(
+    ctx,
+    size,
+    color,
+    opacity
+){
+
+    const w = size;
+
+    const h =
+        size * 0.72;
+
+
+    ctx.save();
+
+
+    ctx.globalAlpha =
+        opacity;
+
+
+    /* خيط البالون */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        0,
+        h * 0.32
+    );
+
+
+    ctx.quadraticCurveTo(
+        -8,
+        h * 0.75,
+        5,
+        h * 1.05
+    );
+
+
+    ctx.strokeStyle =
+        "rgba(100,100,100,0.45)";
+
+    ctx.lineWidth = 2;
+
+    ctx.stroke();
+
+
+    /* جسم السيارة */
+
+    ctx.beginPath();
+
+
+    ctx.moveTo(
+        -w * 0.48,
+        h * 0.10
+    );
+
+
+    ctx.quadraticCurveTo(
+        -w * 0.52,
+        -h * 0.05,
+        -w * 0.42,
+        -h * 0.20
+    );
+
+
+    ctx.lineTo(
+        -w * 0.26,
+        -h * 0.38
+    );
+
+
+    ctx.quadraticCurveTo(
+        -w * 0.18,
+        -h * 0.48,
+        0,
+        -h * 0.48
+    );
+
+
+    ctx.quadraticCurveTo(
+        w * 0.18,
+        -h * 0.48,
+        w * 0.26,
+        -h * 0.38
+    );
+
+
+    ctx.lineTo(
+        w * 0.42,
+        -h * 0.20
+    );
+
+
+    ctx.quadraticCurveTo(
+        w * 0.52,
+        -h * 0.05,
+        w * 0.48,
+        h * 0.10
+    );
+
+
+    ctx.quadraticCurveTo(
+        w * 0.46,
+        h * 0.30,
+        w * 0.27,
+        h * 0.33
+    );
+
+
+    ctx.lineTo(
+        -w * 0.27,
+        h * 0.33
+    );
+
+
+    ctx.quadraticCurveTo(
+        -w * 0.46,
+        h * 0.30,
+        -w * 0.48,
+        h * 0.10
+    );
+
+
+    ctx.closePath();
+
+
+    ctx.fillStyle =
+        color;
+
+    ctx.fill();
+
+
+    /* لمعان */
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        -w * 0.22,
+        h * 0.02,
+        w * 0.08,
+        h * 0.05,
+        -0.3,
+        0,
+        Math.PI * 2
+    );
+
+
+    ctx.fillStyle =
+        "rgba(255,255,255,0.35)";
+
+    ctx.fill();
+
+
+    /* النوافذ */
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        -w * 0.24,
+        -h * 0.35,
+        w * 0.20,
+        h * 0.18,
+        6
+    );
+
+
+    ctx.fillStyle =
+        "rgba(190,230,250,0.95)";
+
+    ctx.fill();
+
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        w * 0.04,
+        -h * 0.35,
+        w * 0.20,
+        h * 0.18,
+        6
+    );
+
+    ctx.fill();
+
+
+    /* العجلات */
+
+    drawWheel(
+        ctx,
+        -w * 0.29,
+        h * 0.30,
+        w * 0.10
+    );
+
+
+    drawWheel(
+        ctx,
+        w * 0.29,
+        h * 0.30,
+        w * 0.10
+    );
+
+
+    /* الوجه */
+
+    ctx.strokeStyle =
+        "#333";
+
+    ctx.lineWidth =
+        Math.max(
+            2,
+            size * 0.025
+        );
+
+    ctx.lineCap =
+        "round";
+
+
+    /* العين الأولى */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        -w * 0.12,
+        -h * 0.08,
+        w * 0.025,
+        0,
+        Math.PI
+    );
+
+    ctx.stroke();
+
+
+    /* العين الثانية */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        w * 0.12,
+        -h * 0.08,
+        w * 0.025,
+        0,
+        Math.PI
+    );
+
+    ctx.stroke();
+
+
+    /* الابتسامة */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        0,
+        h * 0.02,
+        w * 0.10,
+        0,
+        Math.PI
+    );
+
+    ctx.stroke();
+
+
+    ctx.restore();
+
+}
+
+
+/* =========================================================
+   WHEEL
+========================================================= */
+
+function drawWheel(
+    ctx,
+    x,
+    y,
+    radius
+){
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        radius,
+        0,
+        Math.PI * 2
+    );
+
+
+    ctx.fillStyle =
+        "#333";
+
+    ctx.fill();
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        x,
+        y,
+        radius * 0.45,
+        0,
+        Math.PI * 2
+    );
+
+
+    ctx.fillStyle =
+        "#ddd";
+
+    ctx.fill();
+
+}
+
+
+/* =========================================================
+   SPARKLE
+========================================================= */
+
+function drawSparkle(
+    ctx,
+    x,
+    y,
+    size,
+    progress
+){
+
+    const pulse =
+        0.65 +
+        Math.sin(
+            progress *
+            Math.PI *
+            6 +
+            x
+        ) *
+        0.35;
+
+
+    ctx.save();
+
+
+    ctx.globalAlpha =
+        pulse;
+
+
+    ctx.strokeStyle =
+        "#ffffff";
+
+    ctx.lineWidth =
+        4;
+
+    ctx.lineCap =
+        "round";
+
+
+    ctx.beginPath();
+
+
+    ctx.moveTo(
+        x - size,
+        y
+    );
+
+
+    ctx.lineTo(
+        x + size,
+        y
+    );
+
+
+    ctx.moveTo(
+        x,
+        y - size
+    );
+
+
+    ctx.lineTo(
+        x,
+        y + size
+    );
+
+
+    ctx.stroke();
+
+
+    ctx.restore();
+
+}
+
+
+/* =========================================================
+   SPEECH
+========================================================= */
+
+function speak(text){
+
+    if(
+        "speechSynthesis"
+        in window
+    ){
+
+        window.speechSynthesis.cancel();
+
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+
+        speech.lang =
+            "ar-SA";
+
+
+        speech.rate =
+            0.9;
+
+
+        speech.pitch =
+            1.1;
+
+
+        window.speechSynthesis.speak(
+            speech
+        );
+
+    }
+
+}
+
+
+function speakQuestion(){
+
+    speak(
+        "ما شعورهما؟ السعادة، الحزن، أم القلق؟"
+    );
+
+}
+
+
+/* =========================================================
+   NEXT
+========================================================= */
+
+function nextPage(){
+
+    if(!answeredCorrectly){
+
+        return;
+
+    }
+
+
+    window.location.href =
+        "next-game.html";
+
+}
+
+
+/* =========================================================
+   CLOSE MENU
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const menu =
+            document.getElementById(
+                "menu"
+            );
+
+
+        const menuButton =
+            document.querySelector(
+                ".top-right"
+            );
+
+
+        if(
+            menu.style.display === "block" &&
+            !menu.contains(event.target) &&
+            !menuButton.contains(event.target)
+        ){
+
+            menu.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>

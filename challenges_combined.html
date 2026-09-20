@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التحديات | رفيق</title>
+
+    <style>
+/* =====================================
+   صفحة التحديات الجديدة
+===================================== */
+
+.challenges-page {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+
+    padding: 35px 20px 45px;
+
+    box-sizing: border-box;
+}
+
+
+/* الخلفية */
+
+.challenges-background {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    z-index: 0;
+}
+
+
+/* المحتوى فوق الخلفية */
+
+.challenges-content {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(92%, 900px);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* العنوان */
+
+.challenges-title {
+    text-align: center;
+
+    background: rgba(255,255,255,0.90);
+
+    padding: 15px 45px;
+
+    border-radius: 30px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.10);
+}
+
+
+.challenges-title h1 {
+    margin: 0;
+
+    font-size: 42px;
+
+    color: #744f59;
+}
+
+
+.challenges-title p {
+    margin: 6px 0 0;
+
+    font-size: 18px;
+
+    color: #666;
+}
+
+
+/* قائمة التحديات */
+
+.challenges-list {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 17px;
+}
+
+
+/* البطاقة */
+
+.new-challenge-card {
+    width: 100%;
+    min-height: 160px;
+
+    display: grid;
+
+    grid-template-columns:
+        180px 1fr 60px;
+
+    align-items: center;
+
+    gap: 22px;
+
+    padding: 14px 20px;
+
+    border: 3px solid rgba(255,255,255,.85);
+
+    border-radius: 35px;
+
+    background:
+        rgba(255,255,255,0.91);
+
+    box-shadow:
+        0 8px 22px rgba(0,0,0,.12);
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+    text-align: right;
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.new-challenge-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.16);
+}
+
+
+/* صورة كل تحدي */
+
+.new-challenge-image {
+    width: 170px;
+    height: 130px;
+
+    object-fit: cover;
+
+    border-radius: 25px;
+
+    display: block;
+}
+
+
+/* النص */
+
+.new-challenge-info h2 {
+    margin: 0 0 7px;
+
+    font-size: 27px;
+
+    color: #704e57;
+}
+
+
+.new-challenge-info p {
+    margin: 0;
+
+    font-size: 18px;
+
+    line-height: 1.6;
+
+    color: #555;
+}
+
+
+/* السهم */
+
+.challenge-arrow {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #9b6872;
+
+    color: white;
+
+    font-size: 26px;
+}
+
+
+/* العبارة السفلية */
+
+.challenges-footer {
+    margin-top: 25px;
+
+    padding: 12px 28px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,.90);
+
+    font-size: 17px;
+
+    color: #684b53;
+
+    text-align: center;
+}
+
+
+/* =====================================
+   شاشة صغيرة
+===================================== */
+
+@media (max-width: 650px) {
+
+    .challenges-page {
+        padding:
+            20px 12px 30px;
+    }
+
+    .challenges-title h1 {
+        font-size: 32px;
+    }
+
+
+    .new-challenge-card {
+
+        grid-template-columns:
+            110px 1fr 42px;
+
+        min-height: 130px;
+
+        gap: 10px;
+
+        padding: 10px;
+    }
+
+
+    .new-challenge-image {
+        width: 105px;
+        height: 100px;
+
+        border-radius: 20px;
+    }
+
+
+    .new-challenge-info h2 {
+        font-size: 21px;
+    }
+
+
+    .new-challenge-info p {
+        font-size: 14px;
+    }
+
+
+    .challenge-arrow {
+        width: 38px;
+        height: 38px;
+
+        font-size: 21px;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <main class="challenges-page">
+
+        <img src="images/tree.png" class="challenges-background" alt="">
+
+        <div class="challenges-content">
+
+            <div class="challenges-title">
+                <h1>التحديات</h1>
+                <p>هيا نواجه تحديات جديدة ونتعلم معًا!</p>
+            </div>
+
+            <div class="challenges-list">
+
+                <button class="new-challenge-card" type="button"
+                        onclick="window.location.href='routine_combined.html'">
+                    <img src="images/gree.png" class="new-challenge-image" alt="روتيني يتغيّر">
+                    <div class="new-challenge-info">
+                        <h2>روتيني يتغيّر</h2>
+                        <p>أتعلم كيف أتعامل مع التغييرات الصغيرة في يومي</p>
+                    </div>
+                    <span class="challenge-arrow">←</span>
+                </button>
+
+                <button class="new-challenge-card" type="button"
+                        onclick="window.location.href='order_combined.html'">
+                    <img src="images/b.png" class="new-challenge-image" alt="ترتيبي يتغيّر">
+                    <div class="new-challenge-info">
+                        <h2>ترتيبي يتغيّر</h2>
+                        <p>أتعلم أن أرتب الأشياء بطرق مختلفة</p>
+                    </div>
+                    <span class="challenge-arrow">←</span>
+                </button>
+
+                <button class="new-challenge-card" type="button"
+                        onclick="window.location.href='number_combined.html'">
+                    <img src="images/ten.png" class="new-challenge-image" alt="تجربة رقم جديد">
+                    <div class="new-challenge-info">
+                        <h2>تجربة رقم جديد</h2>
+                        <p>أجرّب رقمًا جديدًا بطريقة ممتعة وآمنة</p>
+                    </div>
+                    <span class="challenge-arrow">←</span>
+                </button>
+
+            </div>
+
+            <div class="challenges-footer">
+                ⭐ كل تحدٍ يساعدني على تجربة شيء جديد!
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,2122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>هل تستطيع معرفة الشعور؟ - رفيق</title>
+
+<!-- =====================================================
+     LOTTIE
+===================================================== -->
+
+<script
+    src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js">
+</script>
+
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Arial,
+        sans-serif;
+
+    color: #555;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8fcff 0%,
+            #ffffff 65%,
+            #f7fbff 100%
+        );
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   DECORATIONS
+===================================================== */
+
+.cloud {
+
+    position: fixed;
+
+    font-size: 85px;
+
+    opacity: 0.30;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    animation:
+        cloudFloat 5s ease-in-out infinite;
+}
+
+.cloud-one {
+
+    top: 130px;
+
+    left: 55px;
+}
+
+.cloud-two {
+
+    top: 175px;
+
+    right: 45px;
+
+    animation-delay: 1.5s;
+}
+
+
+@keyframes cloudFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-10px);
+    }
+}
+
+
+.star {
+
+    position: fixed;
+
+    font-size: 25px;
+
+    pointer-events: none;
+
+    z-index: 0;
+
+    animation:
+        starTwinkle 2.5s ease-in-out infinite;
+}
+
+.star-one {
+
+    top: 250px;
+
+    left: 85px;
+}
+
+.star-two {
+
+    top: 220px;
+
+    right: 110px;
+
+    animation-delay: 0.8s;
+}
+
+.star-three {
+
+    top: 470px;
+
+    right: 60px;
+
+    animation-delay: 1.2s;
+}
+
+.star-four {
+
+    top: 500px;
+
+    left: 90px;
+
+    animation-delay: 1.8s;
+}
+
+
+@keyframes starTwinkle {
+
+    0%,
+    100% {
+        opacity: 0.35;
+        transform: scale(0.9);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding:
+        85px 20px 80px;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+/* =====================================================
+   PREVIOUS BUTTON
+===================================================== */
+
+.previous-button {
+
+    position: fixed;
+
+    top: 35px;
+
+    left: 35px;
+
+    width: 155px;
+
+    height: 60px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #e4f2ff;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(60,80,100,0.18);
+
+    z-index: 1001;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.previous-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    background: #d8edfc;
+}
+
+.previous-button:active {
+
+    transform:
+        scale(0.96);
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-button {
+
+    position: fixed;
+
+    top: 35px;
+
+    right: 35px;
+
+    width: 65px;
+
+    height: 65px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,0.94);
+
+    color: #555;
+
+    font-size: 31px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 20px
+        rgba(60,80,100,0.18);
+
+    z-index: 1000;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.menu-button:hover {
+
+    transform:
+        translateY(-3px);
+}
+
+.menu-button:active {
+
+    transform:
+        scale(0.95);
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 115px;
+
+    right: 35px;
+
+    width: 245px;
+
+    padding: 18px;
+
+    border-radius: 28px;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    backdrop-filter:
+        blur(12px);
+
+    box-shadow:
+        0 12px 35px
+        rgba(60,80,100,0.20);
+
+    transform:
+        translateX(130%);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+
+    z-index: 999;
+}
+
+.side-menu.show {
+
+    transform:
+        translateX(0);
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.side-menu button {
+
+    width: 100%;
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: transparent;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    text-align: right;
+
+    padding: 0 18px;
+
+    margin-bottom: 8px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.side-menu button:hover {
+
+    background: #e4f2ff;
+
+    transform:
+        translateX(-3px);
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+
+    width:
+        min(900px, 95vw);
+
+    margin: 0 auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title {
+
+    margin:
+        20px 0 8px;
+
+    font-size: 42px;
+
+    font-weight: 900;
+
+    color: #555;
+
+    text-align: center;
+
+    text-shadow:
+        0 3px 5px
+        rgba(255,255,255,0.95);
+}
+
+
+/* =====================================================
+   AUDIO BUTTON
+===================================================== */
+
+.audio-button {
+
+    width: 52px;
+
+    height: 52px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #e4f2ff;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 14px
+        rgba(60,80,100,0.15);
+
+    transition:
+        transform 0.2s ease;
+}
+
+.audio-button:hover {
+
+    transform:
+        scale(1.08);
+}
+
+.audio-button:active {
+
+    transform:
+        scale(0.95);
+}
+
+
+/* =====================================================
+   QUESTION CARD
+===================================================== */
+
+.question-card {
+
+    width: 760px;
+
+    max-width: 94vw;
+
+    margin-top: 35px;
+
+    background:
+        rgba(255,255,255,0.93);
+
+    border-radius: 30px;
+
+    padding:
+        25px 30px 30px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(70,100,120,0.13);
+
+    border:
+        2px solid
+        rgba(228,242,255,0.9);
+}
+
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+.question {
+
+    margin: 0 0 18px;
+
+    text-align: center;
+
+    font-size: 30px;
+
+    font-weight: 900;
+
+    color: #555;
+}
+
+
+/* =====================================================
+   LOTTIE AREA
+===================================================== */
+
+.animation-box {
+
+    width: 650px;
+
+    max-width: 100%;
+
+    height: 390px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 24px;
+
+    background:
+        #ffffff;
+
+    border:
+        2px solid
+        #d9edf9;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+/* LOTTIE */
+
+lottie-player {
+
+    width: 350px;
+
+    height: 350px;
+}
+
+
+/* =====================================================
+   SCENE FOR OTHER QUESTIONS
+===================================================== */
+
+.emoji-scene {
+
+    width: 650px;
+
+    max-width: 100%;
+
+    height: 390px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 24px;
+
+    border:
+        2px solid
+        #d9edf9;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8fcff,
+            #ffffff
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 145px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.scene-ground {
+
+    position: absolute;
+
+    bottom: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 65px;
+
+    background:
+        #eaf6ff;
+
+    border-radius:
+        0 0 22px 22px;
+}
+
+.scene-emoji {
+
+    position: relative;
+
+    z-index: 2;
+
+    animation:
+        sceneFloat 2.5s ease-in-out infinite;
+}
+
+@keyframes sceneFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-8px);
+    }
+}
+
+
+/* =====================================================
+   ANSWERS
+===================================================== */
+
+.answers {
+
+    width: 620px;
+
+    max-width: 100%;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+
+.answer-button {
+
+    min-height: 72px;
+
+    border:
+        2px solid
+        #d8eaf4;
+
+    border-radius: 22px;
+
+    background: #ffffff;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 22px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 13px
+        rgba(70,90,110,0.10);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.answer-button:hover {
+
+    transform:
+        translateY(-4px);
+
+    background:
+        #f4faff;
+
+    border-color:
+        #c9e5f5;
+}
+
+.answer-button:active {
+
+    transform:
+        scale(0.97);
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.feedback {
+
+    width: 620px;
+
+    max-width: 100%;
+
+    min-height: 72px;
+
+    margin:
+        20px auto 0;
+
+    padding:
+        15px 20px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.feedback.show {
+
+    display: flex;
+
+    animation:
+        feedbackPop 0.35s ease;
+}
+
+.feedback.correct {
+
+    background:
+        #eaf8ed;
+
+    border:
+        2px solid
+        #c6e8ce;
+
+    color:
+        #477653;
+}
+
+.feedback.wrong {
+
+    background:
+        #fff2f2;
+
+    border:
+        2px solid
+        #f0d0d0;
+
+    color:
+        #9b5555;
+}
+
+
+@keyframes feedbackPop {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.94);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.next-button {
+
+    width: 260px;
+
+    height: 65px;
+
+    margin:
+        20px auto 0;
+
+    display: none;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background: #e4f2ff;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 22px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 17px
+        rgba(70,90,110,0.15);
+
+    transition:
+        transform 0.2s ease;
+}
+
+.next-button.show {
+
+    display: block;
+}
+
+.next-button:hover {
+
+    transform:
+        translateY(-3px);
+}
+
+
+/* =====================================================
+   SCORE
+===================================================== */
+
+.score-box {
+
+    margin-top: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 30px;
+
+    font-size: 20px;
+
+    font-weight: 800;
+}
+
+.score-item {
+
+    background:
+        rgba(255,255,255,0.85);
+
+    padding:
+        10px 20px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 4px 12px
+        rgba(70,90,110,0.10);
+}
+
+
+/* =====================================================
+   FINAL MESSAGE
+===================================================== */
+
+.final-message {
+
+    width: 700px;
+
+    max-width: 94vw;
+
+    margin-top: 30px;
+
+    padding: 25px;
+
+    border-radius: 28px;
+
+    background: #e4f2ff;
+
+    text-align: center;
+
+    display: none;
+
+    box-shadow:
+        0 8px 20px
+        rgba(70,90,110,0.14);
+}
+
+.final-message.show {
+
+    display: block;
+
+    animation:
+        feedbackPop 0.4s ease;
+}
+
+.final-message h2 {
+
+    margin:
+        0 0 10px;
+
+    font-size: 29px;
+}
+
+.final-message p {
+
+    margin: 0;
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+
+/* =====================================================
+   IPAD PORTRAIT
+===================================================== */
+
+@media (min-width: 768px) {
+
+    .page {
+
+        min-height: 1366px;
+
+        padding-top: 105px;
+    }
+
+    .title {
+
+        margin-top: 10px;
+
+        font-size: 42px;
+    }
+
+    .question-card {
+
+        margin-top: 35px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 767px) {
+
+    .page {
+
+        padding:
+            95px 10px 50px;
+    }
+
+    .previous-button {
+
+        top: 20px;
+
+        left: 20px;
+
+        width: 125px;
+
+        height: 52px;
+
+        font-size: 18px;
+    }
+
+    .menu-button {
+
+        top: 20px;
+
+        right: 20px;
+
+        width: 55px;
+
+        height: 55px;
+
+        font-size: 27px;
+    }
+
+    .side-menu {
+
+        top: 90px;
+
+        right: 20px;
+
+        width: 220px;
+    }
+
+    .title {
+
+        font-size: 30px;
+
+        margin-top: 15px;
+    }
+
+    .question-card {
+
+        margin-top: 25px;
+
+        padding:
+            18px 12px 22px;
+
+        border-radius: 24px;
+    }
+
+    .question {
+
+        font-size: 22px;
+    }
+
+    .animation-box,
+    .emoji-scene {
+
+        height: 270px;
+
+        border-radius: 20px;
+    }
+
+    lottie-player {
+
+        width: 250px;
+
+        height: 250px;
+    }
+
+    .emoji-scene {
+
+        font-size: 100px;
+    }
+
+    .answers {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 10px;
+    }
+
+    .answer-button {
+
+        min-height: 58px;
+
+        font-size: 19px;
+    }
+
+    .feedback {
+
+        font-size: 18px;
+    }
+
+    .score-box {
+
+        gap: 10px;
+
+        font-size: 16px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     DECORATIONS
+===================================================== -->
+
+<div class="cloud cloud-one">☁️</div>
+
+<div class="cloud cloud-two">☁️</div>
+
+<div class="star star-one">✦</div>
+
+<div class="star star-two">⭐</div>
+
+<div class="star star-three">✦</div>
+
+<div class="star star-four">✦</div>
+
+
+<!-- =====================================================
+     PREVIOUS
+===================================================== -->
+
+<button
+    class="previous-button"
+    onclick="goBackToEmotions()">
+
+    ← السابق
+
+</button>
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton"
+    onclick="toggleMenu()">
+
+    ☰
+
+</button>
+
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+    <button onclick="goHome()">
+        🏠 الرئيسية
+    </button>
+
+    <button onclick="goProfile()">
+        👤 ملفي
+    </button>
+
+    <button onclick="goProgress()">
+        ⭐ تقدمي
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="page">
+
+<div class="content">
+
+
+    <!-- TITLE -->
+
+    <h1 class="title">
+
+        هل تستطيع معرفة الشعور؟ 🧠💭
+
+    </h1>
+
+
+    <!-- AUDIO -->
+
+    <button
+        class="audio-button"
+        onclick="speakQuestion()"
+        aria-label="استمع للسؤال">
+
+        🔊
+
+    </button>
+
+
+    <!-- QUESTION CARD -->
+
+    <section class="question-card">
+
+
+        <h2
+            class="question"
+            id="questionText">
+
+            برأيك لماذا يشعر هذا الطفل؟
+
+        </h2>
+
+
+        <!-- =============================================
+             ANIMATION
+        ============================================== -->
+
+        <div
+            class="animation-box"
+            id="animationBox">
+
+            <lottie-player
+                id="lottieAnimation"
+                src="bob-404.json"
+                background="transparent"
+                speed="1"
+                loop
+                autoplay>
+            </lottie-player>
+
+        </div>
+
+
+        <!-- =============================================
+             ANSWERS
+        ============================================== -->
+
+        <div
+            class="answers"
+            id="answers">
+
+
+            <button
+                class="answer-button"
+                data-answer="خوف"
+                onclick="chooseAnswer('خوف')">
+
+                😨 الخوف
+
+            </button>
+
+
+            <button
+                class="answer-button"
+                data-answer="سعادة"
+                onclick="chooseAnswer('سعادة')">
+
+                😊 السعادة
+
+            </button>
+
+
+            <button
+                class="answer-button"
+                data-answer="حزن"
+                onclick="chooseAnswer('حزن')">
+
+                😢 الحزن
+
+            </button>
+
+
+        </div>
+
+
+        <!-- =============================================
+             FEEDBACK
+        ============================================== -->
+
+        <div
+            class="feedback"
+            id="feedback">
+        </div>
+
+
+        <!-- =============================================
+             NEXT
+        ============================================== -->
+
+        <button
+            class="next-button"
+            id="nextButton"
+            onclick="nextQuestion()">
+
+            السؤال التالي ←
+
+        </button>
+
+
+    </section>
+
+
+    <!-- =================================================
+         SCORE
+    ================================================== -->
+
+    <div class="score-box">
+
+        <div class="score-item">
+
+            ⭐ النقاط:
+            <span id="score">
+                0
+            </span>
+
+        </div>
+
+
+        <div class="score-item">
+
+            السؤال:
+            <span id="questionNumber">
+                1
+            </span>
+            / 4
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         FINAL
+    ================================================== -->
+
+    <div
+        class="final-message"
+        id="finalMessage">
+
+        <h2>
+            🎉 أحسنت يا رفيق!
+        </h2>
+
+        <p id="finalText"></p>
+
+    </div>
+
+
+</div>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById(
+            "sideMenu"
+        );
+
+    menu.classList.toggle("show");
+}
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const menu =
+            document.getElementById(
+                "sideMenu"
+            );
+
+        const button =
+            document.getElementById(
+                "menuButton"
+            );
+
+        if (
+            !menu.contains(event.target) &&
+            !button.contains(event.target)
+        ) {
+
+            menu.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goHome() {
+
+    window.location.href =
+        "home.html";
+}
+
+
+function goBackToEmotions() {
+
+    window.location.href =
+        "emotions.html";
+}
+
+
+function goProfile() {
+
+    alert(
+        "👤 صفحة ملفي\n\nسنصممها لاحقًا."
+    );
+}
+
+
+function goProgress() {
+
+    alert(
+        "⭐ صفحة تقدمي\n\nسنصممها لاحقًا."
+    );
+}
+
+
+/* =====================================================
+   QUESTIONS
+===================================================== */
+
+/*
+    كل سؤال يحتوي على:
+
+    scene
+    question
+    correctAnswer
+    correctFeedback
+    wrongFeedback
+*/
+
+const questions = [
+
+    {
+        type: "lottie",
+
+        question:
+            "برأيك لماذا يشعر هذا الطفل؟",
+
+        correctAnswer:
+            "خوف",
+
+        correctFeedback:
+            "🌈 أحسنت! يبدو أن الطفل يشعر بالخوف لأنه تحت المظلة ويبدو متوترًا.",
+
+        wrongFeedback:
+            "💭 حاول مرة أخرى. انظر إلى وجه الطفل والموقف من حوله."
+
+    },
+
+
+    {
+        type: "emoji",
+
+        emoji:
+            "🎁😊",
+
+        question:
+            "هذا الطفل حصل على هدية يحبها. كيف يشعر؟",
+
+        correctAnswer:
+            "سعادة",
+
+        correctFeedback:
+            "🎉 صحيح! الطفل يشعر بالسعادة لأنه حصل على شيء يحبه.",
+
+        wrongFeedback:
+            "💭 انظر إلى الموقف مرة أخرى. ماذا يمكن أن نشعر عندما نحصل على شيء نحبه؟"
+
+    },
+
+
+    {
+        type: "emoji",
+
+        emoji:
+            "🧸😢",
+
+        question:
+            "ضاعَت لعبة الطفل المفضلة. كيف يشعر؟",
+
+        correctAnswer:
+            "حزن",
+
+        correctFeedback:
+            "💙 صحيح! من الطبيعي أن يشعر الطفل بالحزن عندما تضيع لعبته المفضلة.",
+
+        wrongFeedback:
+            "💭 فكر: كيف نشعر عندما نفقد شيئًا نحبه؟"
+
+    },
+
+
+    {
+        type: "emoji",
+
+        emoji:
+            "📢😨",
+
+        question:
+            "سمع الطفل صوتًا عاليًا ومفاجئًا. كيف يشعر؟",
+
+        correctAnswer:
+            "خوف",
+
+        correctFeedback:
+            "👏 أحسنت! الصوت العالي والمفاجئ قد يجعل الطفل يشعر بالخوف.",
+
+        wrongFeedback:
+            "💭 فكر في شعورك عندما تسمع صوتًا عاليًا فجأة."
+
+    }
+
+];
+
+
+/* =====================================================
+   GAME VARIABLES
+===================================================== */
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let answered = false;
+
+let questionStartTime =
+    Date.now();
+
+let totalErrors = 0;
+
+let totalResponseTime = 0;
+
+let hintsUsed = 0;
+
+
+/* =====================================================
+   LOAD QUESTION
+===================================================== */
+
+function loadQuestion() {
+
+    const question =
+        questions[currentQuestion];
+
+
+    answered = false;
+
+
+    questionStartTime =
+        Date.now();
+
+
+    document
+        .getElementById("questionText")
+        .textContent =
+        question.question;
+
+
+    document
+        .getElementById("questionNumber")
+        .textContent =
+        currentQuestion + 1;
+
+
+    const animationBox =
+        document.getElementById(
+            "animationBox"
+        );
+
+
+    /*
+       السؤال الأول يستخدم
+       ملف Lottie الحقيقي.
+    */
+
+    if (
+        question.type === "lottie"
+    ) {
+
+        animationBox.innerHTML = `
+
+            <lottie-player
+                id="lottieAnimation"
+                src="bob-404.json"
+                background="transparent"
+                speed="1"
+                loop
+                autoplay>
+            </lottie-player>
+
+        `;
+
+    }
+
+
+    /*
+       الأسئلة الأخرى تستخدم
+       مشاهد بسيطة حتى نقدر
+       نضيف لها صور Lottie لاحقًا.
+    */
+
+    else {
+
+        animationBox.innerHTML = `
+
+            <div class="emoji-scene">
+
+                <div class="scene-ground"></div>
+
+                <div class="scene-emoji">
+                    ${question.emoji}
+                </div>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /*
+       إعادة الأزرار للوضع الطبيعي
+    */
+
+    const buttons =
+        document.querySelectorAll(
+            ".answer-button"
+        );
+
+
+    buttons.forEach(
+        button => {
+
+            button.disabled = false;
+
+            button.style.opacity = "1";
+
+            button.style.transform =
+                "none";
+
+        }
+    );
+
+
+    /*
+       إعادة التغذية الراجعة
+    */
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+    feedback.className =
+        "feedback";
+
+    feedback.textContent =
+        "";
+
+
+    /*
+       إخفاء التالي
+    */
+
+    document
+        .getElementById(
+            "nextButton"
+        )
+        .classList
+        .remove("show");
+
+}
+
+
+/* =====================================================
+   CHOOSE ANSWER
+===================================================== */
+
+function chooseAnswer(answer) {
+
+    if (answered) {
+
+        return;
+
+    }
+
+
+    answered = true;
+
+
+    const question =
+        questions[currentQuestion];
+
+
+    const responseTime =
+        Date.now() -
+        questionStartTime;
+
+
+    totalResponseTime +=
+        responseTime;
+
+
+    /*
+       حفظ عدد الأخطاء
+    */
+
+    if (
+        answer !==
+        question.correctAnswer
+    ) {
+
+        totalErrors++;
+
+    }
+
+
+    /*
+       تعطيل الأزرار
+    */
+
+    const buttons =
+        document.querySelectorAll(
+            ".answer-button"
+        );
+
+
+    buttons.forEach(
+        button => {
+
+            button.disabled = true;
+
+        }
+    );
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    /*
+       إجابة صحيحة
+    */
+
+    if (
+        answer ===
+        question.correctAnswer
+    ) {
+
+        score++;
+
+
+        document
+            .getElementById("score")
+            .textContent =
+            score;
+
+
+        feedback.className =
+            "feedback show correct";
+
+        feedback.textContent =
+            question.correctFeedback;
+
+
+    }
+
+
+    /*
+       إجابة خاطئة
+    */
+
+    else {
+
+        feedback.className =
+            "feedback show wrong";
+
+        feedback.textContent =
+            question.wrongFeedback;
+
+
+        /*
+           نسمح له بالمحاولة
+           مرة أخرى.
+        */
+
+        answered = false;
+
+
+        buttons.forEach(
+            button => {
+
+                button.disabled = false;
+
+            }
+        );
+
+    }
+
+
+    /*
+       إذا كانت صحيحة
+       نظهر زر التالي.
+    */
+
+    if (
+        answer ===
+        question.correctAnswer
+    ) {
+
+        document
+            .getElementById(
+                "nextButton"
+            )
+            .classList
+            .add("show");
+
+    }
+
+
+    /*
+       تسجيل أداء الطفل
+       لاستخدامه لاحقًا مع AI.
+    */
+
+    savePerformance(
+        question,
+        answer,
+        responseTime
+    );
+
+}
+
+
+/* =====================================================
+   NEXT QUESTION
+===================================================== */
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
+
+        finishGame();
+
+        return;
+
+    }
+
+
+    loadQuestion();
+
+}
+
+
+/* =====================================================
+   FINISH GAME
+===================================================== */
+
+function finishGame() {
+
+    document
+        .querySelector(".question-card")
+        .style.display =
+        "none";
+
+
+    const percentage =
+        Math.round(
+            (
+                score /
+                questions.length
+            ) * 100
+        );
+
+
+    const averageTime =
+        Math.round(
+            totalResponseTime /
+            questions.length /
+            1000
+        );
+
+
+    document
+        .getElementById(
+            "finalMessage"
+        )
+        .classList
+        .add("show");
+
+
+    document
+        .getElementById(
+            "finalText"
+        )
+        .innerHTML = `
+
+            حصلت على
+            <strong>
+                ${score}
+            </strong>
+            من
+            <strong>
+                ${questions.length}
+            </strong>
+            ⭐
+            <br><br>
+
+            نسبة الإجابات الصحيحة:
+            <strong>
+                ${percentage}%
+            </strong>
+
+            <br><br>
+
+            🌟 وقتك في الإجابة كان حوالي
+            <strong>
+                ${averageTime}
+            </strong>
+            ثانية لكل سؤال.
+
+        `;
+
+
+    /*
+       تخزين النتيجة كاملة.
+    */
+
+    const finalPerformance = {
+
+        activity:
+            "هل تستطيع معرفة الشعور؟",
+
+        score:
+            score,
+
+        totalQuestions:
+            questions.length,
+
+        percentage:
+            percentage,
+
+        errors:
+            totalErrors,
+
+        hints:
+            hintsUsed,
+
+        averageResponseTime:
+            averageTime,
+
+        completedAt:
+            new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+        "rafiqEmotionRecognitionPerformance",
+        JSON.stringify(
+            finalPerformance
+        )
+    );
+
+}
+
+
+/* =====================================================
+   PERFORMANCE STORAGE
+===================================================== */
+
+function savePerformance(
+    question,
+    selectedAnswer,
+    responseTime
+) {
+
+    const oldData =
+        JSON.parse(
+            localStorage.getItem(
+                "rafiqEmotionAttempts"
+            ) || "[]"
+        );
+
+
+    oldData.push({
+
+        activity:
+            "هل تستطيع معرفة الشعور؟",
+
+        question:
+            question.question,
+
+        correctAnswer:
+            question.correctAnswer,
+
+        selectedAnswer:
+            selectedAnswer,
+
+        isCorrect:
+            selectedAnswer ===
+            question.correctAnswer,
+
+        responseTime:
+            Math.round(
+                responseTime / 1000
+            ),
+
+        timestamp:
+            new Date().toISOString()
+
+    });
+
+
+    localStorage.setItem(
+        "rafiqEmotionAttempts",
+        JSON.stringify(oldData)
+    );
+
+}
+
+
+/* =====================================================
+   TEXT TO SPEECH
+===================================================== */
+
+function speakQuestion() {
+
+    const text =
+        document
+            .getElementById(
+                "questionText"
+            )
+            .textContent;
+
+
+    if (
+        "speechSynthesis"
+        in window
+    ) {
+
+        window.speechSynthesis.cancel();
+
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+
+        speech.lang =
+            "ar-SA";
+
+        speech.rate =
+            0.85;
+
+        speech.pitch =
+            1.05;
+
+
+        window.speechSynthesis.speak(
+            speech
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   START GAME
+===================================================== */
+
+loadQuestion();
+
+</script>
+
+</body>
+
+</html>

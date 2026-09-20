@@ -1,0 +1,2745 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>صنّف الصواريخ</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    font-family: Tahoma, Arial, sans-serif;
+    direction: rtl;
+
+    user-select: none;
+    touch-action: none;
+}
+
+body {
+    background: #101A38;
+}
+
+
+/* =====================================================
+   القائمة المنسدلة
+===================================================== */
+
+.menu-wrapper {
+    position: fixed;
+
+    top: 14px;
+    right: 18px;
+
+    z-index: 20000;
+
+    direction: rtl;
+}
+
+.menu-button {
+    width: 52px;
+    height: 52px;
+
+    border: none;
+    border-radius: 16px;
+
+    background: rgba(255,255,255,0.14);
+
+    border: 1px solid rgba(255,255,255,0.22);
+
+    color: white;
+
+    font-size: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.18);
+
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+
+    transition:
+        transform 0.15s,
+        background 0.2s;
+}
+
+.menu-button:active {
+    transform: scale(0.94);
+}
+
+.menu-button.open {
+    background: rgba(255,255,255,0.22);
+}
+
+
+/* القائمة */
+
+.dropdown-menu {
+    position: absolute;
+
+    top: 60px;
+    right: 0;
+
+    width: 190px;
+
+    padding: 8px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.97);
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,0.25);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(-8px)
+        scale(0.96);
+
+    transform-origin: top right;
+
+    transition:
+        opacity 0.18s,
+        transform 0.18s,
+        visibility 0.18s;
+
+    pointer-events: none;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+    pointer-events: auto;
+}
+
+.menu-item {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 15px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background: transparent;
+
+    color: #40566D;
+
+    text-decoration: none;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s,
+        transform 0.15s;
+}
+
+.menu-item:hover {
+    background: #E4F2FF;
+}
+
+.menu-item:active {
+    transform: scale(0.97);
+}
+
+.menu-icon {
+    width: 30px;
+    text-align: center;
+    font-size: 22px;
+}
+
+
+/* =====================================================
+   اللعبة
+===================================================== */
+
+.game {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #111B42 0%,
+            #172653 50%,
+            #101A38 100%
+        );
+}
+
+
+/* =====================================================
+   النجوم
+===================================================== */
+
+.star-bg {
+    position: absolute;
+
+    color: white;
+    opacity: 0.65;
+
+    pointer-events: none;
+
+    animation:
+        twinkle 2.5s infinite alternate;
+}
+
+.star1 {
+    top: 8%;
+    left: 8%;
+    font-size: 14px;
+}
+
+.star2 {
+    top: 15%;
+    left: 30%;
+    font-size: 9px;
+}
+
+.star3 {
+    top: 10%;
+    right: 18%;
+    font-size: 12px;
+}
+
+.star4 {
+    top: 30%;
+    left: 6%;
+    font-size: 10px;
+}
+
+.star5 {
+    top: 36%;
+    right: 8%;
+    font-size: 15px;
+}
+
+.star6 {
+    top: 52%;
+    left: 15%;
+    font-size: 8px;
+}
+
+.star7 {
+    top: 60%;
+    right: 17%;
+    font-size: 10px;
+}
+
+.star8 {
+    top: 73%;
+    left: 8%;
+    font-size: 13px;
+}
+
+.star9 {
+    top: 78%;
+    right: 8%;
+    font-size: 9px;
+}
+
+.star10 {
+    top: 88%;
+    left: 42%;
+    font-size: 12px;
+}
+
+@keyframes twinkle {
+
+    from {
+        opacity: 0.25;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 0.9;
+        transform: scale(1.2);
+    }
+
+}
+
+
+/* =====================================================
+   كواكب الخلفية
+===================================================== */
+
+.planet-bg {
+    position: absolute;
+
+    width: 95px;
+    height: 95px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #ffffff55,
+            transparent 20%
+        ),
+        #8267E8;
+
+    box-shadow:
+        0 0 25px #8267E855;
+
+    opacity: 0.35;
+
+    pointer-events: none;
+}
+
+.planet-bg.one {
+    top: 17%;
+    right: -35px;
+}
+
+.planet-bg.two {
+    bottom: 15%;
+    left: -40px;
+
+    width: 75px;
+    height: 75px;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #ffffff55,
+            transparent 20%
+        ),
+        #5B8DEF;
+}
+
+
+/* =====================================================
+   المحتوى
+===================================================== */
+
+.content {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 10px 20px 8px;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* =====================================================
+   المستوى + الوقت
+===================================================== */
+
+.top-row {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.info-box {
+    padding: 7px 16px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.18);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: white;
+}
+
+.info-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.info-value {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* =====================================================
+   المؤقت
+===================================================== */
+
+.timer-box {
+    padding: 7px 15px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.18);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    transition: 0.25s;
+}
+
+.timer-box.urgent {
+    background:
+        rgba(255,77,90,0.22);
+}
+
+.timer-icon {
+    font-size: 18px;
+}
+
+.timer-number {
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: white;
+}
+
+.timer-box.urgent .timer-number {
+    color: #FF7180;
+}
+
+.timer-unit {
+    font-size: 14px;
+    color: #DCE5FF;
+}
+
+
+/* =====================================================
+   النجوم
+===================================================== */
+
+.stars-box {
+    align-self: center;
+
+    margin-top: 8px;
+
+    padding: 5px 14px;
+
+    background:
+        rgba(255,255,255,0.09);
+
+    border-radius: 28px;
+
+    border:
+        2px solid
+        rgba(255,255,255,0.12);
+
+    display: flex;
+
+    gap: 6px;
+}
+
+.star {
+    font-size: 25px;
+
+    color: #7183A5;
+
+    transition:
+        transform 0.25s,
+        color 0.25s;
+}
+
+.star.active {
+    transform: scale(1.15);
+
+    color: #FFC928;
+}
+
+
+/* =====================================================
+   العنوان
+===================================================== */
+
+.title {
+    margin: 4px 0 2px;
+
+    text-align: center;
+
+    font-size: 36px;
+
+    font-weight: bold;
+
+    color: white;
+
+    flex-shrink: 0;
+
+    text-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.25);
+}
+
+
+/* =====================================================
+   التعليمات
+===================================================== */
+
+.instructions {
+    align-self: center;
+
+    padding: 10px 20px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,0.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.15);
+
+    color: #EAF1FF;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   شريط الوقت
+===================================================== */
+
+.time-bar {
+    width: 100%;
+
+    height: 18px;
+
+    margin-top: 10px;
+
+    padding: 3px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    flex-shrink: 0;
+}
+
+.time-fill {
+    height: 100%;
+
+    width: 100%;
+
+    border-radius: 20px;
+
+    background: #6C8CD5;
+
+    transition:
+        width 0.3s linear,
+        background 0.3s;
+}
+
+
+/* =====================================================
+   منطقة الصواريخ
+===================================================== */
+
+.space-area {
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 5px 0;
+}
+
+.space-row {
+    width: 100%;
+
+    min-height: 58px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =====================================================
+   الصاروخ
+===================================================== */
+
+.rocket {
+    width: 62px;
+    height: 62px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: grab;
+
+    touch-action: none;
+
+    transition:
+        opacity 0.2s,
+        transform 0.15s;
+}
+
+.rocket:active {
+    cursor: grabbing;
+}
+
+.rocket.done {
+    opacity: 0.15;
+}
+
+.rocket.dragging {
+    opacity: 0.25;
+}
+
+.rocket svg {
+    width: 62px;
+    height: 62px;
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   نسخة السحب
+===================================================== */
+
+.drag-clone {
+    position: fixed;
+
+    width: 70px;
+    height: 70px;
+
+    z-index: 99999;
+
+    pointer-events: none;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+.drag-clone svg {
+    width: 70px;
+    height: 70px;
+}
+
+
+/* =====================================================
+   الكواكب
+===================================================== */
+
+.planet-area {
+    width: 100%;
+
+    height: 135px;
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+.planet {
+    position: relative;
+
+    flex: 1;
+
+    border-radius: 50%;
+
+    border:
+        4px solid
+        rgba(255,255,255,0.85);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.20);
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+.planet.hover {
+    transform: scale(1.07);
+
+    box-shadow:
+        0 0 25px
+        rgba(255,255,255,0.35);
+}
+
+.planet.red {
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #ffffff55,
+            transparent 18%
+        ),
+        #FF4D5A;
+}
+
+.planet.yellow {
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #ffffff55,
+            transparent 18%
+        ),
+        #FFC928;
+}
+
+.planet.blue {
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #ffffff55,
+            transparent 18%
+        ),
+        #5B8DEF;
+}
+
+.planet.green {
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            #ffffff55,
+            transparent 18%
+        ),
+        #55C878;
+}
+
+.planet::after {
+    content: "";
+
+    position: absolute;
+
+    width: 75%;
+    height: 22px;
+
+    border:
+        4px solid
+        rgba(255,255,255,0.55);
+
+    border-radius: 50%;
+
+    transform:
+        rotate(-18deg);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
+   النتيجة
+===================================================== */
+
+.score {
+    margin-top: 4px;
+
+    text-align: center;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    color: #DCE5FF;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   زر إعادة اللعبة
+===================================================== */
+
+.restart-btn {
+    align-self: center;
+
+    margin-top: 5px;
+
+    border: none;
+
+    padding: 10px 30px;
+
+    border-radius: 22px;
+
+    background: #8267E8;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 4px 12px
+        rgba(130,103,232,0.35);
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+.restart-btn:active {
+    transform: scale(0.96);
+}
+
+
+/* =====================================================
+   رسالة الخطأ
+===================================================== */
+
+.message {
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 155px;
+
+    transform:
+        translateX(-50%)
+        translateY(20px);
+
+    z-index: 5000;
+
+    width:
+        min(90%, 550px);
+
+    padding: 14px 20px;
+
+    border-radius: 20px;
+
+    background: white;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,0.20);
+
+    color: #536B91;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.2s,
+        transform 0.2s;
+
+    pointer-events: none;
+}
+
+.message.show {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+/* =====================================================
+   نافذة النتيجة
+===================================================== */
+
+.overlay {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    background:
+        rgba(5,12,35,0.65);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.overlay.show {
+    display: flex;
+}
+
+.dialog {
+    width:
+        min(92%, 500px);
+
+    background: white;
+
+    border-radius: 28px;
+
+    padding: 25px 22px;
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,0.25);
+
+    text-align: center;
+
+    animation:
+        dialogIn 0.25s ease;
+}
+
+@keyframes dialogIn {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+.dialog-title {
+    font-size: 27px;
+
+    font-weight: bold;
+
+    color: #40566D;
+
+    margin-bottom: 15px;
+}
+
+.dialog-stars {
+    font-size: 22px;
+
+    min-height: 30px;
+
+    margin-bottom: 12px;
+}
+
+.dialog-text {
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: #536B91;
+
+    white-space: pre-line;
+
+    margin-bottom: 10px;
+}
+
+.dialog-mistakes {
+    font-size: 16px;
+
+    color: #777;
+
+    margin-bottom: 18px;
+}
+
+.dialog-btn {
+    border: none;
+
+    background: #6C8CD5;
+
+    color: white;
+
+    border-radius: 22px;
+
+    padding: 11px 25px;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   الجوال
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .content {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .title {
+        font-size: 29px;
+    }
+
+    .instructions {
+        font-size: 15px;
+        padding: 8px 14px;
+    }
+
+    .rocket {
+        width: 50px;
+        height: 50px;
+    }
+
+    .rocket svg {
+        width: 50px;
+        height: 50px;
+    }
+
+    .planet-area {
+        height: 105px;
+        gap: 6px;
+    }
+
+    .space-area {
+        gap: 7px;
+    }
+
+    .space-row {
+        min-height: 50px;
+        gap: 4px;
+    }
+
+    .restart-btn {
+        font-size: 16px;
+        padding: 8px 24px;
+    }
+
+    .menu-wrapper {
+        top: 10px;
+        right: 12px;
+    }
+
+    .menu-button {
+        width: 48px;
+        height: 48px;
+        font-size: 25px;
+    }
+
+    .dropdown-menu {
+        top: 56px;
+        width: 180px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     القائمة
+===================================================== -->
+
+<div class="menu-wrapper">
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="فتح القائمة">
+
+        ☰
+
+    </button>
+
+    <div
+        class="dropdown-menu"
+        id="dropdownMenu">
+
+        <a
+            href="home.html"
+            class="menu-item">
+
+            <span class="menu-icon">
+                🏠
+            </span>
+
+            <span>
+                الرئيسية
+            </span>
+
+        </a>
+
+        <a
+            href="reports.html"
+            class="menu-item">
+
+            <span class="menu-icon">
+                📊
+            </span>
+
+            <span>
+                تقاريري
+            </span>
+
+        </a>
+
+        <a
+            href="progress.html"
+            class="menu-item">
+
+            <span class="menu-icon">
+                ⭐
+            </span>
+
+            <span>
+                تقدمي
+            </span>
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     اللعبة
+===================================================== -->
+
+<div class="game">
+
+
+    <!-- النجوم -->
+
+    <div class="star-bg star1">✦</div>
+    <div class="star-bg star2">✦</div>
+    <div class="star-bg star3">✦</div>
+    <div class="star-bg star4">✦</div>
+    <div class="star-bg star5">✦</div>
+    <div class="star-bg star6">✦</div>
+    <div class="star-bg star7">✦</div>
+    <div class="star-bg star8">✦</div>
+    <div class="star-bg star9">✦</div>
+    <div class="star-bg star10">✦</div>
+
+
+    <!-- كواكب الخلفية -->
+
+    <div class="planet-bg one"></div>
+    <div class="planet-bg two"></div>
+
+
+    <div class="content">
+
+
+        <!-- المستوى + الوقت -->
+
+        <div class="top-row">
+
+            <div class="info-box">
+
+                <span class="info-title">
+                    المستوى
+                </span>
+
+                <span
+                    class="info-value"
+                    id="level">
+
+                    1
+
+                </span>
+
+            </div>
+
+
+            <div
+                class="timer-box"
+                id="timerBox">
+
+                <span class="timer-icon">
+                    ⏱️
+                </span>
+
+                <span
+                    class="timer-number"
+                    id="timer">
+
+                    20
+
+                </span>
+
+                <span class="timer-unit">
+                    ث
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- النجوم -->
+
+        <div class="stars-box">
+
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+            <span class="star">☆</span>
+
+        </div>
+
+
+        <!-- العنوان -->
+
+        <div class="title">
+
+            صنّف الصواريخ 🚀
+
+        </div>
+
+
+        <!-- التعليمات -->
+
+        <div class="instructions">
+
+            ضع كل صاروخ في الكوكب الذي نفس لونه
+
+        </div>
+
+
+        <!-- شريط الوقت -->
+
+        <div class="time-bar">
+
+            <div
+                class="time-fill"
+                id="timeFill">
+            </div>
+
+        </div>
+
+
+        <!-- الصواريخ -->
+
+        <div
+            class="space-area"
+            id="spaceArea">
+
+            <div
+                class="space-row"
+                id="redRow">
+            </div>
+
+            <div
+                class="space-row"
+                id="yellowRow">
+            </div>
+
+            <div
+                class="space-row"
+                id="blueRow">
+            </div>
+
+            <div
+                class="space-row"
+                id="greenRow">
+            </div>
+
+        </div>
+
+
+        <!-- الكواكب -->
+
+        <div class="planet-area">
+
+            <div
+                class="planet red"
+                data-color="red">
+            </div>
+
+            <div
+                class="planet yellow"
+                data-color="yellow">
+            </div>
+
+            <div
+                class="planet blue"
+                data-color="blue">
+            </div>
+
+            <div
+                class="planet green"
+                data-color="green">
+            </div>
+
+        </div>
+
+
+        <!-- النتيجة -->
+
+        <div
+            class="score"
+            id="score">
+
+            0 / 4
+
+        </div>
+
+
+        <!-- إعادة -->
+
+        <button
+            class="restart-btn"
+            id="restartBtn">
+
+            ↻ &nbsp; إعادة اللعبة
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     رسالة الخطأ
+===================================================== -->
+
+<div
+    class="message"
+    id="message">
+
+    💡 حاول وضع الصاروخ في الكوكب المطابق للونه
+
+</div>
+
+
+<!-- =====================================================
+     نافذة النتيجة
+===================================================== -->
+
+<div
+    class="overlay"
+    id="overlay">
+
+    <div class="dialog">
+
+        <div
+            class="dialog-title"
+            id="dialogTitle">
+        </div>
+
+        <div
+            class="dialog-stars"
+            id="dialogStars">
+        </div>
+
+        <div
+            class="dialog-text"
+            id="dialogText">
+        </div>
+
+        <div
+            class="dialog-mistakes"
+            id="dialogMistakes">
+        </div>
+
+        <button
+            class="dialog-btn"
+            id="dialogBtn">
+
+            ▶️ المرحلة التالية
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   القائمة المنسدلة
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const dropdownMenu =
+    document.getElementById(
+        "dropdownMenu"
+    );
+
+
+menuButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+        dropdownMenu.classList.toggle(
+            "show"
+        );
+
+        menuButton.classList.toggle(
+            "open"
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        if (
+            !event.target.closest(
+                ".menu-wrapper"
+            )
+        ) {
+
+            dropdownMenu.classList.remove(
+                "show"
+            );
+
+            menuButton.classList.remove(
+                "open"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   المستويات
+===================================================== */
+
+const LEVELS = [
+
+    {
+        level: 1,
+        objects: 4,
+        time: 20
+    },
+
+    {
+        level: 2,
+        objects: 6,
+        time: 25
+    },
+
+    {
+        level: 3,
+        objects: 8,
+        time: 30
+    }
+
+];
+
+
+/* =====================================================
+   حالة اللعبة
+===================================================== */
+
+let level = 1;
+
+let score = 0;
+
+let mistakes = 0;
+
+let timeLeft = 20;
+
+let timer = null;
+
+let stageFinished = false;
+
+let easierNextAttempt = false;
+
+let rockets = [];
+
+let activeDrag = null;
+
+
+/* =====================================================
+   العناصر
+===================================================== */
+
+const levelElement =
+    document.getElementById("level");
+
+const timerElement =
+    document.getElementById("timer");
+
+const timerBox =
+    document.getElementById("timerBox");
+
+const timeFill =
+    document.getElementById("timeFill");
+
+const scoreElement =
+    document.getElementById("score");
+
+const stars =
+    document.querySelectorAll(
+        ".stars-box .star"
+    );
+
+const message =
+    document.getElementById("message");
+
+const overlay =
+    document.getElementById("overlay");
+
+const dialogTitle =
+    document.getElementById("dialogTitle");
+
+const dialogStars =
+    document.getElementById("dialogStars");
+
+const dialogText =
+    document.getElementById("dialogText");
+
+const dialogMistakes =
+    document.getElementById("dialogMistakes");
+
+const dialogBtn =
+    document.getElementById("dialogBtn");
+
+
+/* =====================================================
+   الألوان
+===================================================== */
+
+const colors = {
+
+    red: "#FF4D5A",
+
+    yellow: "#FFC928",
+
+    blue: "#5B8DEF",
+
+    green: "#55C878"
+
+};
+
+
+/* =====================================================
+   المستوى الحالي
+===================================================== */
+
+function getCurrentLevel() {
+
+    return LEVELS[level - 1];
+
+}
+
+
+/* =====================================================
+   عدد الصواريخ
+===================================================== */
+
+function getRocketCount() {
+
+    if (easierNextAttempt) {
+
+        return 2;
+
+    }
+
+    return getCurrentLevel().objects;
+
+}
+
+
+/* =====================================================
+   الوقت
+===================================================== */
+
+function getTime() {
+
+    return getCurrentLevel().time;
+
+}
+
+
+/* =====================================================
+   رسم الصاروخ
+===================================================== */
+
+function createRocketSVG(color) {
+
+    return `
+
+        <svg
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <path
+                d="
+                M50 10
+                C36 24 29 43 29 61
+                C29 77 38 87 50 90
+                C62 87 71 77 71 61
+                C71 43 64 24 50 10
+                Z"
+                fill="${color}"
+                stroke="white"
+                stroke-width="3"/>
+
+
+            <circle
+                cx="50"
+                cy="43"
+                r="12"
+                fill="#DDEBFF"
+                stroke="white"
+                stroke-width="3"/>
+
+
+            <path
+                d="
+                M31 61
+                L14 75
+                L30 75
+                Z"
+                fill="${color}"
+                stroke="white"
+                stroke-width="3"/>
+
+
+            <path
+                d="
+                M69 61
+                L86 75
+                L70 75
+                Z"
+                fill="${color}"
+                stroke="white"
+                stroke-width="3"/>
+
+
+            <path
+                d="
+                M43 83
+                L50 99
+                L57 83
+                Z"
+                fill="#FF9F43"/>
+
+        </svg>
+
+    `;
+
+}
+
+
+/* =====================================================
+   إنشاء الصواريخ
+===================================================== */
+
+function createRockets() {
+
+    const count =
+        getRocketCount();
+
+
+    const available = [
+
+        { colorName: "red" },
+        { colorName: "red" },
+        { colorName: "red" },
+        { colorName: "red" },
+
+        { colorName: "yellow" },
+        { colorName: "yellow" },
+        { colorName: "yellow" },
+        { colorName: "yellow" },
+
+        { colorName: "blue" },
+        { colorName: "blue" },
+        { colorName: "blue" },
+        { colorName: "blue" },
+
+        { colorName: "green" },
+        { colorName: "green" },
+        { colorName: "green" }
+
+    ];
+
+
+    for (
+        let i = available.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            available[i],
+            available[j]
+        ] =
+        [
+            available[j],
+            available[i]
+        ];
+
+    }
+
+
+    return available
+        .slice(0, count)
+        .map(item => ({
+
+            colorName:
+                item.colorName,
+
+            color:
+                colors[item.colorName],
+
+            done: false
+
+        }));
+
+}
+
+
+/* =====================================================
+   بدء المرحلة
+===================================================== */
+
+function startStage() {
+
+    clearInterval(timer);
+
+    stageFinished = false;
+
+    score = 0;
+
+    mistakes = 0;
+
+    timeLeft = getTime();
+
+    rockets = createRockets();
+
+    updateUI();
+
+    renderRockets();
+
+    startTimer();
+
+}
+
+
+/* =====================================================
+   المؤقت
+===================================================== */
+
+function startTimer() {
+
+    clearInterval(timer);
+
+    timer =
+        setInterval(() => {
+
+            if (stageFinished) {
+
+                clearInterval(timer);
+
+                return;
+
+            }
+
+            if (timeLeft > 0) {
+
+                timeLeft--;
+
+                updateTimer();
+
+            }
+
+            if (timeLeft <= 0) {
+
+                clearInterval(timer);
+
+                timeUp();
+
+            }
+
+        }, 1000);
+
+}
+
+
+/* =====================================================
+   تحديث الواجهة
+===================================================== */
+
+function updateUI() {
+
+    levelElement.textContent =
+        level;
+
+    scoreElement.textContent =
+        `${score} / ${rockets.length}`;
+
+    updateStars();
+
+    updateTimer();
+
+}
+
+
+/* =====================================================
+   النجوم
+===================================================== */
+
+function updateStars() {
+
+    stars.forEach(
+        (star, index) => {
+
+            const active =
+                index <
+                Math.min(score, 6);
+
+            star.textContent =
+                active
+                    ? "⭐"
+                    : "☆";
+
+            star.classList.toggle(
+                "active",
+                active
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   تحديث الوقت
+===================================================== */
+
+function updateTimer() {
+
+    timerElement.textContent =
+        timeLeft;
+
+    const total =
+        getTime();
+
+    let progress =
+        timeLeft / total;
+
+    progress =
+        Math.max(
+            0,
+            Math.min(
+                1,
+                progress
+            )
+        );
+
+    timeFill.style.width =
+        `${progress * 100}%`;
+
+    timerBox.classList.toggle(
+        "urgent",
+        timeLeft <= 7
+    );
+
+
+    if (progress <= 0.25) {
+
+        timeFill.style.background =
+            "#FF4D5A";
+
+    }
+
+    else if (progress <= 0.50) {
+
+        timeFill.style.background =
+            "#FF9F43";
+
+    }
+
+    else {
+
+        timeFill.style.background =
+            "#6C8CD5";
+
+    }
+
+}
+
+
+/* =====================================================
+   عرض الصواريخ
+===================================================== */
+
+function renderRockets() {
+
+    const rows = {
+
+        red:
+            document.getElementById(
+                "redRow"
+            ),
+
+        yellow:
+            document.getElementById(
+                "yellowRow"
+            ),
+
+        blue:
+            document.getElementById(
+                "blueRow"
+            ),
+
+        green:
+            document.getElementById(
+                "greenRow"
+            )
+
+    };
+
+
+    Object.values(rows)
+        .forEach(row => {
+
+            row.innerHTML = "";
+
+        });
+
+
+    rockets.forEach(
+        (rocket, index) => {
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+            element.className =
+                "rocket";
+
+            element.dataset.index =
+                index;
+
+            element.innerHTML =
+                createRocketSVG(
+                    rocket.color
+                );
+
+
+            if (rocket.done) {
+
+                element.classList.add(
+                    "done"
+                );
+
+            }
+
+
+            setupDrag(
+                element,
+                rocket
+            );
+
+
+            rows[
+                rocket.colorName
+            ].appendChild(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   تفعيل السحب
+===================================================== */
+
+function setupDrag(
+    element,
+    rocket
+) {
+
+    element.addEventListener(
+        "pointerdown",
+        function(event) {
+
+            if (
+                stageFinished ||
+                rocket.done
+            ) {
+
+                return;
+
+            }
+
+            event.preventDefault();
+
+            startDrag(
+                element,
+                rocket,
+                event
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   بداية السحب
+===================================================== */
+
+function startDrag(
+    element,
+    rocket,
+    event
+) {
+
+    activeDrag = {
+
+        element:
+            element,
+
+        rocket:
+            rocket,
+
+        clone:
+            null
+
+    };
+
+
+    element.classList.add(
+        "dragging"
+    );
+
+
+    const clone =
+        document.createElement(
+            "div"
+        );
+
+    clone.className =
+        "drag-clone";
+
+    clone.innerHTML =
+        createRocketSVG(
+            rocket.color
+        );
+
+    clone.style.left =
+        `${event.clientX}px`;
+
+    clone.style.top =
+        `${event.clientY}px`;
+
+    document.body.appendChild(
+        clone
+    );
+
+
+    activeDrag.clone =
+        clone;
+
+
+    moveDrag(event);
+
+
+    window.addEventListener(
+        "pointermove",
+        moveDrag,
+        {
+            passive: false
+        }
+    );
+
+
+    window.addEventListener(
+        "pointerup",
+        endDrag,
+        {
+            once: true
+        }
+    );
+
+}
+
+
+/* =====================================================
+   تحريك الصاروخ
+===================================================== */
+
+function moveDrag(event) {
+
+    if (!activeDrag) {
+
+        return;
+
+    }
+
+    event.preventDefault();
+
+
+    activeDrag.clone.style.left =
+        `${event.clientX}px`;
+
+    activeDrag.clone.style.top =
+        `${event.clientY}px`;
+
+
+    document
+        .querySelectorAll(
+            ".planet"
+        )
+        .forEach(
+            planet => {
+
+                const rect =
+                    planet.getBoundingClientRect();
+
+                const inside =
+
+                    event.clientX >=
+                    rect.left &&
+
+                    event.clientX <=
+                    rect.right &&
+
+                    event.clientY >=
+                    rect.top &&
+
+                    event.clientY <=
+                    rect.bottom;
+
+
+                planet.classList.toggle(
+                    "hover",
+                    inside
+                );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   نهاية السحب
+===================================================== */
+
+function endDrag(event) {
+
+    if (!activeDrag) {
+
+        return;
+
+    }
+
+
+    window.removeEventListener(
+        "pointermove",
+        moveDrag
+    );
+
+
+    const drag =
+        activeDrag;
+
+    activeDrag = null;
+
+
+    if (drag.clone) {
+
+        drag.clone.remove();
+
+    }
+
+
+    drag.element.classList.remove(
+        "dragging"
+    );
+
+
+    document
+        .querySelectorAll(
+            ".planet"
+        )
+        .forEach(
+            planet => {
+
+                planet.classList.remove(
+                    "hover"
+                );
+
+            }
+        );
+
+
+    const target =
+        document.elementFromPoint(
+            event.clientX,
+            event.clientY
+        );
+
+
+    const planet =
+        target &&
+        target.closest(
+            ".planet"
+        );
+
+
+    if (!planet) {
+
+        return;
+
+    }
+
+
+    rocketPlaced(
+        drag.rocket,
+        planet.dataset.color
+    );
+
+}
+
+
+/* =====================================================
+   وضع الصاروخ
+===================================================== */
+
+function rocketPlaced(
+    rocket,
+    planetColor
+) {
+
+    if (
+        stageFinished ||
+        rocket.done
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        rocket.colorName ===
+        planetColor
+    ) {
+
+        rocket.done = true;
+
+        score++;
+
+        updateUI();
+
+        renderRockets();
+
+
+        if (
+            score ===
+            rockets.length
+        ) {
+
+            stageCompleted();
+
+        }
+
+    }
+
+    else {
+
+        mistakes++;
+
+        showMessage();
+
+    }
+
+}
+
+
+/* =====================================================
+   رسالة الخطأ
+===================================================== */
+
+let messageTimeout = null;
+
+
+function showMessage() {
+
+    message.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        messageTimeout
+    );
+
+
+    messageTimeout =
+        setTimeout(
+            () => {
+
+                message.classList.remove(
+                    "show"
+                );
+
+            },
+            700
+        );
+
+
+    speak(
+        "حاول وضع الصاروخ في الكوكب المطابق للونه"
+    );
+
+}
+
+
+/* =====================================================
+   انتهاء الوقت
+===================================================== */
+
+function timeUp() {
+
+    if (stageFinished) {
+
+        return;
+
+    }
+
+
+    stageFinished = true;
+
+    clearInterval(timer);
+
+
+    easierNextAttempt = true;
+
+
+    setTimeout(
+        () => {
+
+            showDialog({
+
+                title:
+                    "⏰ انتهى الوقت",
+
+                stars:
+                    "",
+
+                text:
+                    "! سنجعلها أسهل 💛\nالمرة القادمة ستكون بصاروخين فقط 🚀",
+
+                mistakes:
+                    "",
+
+                speakText:
+                    "! سنجعلها أسهل. المرة القادمة ستكون بصاروخين فقط."
+
+            });
+
+        },
+        300
+    );
+
+}
+
+
+/* =====================================================
+   اكتمال المرحلة
+===================================================== */
+
+function stageCompleted() {
+
+    if (stageFinished) {
+
+        return;
+
+    }
+
+
+    stageFinished = true;
+
+    clearInterval(timer);
+
+
+    const currentMistakes =
+        mistakes;
+
+
+    easierNextAttempt = false;
+
+
+    /* =================================================
+       إذا اكتمل المستوى الثالث
+    ================================================= */
+
+    if (level === 3) {
+
+        setTimeout(
+            () => {
+
+                showDialog({
+
+                    title:
+                        "🏆 رائع جدًا!",
+
+                    stars:
+                        "⭐".repeat(
+                            Math.min(
+                                score,
+                                6
+                            )
+                        ),
+
+                    text:
+                        "أكملت جميع المستويات! 🎉\nأنت بطل الصواريخ 🚀🌈",
+
+                    mistakes:
+                        `الأخطاء: ${currentMistakes}`,
+
+                    speakText:
+                        "رائع جدًا! أكملت جميع المستويات! أنت بطل الصواريخ."
+
+                });
+
+            },
+            350
+        );
+
+        return;
+
+    }
+
+
+    /* =================================================
+       الانتقال للمستوى التالي
+    ================================================= */
+
+    level++;
+
+
+    setTimeout(
+        () => {
+
+            showDialog({
+
+                title:
+                    "🌟 أحسنت!",
+
+                stars:
+                    "⭐".repeat(
+                        Math.min(
+                            score,
+                            6
+                        )
+                    ),
+
+                text:
+                    `أكملت المرحلة بسرعة! 🎉\nهيا نجرب المستوى ${level} 🚀`,
+
+                mistakes:
+                    `الأخطاء: ${currentMistakes}`,
+
+                speakText:
+                    `أحسنت! أكملت المرحلة بسرعة. هيا نجرب المستوى ${level}.`
+
+            });
+
+        },
+        350
+    );
+
+}
+
+
+/* =====================================================
+   نافذة النتيجة
+===================================================== */
+
+function showDialog(data) {
+
+    dialogTitle.textContent =
+        data.title;
+
+    dialogStars.textContent =
+        data.stars;
+
+    dialogText.textContent =
+        data.text;
+
+    dialogMistakes.textContent =
+        data.mistakes;
+
+
+    overlay.classList.add(
+        "show"
+    );
+
+
+    speak(
+        data.speakText
+    );
+
+}
+
+
+/* =====================================================
+   المرحلة التالية
+===================================================== */
+
+dialogBtn.addEventListener(
+    "click",
+    function() {
+
+        /*
+         * إذا كان الطفل أنهى المستوى الثالث
+         * ينتقل مباشرة إلى صفحة الألوان
+         */
+
+        if (
+            level === 3 &&
+            score === rockets.length
+        ) {
+
+            window.location.href =
+                "colors.html";
+
+            return;
+
+        }
+
+
+        /*
+         * إذا لم تنتهِ اللعبة بالكامل
+         * يبدأ المستوى التالي
+         */
+
+        overlay.classList.remove(
+            "show"
+        );
+
+        startStage();
+
+    }
+);
+
+
+/* =====================================================
+   إعادة اللعبة
+===================================================== */
+
+document
+    .getElementById(
+        "restartBtn"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+            clearInterval(timer);
+
+            level = 1;
+
+            score = 0;
+
+            mistakes = 0;
+
+            timeLeft = 20;
+
+            easierNextAttempt = false;
+
+            stageFinished = false;
+
+            startStage();
+
+        }
+    );
+
+
+/* =====================================================
+   النطق العربي
+===================================================== */
+
+function speak(text) {
+
+    if (
+        !("speechSynthesis" in window) ||
+        !text
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        window.speechSynthesis.cancel();
+
+
+        const utterance =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+
+        utterance.lang =
+            "ar-SA";
+
+        utterance.rate =
+            0.85;
+
+        utterance.pitch =
+            1.05;
+
+
+        window.speechSynthesis.speak(
+            utterance
+        );
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Speech error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   تشغيل اللعبة
+===================================================== */
+
+startStage();
+
+</script>
+
+</body>
+
+</html>

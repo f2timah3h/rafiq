@@ -1,0 +1,2069 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>اختر اللون الصحيح - رفيق</title>
+
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+
+    box-sizing: border-box;
+
+    -webkit-tap-highlight-color: transparent;
+
+}
+
+html,
+body {
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+
+}
+
+body {
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Arial,
+        sans-serif;
+
+    color: #40566d;
+
+    background-color: #ffffff;
+
+    background-image:
+        url("images/carrr.jpeg");
+
+    background-size:
+        100% 100%;
+
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
+
+    position: relative;
+
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    min-height: 1366px;
+
+    overflow: hidden;
+
+}
+
+
+/* =====================================================
+   PREVIOUS BUTTON
+===================================================== */
+
+.previous-button {
+
+    position: fixed;
+
+    top: 35px;
+    left: 35px;
+
+    width: 155px;
+    height: 60px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #e4f2ff;
+
+    color: #55718b;
+
+    font-family: inherit;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(60,80,100,.18);
+
+    z-index: 100;
+
+    transition: .2s ease;
+
+}
+
+.previous-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    background: #d8edfc;
+
+}
+
+.previous-button:active {
+
+    transform:
+        scale(.96);
+
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-button {
+
+    position: fixed;
+
+    top: 35px;
+    right: 35px;
+
+    width: 65px;
+    height: 65px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    color: #55718b;
+
+    font-size: 31px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 20px
+        rgba(60,80,100,.18);
+
+    z-index: 100;
+
+    transition: .2s ease;
+
+}
+
+.menu-button:hover {
+
+    transform:
+        translateY(-3px);
+
+}
+
+.menu-button:active {
+
+    transform:
+        scale(.95);
+
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 115px;
+    right: 35px;
+
+    width: 245px;
+
+    padding: 18px;
+
+    border-radius: 28px;
+
+    background:
+        rgba(255,255,255,.97);
+
+    backdrop-filter:
+        blur(12px);
+
+    box-shadow:
+        0 12px 35px
+        rgba(60,80,100,.20);
+
+    transform:
+        translateX(130%);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .3s ease;
+
+    z-index: 99;
+
+}
+
+.side-menu.show {
+
+    transform:
+        translateX(0);
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+.side-menu button {
+
+    width: 100%;
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: transparent;
+
+    color: #55718b;
+
+    font-family: inherit;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    text-align: right;
+
+    padding: 0 18px;
+
+    margin-bottom: 8px;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+
+}
+
+.side-menu button:hover {
+
+    background: #e4f2ff;
+
+    transform:
+        translateX(-3px);
+
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.content {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width: 900px;
+
+    max-width: 90vw;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+.question-area {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.question {
+
+    margin: 0;
+
+    color: #40566d;
+
+    font-size: 46px;
+
+    font-weight: 900;
+
+    line-height: 1.4;
+
+    text-align: center;
+
+    text-shadow:
+        0 2px 5px
+        rgba(70,90,110,.08);
+
+}
+
+
+.question-hint {
+
+    margin-top: 12px;
+
+    color: #8296a9;
+
+    font-size: 21px;
+
+    font-weight: 700;
+
+}
+
+
+/* =====================================================
+   CARS CONTAINER
+===================================================== */
+
+.cars-container {
+
+    width: 100%;
+
+    display: flex;
+
+    direction: ltr;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 100px;
+
+    margin-top: 55px;
+
+}
+
+
+/* =====================================================
+   CAR OPTION
+===================================================== */
+
+.car-option {
+
+    position: relative;
+
+    width: 190px;
+    height: 155px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    border-radius: 30px;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.car-option:hover {
+
+    transform:
+        translateY(-8px)
+        scale(1.04);
+
+}
+
+
+/* =====================================================
+   PRESS
+===================================================== */
+
+.car-option:active {
+
+    transform:
+        scale(.94);
+
+}
+
+
+/* =====================================================
+   CAR IMAGES
+===================================================== */
+
+.car-option img {
+
+    width: 175px;
+
+    height: 125px;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    user-select: none;
+
+}
+
+
+/* =====================================================
+   LIGHT MOVEMENT
+===================================================== */
+
+/*
+   كل سيارة لها حركة مختلفة قليلًا
+   حتى تبدو طبيعية وهادئة.
+*/
+
+
+/* السيارة الزرقاء */
+
+.car-blue {
+
+    animation:
+        blueCarMove
+        3.6s
+        ease-in-out
+        infinite;
+
+}
+
+
+/* السيارة الحمراء */
+
+.car-red {
+
+    animation:
+        redCarMove
+        3.9s
+        ease-in-out
+        infinite;
+
+    animation-delay:
+        .4s;
+
+}
+
+
+/* السيارة الخضراء */
+
+.car-green {
+
+    animation:
+        greenCarMove
+        4.2s
+        ease-in-out
+        infinite;
+
+    animation-delay:
+        .8s;
+
+}
+
+
+/* =====================================================
+   BLUE MOVEMENT
+===================================================== */
+
+@keyframes blueCarMove {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(-5px)
+            translateY(0)
+            rotate(-1deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateX(7px)
+            translateY(-7px)
+            rotate(1deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   RED MOVEMENT
+===================================================== */
+
+@keyframes redCarMove {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(3px)
+            rotate(1deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-9px)
+            rotate(-1deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   GREEN MOVEMENT
+===================================================== */
+
+@keyframes greenCarMove {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(6px)
+            translateY(0)
+            rotate(1deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateX(-7px)
+            translateY(-6px)
+            rotate(-2deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   STOP CAR MOVEMENT
+===================================================== */
+
+.car-option.stop-animation img {
+
+    animation-play-state:
+        paused;
+
+}
+
+
+/*
+   نوقف الحركة من العنصر نفسه
+*/
+
+.car-option.stop-animation {
+
+    animation-play-state:
+        paused;
+
+}
+
+
+/* =====================================================
+   SELECTED CAR
+===================================================== */
+
+.car-option.selected {
+
+    background:
+        rgba(255,255,255,.55);
+
+    box-shadow:
+        0 10px 25px
+        rgba(60,80,100,.12);
+
+}
+
+
+/* =====================================================
+   CORRECT CAR
+===================================================== */
+
+.car-option.correct {
+
+    animation:
+        correctBounce
+        .65s
+        ease
+        forwards;
+
+}
+
+
+@keyframes correctBounce {
+
+    0% {
+
+        transform:
+            scale(1);
+
+    }
+
+    35% {
+
+        transform:
+            scale(1.15)
+            translateY(-12px);
+
+    }
+
+    65% {
+
+        transform:
+            scale(.98)
+            translateY(2px);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1.08)
+            translateY(-8px);
+
+    }
+
+}
+
+
+/* =====================================================
+   WRONG CAR
+===================================================== */
+
+.car-option.wrong {
+
+    animation:
+        wrongShake
+        .4s
+        ease;
+
+}
+
+
+@keyframes wrongShake {
+
+    0% {
+
+        transform:
+            translateX(0);
+
+    }
+
+    25% {
+
+        transform:
+            translateX(-10px);
+
+    }
+
+    50% {
+
+        transform:
+            translateX(10px);
+
+    }
+
+    75% {
+
+        transform:
+            translateX(-7px);
+
+    }
+
+    100% {
+
+        transform:
+            translateX(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   FEEDBACK
+===================================================== */
+
+.feedback {
+
+    margin-top: 25px;
+
+    min-height: 45px;
+
+    font-size: 28px;
+
+    font-weight: 900;
+
+    opacity: 0;
+
+    transform:
+        translateY(10px);
+
+    transition:
+        .3s ease;
+
+}
+
+
+.feedback.show {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+.feedback.success {
+
+    color: #56a875;
+
+}
+
+
+.feedback.wrong {
+
+    color: #8092a0;
+
+}
+
+
+/* =====================================================
+   SUCCESS DECORATION
+===================================================== */
+
+.success-decoration {
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    z-index: 20;
+
+}
+
+
+.success-decoration.show {
+
+    opacity: 1;
+
+}
+
+
+/* =====================================================
+   STARS
+===================================================== */
+
+.success-star {
+
+    position: absolute;
+
+    color: #f5cf62;
+
+    font-size: 42px;
+
+    opacity: 0;
+
+    animation:
+        starPop
+        1.2s
+        ease-out
+        forwards;
+
+}
+
+
+.success-star-1 {
+
+    left: 14%;
+    top: 35%;
+
+}
+
+
+.success-star-2 {
+
+    left: 30%;
+    top: 22%;
+
+    animation-delay: .15s;
+
+}
+
+
+.success-star-3 {
+
+    right: 30%;
+    top: 22%;
+
+    animation-delay: .25s;
+
+}
+
+
+.success-star-4 {
+
+    right: 14%;
+    top: 35%;
+
+    animation-delay: .35s;
+
+}
+
+
+@keyframes starPop {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(.2)
+            rotate(0deg);
+
+    }
+
+    40% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.35)
+            rotate(25deg);
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            scale(1)
+            rotate(0deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   CONFETTI
+===================================================== */
+
+.confetti {
+
+    position: absolute;
+
+    width: 12px;
+    height: 22px;
+
+    border-radius: 5px;
+
+    opacity: 0;
+
+    animation:
+        confettiFall
+        1.8s
+        ease-out
+        forwards;
+
+}
+
+
+.confetti-1 {
+
+    left: 18%;
+    top: 27%;
+
+    background: #e53935;
+
+}
+
+
+.confetti-2 {
+
+    left: 35%;
+    top: 19%;
+
+    background: #ffc107;
+
+    animation-delay: .1s;
+
+}
+
+
+.confetti-3 {
+
+    left: 58%;
+    top: 20%;
+
+    background: #2f7fd3;
+
+    animation-delay: .2s;
+
+}
+
+
+.confetti-4 {
+
+    right: 18%;
+    top: 27%;
+
+    background: #4f9b63;
+
+    animation-delay: .3s;
+
+}
+
+
+.confetti-5 {
+
+    left: 48%;
+    top: 15%;
+
+    background: #ec407a;
+
+    animation-delay: .4s;
+
+}
+
+
+@keyframes confettiFall {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(-20px)
+            rotate(0deg);
+
+    }
+
+    20% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translateY(130px)
+            rotate(240deg);
+
+    }
+
+}
+
+
+/* =====================================================
+   MINI CARS
+===================================================== */
+
+.mini-car {
+
+    position: absolute;
+
+    font-size: 48px;
+
+    opacity: 0;
+
+    animation:
+        miniCarMove
+        1.6s
+        ease-out
+        forwards;
+
+}
+
+
+.mini-car-1 {
+
+    left: 8%;
+    bottom: 20%;
+
+}
+
+
+.mini-car-2 {
+
+    left: 25%;
+    bottom: 15%;
+
+    animation-delay: .15s;
+
+}
+
+
+.mini-car-3 {
+
+    right: 25%;
+    bottom: 15%;
+
+    animation-delay: .25s;
+
+}
+
+
+.mini-car-4 {
+
+    right: 8%;
+    bottom: 20%;
+
+    animation-delay: .35s;
+
+}
+
+
+@keyframes miniCarMove {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            translateY(50px)
+            scale(.4);
+
+    }
+
+    30% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            translateY(-100px)
+            scale(1);
+
+    }
+
+}
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.next-button {
+
+    position: fixed;
+
+    bottom: 35px;
+
+    right: 35px;
+
+    width: 165px;
+
+    height: 62px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #e4f2ff;
+
+    color: #55718b;
+
+    font-family: inherit;
+
+    font-size: 21px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(60,80,100,.18);
+
+    opacity: .5;
+
+    pointer-events: none;
+
+    transition:
+        .25s ease;
+
+    z-index: 80;
+
+}
+
+
+.next-button.ready {
+
+    opacity: 1;
+
+    pointer-events: auto;
+
+}
+
+
+.next-button.ready:hover {
+
+    transform:
+        translateY(-3px);
+
+    background: #d8edfc;
+
+}
+
+
+.next-button.ready:active {
+
+    transform:
+        scale(.96);
+
+}
+
+
+/* =====================================================
+   IPAD PORTRAIT
+===================================================== */
+
+@media
+(min-width: 768px)
+and
+(max-width: 1100px) {
+
+
+    .content {
+
+        width: 850px;
+
+        max-width: 88vw;
+
+    }
+
+
+    .question {
+
+        font-size: 44px;
+
+    }
+
+
+    .question-hint {
+
+        font-size: 21px;
+
+    }
+
+
+    .cars-container {
+
+        gap: 90px;
+
+        margin-top: 55px;
+
+    }
+
+
+    .car-option {
+
+        width: 185px;
+        height: 150px;
+
+    }
+
+
+    .car-option img {
+
+        width: 175px;
+        height: 125px;
+
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:767px) {
+
+
+    .previous-button {
+
+        top: 20px;
+        left: 20px;
+
+        width: 125px;
+        height: 52px;
+
+        font-size: 18px;
+
+    }
+
+
+    .menu-button {
+
+        top: 20px;
+        right: 20px;
+
+        width: 55px;
+        height: 55px;
+
+        font-size: 27px;
+
+    }
+
+
+    .side-menu {
+
+        top: 90px;
+        right: 20px;
+
+        width: 220px;
+
+    }
+
+
+    .content {
+
+        width: 94vw;
+
+    }
+
+
+    .question {
+
+        font-size: 31px;
+
+    }
+
+
+    .question-hint {
+
+        font-size: 17px;
+
+    }
+
+
+    .cars-container {
+
+        gap: 10px;
+
+        margin-top: 40px;
+
+    }
+
+
+    .car-option {
+
+        width: 105px;
+        height: 115px;
+
+    }
+
+
+    .car-option img {
+
+        width: 105px;
+        height: 90px;
+
+    }
+
+
+    .next-button {
+
+        right: 20px;
+        bottom: 20px;
+
+        width: 145px;
+        height: 55px;
+
+        font-size: 19px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =================================================
+         PREVIOUS
+    ================================================== -->
+
+    <button
+        class="previous-button"
+        onclick="goBack()">
+
+        ← السابق
+
+    </button>
+
+
+
+    <!-- =================================================
+         MENU
+    ================================================== -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        onclick="toggleMenu()">
+
+        ☰
+
+    </button>
+
+
+
+    <div
+        class="side-menu"
+        id="sideMenu">
+
+
+        <button onclick="goHome()">
+
+            🏠 الرئيسية
+
+        </button>
+
+
+        <button onclick="goProfile()">
+
+            👤 ملفي
+
+        </button>
+
+
+        <button onclick="goProgress()">
+
+            ⭐ تقدمي
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         SUCCESS DECORATION
+    ================================================== -->
+
+    <div
+        class="success-decoration"
+        id="successDecoration">
+
+
+        <div class="mini-car mini-car-1">
+            🚗
+        </div>
+
+        <div class="mini-car mini-car-2">
+            🚙
+        </div>
+
+        <div class="mini-car mini-car-3">
+            🚕
+        </div>
+
+        <div class="mini-car mini-car-4">
+            🚗
+        </div>
+
+
+        <div class="success-star success-star-1">
+            ★
+        </div>
+
+        <div class="success-star success-star-2">
+            ★
+        </div>
+
+        <div class="success-star success-star-3">
+            ★
+        </div>
+
+        <div class="success-star success-star-4">
+            ★
+        </div>
+
+
+        <div class="confetti confetti-1"></div>
+
+        <div class="confetti confetti-2"></div>
+
+        <div class="confetti confetti-3"></div>
+
+        <div class="confetti confetti-4"></div>
+
+        <div class="confetti confetti-5"></div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         MAIN CONTENT
+    ================================================== -->
+
+    <div class="content">
+
+
+        <!-- =================================================
+             QUESTION
+        ================================================== -->
+
+        <div class="question-area">
+
+
+            <h1 class="question">
+
+                أين السيارة الحمراء؟
+
+            </h1>
+
+
+            <div class="question-hint">
+
+                اختر السيارة ذات اللون الصحيح
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             CARS
+        ================================================== -->
+
+        <div class="cars-container">
+
+
+            <!-- =================================================
+                 BLUE CAR
+            ================================================== -->
+
+            <div
+                class="car-option"
+                onclick="checkAnswer('blue')">
+
+
+                <img
+                    src="images/bl.png"
+                    class="car-blue"
+                    alt="السيارة الزرقاء">
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RED CAR - CORRECT
+            ================================================== -->
+
+            <div
+                class="car-option"
+                id="correctCar"
+                onclick="checkAnswer('red')">
+
+
+                <img
+                    src="images/re.png"
+                    class="car-red"
+                    alt="السيارة الحمراء">
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 GREEN CAR
+            ================================================== -->
+
+            <div
+                class="car-option"
+                onclick="checkAnswer('green')">
+
+
+                <img
+                    src="images/gr.png"
+                    class="car-green"
+                    alt="السيارة الخضراء">
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             FEEDBACK
+        ================================================== -->
+
+        <div
+            class="feedback"
+            id="feedback">
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         NEXT BUTTON
+    ================================================== -->
+
+    <button
+        class="next-button"
+        id="nextButton"
+        onclick="goNext()">
+
+        التالي →
+
+    </button>
+
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById(
+            "sideMenu"
+        );
+
+    menu.classList.toggle(
+        "show"
+    );
+
+}
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const menu =
+            document.getElementById(
+                "sideMenu"
+            );
+
+        const button =
+            document.getElementById(
+                "menuButton"
+            );
+
+        if (
+            !menu.contains(event.target) &&
+            !button.contains(event.target)
+        ) {
+
+            menu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goBack() {
+
+    window.location.href =
+        "colors.html";
+
+}
+
+
+function goHome() {
+
+    window.location.href =
+        "home.html";
+
+}
+
+
+function goProfile() {
+
+    alert(
+        "👤 صفحة ملفي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+function goProgress() {
+
+    alert(
+        "⭐ صفحة تقدمي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+/* =====================================================
+   ANSWER STATE
+===================================================== */
+
+let answered = false;
+
+
+/* =====================================================
+   CHECK ANSWER
+===================================================== */
+
+function checkAnswer(color) {
+
+
+    /*
+       إذا انتهى السؤال،
+       لا نسمح بإجابة أخرى.
+    */
+
+    if (answered) {
+
+        return;
+
+    }
+
+
+    /* =================================================
+       WRONG ANSWER
+    ================================================= */
+
+    if (color !== "red") {
+
+        showWrong();
+
+        return;
+
+    }
+
+
+    /* =================================================
+       CORRECT ANSWER
+    ================================================= */
+
+    answered = true;
+
+
+    /*
+       إيقاف حركة السيارات
+    */
+
+    stopCarAnimations();
+
+
+    /*
+       حفظ إكمال السؤال
+    */
+
+    localStorage.setItem(
+        "colorChoose1Completed",
+        "completed"
+    );
+
+
+    /*
+       إظهار النجاح
+    */
+
+    showSuccess();
+
+
+    /*
+       تشغيل التصفيق
+    */
+
+    playApplause();
+
+}
+
+
+/* =====================================================
+   STOP CAR ANIMATIONS
+===================================================== */
+
+function stopCarAnimations() {
+
+
+    const cars =
+        document.querySelectorAll(
+            ".car-option"
+        );
+
+
+    cars.forEach(
+        function(car) {
+
+            car.classList.add(
+                "stop-animation"
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   WRONG ANSWER
+===================================================== */
+
+function showWrong() {
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    feedback.className =
+        "feedback wrong show";
+
+
+    feedback.innerHTML =
+        "حاول مرة أخرى 🌱";
+
+
+    setTimeout(
+        function() {
+
+            feedback.classList.remove(
+                "show"
+            );
+
+        },
+        1000
+    );
+
+}
+
+
+/* =====================================================
+   SUCCESS
+===================================================== */
+
+function showSuccess() {
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    feedback.className =
+        "feedback success show";
+
+
+    feedback.innerHTML =
+        "أحسنت! 🎉";
+
+
+    /*
+       إبراز السيارة الحمراء
+    */
+
+    const correct =
+        document.getElementById(
+            "correctCar"
+        );
+
+
+    correct.classList.add(
+        "correct"
+    );
+
+
+    correct.classList.add(
+        "selected"
+    );
+
+
+    /*
+       تشغيل الزينة
+    */
+
+    const decoration =
+        document.getElementById(
+            "successDecoration"
+        );
+
+
+    decoration.classList.add(
+        "show"
+    );
+
+
+    /*
+       تفعيل زر التالي
+    */
+
+    const next =
+        document.getElementById(
+            "nextButton"
+        );
+
+
+    next.classList.add(
+        "ready"
+    );
+
+}
+
+
+/* =====================================================
+   APPLAUSE SOUND
+===================================================== */
+
+function playApplause() {
+
+
+    try {
+
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+
+        const audio =
+            new AudioContext();
+
+
+        /*
+           أصوات قصيرة متتابعة
+           تعطي إحساس التصفيق.
+        */
+
+        for (
+            let i = 0;
+            i < 22;
+            i++
+        ) {
+
+
+            const oscillator =
+                audio.createOscillator();
+
+
+            const gain =
+                audio.createGain();
+
+
+            oscillator.type =
+                "square";
+
+
+            oscillator.frequency.value =
+                450 +
+                Math.random() * 1100;
+
+
+            const startTime =
+                audio.currentTime +
+                i * 0.045;
+
+
+            gain.gain.setValueAtTime(
+                0,
+                startTime
+            );
+
+
+            gain.gain.linearRampToValueAtTime(
+                0.10,
+                startTime + 0.008
+            );
+
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.001,
+                startTime + 0.045
+            );
+
+
+            oscillator.connect(
+                gain
+            );
+
+
+            gain.connect(
+                audio.destination
+            );
+
+
+            oscillator.start(
+                startTime
+            );
+
+
+            oscillator.stop(
+                startTime + 0.05
+            );
+
+        }
+
+
+    }
+    catch(error) {
+
+        console.log(
+            "Audio unavailable"
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+function goNext() {
+
+
+    /*
+       لا ينتقل الطفل إلا بعد الإجابة الصحيحة.
+    */
+
+    if (!answered) {
+
+        return;
+
+    }
+
+
+    /*
+       الانتقال إلى السؤال التالي.
+    */
+
+    window.location.href =
+        "choose-green.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

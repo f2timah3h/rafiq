@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>التواصل - رفيق</title>
+
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+
+    margin:0;
+    padding:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    font-family:"Tahoma","Arial",sans-serif;
+
+    background:#ffffff;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    background-image:
+        url("images/um.jpeg");
+
+    background-repeat:no-repeat;
+
+    background-position:
+        center top;
+
+    background-size:
+        100% 100%;
+
+    color:#173d68;
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-button{
+
+    position:absolute;
+
+    top:25px;
+    right:28px;
+
+    width:65px;
+    height:55px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.96);
+
+    color:#55718b;
+
+    font-size:28px;
+
+    box-shadow:
+        0 5px 12px
+        rgba(0,0,0,.12);
+
+    cursor:pointer;
+
+    z-index:100;
+}
+
+.menu-button:active{
+
+    transform:scale(.95);
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu{
+
+    position:absolute;
+
+    top:90px;
+    right:28px;
+
+    width:230px;
+
+    padding:18px;
+
+    background:rgba(255,255,255,.98);
+
+    border-radius:25px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.18);
+
+    display:none;
+
+    z-index:300;
+}
+
+.side-menu.show{
+
+    display:block;
+}
+
+.side-menu button{
+
+    width:100%;
+
+    height:52px;
+
+    margin-bottom:10px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#e4f2ff;
+
+    color:#244d74;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.side-menu button:last-child{
+
+    margin-bottom:0;
+}
+
+.side-menu button:active{
+
+    transform:scale(.97);
+}
+
+
+/* =====================================================
+   BACK BUTTON
+===================================================== */
+
+.section-back{
+
+    position:absolute;
+
+    top:28px;
+    left:28px;
+
+    width:105px;
+    height:55px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.96);
+
+    color:#55718b;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 5px 12px
+        rgba(0,0,0,.12);
+
+    cursor:pointer;
+
+    z-index:100;
+}
+
+.section-back:active{
+
+    transform:scale(.95);
+}
+
+
+/* =====================================================
+   HEADER
+   تم إنزاله أسفل صورة um.jpeg
+===================================================== */
+
+.header{
+
+    position:absolute;
+
+    top:185px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:78vw;
+
+    text-align:center;
+
+    z-index:5;
+
+    padding:
+        6px 15px;
+
+    border-radius:22px;
+}
+
+.header h1{
+
+    margin:0;
+
+    font-size:42px;
+
+    font-weight:900;
+
+    color:#173d68;
+
+    text-shadow:
+        0 2px 5px
+        rgba(255,255,255,.95);
+}
+
+.header p{
+
+    margin:8px 0 0;
+
+    font-size:19px;
+
+    font-weight:700;
+
+    line-height:1.5;
+
+    color:#52708c;
+
+    text-shadow:
+        0 2px 5px
+        rgba(255,255,255,.95);
+}
+
+
+/* =====================================================
+   OPTIONS CONTAINER
+===================================================== */
+
+.options{
+
+    position:absolute;
+
+    left:50%;
+
+    top:59%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:88vw;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    /*
+       مسافات واضحة بين الأزرار
+    */
+
+    column-gap:24px;
+
+    row-gap:24px;
+
+    z-index:10;
+}
+
+
+/* =====================================================
+   OPTION CARD
+===================================================== */
+
+.option{
+
+    position:relative;
+
+    min-height:140px;
+
+    border:none;
+
+    border-radius:28px;
+
+    padding:
+        17px 20px;
+
+    display:flex;
+
+    align-items:center;
+
+    text-align:right;
+
+    cursor:pointer;
+
+    /*
+       اللون المعتمد
+    */
+
+    background:#e4f2ff;
+
+    box-shadow:
+        0 8px 18px
+        rgba(55,105,140,.15);
+
+    transition:
+        transform .2s,
+        box-shadow .2s;
+}
+
+.option:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 12px 24px
+        rgba(55,105,140,.20);
+}
+
+.option:active{
+
+    transform:scale(.98);
+}
+
+
+/* =====================================================
+   ICON CONTAINER
+===================================================== */
+
+.option-icon{
+
+    flex:0 0 82px;
+
+    width:95px;
+    height:95px;
+
+    border-radius:23px;
+
+    background:
+        rgba(255,255,255,.88);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:44px;
+
+    margin-left:14px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 3px 8px
+        rgba(50,100,140,.08);
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.option-icon img{
+
+    width:95px;
+
+    height:95px;
+
+    object-fit:contain;
+
+    display:block;
+}
+
+
+/* =====================================================
+   TEXT
+===================================================== */
+
+.option-content{
+
+    flex:1;
+
+    min-width:0;
+}
+
+.option-title{
+
+    font-size:22px;
+
+    font-weight:900;
+
+    color:#173d68;
+
+    margin-bottom:6px;
+}
+
+.option-description{
+
+    font-size:14px;
+
+    font-weight:600;
+
+    line-height:1.5;
+
+    color:#52708c;
+}
+
+
+/* =====================================================
+   ARROW
+===================================================== */
+
+.option-arrow{
+
+    flex:0 0 45px;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:white;
+
+    /*
+       لون أزرق متناسق مع اللون المعتمد
+    */
+
+    background:#5b9bd5;
+
+    font-size:26px;
+
+    font-weight:900;
+
+    margin-right:8px;
+
+    box-shadow:
+        0 4px 8px
+        rgba(60,120,170,.15);
+}
+
+
+/* =====================================================
+   ALL CARDS
+   SAME OFFICIAL COLOR
+===================================================== */
+
+.food,
+.request,
+.talk,
+.questions,
+.pictures{
+
+    background:#e4f2ff;
+}
+
+
+/* =====================================================
+   PICTURES CARD
+===================================================== */
+
+.pictures{
+
+    grid-column:
+        1 / 3;
+
+    min-height:115px;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+
+    position:absolute;
+
+    bottom:15px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    background:white;
+
+    border-radius:30px;
+
+    padding:
+        10px 28px;
+
+    min-width:410px;
+
+    text-align:center;
+
+    font-size:17px;
+
+    font-weight:900;
+
+    color:#244d74;
+
+    box-shadow:
+        0 7px 18px
+        rgba(55,104,140,.12);
+
+    z-index:20;
+}
+
+.footer span{
+
+    font-size:25px;
+
+    margin-left:7px;
+}
+
+
+/* =====================================================
+   IPAD PORTRAIT
+===================================================== */
+
+@media (orientation:portrait){
+
+    /* PAGE */
+
+    .page{
+
+        background-size:
+            100% 100%;
+
+        background-position:
+            center top;
+    }
+
+
+    /* BACK BUTTON */
+
+    .section-back{
+
+        top:16px;
+        left:16px;
+
+        width:95px;
+        height:50px;
+
+        font-size:18px;
+    }
+
+
+    /* MENU */
+
+    .menu-button{
+
+        top:16px;
+        right:16px;
+
+        width:58px;
+        height:50px;
+
+        font-size:25px;
+    }
+
+
+    /* SIDE MENU */
+
+    .side-menu{
+
+        top:76px;
+        right:16px;
+
+        width:220px;
+    }
+
+
+    /* HEADER */
+
+    .header{
+
+        top:180px;
+
+        width:82vw;
+
+        padding:
+            5px 12px;
+    }
+
+    .header h1{
+
+        font-size:34px;
+    }
+
+    .header p{
+
+        font-size:16px;
+
+        margin-top:6px;
+    }
+
+
+    /* OPTIONS */
+
+    .options{
+
+        top:59%;
+
+        width:88vw;
+
+        /*
+           زيادة المسافات
+        */
+
+        column-gap:22px;
+
+        row-gap:22px;
+    }
+
+
+    /* CARD */
+
+    .option{
+
+        min-height:135px;
+
+        padding:
+            14px 14px;
+
+        border-radius:25px;
+    }
+
+
+    /* ICON */
+
+    .option-icon{
+
+        flex-basis:72px;
+
+        width:70px;
+        height:70px;
+
+        font-size:40px;
+
+        border-radius:21px;
+
+        margin-left:10px;
+    }
+
+
+    .option-icon img{
+
+        width:200px;
+
+        height:200px;
+    }
+
+
+    /* TITLE */
+
+    .option-title{
+
+        font-size:19px;
+
+        margin-bottom:4px;
+    }
+
+
+    /* DESCRIPTION */
+
+    .option-description{
+
+        font-size:13px;
+
+        line-height:1.4;
+    }
+
+
+    /* ARROW */
+
+    .option-arrow{
+
+        flex-basis:42px;
+
+        width:42px;
+        height:42px;
+
+        font-size:23px;
+
+        margin-right:6px;
+    }
+
+
+    /* PICTURES */
+
+    .pictures{
+
+        grid-column:
+            1 / 3;
+
+        min-height:110px;
+    }
+
+
+    /* FOOTER */
+
+    .footer{
+
+        bottom:8px;
+
+        min-width:330px;
+
+        font-size:14px;
+
+        padding:
+            8px 18px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL HEIGHT
+===================================================== */
+
+@media
+(max-height:900px){
+
+    .header{
+
+        top:155px;
+    }
+
+    .options{
+
+        top:57%;
+    }
+
+    .option{
+
+        min-height:120px;
+    }
+
+    .pictures{
+
+        min-height:100px;
+    }
+
+    .footer{
+
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<!-- =====================================================
+     BACK
+===================================================== -->
+
+<button
+    class="section-back"
+    onclick="location.href='games.html'">
+
+    ← السابق
+
+</button>
+
+
+<!-- =====================================================
+     MENU BUTTON
+===================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton">
+
+    ☰
+
+</button>
+
+
+<!-- =====================================================
+     SIDE MENU
+===================================================== -->
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+
+    <button
+        onclick="location.href='home.html'">
+
+        🏠 الرئيسية
+
+    </button>
+
+
+    <button
+        onclick="location.href='reports.html'">
+
+        📊 تقاريري
+
+    </button>
+
+
+    <button
+        onclick="location.href='profile.html'">
+
+        👤 ملفي
+
+    </button>
+
+
+</div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="header">
+
+    <h1>
+
+        التواصل 
+
+    </h1>
+
+
+    <p>
+
+        هيا نتعلم كيف نعبّر عن أنفسنا
+        ونتواصل مع الآخرين!
+
+    </p>
+
+</div>
+
+
+<!-- =====================================================
+     OPTIONS
+===================================================== -->
+
+<div class="options">
+
+
+    <!-- =================================================
+         FOOD
+    ================================================= -->
+
+    <button
+        class="option food"
+        onclick="location.href='food-game.html'">
+
+
+        <div class="option-icon">
+
+            <img
+                src="images/food.png"
+                alt="الطعام والشراب">
+
+        </div>
+
+
+        <div class="option-content">
+
+            <div class="option-title">
+
+                الطعام والشراب
+
+            </div>
+
+
+            <div class="option-description">
+
+                أتعلّم كيف أطلب الطعام
+                والشراب بطريقة مناسبة.
+
+            </div>
+
+        </div>
+
+
+        <div class="option-arrow">
+
+            ←
+
+        </div>
+
+
+    </button>
+
+
+    <!-- =================================================
+         REQUEST
+    ================================================= -->
+
+    <button
+        class="option request"
+        onclick="location.href='requests.html'">
+
+
+        <div class="option-icon">
+
+            <img
+                src="images/boy.png"
+                alt="الطلب والاحتياجات">
+
+        </div>
+
+
+        <div class="option-content">
+
+            <div class="option-title">
+
+                الطلب والاحتياجات
+
+            </div>
+
+
+            <div class="option-description">
+
+                أتعلّم كيف أطلب ما أحتاجه
+                وأعبّر عن احتياجاتي.
+
+            </div>
+
+        </div>
+
+
+        <div class="option-arrow">
+
+            ←
+
+        </div>
+
+
+    </button>
+
+
+    <!-- =================================================
+         TALK
+    ================================================= -->
+
+    <button
+        class="option talk"
+        onclick="location.href='talk-expression.html'">
+
+
+        <div class="option-icon">
+
+            💬
+
+        </div>
+
+
+        <div class="option-content">
+
+            <div class="option-title">
+
+                التحدث والتعبير
+
+            </div>
+
+
+            <div class="option-description">
+
+                أتعلّم استخدام الكلمات
+                والجمل للتعبير عن أفكاري.
+
+            </div>
+
+        </div>
+
+
+        <div class="option-arrow">
+
+            ←
+
+        </div>
+
+
+    </button>
+
+
+    <!-- =================================================
+         QUESTIONS
+    ================================================= -->
+
+    <button
+        class="option questions"
+        onclick="location.href='questions-answers.html'">
+
+
+        <div class="option-icon">
+
+            ❓
+
+        </div>
+
+
+        <div class="option-content">
+
+            <div class="option-title">
+
+                فهم الأسئلة والإجابة
+
+            </div>
+
+
+            <div class="option-description">
+
+                أتعلم فهم الاسئلة والإجابة عليها 
+
+            </div>
+
+        </div>
+
+
+        <div class="option-arrow">
+
+            ←
+
+        </div>
+
+
+    </button>
+
+
+    <!-- =================================================
+         PICTURES
+    ================================================= -->
+
+    <button
+        class="option pictures"
+        onclick="location.href='picture-communication.html'">
+
+
+        <div class="option-icon">
+
+            🖼️
+
+        </div>
+
+
+        <div class="option-content">
+
+            <div class="option-title">
+
+                التواصل بالصور
+
+            </div>
+
+
+            <div class="option-description">
+
+                أتعلّم استخدام الصور
+                للتعبير عن احتياجاتي ورغباتي
+                بطريقة سهلة وواضحة.
+
+            </div>
+
+        </div>
+
+
+        <div class="option-arrow">
+
+            ←
+
+        </div>
+
+
+    </button>
+
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<div class="footer">
+
+    <span>💙</span>
+
+    كل كلمة أقولها... تساعدني على التواصل!
+
+</div>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   MENU
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+
+const sideMenu =
+    document.getElementById(
+        "sideMenu"
+    );
+
+
+menuButton.addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        sideMenu.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   CLOSE MENU
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            !sideMenu.contains(event.target) &&
+            event.target !== menuButton
+        ){
+
+            sideMenu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

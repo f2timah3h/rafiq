@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>رفيق</title>
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Arial,
+        sans-serif;
+
+    background-image:
+        url("images/home.jpeg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    overflow: hidden;
+
+    color: #55718b;
+}
+
+/* =====================================================
+   الصفحة الرئيسية
+===================================================== */
+
+.home-page {
+
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding:
+        35px
+        40px
+        115px;
+}
+
+/* =====================================================
+   الترحيب
+===================================================== */
+
+.personal-greeting {
+
+    width: 100%;
+    height: 190px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 5px;
+
+    direction: rtl;
+}
+
+.greeting-text {
+
+    position: absolute;
+
+    left: 50%;
+    top: 100%;
+
+    transform:
+        translate(-50%, -50%);
+
+    white-space: nowrap;
+
+    text-align: center;
+
+    z-index: 2;
+}
+
+.greeting-text .hello {
+
+    font-size: 40px;
+
+    font-weight: 800;
+
+    color: #55718b;
+
+    white-space: nowrap;
+
+    text-align: center;
+}
+
+/* =====================================================
+   الشخصية
+===================================================== */
+
+.character-container {
+
+    width: 500px;
+    height: 500px;
+
+    position: absolute;
+
+    left: 40%;
+
+    top: 1%;
+
+    transform:
+        translateY(-50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    touch-action: manipulation;
+
+    z-index: 1;
+
+    animation:
+        characterFloat 2.8s ease-in-out infinite,
+        characterTilt 4.5s ease-in-out infinite;
+}
+
+/* =====================================================
+   صورة الشخصية
+===================================================== */
+
+.character-container img {
+
+    width: 190px;
+    height: 190px;
+
+    object-fit: contain;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    filter:
+        drop-shadow(
+            0 7px 7px
+            rgba(80,110,130,0.15)
+        );
+
+    transition:
+        transform 0.2s ease,
+        filter 0.2s ease;
+}
+
+/* =====================================================
+   حركة الطفو
+===================================================== */
+
+@keyframes characterFloat {
+
+    0% {
+
+        transform:
+            translateY(0);
+    }
+
+    50% {
+
+        transform:
+            translateY(-9px);
+    }
+
+    100% {
+
+        transform:
+            translateY(0);
+    }
+}
+
+/* =====================================================
+   الميلان الخفيف
+===================================================== */
+
+@keyframes characterTilt {
+
+    0%,
+    70%,
+    100% {
+
+        rotate: 0deg;
+    }
+
+    75% {
+
+        rotate: -3deg;
+    }
+
+    80% {
+
+        rotate: 3deg;
+    }
+
+    85% {
+
+        rotate: -2deg;
+    }
+
+    90% {
+
+        rotate: 0deg;
+    }
+}
+
+/* =====================================================
+   نطة الشخصية
+===================================================== */
+
+.character-container.character-jump {
+
+    animation:
+        characterJump
+        0.75s
+        ease-out
+        !important;
+}
+
+@keyframes characterJump {
+
+    0% {
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+    20% {
+
+        transform:
+            translateY(-20px)
+            scale(1.05);
+    }
+
+    40% {
+
+        transform:
+            translateY(-35px)
+            scale(1.09);
+    }
+
+    60% {
+
+        transform:
+            translateY(-12px)
+            scale(1.04);
+    }
+
+    80% {
+
+        transform:
+            translateY(-4px)
+            scale(1.01);
+    }
+
+    100% {
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* =====================================================
+   ✨ تأثير النجوم
+===================================================== */
+
+.character-container::after {
+
+    content: "✨";
+
+    position: absolute;
+
+    top: 0;
+    right: 0;
+
+    font-size: 30px;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+.character-container.character-happy::after {
+
+    animation:
+        sparkle
+        0.8s
+        ease-out;
+}
+
+@keyframes sparkle {
+
+    0% {
+
+        opacity: 0;
+
+        transform:
+            scale(0.5)
+            translateY(10px);
+    }
+
+    35% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.1)
+            translateY(-5px);
+    }
+
+    100% {
+
+        opacity: 0;
+
+        transform:
+            scale(0.7)
+            translateY(-20px);
+    }
+}
+
+/* =====================================================
+   الوصف
+===================================================== */
+
+.subtitle {
+
+    font-size: 20px;
+
+    font-weight: 500;
+
+    color: #55718b;
+
+    text-align: center;
+
+    max-width: 750px;
+
+    line-height: 1.6;
+
+    margin:
+        5px 0 0;
+}
+
+/* =====================================================
+   الأزرار
+===================================================== */
+
+.menu-container {
+
+    width:
+        min(760px, 88%);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 17px;
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 30%;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+/* =====================================================
+   زر النشاط
+===================================================== */
+
+.menu-button {
+
+    width: 100%;
+
+    min-height: 85px;
+
+    border: none;
+
+    border-radius: 28px;
+
+    background:
+        rgba(
+            217,
+            241,
+            255,
+            0.94
+        );
+
+    color: #55718b;
+
+    font-family: inherit;
+
+    font-size: 35px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(
+            85,
+            113,
+            139,
+            0.12
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+
+    touch-action: manipulation;
+}
+
+.menu-button:active {
+
+    transform:
+        scale(0.97);
+
+    box-shadow:
+        0 3px 10px
+        rgba(
+            85,
+            113,
+            139,
+            0.12
+        );
+}
+
+.menu-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 9px 20px
+        rgba(
+            85,
+            113,
+            139,
+            0.16
+        );
+}
+
+/* =====================================================
+   الشريط السفلي
+===================================================== */
+
+.bottom-nav {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 18px;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        min(760px, 88%);
+
+    height: 76px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.93
+        );
+
+    border-radius: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-around;
+
+    padding:
+        5px 20px;
+
+    box-shadow:
+        0 7px 25px
+        rgba(
+            85,
+            113,
+            139,
+            0.15
+        );
+
+    z-index: 100;
+}
+
+/* =====================================================
+   أزرار الشريط السفلي
+===================================================== */
+
+.nav-button {
+
+    border: none;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    color: #55718b;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 3px;
+
+    cursor: pointer;
+
+    min-width: 90px;
+
+    touch-action: manipulation;
+}
+
+.nav-icon {
+
+    font-size: 27px;
+
+    transition:
+        transform 0.2s ease;
+}
+
+.nav-button:active .nav-icon {
+
+    transform:
+        scale(0.88);
+}
+
+.nav-button.active {
+
+    font-weight: 800;
+}
+
+.nav-button.active .nav-icon {
+
+    transform:
+        scale(1.08);
+}
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+
+/* =====================================================
+   iPad Portrait
+===================================================== */
+
+@media (orientation: portrait) {
+
+    .home-page {
+
+        padding-top: 35px;
+
+        padding-bottom: 115px;
+    }
+
+    .personal-greeting {
+
+        min-height: 170px;
+
+        gap: 20px;
+
+        margin-top: 5px;
+    }
+
+    .greeting-text .hello {
+
+        font-size: 38px;
+    }
+
+    .character-container {
+
+        width: 240px;
+
+        height: 240px;
+    }
+
+    .character-container img {
+
+        width: 220px;
+
+        height: 220px;
+    }
+
+    .subtitle {
+
+        font-size: 25px;
+
+        margin-top: 35px;
+    }
+
+    .menu-container {
+
+        width:
+            min(620px, 88%);
+
+        top: 45%;
+
+        left: 50%;
+
+        transform:
+            translate(-50%, -50%);
+
+        gap: 17px;
+    }
+
+    .menu-button {
+
+        min-height: 84px;
+
+        font-size: 33px;
+
+        letter-spacing: 1.5px;
+    }
+
+}
+
+/* =====================================================
+   الشاشات القصيرة
+===================================================== */
+
+@media (max-height: 800px) {
+
+    .home-page {
+
+        padding-top: 20px;
+
+        padding-bottom: 100px;
+    }
+
+    .personal-greeting {
+
+        min-height: 120px;
+
+        gap: 12px;
+    }
+
+    .greeting-text .hello {
+
+        font-size: 31px;
+    }
+
+    .character-container {
+
+        width: 130px;
+
+        height: 130px;
+    }
+
+    .character-container img {
+
+        width: 122px;
+
+        height: 122px;
+    }
+
+    .subtitle {
+
+        font-size: 17px;
+    }
+
+    .menu-container {
+
+        top: 51%;
+
+        gap: 11px;
+    }
+
+    .menu-button {
+
+        min-height: 70px;
+
+        font-size: 22px;
+
+        border-radius: 23px;
+    }
+
+    .bottom-nav {
+
+        height: 68px;
+
+        bottom: 10px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+
+
+<!-- =====================================================
+     HOME
+===================================================== -->
+
+<div class="home-page">
+
+    <div class="personal-greeting">
+
+        <div class="greeting-text">
+
+            <span
+                class="hello"
+                id="greetingText">
+
+                مرحبًا بك يا بطل
+
+            </span>
+
+        </div>
+
+        <div
+            class="character-container"
+            id="favoriteCharacter"
+            title="اضغط عليّ!">
+
+            <span
+                style="font-size:90px;">
+
+            </span>
+
+        </div>
+
+    </div>
+
+    <p class="subtitle">
+
+        جاهز للمرح؟
+        اختر نشاطك المفضل وابدأ رحلة ممتعة
+        مليئة بالمرح والتعلم
+
+    </p>
+
+    <div class="menu-container">
+
+        <button
+            class="menu-button"
+            onclick="goToPage('games.html')">
+
+            🎮
+
+            <span>
+                الألعاب
+            </span>
+
+        </button>
+
+        <button
+            class="menu-button"
+            onclick="goToPage('emotions.html')">
+
+            😊
+
+            <span>
+                المشاعر
+            </span>
+
+        </button>
+
+        <button
+            class="menu-button"
+            onclick="goToPage('stories.html')">
+
+            📚
+
+            <span>
+                القصص
+            </span>
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     Bottom Navigation
+===================================================== -->
+
+<div class="bottom-nav">
+
+    <button
+        class="nav-button active"
+        onclick="goToPage('home.html')">
+
+        <span class="nav-icon">
+            🏠
+        </span>
+
+        <span>
+            الرئيسية
+        </span>
+
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="goToPage('reports.html')">
+
+        <span class="nav-icon">
+            📊
+        </span>
+
+        <span>
+            التقارير
+        </span>
+
+    </button>
+
+    <button
+        class="nav-button"
+        onclick="goToPage('profile.html')">
+
+        <span class="nav-icon">
+            👤
+        </span>
+
+        <span>
+            الملف الشخصي
+        </span>
+
+    </button>
+
+</div>
+
+<script>
+
+/* =====================================================
+   SUPABASE CONNECTION
+===================================================== */
+
+const SUPABASE_URL =
+    "https://ciwrwmutcrarwtounelg.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goToPage(page) {
+
+    window.location.href = page;
+
+}
+
+/* =====================================================
+   LOAD CURRENT CHILD
+===================================================== */
+
+async function loadChildFromSupabase() {
+
+    const childId =
+        localStorage.getItem("rafiqChildId");
+
+    console.log(
+        "Current Rafiq Child ID:",
+        childId
+    );
+
+    /* =========================================
+       لا يوجد طفل محفوظ
+    ========================================= */
+
+    if (!childId) {
+
+        console.warn(
+            "لا يوجد rafiqChildId"
+        );
+
+        showChildName("");
+        showFavoriteCharacter("");
+
+        loading.style.display = "none";
+
+        return;
+    }
+
+    try {
+
+        /* =====================================
+           جلب الطفل الحالي
+        ====================================== */
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+            .from("children")
+            .select(
+                "id, child_name, favorite_character"
+            )
+            .eq(
+                "id",
+                childId
+            )
+            .maybeSingle();
+
+        /* =====================================
+           Supabase Error
+        ====================================== */
+
+        if (error) {
+
+            console.error(
+                "Supabase Home Error:",
+                error
+            );
+
+            throw error;
+        }
+
+        /* =====================================
+           لم يتم العثور على الطفل
+        ====================================== */
+
+        if (!data) {
+
+            console.warn(
+                "لم يتم العثور على الطفل:",
+                childId
+            );
+
+            showChildName("");
+            showFavoriteCharacter("");
+
+            return;
+        }
+
+        console.log(
+            "Current child from Supabase:",
+            data
+        );
+
+        /* =====================================
+           اسم الطفل
+        ====================================== */
+
+        showChildName(
+            data.child_name
+        );
+
+        /* =====================================
+           الشخصية المفضلة
+        ====================================== */
+
+        showFavoriteCharacter(
+            data.favorite_character
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "حدث خطأ أثناء تحميل بيانات الطفل:",
+            error
+        );
+
+        showChildName("");
+        showFavoriteCharacter("");
+
+    }
+
+    finally {
+
+        loading.style.display = "none";
+
+    }
+
+}
+
+/* =====================================================
+   SHOW CHILD NAME
+===================================================== */
+
+function showChildName(name) {
+
+    const greeting =
+        document.getElementById(
+            "greetingText"
+        );
+
+    if (
+        name &&
+        String(name).trim() !== ""
+    ) {
+
+        greeting.textContent =
+            "مرحبًا بك " +
+            String(name).trim() +
+            "!";
+
+    }
+
+    else {
+
+        greeting.textContent =
+            "مرحبًا بك يا بطل";
+
+    }
+
+}
+
+/* =====================================================
+   SHOW FAVORITE CHARACTER
+===================================================== */
+
+function showFavoriteCharacter(character) {
+
+    const characterBox =
+        document.getElementById(
+            "favoriteCharacter"
+        );
+
+    const value =
+        String(character || "")
+            .trim()
+            .toLowerCase();
+
+    /* =====================================
+       كرومي
+    ====================================== */
+
+    if (
+
+        value === "كرومي" ||
+        value === "كروومي" ||
+        value === "kromi"
+
+    ) {
+
+        characterBox.innerHTML = `
+
+            <img
+                src="images/kromi.png"
+                alt="كرومي">
+
+        `;
+
+        return;
+    }
+
+    /* =====================================
+       الديناصور
+    ====================================== */
+
+    if (
+
+        value === "ديناصور" ||
+        value === "dinosaur"
+
+    ) {
+
+        characterBox.innerHTML = `
+
+            <img
+                src="images/dinosaur.png"
+                alt="ديناصور">
+
+        `;
+
+        return;
+    }
+
+    /* =====================================
+       إذا كانت القيمة غير معروفة
+    ====================================== */
+
+    characterBox.innerHTML = "";
+
+}
+
+/* =====================================================
+   CHARACTER INTERACTION
+===================================================== */
+
+function makeCharacterInteractive() {
+
+    const character =
+        document.getElementById(
+            "favoriteCharacter"
+        );
+
+    character.addEventListener(
+        "click",
+        function () {
+
+            character.classList.remove(
+                "character-jump"
+            );
+
+            character.classList.remove(
+                "character-happy"
+            );
+
+            void character.offsetWidth;
+
+            character.classList.add(
+                "character-jump"
+            );
+
+            character.classList.add(
+                "character-happy"
+            );
+
+            speakWelcome();
+
+            setTimeout(
+                function () {
+
+                    character.classList.remove(
+                        "character-jump"
+                    );
+
+                    character.classList.remove(
+                        "character-happy"
+                    );
+
+                },
+                850
+            );
+
+        }
+    );
+
+}
+
+/* =====================================================
+   WELCOME VOICE
+===================================================== */
+
+function speakWelcome() {
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        return;
+    }
+
+    const greeting =
+        document.getElementById(
+            "greetingText"
+        );
+
+    const message =
+        greeting.textContent.trim();
+
+    window.speechSynthesis.cancel();
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            message
+        );
+
+    speech.lang = "ar-SA";
+
+    speech.rate = 0.9;
+
+    speech.pitch = 1.1;
+
+    speech.volume = 0.8;
+
+    window.speechSynthesis.speak(
+        speech
+    );
+
+}
+
+/* =====================================================
+   PERIODIC CHARACTER GREETING
+===================================================== */
+
+function startPeriodicGreeting() {
+
+    const character =
+        document.getElementById(
+            "favoriteCharacter"
+        );
+
+    setInterval(
+        function () {
+
+            if (
+                character.classList.contains(
+                    "character-jump"
+                )
+            ) {
+
+                return;
+            }
+
+            character.classList.remove(
+                "character-jump"
+            );
+
+            void character.offsetWidth;
+
+            character.classList.add(
+                "character-jump"
+            );
+
+            setTimeout(
+                function () {
+
+                    character.classList.remove(
+                        "character-jump"
+                    );
+
+                },
+                800
+            );
+
+        },
+        7000
+    );
+
+}
+
+/* =====================================================
+   START HOME
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadChildFromSupabase();
+
+        makeCharacterInteractive();
+
+        startPeriodicGreeting();
+
+    }
+);
+
+</script>
+
+</body>
+</html>

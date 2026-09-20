@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>رفيق - الرئيسية</title>
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    direction: rtl;
+}
+
+body {
+
+    min-height: 100vh;
+
+    background-image:
+        url("images/home.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    color: #555;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding:
+        45px 35px 125px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   DECORATIONS
+========================= */
+
+.decoration {
+
+    position: absolute;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    z-index: 1;
+}
+
+
+/* CLOUD ONE */
+
+.cloud-one {
+
+    top: 35px;
+
+    left: 55px;
+
+    font-size: 65px;
+
+    opacity: 0.55;
+}
+
+
+/* CLOUD TWO */
+
+.cloud-two {
+
+    top: 180px;
+
+    right: 45px;
+
+    font-size: 52px;
+
+    opacity: 0.45;
+}
+
+
+/* STAR ONE */
+
+.star-one {
+
+    top: 75px;
+
+    right: 105px;
+
+    font-size: 30px;
+
+    opacity: 0.8;
+
+    transform: rotate(-12deg);
+}
+
+
+/* STAR TWO */
+
+.star-two {
+
+    top: 265px;
+
+    left: 95px;
+
+    font-size: 25px;
+
+    opacity: 0.75;
+
+    transform: rotate(15deg);
+}
+
+
+/* =========================
+   BEES
+========================= */
+
+.bee {
+
+    position: absolute;
+
+    z-index: 4;
+
+    pointer-events: none;
+
+    user-select: none;
+
+    font-size: 38px;
+
+    filter:
+        drop-shadow(
+            0 3px 4px
+            rgba(80,80,80,0.15)
+        );
+}
+
+
+/* النحلة الأولى - بجانب البحيرة */
+
+.bee-one {
+
+    top: 780px;
+
+    left: 150px;
+
+    animation:
+        beeFlyOne
+        5s
+        ease-in-out
+        infinite;
+}
+
+
+/* النحلة الثانية - بجانب البحيرة */
+
+.bee-two {
+
+    top: 850px;
+
+    right: 140px;
+
+    animation:
+        beeFlyTwo
+        5.5s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================
+   BEE ANIMATIONS
+========================= */
+
+@keyframes beeFlyOne {
+
+    0% {
+
+        transform:
+            translate(0, 0)
+            rotate(-8deg);
+    }
+
+    20% {
+
+        transform:
+            translate(25px, -15px)
+            rotate(5deg);
+    }
+
+    40% {
+
+        transform:
+            translate(50px, 5px)
+            rotate(-3deg);
+    }
+
+    60% {
+
+        transform:
+            translate(30px, 25px)
+            rotate(7deg);
+    }
+
+    80% {
+
+        transform:
+            translate(10px, 10px)
+            rotate(-4deg);
+    }
+
+    100% {
+
+        transform:
+            translate(0, 0)
+            rotate(-8deg);
+    }
+}
+
+
+@keyframes beeFlyTwo {
+
+    0% {
+
+        transform:
+            translate(0, 0)
+            rotate(8deg);
+    }
+
+    20% {
+
+        transform:
+            translate(-25px, 15px)
+            rotate(-5deg);
+    }
+
+    40% {
+
+        transform:
+            translate(-50px, -5px)
+            rotate(4deg);
+    }
+
+    60% {
+
+        transform:
+            translate(-30px, -25px)
+            rotate(-7deg);
+    }
+
+    80% {
+
+        transform:
+            translate(-10px, -10px)
+            rotate(4deg);
+    }
+
+    100% {
+
+        transform:
+            translate(0, 0)
+            rotate(8deg);
+    }
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content {
+
+    width: min(900px, 94vw);
+
+    position: relative;
+
+    z-index: 5;
+
+    text-align: center;
+}
+
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome {
+
+    margin-top: 60px;
+
+    text-align: center;
+
+    position: relative;
+}
+
+
+.welcome h1 {
+
+    margin: 0;
+
+    color: #8f626c;
+
+    font-size: 42px;
+
+    font-weight: 800;
+
+    text-shadow:
+        0 2px 4px
+        rgba(255,255,255,0.45);
+}
+
+
+.welcome p {
+
+    margin:
+        14px auto 0;
+
+    max-width: 680px;
+
+    color: #5f5f5f;
+
+    font-size: 19px;
+
+    line-height: 1.9;
+
+    font-weight: 600;
+
+    text-shadow:
+        0 1px 3px
+        rgba(255,255,255,0.55);
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+.menu {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 25px;
+
+    position: relative;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.menu-button {
+
+    width: 460px;
+
+    max-width: 90%;
+
+    height: 100px;
+
+    border: none;
+
+    border-radius: 28px;
+
+    background: #e4f2ff;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 13px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(80,100,120,0.16);
+
+    border:
+        2px solid
+        rgba(255,255,255,0.65);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+/* Hover */
+
+.menu-button:hover {
+
+    transform:
+        translateY(-4px);
+
+    background: #e4f2ff;
+
+    box-shadow:
+        0 12px 25px
+        rgba(80,100,120,0.20);
+}
+
+
+/* Click */
+
+.menu-button:active {
+
+    transform:
+        scale(0.97);
+}
+
+
+/* Icons */
+
+.menu-button span {
+
+    font-size: 36px;
+
+    line-height: 1;
+}
+
+
+/* =========================
+   BOTTOM NAVIGATION
+========================= */
+
+.bottom-nav {
+
+    position: fixed;
+
+    bottom: 0;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: min(900px, 94vw);
+
+    height: 82px;
+
+    background:
+        rgba(255,255,255,0.10);
+
+    border-radius:
+        25px 25px 0 0;
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    box-shadow:
+        0 -5px 20px
+        rgba(80,80,80,0.12);
+
+    display: flex;
+
+    justify-content:
+        space-around;
+
+    align-items: center;
+
+    z-index: 100;
+}
+
+
+/* =========================
+   NAV ITEM
+========================= */
+
+.nav-item {
+
+    border: none;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    color: #666;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    min-width: 110px;
+
+    height: 70px;
+
+    border-radius: 18px;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* Active */
+
+.nav-item.active {
+
+    color: #9b6872;
+
+    background:
+        rgba(228,242,255,0.70);
+}
+
+
+/* Icon */
+
+.nav-icon {
+
+    font-size: 27px;
+
+    line-height: 1;
+}
+
+
+/* Text */
+
+.nav-text {
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =========================
+   IPAD PORTRAIT
+========================= */
+
+@media (min-width: 768px) {
+
+    .page {
+
+        min-height: 1366px;
+
+        padding-top: 70px;
+    }
+
+
+    .content {
+
+        width: 900px;
+    }
+
+
+    /* العنوان إلى الأعلى */
+
+    .welcome {
+
+        margin-top: 70px;
+
+        position: relative;
+
+        top: -30px;
+    }
+
+
+    .welcome h1 {
+
+        font-size: 44px;
+    }
+
+
+    .welcome p {
+
+        font-size: 20px;
+    }
+
+
+    /* الأزرار إلى الأسفل */
+
+    .menu {
+
+        margin-top: 75px;
+
+        gap: 28px;
+
+        position: relative;
+
+        top: 80px;
+    }
+
+
+    .menu-button {
+
+        width: 500px;
+
+        height: 105px;
+
+        font-size: 31px;
+    }
+
+
+    /* =========================
+       BEES - IPAD
+    ========================= */
+
+    .bee-one {
+
+        top: 780px;
+
+        left: 150px;
+
+        font-size: 38px;
+    }
+
+
+    .bee-two {
+
+        top: 850px;
+
+        right: 140px;
+
+        font-size: 38px;
+    }
+
+}
+
+
+/* =========================
+   SMALL SCREEN
+========================= */
+
+@media (max-width: 600px) {
+
+    .page {
+
+        padding:
+            25px 15px 105px;
+    }
+
+
+    .content {
+
+        width: 100%;
+    }
+
+
+    .welcome {
+
+        margin-top: 60px;
+    }
+
+
+    .welcome h1 {
+
+        font-size: 31px;
+    }
+
+
+    .welcome p {
+
+        font-size: 16px;
+
+        line-height: 1.7;
+    }
+
+
+    .menu {
+
+        margin-top: 50px;
+
+        gap: 18px;
+    }
+
+
+    .menu-button {
+
+        width: 100%;
+
+        max-width: 420px;
+
+        height: 82px;
+
+        font-size: 25px;
+
+        border-radius: 23px;
+    }
+
+
+    .menu-button span {
+
+        font-size: 30px;
+    }
+
+
+    .bottom-nav {
+
+        width: 100%;
+
+        border-radius:
+            20px 20px 0 0;
+    }
+
+
+    /* النحل أسفل الشاشة */
+
+    .bee-one {
+
+        top: 650px;
+
+        left: 25px;
+
+        font-size: 28px;
+    }
+
+
+    .bee-two {
+
+        top: 720px;
+
+        right: 20px;
+
+        font-size: 28px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     MAIN PAGE
+========================= -->
+
+<div class="page">
+
+
+    <!-- DECORATIONS -->
+
+    
+
+
+    <!-- =========================
+         BEES
+    ========================= -->
+
+    <div class="bee bee-one">
+        🐝
+    </div>
+
+
+    
+
+
+    <!-- =========================
+         CONTENT
+    ========================= -->
+
+    <main class="content">
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome">
+
+            <h1 id="welcomeTitle">
+                مرحبًا بك في رفيق
+            </h1>
+
+
+            <p>
+                جاهز للمرح؟
+                اختر نشاطك المفضل وابدأ رحلة ممتعة
+                مليئة بالمرح والتعلم
+            </p>
+
+        </section>
+
+
+        <!-- =========================
+             MAIN MENU
+        ========================= -->
+
+        <section class="menu">
+
+
+            <!-- GAMES -->
+
+            <button
+                class="menu-button"
+                onclick="openGames()">
+
+                <span>
+                    🎮
+                </span>
+
+                <span>
+                    الألعاب
+                </span>
+
+            </button>
+
+
+            <!-- EMOTIONS -->
+
+            <button
+                class="menu-button"
+                onclick="openEmotions()">
+
+                <span>
+                    😊
+                </span>
+
+                <span>
+                    المشاعر
+                </span>
+
+            </button>
+
+
+            <!-- STORIES -->
+
+            <button
+                class="menu-button"
+                onclick="openStories()">
+
+                <span>
+                    📚
+                </span>
+
+                <span>
+                    القصص
+                </span>
+
+            </button>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- =========================
+     BOTTOM NAVIGATION
+========================= -->
+
+<nav class="bottom-nav">
+
+
+    <!-- HOME -->
+
+    <button
+        class="nav-item active"
+        onclick="goHome()">
+
+        <div class="nav-icon">
+            🏠
+        </div>
+
+        <div class="nav-text">
+            الرئيسية
+        </div>
+
+    </button>
+
+
+    <!-- REPORTS -->
+
+    <button
+        class="nav-item"
+        onclick="openReports()">
+
+        <div class="nav-icon">
+            📊
+        </div>
+
+        <div class="nav-text">
+            تقاريري
+        </div>
+
+    </button>
+
+
+    <!-- PROFILE -->
+
+    <button
+        class="nav-item"
+        onclick="openProfile()">
+
+        <div class="nav-icon">
+            👤
+        </div>
+
+        <div class="nav-text">
+            ملفي
+        </div>
+
+    </button>
+
+
+</nav>
+
+
+
+<script>
+
+/* =========================
+   OPEN GAMES
+========================= */
+
+function openGames() {
+
+    alert(
+        "🎮 صفحة الألعاب\n\nسنضيفها في الخطوة التالية."
+    );
+
+}
+
+
+/* =========================
+   OPEN EMOTIONS
+========================= */
+
+function openEmotions() {
+
+    alert(
+        "😊 صفحة المشاعر\n\nسنضيفها في الخطوة التالية."
+    );
+
+}
+
+
+/* =========================
+   OPEN STORIES
+========================= */
+
+function openStories() {
+
+    alert(
+        "📚 صفحة القصص\n\nسنضيفها في الخطوة التالية."
+    );
+
+}
+
+
+/* =========================
+   HOME
+========================= */
+
+function goHome() {
+
+    window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+    });
+
+}
+
+
+/* =========================
+   REPORTS
+========================= */
+
+function openReports() {
+
+    alert(
+        "📊 صفحة تقاريري\n\nسنضيفها لاحقًا."
+    );
+
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+function openProfile() {
+
+    alert(
+        "👤 صفحة ملفي\n\nسنضيفها لاحقًا."
+    );
+
+}
+
+
+/* =========================
+   LOAD CHILD NAME
+========================= */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const savedData =
+            localStorage.getItem(
+                "rafiqChildData"
+            );
+
+
+        if (!savedData) {
+
+            return;
+
+        }
+
+
+        try {
+
+            const data =
+                JSON.parse(savedData);
+
+
+            if (
+                data.childName &&
+                data.childName.trim() !== ""
+            ) {
+
+                document.getElementById(
+                    "welcomeTitle"
+                ).innerHTML =
+                    "مرحبًا " +
+                    data.childName +
+                    " في رفيق 🌈";
+
+            }
+
+
+        } catch (error) {
+
+            console.log(
+                "Could not load child data."
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

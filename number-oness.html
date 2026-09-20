@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=1024,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>رفيق - تعلم الرقم ١</title>
+
+
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+
+    margin:0;
+    padding:0;
+
+    overflow:hidden;
+}
+
+body{
+
+    font-family:"Tajawal","Arial",sans-serif;
+
+    background:#e4f2ff;
+
+    touch-action:manipulation;
+}
+
+
+/* =====================================================
+   PAGE
+   iPad Portrait 1024 × 1366
+===================================================== */
+
+.page{
+
+    width:100vw;
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+}
+
+
+.app{
+
+    position:relative;
+
+    width:min(100vw,1024px);
+
+    height:min(100vh,1366px);
+
+    aspect-ratio:1024 / 1366;
+
+    overflow:hidden;
+
+    background:#e4f2ff;
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.background{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:1;
+
+    background-image:url("images/spaa.jpeg");
+
+    background-size:cover;
+
+    background-position:center center;
+
+    background-repeat:no-repeat;
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar{
+
+    position:absolute;
+
+    top:30px;
+
+    left:35px;
+    right:35px;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:space-between;
+
+    z-index:100;
+}
+
+
+/* =====================================================
+   TOP BUTTONS
+===================================================== */
+
+.circle-button{
+
+    width:70px;
+    height:70px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#ffffff;
+
+    color:#167bc4;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.15);
+
+    cursor:pointer;
+}
+
+
+.circle-button:active{
+
+    transform:scale(.94);
+}
+
+
+/* السابق */
+
+.previous-button{
+
+    font-family:Arial,sans-serif;
+
+    font-size:42px;
+
+    line-height:1;
+}
+
+
+/* القائمة */
+
+.menu-button{
+
+    font-family:Arial,sans-serif;
+
+    font-size:28px;
+}
+
+
+/* =====================================================
+   DROPDOWN MENU
+===================================================== */
+
+.menu-container{
+
+    position:relative;
+}
+
+
+.dropdown{
+
+    position:absolute;
+
+    top:82px;
+
+    right:0;
+
+    width:235px;
+
+    padding:10px;
+
+    background:#ffffff;
+
+    border-radius:22px;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,.18);
+
+    display:none;
+}
+
+
+.dropdown.show{
+
+    display:block;
+}
+
+
+.dropdown button{
+
+    width:100%;
+
+    border:none;
+
+    background:#ffffff;
+
+    padding:16px 15px;
+
+    margin:2px 0;
+
+    border-radius:15px;
+
+    text-align:right;
+
+    color:#175b91;
+
+    font-family:inherit;
+
+    font-size:20px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    transition:.15s;
+}
+
+
+.dropdown button:active{
+
+    background:#e4f2ff;
+
+    transform:scale(.98);
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title{
+
+    position:absolute;
+
+    z-index:60;
+
+    top:48px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:360px;
+
+    padding:11px 20px 14px;
+
+    background:#fff3d5;
+
+    border:5px solid #d58a34;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:
+    0 6px 0 #c77925;
+}
+
+
+.title-small{
+
+    display:block;
+
+    color:#1764a1;
+
+    font-size:30px;
+
+    font-weight:800;
+
+    line-height:1.1;
+}
+
+
+.title-big{
+
+    display:block;
+
+    color:#c96620;
+
+    font-size:44px;
+
+    font-weight:800;
+
+    line-height:1.2;
+}
+
+
+/* =====================================================
+   CAR
+===================================================== */
+
+.car{
+
+    position:absolute;
+
+    z-index:6;
+
+    left:51%;
+
+    transform:translateX(-50%);
+
+    top:20%;
+
+    width:350px;
+
+    height:auto;
+
+    display:block;
+
+    object-fit:contain;
+
+    animation:carMove 2.5s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   CAR ANIMATION
+===================================================== */
+
+@keyframes carMove{
+
+    0%{
+
+        transform:
+        translateX(-50%)
+        translateY(0);
+
+    }
+
+    50%{
+
+        transform:
+        translateX(-50%)
+        translateY(-7px);
+
+    }
+
+    100%{
+
+        transform:
+        translateX(-50%)
+        translateY(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   BOY
+===================================================== */
+
+.boy{
+
+    position:absolute;
+
+    z-index:15;
+
+    left:7%;
+
+    top:34%;
+
+    width:285px;
+
+    height:auto;
+
+    display:block;
+
+    object-fit:contain;
+
+    animation:boyMove 8s ease-in-out infinite;
+}
+
+
+/* =====================================================
+   BOY ANIMATION
+===================================================== */
+
+@keyframes boyMove{
+
+    0%{
+
+        transform:translateX(-25px);
+
+    }
+
+    50%{
+
+        transform:translateX(25px);
+
+    }
+
+    100%{
+
+        transform:translateX(-25px);
+
+    }
+
+}
+
+
+/* =====================================================
+   NUMBER SOUND BUTTON
+===================================================== */
+
+.number-sound-button{
+
+    position:absolute;
+
+    z-index:40;
+
+    left:29%;
+
+    top:43%;
+
+    width:65px;
+
+    height:65px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#ffffff;
+
+    color:#1764a1;
+
+    font-size:32px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-shadow:
+    0 5px 14px rgba(0,0,0,.15);
+
+    cursor:pointer;
+
+    transition:transform .15s;
+}
+
+
+.number-sound-button:active{
+
+    transform:scale(.90);
+}
+
+
+/* =====================================================
+   DRAW AREA
+===================================================== */
+
+.draw-area{
+
+    position:absolute;
+
+    z-index:25;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    top:48%;
+
+    width:430px;
+
+    height:390px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+}
+
+
+/* =====================================================
+   NUMBER 1
+===================================================== */
+
+.letter{
+
+    position:absolute;
+
+    z-index:8;
+
+    top:80px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:210px;
+
+    height:330px;
+
+    object-fit:contain;
+
+    opacity:1;
+
+    pointer-events:none;
+    filter:
+
+        brightness(0)
+
+        invert(1)
+
+        drop-shadow(0 0 0 #258fd3)
+
+        drop-shadow(2px 0 0 #edf1f3)
+
+        
+
+        drop-shadow(0 2px 0 #258fd3)
+
+        drop-shadow(0 -2px 0 #258fd3);
+}
+
+
+/* =====================================================
+   CANVAS
+===================================================== */
+
+#drawingCanvas{
+
+    position:absolute;
+
+    z-index:10;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:330px;
+
+    background:transparent;
+
+    touch-action:none;
+
+    cursor:crosshair;
+}
+
+
+/* =====================================================
+   DRAW CONTROLS
+===================================================== */
+
+.draw-controls{
+
+    position:absolute;
+
+    z-index:30;
+
+    top:145px;
+
+    right:-5px;
+
+    width:185px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:8px;
+}
+
+
+/* =====================================================
+   INSTRUCTION
+===================================================== */
+
+.instruction{
+
+    width:185px;
+
+    padding:9px 10px;
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    color:#1764a1;
+
+    text-align:center;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    line-height:1.4;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,.12);
+}
+
+
+/* =====================================================
+   CLEAR BUTTON
+===================================================== */
+
+.clear-drawing{
+
+    border:2px solid #ccecff;
+
+    background:#ffffff;
+
+    color:#1764a1;
+
+    border-radius:16px;
+
+    padding:6px 17px;
+
+    font-family:inherit;
+
+    font-size:15px;
+
+    font-weight:800;
+
+    box-shadow:
+    0 3px 9px rgba(40,100,140,.14);
+
+    cursor:pointer;
+}
+
+
+.clear-drawing:active{
+
+    transform:scale(.94);
+}
+
+
+/* =====================================================
+   EXAMPLES BOX
+===================================================== */
+
+.examples{
+
+    position:absolute;
+
+    z-index:50;
+
+    left:7%;
+
+    right:7%;
+
+    bottom:0;
+
+    height:190px;
+
+    padding:12px 25px 8px;
+
+    background:#ffffff;
+
+    border-radius:42px 42px 0 0;
+
+    box-shadow:
+    0 -5px 15px rgba(30,100,140,.08);
+}
+
+
+/* =====================================================
+   EXAMPLES TITLE
+===================================================== */
+
+.examples-title{
+
+    text-align:center;
+
+    color:#1764a1;
+
+    font-size:19px;
+
+    font-weight:800;
+
+    margin-bottom:7px;
+}
+
+
+/* =====================================================
+   EXAMPLES GRID
+===================================================== */
+
+.example-grid{
+
+    width:620px;
+
+    max-width:100%;
+
+    height:125px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:18px;
+}
+
+
+/* =====================================================
+   EXAMPLE
+===================================================== */
+
+.example{
+
+    border:2px solid #ccecff;
+
+    background:#fbfeff;
+
+    border-radius:19px;
+
+    padding:5px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    transition:transform .15s;
+}
+
+
+.example:active{
+
+    transform:scale(.96);
+}
+
+
+/* =====================================================
+   EXAMPLE IMAGES
+===================================================== */
+
+.example img{
+
+    width:170px;
+
+    height:170px;
+
+    object-fit:contain;
+
+    flex-shrink:0;
+}
+
+
+.word{
+
+    color:#155d98;
+
+    font-size:22px;
+
+    font-weight:800;
+
+    text-align:center;
+}
+
+
+.sound{
+
+    display:block;
+
+    font-size:18px;
+
+    margin-top:2px;
+}
+
+
+/* =====================================================
+   BOTTOM
+===================================================== */
+
+.bottom{
+
+    position:absolute;
+
+    z-index:60;
+
+    left:7%;
+
+    right:7%;
+
+    bottom:12px;
+
+    height:48px;
+
+    display:flex;
+
+    justify-content:flex-start;
+
+    align-items:center;
+}
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.next-button{
+
+    border:none;
+
+    border-radius:24px;
+
+    padding:11px 38px;
+
+    background:#2d9bea;
+
+    color:#ffffff;
+
+    font-family:inherit;
+
+    font-size:21px;
+
+    font-weight:800;
+
+    box-shadow:
+    0 4px 0 #1479c5;
+
+    cursor:pointer;
+}
+
+
+.next-button:active{
+
+    transform:translateY(2px);
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:800px){
+
+    .title{
+
+        width:300px;
+    }
+
+
+    .title-small{
+
+        font-size:25px;
+    }
+
+
+    .title-big{
+
+        font-size:36px;
+    }
+
+
+    .car{
+
+        width:290px;
+    }
+
+
+    .boy{
+
+        width:225px;
+
+        left:5%;
+    }
+
+
+    .number-sound-button{
+
+        width:58px;
+
+        height:58px;
+
+        font-size:28px;
+
+        left:27%;
+
+        top:43%;
+    }
+
+
+    .draw-area{
+
+        width:370px;
+
+        height:300px;
+    }
+
+
+    .letter{
+
+        width:180px;
+
+        height:280px;
+    }
+
+
+    #drawingCanvas{
+
+        height:280px;
+    }
+
+
+    .draw-controls{
+
+        right:-5px;
+
+        top:120px;
+
+        width:165px;
+    }
+
+
+    .instruction{
+
+        width:165px;
+
+        font-size:15px;
+    }
+
+
+    .examples{
+
+        height:210px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:600px){
+
+    .topbar{
+
+        top:18px;
+
+        left:18px;
+
+        right:18px;
+    }
+
+
+    .circle-button{
+
+        width:52px;
+
+        height:52px;
+
+        font-size:28px;
+    }
+
+
+    .title{
+
+        top:22px;
+
+        width:230px;
+
+        border-width:3px;
+    }
+
+
+    .title-small{
+
+        font-size:20px;
+    }
+
+
+    .title-big{
+
+        font-size:28px;
+    }
+
+
+    .car{
+
+        width:220px;
+
+        top:37%;
+    }
+
+
+    .boy{
+
+        width:155px;
+
+        top:34%;
+
+        left:2%;
+    }
+
+
+    .number-sound-button{
+
+        width:48px;
+
+        height:48px;
+
+        font-size:23px;
+
+        left:24%;
+
+        top:43%;
+    }
+
+
+    .draw-area{
+
+        width:280px;
+
+        height:220px;
+
+        top:50%;
+    }
+
+
+    .letter{
+
+        width:135px;
+
+        height:200px;
+    }
+
+
+    #drawingCanvas{
+
+        height:200px;
+    }
+
+
+    .draw-controls{
+
+        top:80px;
+
+        right:-5px;
+
+        width:125px;
+    }
+
+
+    .instruction{
+
+        width:125px;
+
+        padding:6px;
+
+        font-size:12px;
+    }
+
+
+    .clear-drawing{
+
+        font-size:12px;
+
+        padding:5px 10px;
+    }
+
+
+    .examples{
+
+        left:3%;
+
+        right:3%;
+
+        height:195px;
+
+        padding:8px 12px;
+    }
+
+
+    .examples-title{
+
+        font-size:15px;
+    }
+
+
+    .example-grid{
+
+        height:105px;
+
+        gap:8px;
+    }
+
+
+    .example img{
+
+        width:110px;
+
+        height:110px;
+
+        flex-shrink:0;
+    }
+
+
+    .word{
+
+        font-size:17px;
+    }
+
+
+    .next-button{
+
+        font-size:16px;
+
+        padding:9px 22px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+<div class="app">
+
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="background"></div>
+
+
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<div class="topbar">
+
+
+    <button
+        class="circle-button previous-button"
+        onclick="goGames()">
+
+        ‹
+
+    </button>
+
+
+    <div class="menu-container">
+
+
+        <button
+            class="circle-button menu-button"
+            id="menuButton">
+
+            ☰
+
+        </button>
+
+
+        <div
+            class="dropdown"
+            id="dropdownMenu">
+
+
+            <button onclick="goHome()">
+
+                🏠 الرئيسية
+
+            </button>
+
+
+            <button onclick="goProfile()">
+
+                👤 ملفي
+
+            </button>
+
+
+            <button onclick="goProgress()">
+
+                ⭐ تقدمي
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     TITLE
+===================================================== -->
+
+<div class="title">
+
+    <span class="title-small">
+
+        تعلّم
+
+    </span>
+
+
+    <span class="title-big">
+
+        الرقم ١
+
+    </span>
+
+</div>
+
+
+<!-- =====================================================
+     CAR
+===================================================== -->
+
+<img
+    class="car"
+    src="images/a701.png"
+    alt="السيارة">
+
+
+<!-- =====================================================
+     BOY
+===================================================== -->
+
+<img
+    class="boy"
+    src="images/a702.png"
+    alt="الولد">
+
+
+<!-- =====================================================
+     NUMBER SOUND BUTTON
+===================================================== -->
+
+<button
+    class="number-sound-button"
+    onclick="speakNumber()"
+    aria-label="سماع الرقم واحد">
+
+    🔊
+
+</button>
+
+
+<!-- =====================================================
+     DRAW AREA
+===================================================== -->
+
+<div class="draw-area">
+
+
+    <img
+        class="letter"
+        src="images/ao.png"
+        alt="الرقم ١">
+
+
+    <canvas
+        id="drawingCanvas">
+    </canvas>
+
+
+    <div class="draw-controls">
+
+
+        <div class="instruction">
+
+            ارسم الرقم ١ ✏️
+
+        </div>
+
+
+        <button
+            class="clear-drawing"
+            onclick="clearDrawing()">
+
+            امسح 🧹
+
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     EXAMPLES
+===================================================== -->
+
+<section class="examples">
+
+
+    <div class="examples-title">
+
+        اضغط على الصورة لسماع أمثلة على الرقم ١ 🔊
+
+    </div>
+
+
+    <div class="example-grid">
+
+
+        <!-- =========================
+             BALL
+        ========================== -->
+
+        <button
+            class="example"
+            onclick="speakWord('كرة واحدة')">
+
+
+            <img
+                src="images/abaa.png"
+                alt="كرة واحدة">
+
+
+            <span class="word">
+
+                كرة واحدة
+
+                <span class="sound">
+
+                    🔊
+
+                </span>
+
+            </span>
+
+
+        </button>
+
+
+        <!-- =========================
+             CAR
+        ========================== -->
+
+        <button
+            class="example"
+            onclick="speakWord('سيارة واحدة')">
+
+
+            <img
+                src="images/re.png"
+                alt="سيارة واحدة">
+
+
+            <span class="word">
+
+                سيارة واحدة
+
+                <span class="sound">
+
+                    🔊
+
+                </span>
+
+            </span>
+
+
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     NEXT
+===================================================== -->
+
+<div class="bottom">
+
+
+    <button
+        class="next-button"
+        onclick="goQuestion()">
+
+        التالي ›
+
+    </button>
+
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goGames(){
+
+    location.href="games.html";
+
+}
+
+
+/* =====================================================
+   NEXT
+   صفحة نشاط الرقم ١ - سنصممها لاحقًا
+===================================================== */
+
+function goQuestion(){
+
+    location.href="number-oness-activity.html";
+
+}
+
+
+function goHome(){
+
+    location.href="home.html";
+
+}
+
+
+function goProfile(){
+
+    location.href="profile.html";
+
+}
+
+
+function goProgress(){
+
+    location.href="progress.html";
+
+}
+
+
+/* =====================================================
+   DROPDOWN MENU
+===================================================== */
+
+const menuButton =
+document.getElementById("menuButton");
+
+const dropdownMenu =
+document.getElementById("dropdownMenu");
+
+
+menuButton.addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        dropdownMenu.classList.toggle("show");
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function(){
+
+        dropdownMenu.classList.remove("show");
+
+    }
+);
+
+
+/* =====================================================
+   SPEECH
+===================================================== */
+
+function speakWord(text){
+
+    if(!("speechSynthesis" in window)){
+
+        return;
+
+    }
+
+
+    speechSynthesis.cancel();
+
+
+    const voice =
+    new SpeechSynthesisUtterance(text);
+
+
+    voice.lang="ar-SA";
+
+    voice.rate=.82;
+
+    voice.pitch=1.05;
+
+
+    speechSynthesis.speak(voice);
+
+}
+
+
+/* =====================================================
+   NUMBER 1 SOUND
+===================================================== */
+
+function speakNumber(){
+
+    if(!("speechSynthesis" in window)){
+
+        return;
+
+    }
+
+
+    speechSynthesis.cancel();
+
+
+    const voice =
+    new SpeechSynthesisUtterance("واحد");
+
+
+    voice.lang="ar-SA";
+
+    voice.rate=.75;
+
+    voice.pitch=1.05;
+
+
+    speechSynthesis.speak(voice);
+
+}
+
+
+/* =====================================================
+   AUTO SPEECH
+===================================================== */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        setTimeout(
+            function(){
+
+                speakWord(
+                    "تعلّم الرقم واحد"
+                );
+
+            },
+            700
+        );
+
+    }
+);
+
+
+/* =====================================================
+   DRAWING
+   تعليم الرقم ١
+===================================================== */
+
+const canvas =
+document.getElementById(
+    "drawingCanvas"
+);
+
+const ctx =
+canvas.getContext("2d");
+
+
+let drawing=false;
+
+let lastX=0;
+
+let lastY=0;
+
+
+/* =====================================================
+   CANVAS SIZE
+===================================================== */
+
+function resizeCanvas(){
+
+    const rect =
+    canvas.getBoundingClientRect();
+
+
+    const ratio =
+    window.devicePixelRatio || 1;
+
+
+    canvas.width =
+    rect.width * ratio;
+
+
+    canvas.height =
+    rect.height * ratio;
+
+
+    ctx.setTransform(
+        ratio,
+        0,
+        0,
+        ratio,
+        0,
+        0
+    );
+
+
+    ctx.lineCap="round";
+
+    ctx.lineJoin="round";
+
+}
+
+
+resizeCanvas();
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+/* =====================================================
+   GET POSITION
+===================================================== */
+
+function getPosition(event){
+
+    const rect =
+    canvas.getBoundingClientRect();
+
+
+    return{
+
+        x:event.clientX - rect.left,
+
+        y:event.clientY - rect.top
+
+    };
+
+}
+
+
+/* =====================================================
+   START DRAWING
+===================================================== */
+
+canvas.addEventListener(
+    "pointerdown",
+    function(event){
+
+        event.preventDefault();
+
+
+        drawing=true;
+
+
+        const position =
+        getPosition(event);
+
+
+        lastX=position.x;
+
+        lastY=position.y;
+
+
+        canvas.setPointerCapture(
+            event.pointerId
+        );
+
+    }
+);
+
+
+/* =====================================================
+   DRAW
+===================================================== */
+
+canvas.addEventListener(
+    "pointermove",
+    function(event){
+
+        if(!drawing){
+
+            return;
+
+        }
+
+
+        event.preventDefault();
+
+
+        const position =
+        getPosition(event);
+
+
+        ctx.strokeStyle="#258fd3";
+
+        ctx.lineWidth=10;
+
+        ctx.lineCap="round";
+
+        ctx.lineJoin="round";
+
+
+        ctx.beginPath();
+
+
+        ctx.moveTo(
+            lastX,
+            lastY
+        );
+
+
+        ctx.lineTo(
+            position.x,
+            position.y
+        );
+
+
+        ctx.stroke();
+
+
+        lastX=position.x;
+
+        lastY=position.y;
+
+    }
+);
+
+
+/* =====================================================
+   STOP DRAWING
+===================================================== */
+
+canvas.addEventListener(
+    "pointerup",
+    function(){
+
+        drawing=false;
+
+    }
+);
+
+
+canvas.addEventListener(
+    "pointercancel",
+    function(){
+
+        drawing=false;
+
+    }
+);
+
+
+/* =====================================================
+   CLEAR DRAWING
+===================================================== */
+
+function clearDrawing(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

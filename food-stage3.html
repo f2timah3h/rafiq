@@ -1,0 +1,3160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>رفيق - الطلب</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+
+    margin:0;
+    padding:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    font-family:"Tahoma","Arial",sans-serif;
+
+    direction:rtl;
+}
+
+body{
+
+    color:#173d68;
+
+    background:#e4f2ff;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+}
+
+
+/* =====================================================
+   PREVIOUS BUTTON
+===================================================== */
+
+.previous-button{
+
+    position:absolute;
+
+    top:20px;
+    left:20px;
+
+    width:58px;
+    height:52px;
+
+    border:none;
+
+    border-radius:19px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:30px;
+
+    font-weight:900;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 6px 16px rgba(55,104,140,.18);
+
+    cursor:pointer;
+
+    z-index:1000;
+
+    transition:.2s ease;
+}
+
+.previous-button:active{
+
+    transform:scale(.92);
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-button{
+
+    position:absolute;
+
+    top:20px;
+    right:20px;
+
+    width:58px;
+    height:52px;
+
+    border:none;
+
+    border-radius:19px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:27px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 6px 16px rgba(55,104,140,.18);
+
+    cursor:pointer;
+
+    z-index:1000;
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu{
+
+    position:absolute;
+
+    top:82px;
+    right:20px;
+
+    width:220px;
+
+    padding:17px;
+
+    background:rgba(255,255,255,.97);
+
+    border-radius:24px;
+
+    box-shadow:
+        0 10px 28px rgba(0,0,0,.18);
+
+    display:none;
+
+    z-index:1100;
+}
+
+.side-menu.show{
+
+    display:block;
+}
+
+.side-menu button{
+
+    width:100%;
+
+    height:50px;
+
+    margin-bottom:10px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-family:inherit;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.side-menu button:last-child{
+
+    margin-bottom:0;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.content{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    padding-top:380px;
+
+    z-index:20;
+}
+
+
+/* =====================================================
+   QUESTION
+===================================================== */
+
+.question-box{
+
+    background:rgba(255,255,255,.95);
+
+    border-radius:27px;
+
+    padding:13px 38px 15px;
+
+    min-width:480px;
+
+    text-align:center;
+
+    box-shadow:
+        0 8px 25px rgba(40,80,110,.13);
+
+    margin-bottom:15px;
+}
+
+.question-number{
+
+    display:block;
+
+    margin-bottom:3px;
+
+    color:#72b9e8;
+
+    font-size:15px;
+
+    font-weight:900;
+}
+
+.question{
+
+    margin:0;
+
+    color:#173d68;
+
+    font-size:30px;
+
+    font-weight:900;
+}
+
+
+/* =====================================================
+   CHILDREN
+===================================================== */
+
+.children{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    justify-content:center;
+
+    gap:80px;
+
+    margin-top:50px;
+}
+
+
+/* =====================================================
+   CHILD OPTION
+===================================================== */
+
+.child-option{
+
+    width:390px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    user-select:none;
+
+    -webkit-user-select:none;
+
+    transition:.2s ease;
+}
+
+
+/* =====================================================
+   CHILD IMAGE AREA
+===================================================== */
+
+.child-image-box{
+
+    width:390px;
+
+    height:470px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
+    position:relative;
+
+    border-radius:35px;
+
+    transition:.25s ease;
+}
+
+
+/* =====================================================
+   BIG CHILD IMAGE
+===================================================== */
+
+.child-image{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+
+    pointer-events:none;
+
+    filter:
+        drop-shadow(
+            0 12px 14px
+            rgba(40,80,110,.18)
+        );
+
+    transition:.25s ease;
+}
+
+
+/* =====================================================
+   CLEAR MOVEMENT
+===================================================== */
+
+.child-option:nth-child(1)
+.child-image-box{
+
+    animation:
+        childMoveOne
+        2.5s
+        ease-in-out
+        infinite;
+}
+
+.child-option:nth-child(2)
+.child-image-box{
+
+    animation:
+        childMoveTwo
+        2.8s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes childMoveOne{
+
+    0%,
+    100%{
+
+        transform:
+            translateY(0)
+            rotate(-1deg);
+    }
+
+    50%{
+
+        transform:
+            translateY(-18px)
+            rotate(1.5deg);
+    }
+}
+
+
+@keyframes childMoveTwo{
+
+    0%,
+    100%{
+
+        transform:
+            translateY(-5px)
+            rotate(1deg);
+    }
+
+    50%{
+
+        transform:
+            translateY(-22px)
+            rotate(-1.5deg);
+    }
+}
+
+
+/* =====================================================
+   SELECTED CHILD
+===================================================== */
+
+.child-option.selected
+.child-image-box{
+
+    transform:
+        scale(1.04);
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(114,185,232,.55)
+        );
+}
+
+.child-option.correct
+.child-image-box{
+
+    animation:
+        correctPop
+        .55s
+        ease;
+}
+
+@keyframes correctPop{
+
+    0%{
+
+        transform:scale(1);
+    }
+
+    45%{
+
+        transform:scale(1.10);
+    }
+
+    100%{
+
+        transform:scale(1.04);
+    }
+}
+
+
+/* =====================================================
+   HINT
+===================================================== */
+
+.hint-icon{
+
+    position:absolute;
+
+    top:15px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    width:76px;
+    height:76px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.97);
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:43px;
+
+    box-shadow:
+        0 8px 22px
+        rgba(40,80,110,.20);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    z-index:100;
+}
+
+.child-option.hint .hint-icon{
+
+    opacity:1;
+
+    animation:
+        hintIconMove
+        1s
+        ease-in-out
+        infinite;
+}
+
+.child-option.hint
+.child-image-box{
+
+    animation:
+        hintChild
+        .8s
+        ease-in-out
+        infinite;
+
+    filter:
+        drop-shadow(
+            0 0 25px
+            rgba(255,194,60,.85)
+        );
+}
+
+
+@keyframes hintIconMove{
+
+    0%,
+    100%{
+
+        transform:
+            translateX(-50%)
+            translateY(0)
+            scale(1);
+    }
+
+    50%{
+
+        transform:
+            translateX(-50%)
+            translateY(-12px)
+            scale(1.12);
+    }
+}
+
+
+@keyframes hintChild{
+
+    0%,
+    100%{
+
+        transform:
+            scale(1.03);
+    }
+
+    50%{
+
+        transform:
+            scale(1.09);
+    }
+}
+
+
+/* =====================================================
+   HINT MESSAGE
+===================================================== */
+
+.hint-message{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:88px;
+
+    transform:
+        translateX(-50%)
+        translateY(15px);
+
+    min-width:420px;
+
+    max-width:75vw;
+
+    padding:13px 25px;
+
+    background:rgba(255,255,255,.97);
+
+    border-radius:22px;
+
+    color:#173d68;
+
+    font-size:19px;
+
+    font-weight:900;
+
+    text-align:center;
+
+    box-shadow:
+        0 8px 24px
+        rgba(40,80,110,.18);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.3s ease;
+
+    z-index:2600;
+}
+
+.hint-message.show{
+
+    opacity:1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+/* =====================================================
+   SENTENCE
+===================================================== */
+
+.sentence-row{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:9px;
+
+    margin-top:4px;
+}
+
+
+/* =====================================================
+   SENTENCE BUTTON
+===================================================== */
+
+.sentence{
+
+    min-width:285px;
+
+    min-height:65px;
+
+    padding:9px 22px;
+
+    border-radius:22px;
+
+    border:3px solid #e4f2ff;
+
+    background:white;
+
+    color:#173d68;
+
+    font-family:inherit;
+
+    font-size:23px;
+
+    font-weight:900;
+
+    text-align:center;
+
+    box-shadow:
+        0 7px 18px
+        rgba(50,100,135,.14);
+
+    cursor:pointer;
+
+    transition:.2s ease;
+}
+
+.sentence:active{
+
+    transform:scale(.95);
+}
+
+.child-option.selected .sentence{
+
+    border-color:#72b9e8;
+
+    background:#eef8ff;
+
+}
+
+.child-option.correct .sentence{
+
+    border-color:#76b984;
+
+    background:#eaf8ee;
+
+}
+
+.child-option.wrong .sentence{
+
+    animation:
+        shake
+        .35s
+        ease;
+}
+
+@keyframes shake{
+
+    0%{
+        transform:translateX(0);
+    }
+
+    25%{
+        transform:translateX(-8px);
+    }
+
+    50%{
+        transform:translateX(8px);
+    }
+
+    75%{
+        transform:translateX(-5px);
+    }
+
+    100%{
+        transform:translateX(0);
+    }
+}
+
+
+/* =====================================================
+   MICROPHONE
+===================================================== */
+
+.mic{
+
+    width:52px;
+    height:52px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#e4f2ff;
+
+    color:#397bab;
+
+    font-size:25px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+
+    box-shadow:
+        0 5px 12px
+        rgba(55,104,140,.15);
+
+    transition:.2s ease;
+}
+
+.mic:active{
+
+    transform:scale(.88);
+
+    background:#cce8fb;
+}
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.next-button{
+
+    position:absolute;
+
+    right:25px;
+    bottom:20px;
+
+    min-width:145px;
+
+    height:57px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-family:inherit;
+
+    font-size:20px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 7px 18px
+        rgba(55,104,140,.17);
+
+    cursor:pointer;
+
+    z-index:500;
+
+    transition:.2s ease;
+}
+
+.next-button:active{
+
+    transform:scale(.94);
+}
+
+.next-button.disabled{
+
+    opacity:.45;
+
+    pointer-events:none;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress{
+
+    position:absolute;
+
+    bottom:27px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    background:rgba(255,255,255,.94);
+
+    border-radius:25px;
+
+    padding:8px 20px;
+
+    color:#52708c;
+
+    font-size:14px;
+
+    font-weight:900;
+
+    z-index:400;
+}
+
+
+/* =====================================================
+   DECORATION LAYER
+===================================================== */
+
+.decoration-layer{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:2500;
+}
+
+
+/* =====================================================
+   CAR BALLOON
+===================================================== */
+
+.car-balloon{
+
+    position:absolute;
+
+    bottom:-180px;
+
+    width:110px;
+    height:140px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    animation:
+        carBalloonRise
+        5s
+        cubic-bezier(.18,.72,.25,1)
+        forwards;
+
+    filter:
+        drop-shadow(
+            0 8px 10px
+            rgba(40,70,100,.20)
+        );
+}
+
+
+/* =====================================================
+   BALLOON BODY
+===================================================== */
+
+.car-balloon-body{
+
+    width:92px;
+    height:92px;
+
+    border-radius:50% 48% 52% 48%;
+
+    background:
+        radial-gradient(
+            circle at 30% 24%,
+            white 0 8%,
+            rgba(255,255,255,.45) 9% 16%,
+            transparent 17%
+        ),
+        #e4f2ff;
+
+    border:4px solid white;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:49px;
+
+    position:relative;
+}
+
+
+/* =====================================================
+   BALLOON KNOT
+===================================================== */
+
+.car-balloon-knot{
+
+    width:11px;
+    height:11px;
+
+    background:#72b9e8;
+
+    transform:rotate(45deg);
+
+    margin-top:-3px;
+}
+
+
+/* =====================================================
+   BALLOON STRING
+===================================================== */
+
+.car-balloon-string{
+
+    width:3px;
+
+    height:42px;
+
+    background:
+        rgba(70,100,125,.55);
+}
+
+
+@keyframes carBalloonRise{
+
+    0%{
+
+        transform:
+            translateY(0)
+            translateX(0)
+            rotate(-7deg)
+            scale(.65);
+
+        opacity:0;
+    }
+
+    8%{
+
+        opacity:1;
+    }
+
+    25%{
+
+        transform:
+            translateY(-25vh)
+            translateX(20px)
+            rotate(7deg)
+            scale(.85);
+    }
+
+    50%{
+
+        transform:
+            translateY(-55vh)
+            translateX(-25px)
+            rotate(-7deg)
+            scale(1);
+    }
+
+    75%{
+
+        transform:
+            translateY(-82vh)
+            translateX(25px)
+            rotate(6deg)
+            scale(1.08);
+    }
+
+    100%{
+
+        transform:
+            translateY(-130vh)
+            translateX(-20px)
+            rotate(-6deg)
+            scale(1.12);
+
+        opacity:0;
+    }
+}
+
+
+/* =====================================================
+   SPACE DECORATION
+===================================================== */
+
+.space-item{
+
+    position:absolute;
+
+    bottom:-130px;
+
+    font-size:60px;
+
+    animation:
+        spaceRise
+        4.8s
+        ease-out
+        forwards;
+
+    filter:
+        drop-shadow(
+            0 7px 10px
+            rgba(40,70,100,.20)
+        );
+}
+
+@keyframes spaceRise{
+
+    0%{
+
+        transform:
+            translateY(0)
+            rotate(0deg)
+            scale(.6);
+
+        opacity:0;
+    }
+
+    10%{
+
+        opacity:1;
+    }
+
+    50%{
+
+        transform:
+            translateY(-55vh)
+            rotate(180deg)
+            scale(1);
+    }
+
+    100%{
+
+        transform:
+            translateY(-125vh)
+            rotate(360deg)
+            scale(1.1);
+
+        opacity:0;
+    }
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(23,61,104,.40);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:3000;
+}
+
+.popup{
+
+    width:520px;
+
+    max-width:85vw;
+
+    background:white;
+
+    border-radius:32px;
+
+    padding:35px 30px;
+
+    text-align:center;
+
+    box-shadow:
+        0 20px 55px
+        rgba(20,60,90,.25);
+
+    animation:
+        popupIn
+        .35s
+        ease;
+}
+
+@keyframes popupIn{
+
+    from{
+
+        transform:scale(.75);
+
+        opacity:0;
+    }
+
+    to{
+
+        transform:scale(1);
+
+        opacity:1;
+    }
+}
+
+.popup-icon{
+
+    font-size:52px;
+
+    margin-bottom:7px;
+}
+
+.popup h2{
+
+    margin:0 0 12px;
+
+    color:#173d68;
+
+    font-size:28px;
+}
+
+.popup p{
+
+    margin:0 0 25px;
+
+    color:#52718d;
+
+    font-size:18px;
+
+    line-height:1.7;
+
+    font-weight:700;
+}
+
+.close-button{
+
+    min-width:150px;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-family:inherit;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+
+/* =====================================================
+   PORTRAIT IPAD
+===================================================== */
+
+@media (orientation:portrait){
+
+    .previous-button{
+
+        top:16px;
+        left:16px;
+
+        width:52px;
+        height:48px;
+
+        font-size:27px;
+    }
+
+    .menu-button{
+
+        top:16px;
+        right:16px;
+
+        width:52px;
+        height:48px;
+    }
+
+    .content{
+
+        padding-top:380px;
+    }
+
+    .question-box{
+
+        width:72vw;
+
+        min-width:0;
+
+        margin-bottom:8px;
+
+        padding:10px 25px 12px;
+    }
+
+    .question{
+
+        font-size:27px;
+    }
+
+    .question-number{
+
+        font-size:13px;
+    }
+
+    .children{
+
+        gap:35px;
+    }
+
+    .child-option{
+
+        width:42vw;
+
+        max-width:390px;
+    }
+
+    .child-image-box{
+
+        width:42vw;
+
+        max-width:390px;
+
+        height:430px;
+    }
+
+    .sentence{
+
+        min-width:0;
+
+        width:32vw;
+
+        font-size:21px;
+
+        min-height:62px;
+
+        padding:8px 10px;
+    }
+
+    .mic{
+
+        width:48px;
+        height:48px;
+
+        font-size:23px;
+    }
+
+    .hint-message{
+
+        min-width:350px;
+
+        font-size:17px;
+
+        bottom:82px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL HEIGHT
+===================================================== */
+
+@media (max-height:900px){
+
+    .content{
+
+        padding-top:75px;
+    }
+
+    .question-box{
+
+        padding:8px 22px;
+
+        margin-bottom:4px;
+    }
+
+    .question{
+
+        font-size:24px;
+    }
+
+    .child-image-box{
+
+        height:340px;
+    }
+
+    .sentence{
+
+        min-height:55px;
+
+        font-size:19px;
+    }
+
+    .mic{
+
+        width:44px;
+        height:44px;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL HEIGHT
+===================================================== */
+
+@media (max-height:750px){
+
+    .content{
+
+        padding-top:65px;
+    }
+
+    .question{
+
+        font-size:21px;
+    }
+
+    .question-box{
+
+        padding:6px 18px;
+    }
+
+    .child-image-box{
+
+        height:285px;
+    }
+
+    .sentence{
+
+        min-height:48px;
+
+        font-size:17px;
+    }
+
+    .mic{
+
+        width:39px;
+        height:39px;
+
+        font-size:19px;
+    }
+
+    .next-button{
+
+        height:48px;
+
+        min-width:120px;
+
+        font-size:17px;
+
+        bottom:13px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page" id="page">
+
+
+<!-- =====================================================
+     PREVIOUS BUTTON
+===================================================== -->
+
+<button
+    class="previous-button"
+    onclick="location.href='food-game.html'">
+
+    ←
+
+</button>
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton">
+
+    ☰
+
+</button>
+
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+    <button onclick="location.href='home.html'">
+        🏠 الرئيسية
+    </button>
+
+    <button onclick="location.href='reports.html'">
+        📊 تقاريري
+    </button>
+
+    <button onclick="location.href='profile.html'">
+        👤 ملفي
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     CONTENT
+===================================================== -->
+
+<div class="content">
+
+
+    <div class="question-box">
+
+        <span
+            class="question-number"
+            id="questionNumber">
+
+            السؤال الأول
+
+        </span>
+
+        <h1
+            class="question"
+            id="question">
+
+            ماذا تريد أن تشرب؟
+
+        </h1>
+
+    </div>
+
+
+    <div
+        class="children"
+        id="children">
+
+
+        <!-- JUICE -->
+
+        <div
+            class="child-option"
+            id="juiceChild">
+
+
+            <div
+                class="child-image-box">
+
+                <img
+                    class="child-image"
+                    id="juiceImage"
+                    src=""
+                    alt="طفل يحمل عصير">
+
+
+                <div
+                    class="hint-icon"
+                    id="juiceHintIcon">
+
+                    🚗
+
+                </div>
+
+            </div>
+
+
+            <div class="sentence-row">
+
+                <button
+                    class="sentence"
+                    id="juiceSentence">
+
+                    أريد عصير
+
+                </button>
+
+
+                <button
+                    class="mic"
+                    id="juiceMic"
+                    aria-label="اسمع أريد عصير">
+
+                    🎙️
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- APPLE -->
+
+        <div
+            class="child-option"
+            id="appleChild">
+
+
+            <div
+                class="child-image-box">
+
+                <img
+                    class="child-image"
+                    id="appleImage"
+                    src=""
+                    alt="طفل يحمل تفاحة">
+
+
+                <div
+                    class="hint-icon"
+                    id="appleHintIcon">
+
+                    🚗
+
+                </div>
+
+            </div>
+
+
+            <div class="sentence-row">
+
+                <button
+                    class="sentence"
+                    id="appleSentence">
+
+                    أريد تفاحة
+
+                </button>
+
+
+                <button
+                    class="mic"
+                    id="appleMic"
+                    aria-label="اسمع أريد تفاحة">
+
+                    🎙️
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     PROGRESS
+===================================================== -->
+
+<div
+    class="progress"
+    id="progress">
+
+    ⭐ 1 من 2
+
+</div>
+
+
+<!-- =====================================================
+     NEXT
+===================================================== -->
+
+<button
+    class="next-button disabled"
+    id="nextButton">
+
+    التالي ←
+
+</button>
+
+
+<!-- =====================================================
+     HINT MESSAGE
+===================================================== -->
+
+<div
+    class="hint-message"
+    id="hintMessage">
+
+</div>
+
+
+<!-- =====================================================
+     DECORATIONS
+===================================================== -->
+
+<div
+    class="decoration-layer"
+    id="decorationLayer">
+
+</div>
+
+
+<!-- =====================================================
+     COMPLETION POPUP
+===================================================== -->
+
+<div
+    class="overlay"
+    id="overlay">
+
+
+    <div class="popup">
+
+
+        <div
+            class="popup-icon"
+            id="popupIcon">
+
+            🎉🚗🏎️⭐
+
+        </div>
+
+
+        <h2>
+
+            أحسنت! 🌟
+
+        </h2>
+
+
+        <p>
+
+            انتهينا من هذه المرحلة!<br>
+
+            هيا بنا إلى المرحلة التالية 🚀
+
+        </p>
+
+
+        <button
+            class="close-button"
+            id="closePopup">
+
+            إغلاق
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE CONNECTION
+===================================================== */
+
+const SUPABASE_URL =
+    "https://ciwrwmutcrarwtounelg.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const sideMenu =
+    document.getElementById(
+        "sideMenu"
+    );
+
+
+menuButton.addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        sideMenu.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            !sideMenu.contains(
+                event.target
+            ) &&
+            event.target !== menuButton
+        ){
+
+            sideMenu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const page =
+    document.getElementById(
+        "page"
+    );
+
+const question =
+    document.getElementById(
+        "question"
+    );
+
+const questionNumber =
+    document.getElementById(
+        "questionNumber"
+    );
+
+const juiceChild =
+    document.getElementById(
+        "juiceChild"
+    );
+
+const appleChild =
+    document.getElementById(
+        "appleChild"
+    );
+
+const juiceImage =
+    document.getElementById(
+        "juiceImage"
+    );
+
+const appleImage =
+    document.getElementById(
+        "appleImage"
+    );
+
+const juiceSentence =
+    document.getElementById(
+        "juiceSentence"
+    );
+
+const appleSentence =
+    document.getElementById(
+        "appleSentence"
+    );
+
+const nextButton =
+    document.getElementById(
+        "nextButton"
+    );
+
+const progress =
+    document.getElementById(
+        "progress"
+    );
+
+const decorationLayer =
+    document.getElementById(
+        "decorationLayer"
+    );
+
+const overlay =
+    document.getElementById(
+        "overlay"
+    );
+
+const closePopup =
+    document.getElementById(
+        "closePopup"
+    );
+
+const hintMessage =
+    document.getElementById(
+        "hintMessage"
+    );
+
+const juiceHintIcon =
+    document.getElementById(
+        "juiceHintIcon"
+    );
+
+const appleHintIcon =
+    document.getElementById(
+        "appleHintIcon"
+    );
+
+
+/* =====================================================
+   CHILD ID
+===================================================== */
+
+const childId =
+    localStorage.getItem(
+        "rafiqChildId"
+    );
+
+
+/* =====================================================
+   INTEREST
+===================================================== */
+
+let interest = null;
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+function applyTheme(){
+
+    const normalizedInterest =
+        String(
+            interest || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    /* =================================================
+       SPACE
+    ================================================= */
+
+    if(
+        normalizedInterest === "فضاء" ||
+        normalizedInterest === "space"
+    ){
+
+        /*
+           خلفية الفضاء
+        */
+
+        page.style.backgroundImage =
+            "url('images/sc3s.jpeg')";
+
+
+        /*
+           طفل العصير
+        */
+
+        juiceImage.src =
+            "images/ss3.png";
+
+
+        /*
+           طفل التفاحة
+        */
+
+        appleImage.src =
+            "images/s3s.png";
+
+
+        /*
+           أيقونة التلميح
+        */
+
+        juiceHintIcon.textContent =
+            "🚀";
+
+        appleHintIcon.textContent =
+            "🚀";
+
+
+        /*
+           Popup مناسب للفضاء
+        */
+
+        document.getElementById(
+            "popupIcon"
+        ).textContent =
+            "🎉🚀⭐";
+
+
+        return true;
+
+    }
+
+
+    /* =================================================
+       CARS
+    ================================================= */
+
+    if(
+        normalizedInterest === "سيارات" ||
+        normalizedInterest === "سيارة" ||
+        normalizedInterest === "cars" ||
+        normalizedInterest === "car"
+    ){
+
+        /*
+           خلفية السيارات
+        */
+
+        page.style.backgroundImage =
+            "url('images/sc3.jpeg')";
+
+
+        /*
+           طفل العصير
+        */
+
+        juiceImage.src =
+            "images/s33c.png";
+
+
+        /*
+           طفل التفاحة
+        */
+
+        appleImage.src =
+            "images/s3c.png";
+
+
+        /*
+           أيقونة التلميح
+        */
+
+        juiceHintIcon.textContent =
+            "🚗";
+
+        appleHintIcon.textContent =
+            "🚗";
+
+
+        /*
+           Popup مناسب للسيارات
+        */
+
+        document.getElementById(
+            "popupIcon"
+        ).textContent =
+            "🎉🚗🏎️";
+
+
+        return true;
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =====================================================
+   LOAD CHILD INTEREST FROM SUPABASE
+===================================================== */
+
+async function loadChildInterest(){
+
+    /*
+       لا يوجد ID:
+       الصفحة تبقى ظاهرة.
+    */
+
+    if(!childId){
+
+        console.error(
+            "لا يوجد rafiqChildId في localStorage."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+
+                .from("children")
+
+                .select("interests")
+
+                .eq(
+                    "id",
+                    childId
+                )
+
+                .maybeSingle();
+
+
+        /* =============================================
+           SUPABASE ERROR
+        ============================================= */
+
+        if(error){
+
+            console.error(
+                "تعذر جلب interests:",
+                error
+            );
+
+            /*
+               لا نخفي الصفحة
+            */
+
+            return;
+
+        }
+
+
+        /* =============================================
+           CHILD NOT FOUND
+        ============================================= */
+
+        if(!data){
+
+            console.error(
+                "لم يتم العثور على الطفل."
+            );
+
+            return;
+
+        }
+
+
+        /* =============================================
+           NO INTEREST
+        ============================================= */
+
+        if(
+            data.interests === null ||
+            data.interests === undefined ||
+            String(
+                data.interests
+            ).trim() === ""
+        ){
+
+            console.error(
+                "لا يوجد interests محفوظ للطفل."
+            );
+
+            return;
+
+        }
+
+
+        /* =============================================
+           SAVE INTEREST
+        ============================================= */
+
+        interest =
+            String(
+                data.interests
+            )
+            .trim()
+            .toLowerCase();
+
+
+        console.log(
+            "Child ID:",
+            childId
+        );
+
+        console.log(
+            "Child interest:",
+            interest
+        );
+
+
+        /* =============================================
+           APPLY THEME
+        ============================================= */
+
+        const applied =
+            applyTheme();
+
+
+        if(!applied){
+
+            console.error(
+                "قيمة interests غير مدعومة:",
+                interest
+            );
+
+            return;
+
+        }
+
+
+        console.log(
+            "تم تطبيق تخصيص الصفحة بنجاح."
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "حدث خطأ أثناء الاتصال بـ Supabase:",
+            error
+        );
+
+        /*
+           الصفحة لا تختفي
+        */
+
+    }
+
+}
+
+
+/* =====================================================
+   START PERSONALIZATION
+===================================================== */
+
+loadChildInterest();
+
+
+/* =====================================================
+   QUESTIONS
+===================================================== */
+
+const questions = [
+
+    {
+
+        question:
+            "ماذا تريد أن تشرب؟",
+
+        number:
+            "السؤال الأول",
+
+        correct:
+            "juice",
+
+        hint:
+            "تذكّر... ماذا نشرب؟"
+
+    },
+
+    {
+
+        question:
+            "ماذا تريد أن تأكل؟",
+
+        number:
+            "السؤال الثاني",
+
+        correct:
+            "apple",
+
+        hint:
+            "تذكّر... ماذا نأكل؟"
+
+    }
+
+];
+
+
+let currentQuestion = 0;
+
+let answeredCorrectly = false;
+
+
+/* =====================================================
+   SPEECH
+===================================================== */
+
+function speak(text){
+
+    if(
+        !("speechSynthesis" in window)
+    ){
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+
+    utterance.lang =
+        "ar-SA";
+
+    utterance.rate =
+        0.82;
+
+    utterance.pitch =
+        1.05;
+
+    utterance.volume =
+        1;
+
+
+    window.speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+
+/* =====================================================
+   SPEAK QUESTION
+===================================================== */
+
+function speakQuestion(){
+
+    speak(
+        questions[
+            currentQuestion
+        ].question
+    );
+
+}
+
+
+/* =====================================================
+   HIDE HINT
+===================================================== */
+
+function hideHint(){
+
+    juiceChild.classList.remove(
+        "hint"
+    );
+
+    appleChild.classList.remove(
+        "hint"
+    );
+
+    hintMessage.classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   SHOW HINT
+===================================================== */
+
+function showHint(){
+
+    const correct =
+        questions[
+            currentQuestion
+        ].correct;
+
+
+    let correctChild;
+
+
+    if(
+        correct === "juice"
+    ){
+
+        correctChild =
+            juiceChild;
+
+    }else{
+
+        correctChild =
+            appleChild;
+
+    }
+
+
+    hideHint();
+
+
+    correctChild.classList.add(
+        "hint"
+    );
+
+
+    hintMessage.textContent =
+        questions[
+            currentQuestion
+        ].hint;
+
+
+    hintMessage.classList.add(
+        "show"
+    );
+
+
+    speak(
+        questions[
+            currentQuestion
+        ].hint
+    );
+
+
+    setTimeout(
+        function(){
+
+            correctChild.classList.remove(
+                "hint"
+            );
+
+            hintMessage.classList.remove(
+                "show"
+            );
+
+        },
+        3500
+    );
+
+}
+
+
+/* =====================================================
+   SHOW QUESTION
+===================================================== */
+
+function showQuestion(){
+
+    const data =
+        questions[
+            currentQuestion
+        ];
+
+
+    question.textContent =
+        data.question;
+
+
+    questionNumber.textContent =
+        data.number;
+
+
+    progress.textContent =
+        "⭐ " +
+        (
+            currentQuestion + 1
+        ) +
+        " من 2";
+
+
+    answeredCorrectly =
+        false;
+
+
+    nextButton.classList.add(
+        "disabled"
+    );
+
+
+    juiceChild.classList.remove(
+        "selected",
+        "correct",
+        "wrong",
+        "hint"
+    );
+
+
+    appleChild.classList.remove(
+        "selected",
+        "correct",
+        "wrong",
+        "hint"
+    );
+
+
+    hideHint();
+
+
+    setTimeout(
+        speakQuestion,
+        500
+    );
+
+}
+
+
+/* =====================================================
+   CAR BALLOON DECORATIONS
+===================================================== */
+
+function createCarDecorations(){
+
+    decorationLayer.innerHTML =
+        "";
+
+
+    const cars = [
+
+        "🚗",
+        "🏎️",
+        "🚙",
+        "🚕",
+        "🚓",
+        "🚐",
+        "🚗",
+        "🏎️",
+        "🚙",
+        "🚕",
+        "🚗",
+        "🏁"
+
+    ];
+
+
+    for(
+        let i = 0;
+        i < 18;
+        i++
+    ){
+
+        const balloon =
+            document.createElement(
+                "div"
+            );
+
+
+        balloon.className =
+            "car-balloon";
+
+
+        balloon.style.left =
+            (
+                1 +
+                Math.random() * 96
+            ) +
+            "%";
+
+
+        balloon.style.animationDelay =
+            (
+                Math.random() * 1.2
+            ) +
+            "s";
+
+
+        const body =
+            document.createElement(
+                "div"
+            );
+
+
+        body.className =
+            "car-balloon-body";
+
+
+        body.textContent =
+            cars[
+                i % cars.length
+            ];
+
+
+        const knot =
+            document.createElement(
+                "div"
+            );
+
+
+        knot.className =
+            "car-balloon-knot";
+
+
+        const string =
+            document.createElement(
+                "div"
+            );
+
+
+        string.className =
+            "car-balloon-string";
+
+
+        balloon.appendChild(
+            body
+        );
+
+
+        balloon.appendChild(
+            knot
+        );
+
+
+        balloon.appendChild(
+            string
+        );
+
+
+        decorationLayer.appendChild(
+            balloon
+        );
+
+    }
+
+
+    setTimeout(
+        function(){
+
+            decorationLayer.innerHTML =
+                "";
+
+        },
+        6200
+    );
+
+}
+
+
+/* =====================================================
+   SPACE DECORATIONS
+===================================================== */
+
+function createSpaceDecorations(){
+
+    decorationLayer.innerHTML =
+        "";
+
+
+    const items = [
+
+        "🚀",
+        "⭐",
+        "🌟",
+        "🪐",
+        "🌙",
+        "☄️",
+        "✨",
+        "🌎",
+        "🚀",
+        "⭐",
+        "🌟",
+        "✨"
+
+    ];
+
+
+    for(
+        let i = 0;
+        i < 18;
+        i++
+    ){
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "space-item";
+
+
+        item.textContent =
+            items[
+                i % items.length
+            ];
+
+
+        item.style.left =
+            (
+                2 +
+                Math.random() * 96
+            ) +
+            "%";
+
+
+        item.style.animationDelay =
+            (
+                Math.random() * 1.2
+            ) +
+            "s";
+
+
+        item.style.fontSize =
+            (
+                42 +
+                Math.random() * 25
+            ) +
+            "px";
+
+
+        decorationLayer.appendChild(
+            item
+        );
+
+    }
+
+
+    setTimeout(
+        function(){
+
+            decorationLayer.innerHTML =
+                "";
+
+        },
+        6000
+    );
+
+}
+
+
+/* =====================================================
+   DECORATION
+===================================================== */
+
+function createDecorations(){
+
+    const normalizedInterest =
+        String(
+            interest || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    if(
+        normalizedInterest === "فضاء" ||
+        normalizedInterest === "space"
+    ){
+
+        createSpaceDecorations();
+
+        return;
+
+    }
+
+
+    if(
+        normalizedInterest === "سيارات" ||
+        normalizedInterest === "سيارة" ||
+        normalizedInterest === "cars" ||
+        normalizedInterest === "car"
+    ){
+
+        createCarDecorations();
+
+    }
+
+}
+
+
+/* =====================================================
+   SELECT CHILD
+===================================================== */
+
+function selectChild(
+    selected,
+    type
+){
+
+    if(
+        answeredCorrectly
+    ){
+
+        return;
+
+    }
+
+
+    const correct =
+        questions[
+            currentQuestion
+        ].correct;
+
+
+    hideHint();
+
+
+    juiceChild.classList.remove(
+        "selected",
+        "wrong",
+        "correct"
+    );
+
+    appleChild.classList.remove(
+        "selected",
+        "wrong",
+        "correct"
+    );
+
+
+    selected.classList.add(
+        "selected"
+    );
+
+
+    /* =================================================
+       CORRECT
+    ================================================= */
+
+    if(
+        type === correct
+    ){
+
+        answeredCorrectly =
+            true;
+
+
+        selected.classList.add(
+            "correct"
+        );
+
+
+        speak(
+            "أحسنت! إجابة صحيحة"
+        );
+
+
+        createDecorations();
+
+
+        nextButton.classList.remove(
+            "disabled"
+        );
+
+    }
+
+
+    /* =================================================
+       WRONG
+    ================================================= */
+
+    else{
+
+        selected.classList.add(
+            "wrong"
+        );
+
+
+        speak(
+            "حاول مرة أخرى"
+        );
+
+
+        setTimeout(
+            function(){
+
+                showHint();
+
+            },
+            400
+        );
+
+
+        setTimeout(
+            function(){
+
+                selected.classList.remove(
+                    "wrong"
+                );
+
+            },
+            450
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CHILD CLICK
+===================================================== */
+
+juiceChild.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target.closest(
+                ".mic"
+            )
+        ){
+
+            return;
+
+        }
+
+
+        selectChild(
+            juiceChild,
+            "juice"
+        );
+
+    }
+);
+
+
+appleChild.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target.closest(
+                ".mic"
+            )
+        ){
+
+            return;
+
+        }
+
+
+        selectChild(
+            appleChild,
+            "apple"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   SENTENCE CLICK
+===================================================== */
+
+juiceSentence.addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        selectChild(
+            juiceChild,
+            "juice"
+        );
+
+    }
+);
+
+
+appleSentence.addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        selectChild(
+            appleChild,
+            "apple"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   MICROPHONES
+===================================================== */
+
+document.getElementById(
+    "juiceMic"
+).addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        speak(
+            "أريد عصير"
+        );
+
+    }
+);
+
+
+document.getElementById(
+    "appleMic"
+).addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        speak(
+            "أريد تفاحة"
+        );
+
+    }
+);
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+nextButton.addEventListener(
+    "click",
+    function(){
+
+        if(
+            !answeredCorrectly
+        ){
+
+            return;
+
+        }
+
+
+        if(
+            currentQuestion === 0
+        ){
+
+            currentQuestion = 1;
+
+            showQuestion();
+
+            return;
+
+        }
+
+
+        finishStage();
+
+    }
+);
+
+
+/* =====================================================
+   FINISH STAGE
+===================================================== */
+
+function finishStage(){
+
+    localStorage.setItem(
+        "rafiqFoodStage3",
+        "completed"
+    );
+
+
+    localStorage.setItem(
+        "rafiqFoodStage4",
+        "unlocked"
+    );
+
+
+    speak(
+        "أحسنت! انتهينا من هذه المرحلة. هيا بنا إلى المرحلة التالية."
+    );
+
+
+    overlay.style.display =
+        "flex";
+
+}
+
+
+/* =====================================================
+   CLOSE POPUP
+===================================================== */
+
+closePopup.addEventListener(
+    "click",
+    function(){
+
+        location.href =
+            "food-game.html";
+
+    }
+);
+
+
+/* =====================================================
+   POPUP OUTSIDE
+===================================================== */
+
+overlay.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target === overlay
+        ){
+
+            overlay.style.display =
+                "none";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+showQuestion();
+
+
+/* =====================================================
+   FIRST INTERACTION VOICE
+===================================================== */
+
+let firstInteraction =
+    false;
+
+
+document.addEventListener(
+    "touchstart",
+    function(){
+
+        if(
+            !firstInteraction
+        ){
+
+            firstInteraction =
+                true;
+
+            setTimeout(
+                speakQuestion,
+                150
+            );
+
+        }
+
+    },
+    {
+        passive:true
+    }
+);
+
+
+/* =====================================================
+   STOP VOICE
+===================================================== */
+
+window.addEventListener(
+    "beforeunload",
+    function(){
+
+        if(
+            "speechSynthesis" in window
+        ){
+
+            window.speechSynthesis.cancel();
+
+        }
+
+    }
+);
+
+</script>
+
+</div>
+
+</body>
+
+</html>

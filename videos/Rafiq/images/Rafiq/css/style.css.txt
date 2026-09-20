@@ -1,0 +1,564 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+}
+
+
+/* ===================================
+   شاشة التطبيق
+   iPad Portrait
+   1024 × 1366
+   =================================== */
+
+body {
+    background: #dceff7;
+}
+
+.ipad {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    min-height: 100vh;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* ===================================
+   الخلفية
+   =================================== */
+
+.background {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    z-index: 0;
+}
+
+
+/* ===================================
+   شفافية فوق الخلفية
+   =================================== */
+
+.overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.08
+        );
+
+    z-index: 1;
+}
+
+
+/* ===================================
+   البطاقة الشفافة
+   =================================== */
+
+.login-card {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 720px;
+
+    height: 1150px;
+
+    padding:
+
+        45px
+        65px
+        45px
+        65px;
+
+    border-radius: 45px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.58
+        );
+
+    border:
+        2px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.75
+        );
+
+    box-shadow:
+        0 20px 60px
+        rgba(
+            70,
+            90,
+            100,
+            0.15
+        );
+
+    backdrop-filter:
+        blur(7px);
+
+    -webkit-backdrop-filter:
+        blur(7px);
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+/* ===================================
+   اللوقو
+   =================================== */
+
+.team-logo {
+
+    width: 300px;
+
+    height: auto;
+
+    object-fit: contain;
+
+    margin-bottom: 5px;
+}
+
+
+/* ===================================
+   العبارة
+   =================================== */
+
+.tagline {
+
+    font-size: 28px;
+
+    color: #5d5d5d;
+
+    margin-bottom: 45px;
+
+    text-align: center;
+}
+
+
+/* ===================================
+   الحقول
+   =================================== */
+
+.input-box {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 82px;
+
+    margin-bottom: 20px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.92
+        );
+
+    border:
+        1.5px solid
+        rgba(
+            120,
+            120,
+            120,
+            0.25
+        );
+
+    border-radius: 24px;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+.input-box input {
+
+    width: 100%;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    direction: rtl;
+
+    text-align: right;
+
+    font-family: inherit;
+
+    font-size: 24px;
+
+    color: #444;
+
+    padding:
+        0 75px 0 65px;
+}
+
+
+.input-box input::placeholder {
+
+    color: #777;
+
+    opacity: 1;
+}
+
+
+.input-icon {
+
+    position: absolute;
+
+    right: 25px;
+
+    font-size: 28px;
+
+    color: #777;
+}
+
+
+.eye {
+
+    position: absolute;
+
+    left: 18px;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    padding: 10px;
+}
+
+
+/* ===================================
+   نسيت كلمة المرور
+   =================================== */
+
+.forgot {
+
+    align-self: flex-start;
+
+    background: none;
+
+    border: none;
+
+    color: #267fc4;
+
+    font-family: inherit;
+
+    font-size: 21px;
+
+    cursor: pointer;
+
+    margin:
+        0
+        0
+        28px
+        0;
+}
+
+
+/* ===================================
+   تسجيل الدخول
+   =================================== */
+
+.login {
+
+    width: 100%;
+
+    height: 78px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    background: #c78391;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 29px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 18px
+        rgba(
+            160,
+            90,
+            105,
+            0.20
+        );
+
+    transition:
+        transform 0.15s;
+}
+
+
+.login:active {
+
+    transform: scale(0.98);
+}
+
+
+/* ===================================
+   أو
+   =================================== */
+
+.divider {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    margin:
+        28px
+        0
+        25px;
+}
+
+
+.divider span {
+
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        rgba(
+            90,
+            90,
+            90,
+            0.3
+        );
+}
+
+
+.divider b {
+
+    font-size: 22px;
+
+    font-weight: normal;
+
+    color: #555;
+}
+
+
+/* ===================================
+   Apple / Google
+   =================================== */
+
+.social-row {
+
+    width: 100%;
+
+    display: flex;
+
+    gap: 20px;
+}
+
+
+.social {
+
+    flex: 1;
+
+    height: 75px;
+
+    border: none;
+
+    border-radius: 23px;
+
+    background: white;
+
+    font-size: 23px;
+
+    font-weight: 600;
+
+    color: #333;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px
+        rgba(
+            0,
+            0,
+            0,
+            0.06
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 12px;
+}
+
+
+.apple {
+
+    font-size: 25px;
+
+    color: #111;
+}
+
+
+.google {
+
+    font-size: 27px;
+
+    font-weight: bold;
+
+    color: #4285F4;
+}
+
+
+/* ===================================
+   إنشاء حساب
+   =================================== */
+
+.create-account {
+
+    margin-top: 40px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    font-size: 22px;
+
+    color: #555;
+
+    text-align: center;
+}
+
+
+.create-account button {
+
+    border: none;
+
+    background: none;
+
+    color: #c78391;
+
+    font-family: inherit;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* ===================================
+   الشاشات الأصغر
+   =================================== */
+
+@media (max-width: 800px) {
+
+    .login-card {
+
+        width: 90vw;
+
+        height: 90vh;
+
+        padding:
+            35px
+            45px;
+    }
+
+    .team-logo {
+
+        width: 240px;
+    }
+
+    .tagline {
+
+        font-size: 23px;
+    }
+
+    .input-box {
+
+        height: 70px;
+    }
+
+    .input-box input {
+
+        font-size: 20px;
+    }
+
+    .login {
+
+        height: 68px;
+
+        font-size: 25px;
+    }
+}

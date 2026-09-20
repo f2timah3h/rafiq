@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>رفيق - الأشكال</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+
+    margin:0;
+    padding:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    font-family:"Tahoma","Arial",sans-serif;
+
+    direction:rtl;
+}
+
+body{
+
+    color:#173d68;
+
+    background:#e4f2ff;
+
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    /*
+       مهم:
+       الصفحة تكون مخفية مؤقتًا حتى نعرف الثيم
+       الصحيح من قاعدة البيانات.
+    */
+
+    visibility:hidden;
+
+}
+
+
+/* =====================================================
+   PREVIOUS BUTTON
+===================================================== */
+
+.previous-button{
+
+    position:absolute;
+
+    top:20px;
+    left:20px;
+
+    width:58px;
+    height:52px;
+
+    border:none;
+
+    border-radius:19px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:30px;
+
+    font-weight:900;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 6px 16px
+        rgba(55,104,140,.18);
+
+    cursor:pointer;
+
+    z-index:1000;
+
+    transition:.2s ease;
+}
+
+.previous-button:active{
+
+    transform:scale(.92);
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-button{
+
+    position:absolute;
+
+    top:20px;
+    right:20px;
+
+    width:58px;
+    height:52px;
+
+    border:none;
+
+    border-radius:19px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:27px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 6px 16px
+        rgba(55,104,140,.18);
+
+    cursor:pointer;
+
+    z-index:1000;
+
+    transition:.2s ease;
+}
+
+.menu-button:active{
+
+    transform:scale(.92);
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu{
+
+    position:absolute;
+
+    top:82px;
+    right:20px;
+
+    width:220px;
+
+    padding:17px;
+
+    background:rgba(255,255,255,.97);
+
+    border-radius:24px;
+
+    box-shadow:
+        0 10px 28px
+        rgba(0,0,0,.18);
+
+    display:none;
+
+    z-index:1100;
+}
+
+.side-menu.show{
+
+    display:block;
+
+    animation:
+        menuIn
+        .22s
+        ease;
+}
+
+@keyframes menuIn{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(-8px)
+            scale(.96);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+.side-menu button{
+
+    width:100%;
+
+    height:50px;
+
+    margin-bottom:10px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-family:inherit;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.side-menu button:last-child{
+
+    margin-bottom:0;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.content{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    z-index:20;
+
+    pointer-events:none;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title-row{
+
+    position:absolute;
+
+    top:72px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:14px;
+
+    direction:rtl;
+
+    pointer-events:auto;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title{
+
+    margin:0;
+
+    color:#173d68;
+
+    font-size:42px;
+
+    font-weight:900;
+
+    text-shadow:
+        0 4px 8px
+        rgba(40,80,110,.10);
+}
+
+
+/* =====================================================
+   SOUND BUTTON
+===================================================== */
+
+.sound-button{
+
+    width:58px;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#e4f2ff;
+
+    color:#397bab;
+
+    font-size:29px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(55,104,140,.18);
+
+    transition:.2s ease;
+}
+
+.sound-button:active{
+
+    transform:scale(.88);
+
+    background:#cce8fb;
+}
+
+.sound-button.speaking{
+
+    animation:
+        speakerPulse
+        .7s
+        ease-in-out
+        infinite;
+}
+
+@keyframes speakerPulse{
+
+    0%,
+    100%{
+
+        transform:scale(1);
+    }
+
+    50%{
+
+        transform:scale(1.12);
+    }
+}
+
+
+/* =====================================================
+   CIRCLE
+===================================================== */
+
+.shape-area{
+
+    position:absolute;
+
+    top:155px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    width:330px;
+
+    height:330px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    pointer-events:auto;
+}
+
+
+.shape-image{
+
+    width:330px;
+
+    height:330px;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 12px 18px
+            rgba(40,80,110,.18)
+        );
+
+    animation:
+        circleFloat
+        2.8s
+        ease-in-out
+        infinite;
+
+    transition:.25s ease;
+}
+
+
+/* =====================================================
+   CIRCLE MOVEMENT
+===================================================== */
+
+@keyframes circleFloat{
+
+    0%,
+    100%{
+
+        transform:
+            translateY(0)
+            scale(1)
+            rotate(-2deg);
+    }
+
+    50%{
+
+        transform:
+            translateY(-12px)
+            scale(1.035)
+            rotate(2deg);
+    }
+}
+
+
+/* =====================================================
+   CHILD AREA
+===================================================== */
+
+.child-area{
+
+    position:absolute;
+
+    left:-10px;
+
+    bottom:-95px;
+
+    width:900px;
+
+    height:900px;
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
+    pointer-events:none;
+
+    z-index:30;
+}
+
+
+/* =====================================================
+   CHILD
+===================================================== */
+
+.child{
+
+    width:1000px;
+
+    height:1000px;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 14px 18px
+            rgba(40,80,110,.25)
+        );
+
+    user-select:none;
+
+    pointer-events:none;
+
+    animation:none;
+
+    transform:none;
+}
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.next-button{
+
+    position:absolute;
+
+    right:25px;
+
+    bottom:20px;
+
+    min-width:145px;
+
+    height:57px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-family:inherit;
+
+    font-size:20px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 7px 18px
+        rgba(55,104,140,.17);
+
+    cursor:pointer;
+
+    z-index:500;
+
+    transition:.2s ease;
+}
+
+.next-button:active{
+
+    transform:scale(.94);
+}
+
+
+/* =====================================================
+   PORTRAIT IPAD
+===================================================== */
+
+@media (orientation:portrait){
+
+    .previous-button{
+
+        top:16px;
+
+        left:16px;
+
+        width:52px;
+
+        height:48px;
+
+        font-size:27px;
+    }
+
+    .menu-button{
+
+        top:16px;
+
+        right:16px;
+
+        width:52px;
+
+        height:48px;
+    }
+
+
+    .title-row{
+
+        top:68px;
+    }
+
+    .title{
+
+        font-size:38px;
+    }
+
+    .sound-button{
+
+        width:54px;
+
+        height:54px;
+
+        font-size:27px;
+    }
+
+
+    .shape-area{
+
+        top:145px;
+
+        width:320px;
+
+        height:320px;
+    }
+
+    .shape-image{
+
+        width:320px;
+
+        height:320px;
+    }
+
+
+    .child-area{
+
+        left:-85px;
+
+        bottom:-95px;
+
+        width:1000px;
+
+        height:1000px;
+    }
+
+    .child{
+
+        width:1000px;
+
+        height:1000px;
+
+        animation:none;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL HEIGHT
+===================================================== */
+
+@media (max-height:900px){
+
+    .title-row{
+
+        top:60px;
+    }
+
+    .title{
+
+        font-size:32px;
+    }
+
+    .sound-button{
+
+        width:50px;
+
+        height:50px;
+
+        font-size:25px;
+    }
+
+    .shape-area{
+
+        top:125px;
+
+        width:270px;
+
+        height:270px;
+    }
+
+    .shape-image{
+
+        width:270px;
+
+        height:270px;
+    }
+
+    .child-area{
+
+        left:-90px;
+
+        bottom:-110px;
+
+        width:1000px;
+
+        height:1000px;
+    }
+
+    .child{
+
+        width:1000px;
+
+        height:1000px;
+
+        animation:none;
+    }
+
+}
+
+
+/* =====================================================
+   VERY SMALL HEIGHT
+===================================================== */
+
+@media (max-height:750px){
+
+    .title-row{
+
+        top:52px;
+    }
+
+    .title{
+
+        font-size:27px;
+    }
+
+    .sound-button{
+
+        width:46px;
+
+        height:46px;
+
+        font-size:23px;
+    }
+
+    .shape-area{
+
+        top:105px;
+
+        width:220px;
+
+        height:220px;
+    }
+
+    .shape-image{
+
+        width:220px;
+
+        height:220px;
+    }
+
+
+    .child-area{
+
+        left:-100px;
+
+        bottom:-120px;
+
+        width:1000px;
+
+        height:1000px;
+    }
+
+    .child{
+
+        width:1000px;
+
+        height:1000px;
+
+        animation:none;
+    }
+
+
+    .next-button{
+
+        height:48px;
+
+        min-width:120px;
+
+        font-size:17px;
+
+        bottom:13px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div
+    class="page"
+    id="page">
+
+
+<!-- =====================================================
+     PREVIOUS
+===================================================== -->
+
+<button
+    class="previous-button"
+    id="previousButton"
+    aria-label="السابق">
+
+    ←
+
+</button>
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton"
+    aria-label="القائمة">
+
+    ☰
+
+</button>
+
+
+<!-- =====================================================
+     SIDE MENU
+===================================================== -->
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+    <button
+        onclick="location.href='home.html'">
+
+        🏠 الرئيسية
+
+    </button>
+
+    <button
+        onclick="location.href='reports.html'">
+
+        📊 تقاريري
+
+    </button>
+
+    <button
+        onclick="location.href='profile.html'">
+
+        👤 ملفي
+
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div class="content">
+
+
+    <div class="title-row">
+
+        <h1 class="title">
+
+            دائرة
+
+        </h1>
+
+
+        <button
+            class="sound-button"
+            id="soundButton"
+            aria-label="استمع إلى كلمة دائرة">
+
+            🔊
+
+        </button>
+
+    </div>
+
+
+    <div class="shape-area">
+
+        <img
+            id="shapeImage"
+            class="shape-image"
+            src="images/Adaa.png"
+            alt="شكل الدائرة">
+
+    </div>
+
+
+    <div class="child-area">
+
+        <img
+            id="childImage"
+            class="child"
+            src="images/ad3.png"
+            alt="طفل">
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     NEXT
+===================================================== -->
+
+<button
+    class="next-button"
+    id="nextButton">
+
+    التالي
+
+</button>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE CONNECTION
+===================================================== */
+
+const SUPABASE_URL =
+    "https://ciwrwmutcrarwtounelg.supabase.co";
+
+
+/*
+   خلي نفس Publishable Key الموجود عندك.
+*/
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const page =
+    document.getElementById(
+        "page"
+    );
+
+const childImage =
+    document.getElementById(
+        "childImage"
+    );
+
+const soundButton =
+    document.getElementById(
+        "soundButton"
+    );
+
+const nextButton =
+    document.getElementById(
+        "nextButton"
+    );
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const sideMenu =
+    document.getElementById(
+        "sideMenu"
+    );
+
+const previousButton =
+    document.getElementById(
+        "previousButton"
+    );
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+menuButton.addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        sideMenu.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            !sideMenu.contains(
+                event.target
+            ) &&
+            event.target !== menuButton
+        ){
+
+            sideMenu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   PREVIOUS
+===================================================== */
+
+previousButton.addEventListener(
+    "click",
+    function(){
+
+        location.href =
+            "games.html";
+
+    }
+);
+
+
+/* =====================================================
+   CURRENT CHILD
+===================================================== */
+
+const childId =
+    localStorage.getItem(
+        "rafiqChildId"
+    );
+
+
+console.log(
+    "Shapes - Current Child ID:",
+    childId
+);
+
+
+/* =====================================================
+   THEME
+===================================================== */
+
+let interest = null;
+
+
+/* =====================================================
+   APPLY PERSONALIZATION
+===================================================== */
+
+function applyPersonalization(){
+
+    /*
+       سيارات
+    */
+
+    if(
+        interest === "سيارات"
+    ){
+
+        page.style.backgroundImage =
+            "url('images/car4.jpeg')";
+
+        childImage.src =
+            "images/ad3.png";
+
+        childImage.alt =
+            "طفل مع السيارات";
+
+        console.log(
+            "Shapes Theme: CAR"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       فضاء
+    */
+
+    if(
+        interest === "فضاء"
+    ){
+
+        page.style.backgroundImage =
+            "url('images/spao.jpeg')";
+
+        childImage.src =
+            "images/ad2.png";
+
+        childImage.alt =
+            "طفل مع الفضاء";
+
+        console.log(
+            "Shapes Theme: SPACE"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       في حال عدم وجود قيمة
+       نستخدم سيارات.
+    */
+
+    interest =
+        "سيارات";
+
+    page.style.backgroundImage =
+        "url('images/car4.jpeg')";
+
+    childImage.src =
+        "images/ad3.png";
+
+}
+
+
+/* =====================================================
+   WAIT FOR IMAGES
+===================================================== */
+
+function waitForImage(src){
+
+    return new Promise(
+        function(resolve){
+
+            const img =
+                new Image();
+
+            img.onload =
+                function(){
+
+                    resolve();
+
+                };
+
+            img.onerror =
+                function(){
+
+                    resolve();
+
+                };
+
+            img.src =
+                src;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SHOW PAGE AFTER THEME IS READY
+===================================================== */
+
+async function showPageAfterTheme(){
+
+    let backgroundSrc;
+    let childSrc;
+
+
+    if(
+        interest === "فضاء"
+    ){
+
+        backgroundSrc =
+            "images/spao.jpeg";
+
+        childSrc =
+            "images/ad2.png";
+
+    }
+
+    else{
+
+        backgroundSrc =
+            "images/car4.jpeg";
+
+        childSrc =
+            "images/ad3.png";
+
+    }
+
+
+    await Promise.all([
+
+        waitForImage(
+            backgroundSrc
+        ),
+
+        waitForImage(
+            childSrc
+        )
+
+    ]);
+
+
+    applyPersonalization();
+
+
+    /*
+       إظهار الصفحة فقط بعد
+       تحديد الثيم وتحميل الصور.
+    */
+
+    page.style.visibility =
+        "visible";
+
+
+    console.log(
+        "Shapes page ready:",
+        interest
+    );
+
+}
+
+
+/* =====================================================
+   LOAD CHILD INTEREST FROM SUPABASE
+===================================================== */
+
+async function loadChildInterest(){
+
+    /*
+       إذا ما عندنا ID
+    */
+
+    if(!childId){
+
+        console.warn(
+            "Shapes: لا يوجد rafiqChildId."
+        );
+
+        interest =
+            "سيارات";
+
+        await showPageAfterTheme();
+
+        return;
+    }
+
+
+    try{
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+
+            .from("children")
+
+            .select(
+                "id, interests"
+            )
+
+            .eq(
+                "id",
+                childId
+            )
+
+            .maybeSingle();
+
+
+        if(error){
+
+            console.error(
+                "Shapes Supabase Error:",
+                error
+            );
+
+            interest =
+                "سيارات";
+
+            await showPageAfterTheme();
+
+            return;
+        }
+
+
+        if(!data){
+
+            console.warn(
+                "لم يتم العثور على الطفل."
+            );
+
+            interest =
+                "سيارات";
+
+            await showPageAfterTheme();
+
+            return;
+        }
+
+
+        console.log(
+            "Shapes Child Data:",
+            data
+        );
+
+
+        /*
+           قراءة اهتمام الطفل
+        */
+
+        const savedInterest =
+            String(
+                data.interests || ""
+            )
+            .trim()
+            .toLowerCase();
+
+
+        /*
+           سيارات
+        */
+
+        if(
+            savedInterest === "سيارات" ||
+            savedInterest === "سيارة" ||
+            savedInterest === "car" ||
+            savedInterest === "cars"
+        ){
+
+            interest =
+                "سيارات";
+
+        }
+
+
+        /*
+           فضاء
+        */
+
+        else if(
+            savedInterest === "فضاء" ||
+            savedInterest === "space"
+        ){
+
+            interest =
+                "فضاء";
+
+        }
+
+
+        /*
+           أي قيمة أخرى
+        */
+
+        else{
+
+            interest =
+                "سيارات";
+
+        }
+
+
+        /*
+           الآن فقط نجهز الصفحة
+        */
+
+        await showPageAfterTheme();
+
+    }
+    catch(error){
+
+        console.error(
+            "Shapes Theme Error:",
+            error
+        );
+
+        interest =
+            "سيارات";
+
+        await showPageAfterTheme();
+
+    }
+
+}
+
+
+/* =====================================================
+   START PERSONALIZATION
+===================================================== */
+
+loadChildInterest();
+
+
+/* =====================================================
+   SPEECH
+===================================================== */
+
+function speak(text){
+
+    if(
+        !("speechSynthesis" in window)
+    ){
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+
+    utterance.lang =
+        "ar-SA";
+
+    utterance.rate =
+        0.82;
+
+    utterance.pitch =
+        1.05;
+
+    utterance.volume =
+        1;
+
+
+    utterance.onstart =
+        function(){
+
+            soundButton.classList.add(
+                "speaking"
+            );
+
+        };
+
+
+    utterance.onend =
+        function(){
+
+            soundButton.classList.remove(
+                "speaking"
+            );
+
+        };
+
+
+    utterance.onerror =
+        function(){
+
+            soundButton.classList.remove(
+                "speaking"
+            );
+
+        };
+
+
+    window.speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+
+/* =====================================================
+   SPEAK SHAPE
+===================================================== */
+
+function speakShape(){
+
+    speak(
+        "دائرة"
+    );
+
+}
+
+
+/* =====================================================
+   SOUND BUTTON
+===================================================== */
+
+soundButton.addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        speakShape();
+
+    }
+);
+
+
+/* =====================================================
+   AUTO SPEECH
+===================================================== */
+
+setTimeout(
+    function(){
+
+        speakShape();
+
+    },
+    600
+);
+
+
+/* =====================================================
+   FIRST IPAD INTERACTION
+===================================================== */
+
+let firstInteraction =
+    false;
+
+
+document.addEventListener(
+    "touchstart",
+    function(){
+
+        if(
+            !firstInteraction
+        ){
+
+            firstInteraction =
+                true;
+
+            setTimeout(
+                function(){
+
+                    speakShape();
+
+                },
+                150
+            );
+
+        }
+
+    },
+    {
+        passive:true,
+        once:true
+    }
+);
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+nextButton.addEventListener(
+    "click",
+    function(){
+
+        window.location.href =
+            "shapes-activities.html";
+
+    }
+);
+
+
+/* =====================================================
+   PRELOAD IMAGES
+===================================================== */
+
+const preloadImages = [
+
+    "images/Adaa.png",
+
+    "images/ad3.png",
+
+    "images/ad2.png",
+
+    "images/car4.jpeg",
+
+    "images/spao.jpeg"
+
+];
+
+
+preloadImages.forEach(
+    function(src){
+
+        const image =
+            new Image();
+
+        image.src =
+            src;
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

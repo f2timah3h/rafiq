@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>تعلم اللون الأحمر - رفيق</title>
+
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+}
+
+body {
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Arial,
+        sans-serif;
+
+    color: #40566d;
+
+    overflow-x: hidden;
+
+    background-color: #ffffff;
+
+    background-image:
+        url("images/redb.jpeg");
+
+    background-size:
+        100% auto;
+
+    background-position:
+        center bottom;
+
+    background-repeat:
+        no-repeat;
+
+    background-attachment:
+        fixed;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 100%;
+
+    min-height: 1366px;
+
+    /*
+       رفع المحتوى للأعلى حتى يكون
+       هناك مساحة واضحة أسفل البطاقات
+       للقلم
+    */
+
+    padding:
+        150px 35px 100px;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+
+    width:
+        900px;
+
+    max-width:
+        92vw;
+
+    margin:
+        0 auto;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+}
+
+
+/* =====================================================
+   LESSON
+===================================================== */
+
+.lesson {
+
+    position: relative;
+
+    width:
+        100%;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    text-align:
+        center;
+}
+
+
+/* =====================================================
+   PREVIOUS BUTTON
+===================================================== */
+
+.previous-button {
+
+    position:
+        fixed;
+
+    top:
+        35px;
+
+    left:
+        35px;
+
+    width:
+        155px;
+
+    height:
+        60px;
+
+    border:
+        none;
+
+    border-radius:
+        20px;
+
+    background:
+        #e4f2ff;
+
+    color:
+        #55718b;
+
+    font-family:
+        inherit;
+
+    font-size:
+        21px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(60,80,100,.18);
+
+    z-index:
+        1001;
+
+    transition:
+        .2s ease;
+}
+
+.previous-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        #d8edfc;
+}
+
+.previous-button:active {
+
+    transform:
+        scale(.96);
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-button {
+
+    position:
+        fixed;
+
+    top:
+        35px;
+
+    right:
+        35px;
+
+    width:
+        65px;
+
+    height:
+        65px;
+
+    border:
+        none;
+
+    border-radius:
+        22px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    color:
+        #55718b;
+
+    font-size:
+        31px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 7px 20px
+        rgba(60,80,100,.18);
+
+    z-index:
+        1000;
+
+    transition:
+        .2s ease;
+}
+
+.menu-button:hover {
+
+    transform:
+        translateY(-3px);
+}
+
+.menu-button:active {
+
+    transform:
+        scale(.95);
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu {
+
+    position:
+        fixed;
+
+    top:
+        115px;
+
+    right:
+        35px;
+
+    width:
+        245px;
+
+    padding:
+        18px;
+
+    border-radius:
+        28px;
+
+    background:
+        rgba(255,255,255,.97);
+
+    backdrop-filter:
+        blur(12px);
+
+    box-shadow:
+        0 12px 35px
+        rgba(60,80,100,.20);
+
+    transform:
+        translateX(130%);
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+    transition:
+        .3s ease;
+
+    z-index:
+        999;
+}
+
+.side-menu.show {
+
+    transform:
+        translateX(0);
+
+    opacity:
+        1;
+
+    pointer-events:
+        auto;
+}
+
+.side-menu button {
+
+    width:
+        100%;
+
+    height:
+        58px;
+
+    border:
+        none;
+
+    border-radius:
+        18px;
+
+    background:
+        transparent;
+
+    color:
+        #55718b;
+
+    font-family:
+        inherit;
+
+    font-size:
+        20px;
+
+    font-weight:
+        700;
+
+    text-align:
+        right;
+
+    padding:
+        0 18px;
+
+    margin-bottom:
+        8px;
+
+    cursor:
+        pointer;
+
+    transition:
+        .2s ease;
+}
+
+.side-menu button:hover {
+
+    background:
+        #e4f2ff;
+
+    transform:
+        translateX(-3px);
+}
+
+
+/* =====================================================
+   SPLASH AREA
+===================================================== */
+
+.splash-area {
+
+    position:
+        relative;
+
+    width:
+        300px;
+
+    height:
+        300px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin:
+        0 0 0;
+}
+
+
+/* =====================================================
+   RED SPLASH
+   300 × 300
+===================================================== */
+
+.red-splash {
+
+    width:
+        400px;
+
+    height:
+        400px;
+
+    object-fit:
+        contain;
+
+    display:
+        block;
+
+    animation:
+        splashFloat 3s ease-in-out infinite;
+}
+
+
+@keyframes splashFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50% {
+
+        transform:
+            translateY(-8px)
+            rotate(2deg);
+    }
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title {
+
+    margin:
+        0 0 8px;
+
+    color:
+        #d9364f;
+
+    font-size:
+        54px;
+
+    font-weight:
+        900;
+
+    line-height:
+        1.2;
+}
+
+
+/* =====================================================
+   SPEAKER
+===================================================== */
+
+.speaker-button {
+
+    width:
+        58px;
+
+    height:
+        58px;
+
+    margin:
+        5px 0 0;
+
+    border:
+        none;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,.92);
+
+    color:
+        #55718b;
+
+    font-size:
+        28px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 5px 15px
+        rgba(60,80,100,.14);
+
+    transition:
+        .2s ease;
+}
+
+.speaker-button:hover {
+
+    transform:
+        scale(1.08);
+}
+
+.speaker-button:active {
+
+    transform:
+        scale(.94);
+}
+
+
+/* =====================================================
+   INSTRUCTION
+===================================================== */
+
+.instruction {
+
+    margin:
+        18px 0 28px;
+
+    color:
+        #5f7488;
+
+    font-size:
+        24px;
+
+    font-weight:
+        800;
+}
+
+
+/* =====================================================
+   OBJECTS
+===================================================== */
+
+.objects {
+
+    width:
+        100%;
+
+    display:
+        flex;
+
+    flex-direction:
+        row;
+
+    direction:
+        rtl;
+
+    justify-content:
+        center;
+
+    align-items:
+        flex-start;
+
+    gap:
+        45px;
+
+    position:
+        relative;
+
+    z-index:
+        20;
+}
+
+
+/* =====================================================
+   OBJECT CARD
+===================================================== */
+
+.object-card {
+
+    width:
+        200px;
+
+    height:
+        220px;
+
+    border:
+        3px solid
+        rgba(255,255,255,.95);
+
+    border-radius:
+        30px;
+
+    background:
+        rgba(255,255,255,.62);
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 7px 20px
+        rgba(70,100,120,.12);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        background .22s ease;
+}
+
+.object-card:hover {
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        0 13px 27px
+        rgba(70,100,120,.18);
+}
+
+.object-card:active {
+
+    transform:
+        scale(.94);
+}
+
+
+/* =====================================================
+   OBJECT IMAGE
+===================================================== */
+
+.object-card img {
+
+    width:
+        160px;
+
+    height:
+        160px;
+
+    object-fit:
+        contain;
+
+    display:
+        block;
+}
+
+
+/* =====================================================
+   OBJECT NAME
+===================================================== */
+
+.object-name {
+
+    margin-top:
+        7px;
+
+    color:
+        #55718b;
+
+    font-size:
+        21px;
+
+    font-weight:
+        800;
+}
+
+
+/* =====================================================
+   ACTIVE OBJECT
+===================================================== */
+
+.object-card.playing {
+
+    background:
+        rgba(255,235,238,.95);
+
+    border-color:
+        #e98595;
+
+    transform:
+        scale(1.05);
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.message {
+
+    min-height:
+        38px;
+
+    margin:
+        15px 0 0;
+
+    color:
+        #d14b60;
+
+    font-size:
+        22px;
+
+    font-weight:
+        800;
+
+    opacity:
+        0;
+
+    transition:
+        opacity .25s ease;
+
+    position:
+        relative;
+
+    z-index:
+        30;
+}
+
+.message.show {
+
+    opacity:
+        1;
+}
+
+
+/* =====================================================
+   PENCIL
+   300 × 300
+   أسفل البطاقات جهة اليسار
+===================================================== */
+
+.pencil {
+
+    position:
+        absolute;
+
+    width:
+        300px;
+
+    height:
+        300px;
+
+    object-fit:
+        contain;
+
+    /*
+       جهة اليسار
+       وأسفل بطاقات الأمثلة
+    */
+
+    left:
+        5px;
+
+    top:
+        720px;
+
+    z-index:
+        15;
+
+    pointer-events:
+        none;
+
+    animation:
+        pencilMove 2.5s ease-in-out infinite;
+}
+
+
+@keyframes pencilMove {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(-5deg);
+    }
+
+    50% {
+
+        transform:
+            translateY(-12px)
+            rotate(5deg);
+    }
+}
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.next-button {
+
+    width:
+        170px;
+
+    height:
+        64px;
+
+    margin:
+        25px 0 0;
+
+    border:
+        none;
+
+    border-radius:
+        20px;
+
+    background:
+        #e4f2ff;
+
+    color:
+        #55718b;
+
+    font-family:
+        inherit;
+
+    font-size:
+        23px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(60,80,100,.18);
+
+    transition:
+        .2s ease;
+
+    position:
+        relative;
+
+    z-index:
+        40;
+}
+
+.next-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        #d8edfc;
+}
+
+.next-button:active {
+
+    transform:
+        scale(.96);
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 767px) {
+
+    .page {
+
+        min-height:
+            100vh;
+
+        padding:
+            90px 15px 80px;
+    }
+
+
+    .content {
+
+        max-width:
+            94vw;
+    }
+
+
+    .previous-button {
+
+        top:
+            20px;
+
+        left:
+            20px;
+
+        width:
+            125px;
+
+        height:
+            52px;
+
+        font-size:
+            18px;
+    }
+
+
+    .menu-button {
+
+        top:
+            20px;
+
+        right:
+            20px;
+
+        width:
+            55px;
+
+        height:
+            55px;
+
+        font-size:
+            27px;
+    }
+
+
+    .side-menu {
+
+        top:
+            90px;
+
+        right:
+            20px;
+
+        width:
+            220px;
+    }
+
+
+    .splash-area {
+
+        width:
+            180px;
+
+        height:
+            180px;
+    }
+
+
+    .red-splash {
+
+        width:
+            180px;
+
+        height:
+            180px;
+    }
+
+
+    .title {
+
+        font-size:
+            40px;
+    }
+
+
+    .speaker-button {
+
+        width:
+            50px;
+
+        height:
+            50px;
+
+        font-size:
+            24px;
+    }
+
+
+    .instruction {
+
+        font-size:
+            18px;
+
+        margin:
+            15px 0 25px;
+    }
+
+
+    .objects {
+
+        gap:
+            10px;
+    }
+
+
+    .object-card {
+
+        width:
+            105px;
+
+        height:
+            135px;
+
+        border-radius:
+            20px;
+    }
+
+
+    .object-card img {
+
+        width:
+            85px;
+
+        height:
+            85px;
+    }
+
+
+    .object-name {
+
+        font-size:
+            15px;
+    }
+
+
+    .message {
+
+        font-size:
+            18px;
+    }
+
+
+    .pencil {
+
+        width:
+            120px;
+
+        height:
+            120px;
+
+        left:
+            5px;
+
+        top:
+            600px;
+    }
+
+
+    .next-button {
+
+        width:
+            140px;
+
+        height:
+            54px;
+
+        font-size:
+            19px;
+    }
+
+}
+
+
+/* =====================================================
+   IPAD PORTRAIT
+   1024 × 1366
+===================================================== */
+
+@media
+(min-width: 768px)
+and (max-width: 1100px) {
+
+
+    .page {
+
+        min-height:
+            1366px;
+
+        /*
+           المحتوى أعلى من السابق
+           حتى يكون للقلم مساحة
+        */
+
+        padding:
+            150px 35px 100px;
+    }
+
+
+    .content {
+
+        width:
+            900px;
+
+        max-width:
+            92vw;
+    }
+
+
+    /* =================================================
+       SPLASH
+    ================================================= */
+
+    .splash-area {
+
+        width:
+            300px;
+
+        height:
+            300px;
+
+        margin:
+            0 0 0;
+    }
+
+
+    /* =================================================
+       RED SPLASH — 300 × 300
+    ================================================= */
+
+    .red-splash {
+
+        width:
+            400px;
+
+        height:
+           400Spx;
+    }
+
+
+    /* =================================================
+       TITLE
+    ================================================= */
+
+    .title {
+
+        font-size:
+            54px;
+
+        margin:
+            0 0 8px;
+    }
+
+
+    /* =================================================
+       SPEAKER
+    ================================================= */
+
+    .speaker-button {
+
+        width:
+            58px;
+
+        height:
+            58px;
+
+        font-size:
+            28px;
+    }
+
+
+    /* =================================================
+       INSTRUCTION
+    ================================================= */
+
+    .instruction {
+
+        font-size:
+            24px;
+
+        margin:
+            18px 0 28px;
+    }
+
+
+    /* =================================================
+       OBJECTS
+    ================================================= */
+
+    .objects {
+
+        gap:
+            45px;
+
+        justify-content:
+            center;
+    }
+
+
+    /* =================================================
+       OBJECT CARDS
+    ================================================= */
+
+    .object-card {
+
+        width:
+            200px;
+
+        height:
+            220px;
+    }
+
+
+    /* =================================================
+       OBJECT IMAGES
+    ================================================= */
+
+    .object-card img {
+
+        width:
+            160px;
+
+        height:
+            160px;
+    }
+
+
+    /* =================================================
+       OBJECT NAMES
+    ================================================= */
+
+    .object-name {
+
+        font-size:
+            21px;
+    }
+
+
+    /* =================================================
+       PENCIL
+       كبير 300×300
+       أسفل البطاقات جهة اليسار
+    ================================================= */
+
+    .pencil {
+
+        width:
+            300px;
+
+        height:
+            300px;
+
+        left:
+            5px;
+
+        top:
+            720px;
+
+        z-index:
+            15;
+    }
+
+
+    /* =================================================
+       MESSAGE
+    ================================================= */
+
+    .message {
+
+        font-size:
+            22px;
+
+        min-height:
+            38px;
+    }
+
+
+    /* =================================================
+       NEXT
+    ================================================= */
+
+    .next-button {
+
+        width:
+            170px;
+
+        height:
+            64px;
+
+        margin:
+            25px 0 0;
+
+        font-size:
+            23px;
+
+        background:
+            #e4f2ff;
+
+        color:
+            #55718b;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PREVIOUS
+===================================================== -->
+
+<button
+class="previous-button"
+onclick="goBack()">
+
+    ← السابق
+
+</button>
+
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<button
+class="menu-button"
+id="menuButton"
+onclick="toggleMenu()">
+
+    ☰
+
+</button>
+
+
+
+<div
+class="side-menu"
+id="sideMenu">
+
+    <button onclick="goHome()">
+        🏠 الرئيسية
+    </button>
+
+    <button onclick="goProfile()">
+        👤 ملفي
+    </button>
+
+    <button onclick="goProgress()">
+        ⭐ تقدمي
+    </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="page">
+
+<div class="content">
+
+<div class="lesson">
+
+
+    <!-- =================================================
+         RED SPLASH
+    ================================================== -->
+
+    <div class="splash-area">
+
+        <img
+        src="images/red5.png"
+        class="red-splash"
+        alt="اللون الأحمر">
+
+    </div>
+
+
+
+    <!-- =================================================
+         TITLE
+    ================================================== -->
+
+    <h1 class="title">
+
+        أحمر
+
+    </h1>
+
+
+
+    <!-- =================================================
+         SPEAKER
+    ================================================== -->
+
+    <button
+    class="speaker-button"
+    onclick="speak('أحمر')"
+    aria-label="استمع إلى اللون الأحمر">
+
+        🔊
+
+    </button>
+
+
+
+    <!-- =================================================
+         INSTRUCTION
+    ================================================== -->
+
+    <p class="instruction">
+
+        اضغط على الأشياء الحمراء
+
+    </p>
+
+
+
+    <!-- =================================================
+         OBJECTS
+    ================================================== -->
+
+    <div class="objects">
+
+
+        <!-- STRAWBERRY -->
+
+        <div
+        class="object-card"
+        onclick="
+            playObject(
+                this,
+                'فراولة، لونها أحمر'
+            );
+        ">
+
+            <img
+            src="images/red3.png"
+            alt="فراولة">
+
+            <div class="object-name">
+                فراولة
+            </div>
+
+        </div>
+
+
+
+        <!-- APPLE -->
+
+        <div
+        class="object-card"
+        onclick="
+            playObject(
+                this,
+                'تفاح، لونه أحمر'
+            );
+        ">
+
+            <img
+            src="images/red1.png"
+            alt="تفاح">
+
+            <div class="object-name">
+                تفاح
+            </div>
+
+        </div>
+
+
+
+        <!-- BERRIES -->
+
+        <div
+        class="object-card"
+        onclick="
+            playObject(
+                this,
+                'توت، لونه أحمر'
+            );
+        ">
+
+            <img
+            src="images/red4.png"
+            alt="توت">
+
+            <div class="object-name">
+                توت
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         PENCIL
+         خارج الـ splash-area
+         حتى لا يختفي
+    ================================================== -->
+
+    <img
+    src="images/red2.png"
+    class="pencil"
+    alt="قلم أحمر">
+
+
+
+    <!-- =================================================
+         MESSAGE
+    ================================================== -->
+
+    <div
+    class="message"
+    id="message">
+
+    </div>
+
+
+
+    <!-- =================================================
+         NEXT
+    ================================================== -->
+
+    <button
+    class="next-button"
+    onclick="goNext()">
+
+        التالي
+
+    </button>
+
+
+</div>
+
+</div>
+
+</main>
+
+
+
+<script>
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById(
+            "sideMenu"
+        );
+
+    menu.classList.toggle(
+        "show"
+    );
+
+}
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const menu =
+            document.getElementById(
+                "sideMenu"
+            );
+
+        const button =
+            document.getElementById(
+                "menuButton"
+            );
+
+        if (
+            !menu.contains(
+                event.target
+            ) &&
+            !button.contains(
+                event.target
+            )
+        ) {
+
+            menu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   PREVIOUS
+===================================================== */
+
+function goBack() {
+
+    window.location.href =
+        "colors.html";
+
+}
+
+
+/* =====================================================
+   HOME
+===================================================== */
+
+function goHome() {
+
+    window.location.href =
+        "home.html";
+
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+function goProfile() {
+
+    alert(
+        "👤 صفحة ملفي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+function goProgress() {
+
+    alert(
+        "⭐ صفحة تقدمي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+/* =====================================================
+   SPEECH
+===================================================== */
+
+function speak(text) {
+
+    if (
+        "speechSynthesis" in window
+    ) {
+
+        window.speechSynthesis.cancel();
+
+        const utterance =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+        utterance.lang =
+            "ar-SA";
+
+        utterance.rate =
+            0.78;
+
+        utterance.pitch =
+            1.05;
+
+        window.speechSynthesis.speak(
+            utterance
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   PLAY OBJECT
+===================================================== */
+
+function playObject(
+    element,
+    text
+) {
+
+    /*
+       إزالة التأثير من البطاقات السابقة
+    */
+
+    document
+        .querySelectorAll(
+            ".object-card"
+        )
+        .forEach(
+            function(card) {
+
+                card.classList.remove(
+                    "playing"
+                );
+
+            }
+        );
+
+
+    /*
+       تحديد العنصر الحالي
+    */
+
+    element.classList.add(
+        "playing"
+    );
+
+
+    /*
+       الرسالة
+    */
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+    message.textContent =
+        text;
+
+    message.classList.add(
+        "show"
+    );
+
+
+    /*
+       تشغيل الصوت
+    */
+
+    speak(text);
+
+
+    /*
+       إزالة التحديد بعد ثانية
+    */
+
+    setTimeout(
+        function() {
+
+            element.classList.remove(
+                "playing"
+            );
+
+        },
+        1000
+    );
+
+}
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+function goNext() {
+
+    window.location.href =
+        "green-color.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>تعلم اللون الأصفر - رفيق</title>
+
+<style>
+
+/* =========================================================
+   الإعدادات العامة
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+}
+
+body{
+
+    font-family:"Tajawal","Cairo",Arial,sans-serif;
+
+    color:#40566d;
+
+    overflow-x:hidden;
+
+    background-color:#fff;
+
+    /* نفس خلفية صفحات الألوان السابقة */
+    background-image:url("images/redb.jpeg");
+
+    background-size:100% auto;
+
+    background-position:center bottom;
+
+    background-repeat:no-repeat;
+
+    background-attachment:fixed;
+}
+
+
+/* =========================================================
+   الصفحة
+========================================================= */
+
+.page{
+
+    position:relative;
+
+    z-index:5;
+
+    width:100%;
+
+    min-height:1366px;
+
+    padding:150px 35px 100px;
+}
+
+
+.content{
+
+    width:900px;
+
+    max-width:92vw;
+
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+}
+
+
+.lesson{
+
+    position:relative;
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+}
+
+
+/* =========================================================
+   زر السابق
+========================================================= */
+
+.previous-button{
+
+    position:fixed;
+
+    top:35px;
+    left:35px;
+
+    width:155px;
+    height:60px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#e4f2ff;
+
+    color:#55718b;
+
+    font-family:inherit;
+
+    font-size:21px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 7px 18px rgba(60,80,100,.18);
+
+    z-index:1001;
+
+    transition:.2s ease;
+}
+
+.previous-button:hover{
+
+    transform:translateY(-3px);
+
+    background:#d8edfc;
+}
+
+.previous-button:active{
+
+    transform:scale(.96);
+}
+
+
+/* =========================================================
+   زر القائمة
+========================================================= */
+
+.menu-button{
+
+    position:fixed;
+
+    top:35px;
+    right:35px;
+
+    width:65px;
+    height:65px;
+
+    border:none;
+
+    border-radius:22px;
+
+    background:rgba(255,255,255,.96);
+
+    color:#55718b;
+
+    font-size:31px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 7px 20px rgba(60,80,100,.18);
+
+    z-index:1000;
+
+    transition:.2s ease;
+}
+
+.menu-button:hover{
+
+    transform:translateY(-3px);
+}
+
+.menu-button:active{
+
+    transform:scale(.95);
+}
+
+
+/* =========================================================
+   القائمة الجانبية
+========================================================= */
+
+.side-menu{
+
+    position:fixed;
+
+    top:115px;
+    right:35px;
+
+    width:245px;
+
+    padding:18px;
+
+    border-radius:28px;
+
+    background:rgba(255,255,255,.97);
+
+    backdrop-filter:blur(12px);
+
+    box-shadow:
+        0 12px 35px rgba(60,80,100,.20);
+
+    transform:translateX(130%);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.3s ease;
+
+    z-index:999;
+}
+
+.side-menu.show{
+
+    transform:translateX(0);
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+.side-menu button{
+
+    width:100%;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:transparent;
+
+    color:#55718b;
+
+    font-family:inherit;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    text-align:right;
+
+    padding:0 18px;
+
+    margin-bottom:8px;
+
+    cursor:pointer;
+
+    transition:.2s ease;
+}
+
+.side-menu button:hover{
+
+    background:#e4f2ff;
+
+    transform:translateX(-3px);
+}
+
+
+/* =========================================================
+   البقعة الصفراء
+========================================================= */
+
+.splash-area{
+
+    position:relative;
+
+    width:300px;
+    height:300px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:0;
+}
+
+.yellow-splash{
+
+    width:300px;
+    height:300px;
+
+    object-fit:contain;
+
+    display:block;
+
+    animation:
+        splashFloat 3s ease-in-out infinite;
+}
+
+
+@keyframes splashFloat{
+
+    0%,100%{
+
+        transform:
+            translateY(0)
+            rotate(-2deg);
+    }
+
+    50%{
+
+        transform:
+            translateY(-8px)
+            rotate(2deg);
+    }
+}
+
+
+/* =========================================================
+   عنوان أصفر
+========================================================= */
+
+.title{
+
+    margin:0 0 8px;
+
+    /*
+       لون كلمة "أصفر"
+       يمكنك تغييره هنا
+    */
+
+    color:#F3F315;
+
+    font-size:54px;
+
+    font-weight:900;
+
+    line-height:1.2;
+}
+
+
+/* =========================================================
+   زر الصوت
+========================================================= */
+
+.speaker-button{
+
+    width:58px;
+    height:58px;
+
+    margin:5px 0 0;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.92);
+
+    color:#55718b;
+
+    font-size:28px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 15px rgba(60,80,100,.14);
+
+    transition:.2s ease;
+}
+
+.speaker-button:hover{
+
+    transform:scale(1.08);
+}
+
+.speaker-button:active{
+
+    transform:scale(.94);
+}
+
+
+/* =========================================================
+   التعليمات
+========================================================= */
+
+.instruction{
+
+    margin:18px 0 28px;
+
+    color:#5f7488;
+
+    font-size:24px;
+
+    font-weight:800;
+}
+
+
+/* =========================================================
+   الأشياء
+========================================================= */
+
+.objects{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:row;
+
+    direction:rtl;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+    gap:45px;
+
+    position:relative;
+
+    z-index:20;
+}
+
+
+/* =========================================================
+   بطاقات الأشياء
+========================================================= */
+
+.object-card{
+
+    width:200px;
+    height:220px;
+
+    border:
+        3px solid
+        rgba(255,255,255,.95);
+
+    border-radius:30px;
+
+    background:
+        rgba(255,255,255,.62);
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 7px 20px
+        rgba(70,100,120,.12);
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        background .22s ease;
+}
+
+
+.object-card:hover{
+
+    transform:translateY(-7px);
+
+    box-shadow:
+        0 13px 27px
+        rgba(70,100,120,.18);
+}
+
+
+.object-card:active{
+
+    transform:scale(.94);
+}
+
+
+/* =========================================================
+   صور الأشياء
+========================================================= */
+
+.object-card img{
+
+    width:160px;
+    height:160px;
+
+    object-fit:contain;
+
+    display:block;
+}
+
+
+/* =========================================================
+   اسم الشيء
+========================================================= */
+
+.object-name{
+
+    margin-top:7px;
+
+    color:#55718b;
+
+    font-size:21px;
+
+    font-weight:800;
+}
+
+
+/* =========================================================
+   البطاقة عند الضغط
+========================================================= */
+
+.object-card.playing{
+
+    background:
+        rgba(255,248,216,.95);
+
+    border-color:#e6c65b;
+
+    transform:scale(1.05);
+}
+
+
+/* =========================================================
+   الرسالة
+========================================================= */
+
+.message{
+
+    min-height:38px;
+
+    margin:15px 0 0;
+
+    color:#d6a91b;
+
+    font-size:22px;
+
+    font-weight:800;
+
+    opacity:0;
+
+    transition:opacity .25s ease;
+
+    position:relative;
+
+    z-index:30;
+}
+
+.message.show{
+
+    opacity:1;
+}
+
+
+/* =========================================================
+   القلم الأصفر
+========================================================= */
+
+.pencil{
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    object-fit:contain;
+
+    left:5px;
+
+    top:720px;
+
+    z-index:15;
+
+    pointer-events:none;
+
+    animation:
+        pencilMove 2.5s ease-in-out infinite;
+}
+
+
+@keyframes pencilMove{
+
+    0%,100%{
+
+        transform:
+            translateY(0)
+            rotate(-5deg);
+    }
+
+    50%{
+
+        transform:
+            translateY(-12px)
+            rotate(5deg);
+    }
+}
+
+
+/* =========================================================
+   زر التالي
+========================================================= */
+
+.next-button{
+
+    width:170px;
+    height:64px;
+
+    margin:25px 0 0;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#e4f2ff;
+
+    color:#55718b;
+
+    font-family:inherit;
+
+    font-size:23px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(60,80,100,.18);
+
+    transition:.2s ease;
+
+    position:relative;
+
+    z-index:40;
+}
+
+.next-button:hover{
+
+    transform:translateY(-3px);
+
+    background:#d8edfc;
+}
+
+.next-button:active{
+
+    transform:scale(.96);
+}
+
+
+/* =========================================================
+   الجوال
+========================================================= */
+
+@media (max-width:767px){
+
+    .page{
+
+        min-height:100vh;
+
+        padding:90px 15px 80px;
+    }
+
+
+    .content{
+
+        max-width:94vw;
+    }
+
+
+    .previous-button{
+
+        top:20px;
+        left:20px;
+
+        width:125px;
+        height:52px;
+
+        font-size:18px;
+    }
+
+
+    .menu-button{
+
+        top:20px;
+        right:20px;
+
+        width:55px;
+        height:55px;
+
+        font-size:27px;
+    }
+
+
+    .side-menu{
+
+        top:90px;
+        right:20px;
+
+        width:220px;
+    }
+
+
+    .splash-area{
+
+        width:180px;
+        height:180px;
+    }
+
+
+    .yellow-splash{
+
+        width:180px;
+        height:180px;
+    }
+
+
+    .title{
+
+        font-size:40px;
+    }
+
+
+    .speaker-button{
+
+        width:50px;
+        height:50px;
+
+        font-size:24px;
+    }
+
+
+    .instruction{
+
+        font-size:18px;
+
+        margin:15px 0 25px;
+    }
+
+
+    .objects{
+
+        gap:10px;
+    }
+
+
+    .object-card{
+
+        width:105px;
+        height:135px;
+
+        border-radius:20px;
+    }
+
+
+    .object-card img{
+
+        width:85px;
+        height:85px;
+    }
+
+
+    .object-name{
+
+        font-size:15px;
+    }
+
+
+    .message{
+
+        font-size:18px;
+    }
+
+
+    .pencil{
+
+        width:120px;
+        height:120px;
+
+        left:5px;
+        top:600px;
+    }
+
+
+    .next-button{
+
+        width:140px;
+        height:54px;
+
+        font-size:19px;
+    }
+
+}
+
+
+/* =========================================================
+   iPad Portrait
+========================================================= */
+
+@media (min-width:768px) and (max-width:1100px){
+
+    .page{
+
+        min-height:1366px;
+
+        padding:150px 35px 100px;
+    }
+
+
+    .content{
+
+        width:900px;
+
+        max-width:92vw;
+    }
+
+
+    .splash-area{
+
+        width:300px;
+        height:300px;
+
+        margin:0;
+    }
+
+
+    .yellow-splash{
+
+        width:300px;
+        height:300px;
+    }
+
+
+    .title{
+
+        font-size:54px;
+
+        margin:0 0 8px;
+    }
+
+
+    .speaker-button{
+
+        width:58px;
+        height:58px;
+
+        font-size:28px;
+    }
+
+
+    .instruction{
+
+        font-size:24px;
+
+        margin:18px 0 28px;
+    }
+
+
+    .objects{
+
+        gap:45px;
+
+        justify-content:center;
+    }
+
+
+    .object-card{
+
+        width:200px;
+        height:220px;
+    }
+
+
+    .object-card img{
+
+        width:160px;
+        height:160px;
+    }
+
+
+    .object-name{
+
+        font-size:21px;
+    }
+
+
+    .pencil{
+
+        width:300px;
+        height:300px;
+
+        left:5px;
+        top:720px;
+
+        z-index:15;
+    }
+
+
+    .message{
+
+        font-size:22px;
+
+        min-height:38px;
+    }
+
+
+    .next-button{
+
+        width:170px;
+        height:64px;
+
+        margin:25px 0 0;
+
+        font-size:23px;
+
+        background:#e4f2ff;
+
+        color:#55718b;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     زر السابق
+========================================================= -->
+
+<button
+    class="previous-button"
+    onclick="goBack()">
+
+    ← السابق
+
+</button>
+
+
+
+<!-- =========================================================
+     زر القائمة
+========================================================= -->
+
+<button
+    class="menu-button"
+    id="menuButton"
+    onclick="toggleMenu()">
+
+    ☰
+
+</button>
+
+
+
+<!-- =========================================================
+     القائمة الجانبية
+========================================================= -->
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+
+    <button onclick="goHome()">
+
+        🏠 الرئيسية
+
+    </button>
+
+
+    <button onclick="goProfile()">
+
+        👤 ملفي
+
+    </button>
+
+
+    <button onclick="goProgress()">
+
+        ⭐ تقدمي
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =========================================================
+     محتوى الصفحة
+========================================================= -->
+
+<main class="page">
+
+<div class="content">
+
+<div class="lesson">
+
+
+    <!-- =====================================================
+         البقعة الصفراء
+    ====================================================== -->
+
+    <div class="splash-area">
+
+        <img
+            src="images/y5.png"
+            class="yellow-splash"
+            alt="اللون الأصفر">
+
+    </div>
+
+
+
+    <!-- =====================================================
+         اسم اللون
+    ====================================================== -->
+
+    <h1 class="title">
+
+        أصفر
+
+    </h1>
+
+
+
+    <!-- =====================================================
+         زر الصوت
+    ====================================================== -->
+
+    <button
+        class="speaker-button"
+        onclick="speak('أصفر')"
+        aria-label="استمع إلى اللون الأصفر">
+
+        🔊
+
+    </button>
+
+
+
+    <!-- =====================================================
+         التعليمات
+    ====================================================== -->
+
+    <p class="instruction">
+
+        اضغط على الأشياء الصفراء
+
+    </p>
+
+
+
+    <!-- =====================================================
+         الأشياء الصفراء
+    ====================================================== -->
+
+    <div class="objects">
+
+
+        <!-- =================================================
+             الموز
+        ================================================== -->
+
+        <div
+            class="object-card"
+            onclick="
+                playObject(
+                    this,
+                    'موز، لونه أصفر'
+                )
+            ">
+
+            <img
+                src="images/y2.png"
+                alt="موز">
+
+            <div class="object-name">
+
+                موز
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             الكتاكيت
+        ================================================== -->
+
+        <div
+            class="object-card"
+            onclick="
+                playObject(
+                    this,
+                    'كتاكيت، لونها أصفر'
+                )
+            ">
+
+            <img
+                src="images/y3.png"
+                alt="كتاكيت">
+
+            <div class="object-name">
+
+                كتاكيت
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             الليمون
+        ================================================== -->
+
+        <div
+            class="object-card"
+            onclick="
+                playObject(
+                    this,
+                    'ليمون، لونه أصفر'
+                )
+            ">
+
+            <img
+                src="images/y1.png"
+                alt="ليمون">
+
+            <div class="object-name">
+
+                ليمون
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         القلم الأصفر
+    ====================================================== -->
+
+    <img
+        src="images/y4.png"
+        class="pencil"
+        alt="قلم أصفر">
+
+
+
+    <!-- =====================================================
+         الرسالة
+    ====================================================== -->
+
+    <div
+        class="message"
+        id="message">
+
+    </div>
+
+
+
+    <!-- =====================================================
+         زر التالي
+    ====================================================== -->
+
+    <button
+        class="next-button"
+        onclick="goNext()">
+
+        التالي
+
+    </button>
+
+
+</div>
+
+</div>
+
+</main>
+
+
+
+<script>
+
+
+/* =========================================================
+   فتح وإغلاق القائمة
+========================================================= */
+
+function toggleMenu(){
+
+    const menu =
+        document.getElementById(
+            "sideMenu"
+        );
+
+    menu.classList.toggle(
+        "show"
+    );
+}
+
+
+
+/* =========================================================
+   إغلاق القائمة عند الضغط خارجها
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const menu =
+            document.getElementById(
+                "sideMenu"
+            );
+
+        const button =
+            document.getElementById(
+                "menuButton"
+            );
+
+
+        if(
+            !menu.contains(event.target) &&
+            !button.contains(event.target)
+        ){
+
+            menu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   السابق
+========================================================= */
+
+function goBack(){
+
+    window.location.href =
+        "green-color.html";
+
+}
+
+
+
+/* =========================================================
+   الرئيسية
+========================================================= */
+
+function goHome(){
+
+    window.location.href =
+        "home.html";
+
+}
+
+
+
+/* =========================================================
+   ملفي
+========================================================= */
+
+function goProfile(){
+
+    alert(
+        "👤 صفحة ملفي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+
+/* =========================================================
+   تقدمي
+========================================================= */
+
+function goProgress(){
+
+    alert(
+        "⭐ صفحة تقدمي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+
+/* =========================================================
+   النطق
+========================================================= */
+
+function speak(text){
+
+    if(
+        "speechSynthesis"
+        in window
+    ){
+
+        window.speechSynthesis.cancel();
+
+
+        const utterance =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+
+        utterance.lang =
+            "ar-SA";
+
+
+        utterance.rate =
+            0.78;
+
+
+        utterance.pitch =
+            1.05;
+
+
+        window.speechSynthesis.speak(
+            utterance
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   عند الضغط على أحد الأشياء
+========================================================= */
+
+function playObject(
+    element,
+    text
+){
+
+    /*
+       إزالة التحديد من جميع البطاقات
+    */
+
+    document
+        .querySelectorAll(
+            ".object-card"
+        )
+        .forEach(
+            function(card){
+
+                card.classList.remove(
+                    "playing"
+                );
+
+            }
+        );
+
+
+    /*
+       تحديد البطاقة الحالية
+    */
+
+    element.classList.add(
+        "playing"
+    );
+
+
+    /*
+       إظهار الجملة
+    */
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.textContent =
+        text;
+
+
+    message.classList.add(
+        "show"
+    );
+
+
+    /*
+       نطق الجملة
+    */
+
+    speak(text);
+
+
+    /*
+       إزالة التحديد بعد ثانية
+    */
+
+    setTimeout(
+        function(){
+
+            element.classList.remove(
+                "playing"
+            );
+
+        },
+        1000
+    );
+
+}
+
+
+
+/* =========================================================
+   زر التالي
+========================================================= */
+
+function goNext(){
+
+    /*
+       الأصفر هو آخر لون في المرحلة الأولى.
+
+       لذلك نسجل أن مرحلة
+       "تعلم الألوان" اكتملت.
+    */
+
+    localStorage.setItem(
+        "colorsStage1Completed",
+        "true"
+    );
+
+
+    /*
+       ننتقل إلى شاشة الاحتفال.
+
+       شاشة الاحتفال ستحتوي على:
+       🎉 أحسنت!
+       لقد أنهيت مرحلة تعلم الألوان!
+       🚗🎈 سيارات البالونات
+       ✨ اللمعات
+    */
+
+    window.location.href =
+        "yellow-complete.html";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

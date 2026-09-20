@@ -1,0 +1,2629 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>ارسم شعورك - رفيق</title>
+
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Arial,
+        sans-serif;
+
+    background-image:
+        url("images/spao.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    color: #555;
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding:
+        90px 20px 70px;
+
+    position: relative;
+}
+
+
+/* =====================================================
+   PREVIOUS BUTTON
+===================================================== */
+
+.previous-button {
+
+    position: fixed;
+
+    top: 35px;
+
+    left: 35px;
+
+    width: 155px;
+
+    height: 60px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #e4f2ff;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(60,80,100,0.18);
+
+    z-index: 1001;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.previous-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    background: #d8edfc;
+}
+
+.previous-button:active {
+
+    transform:
+        scale(0.96);
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-button {
+
+    position: fixed;
+
+    top: 35px;
+
+    right: 35px;
+
+    width: 65px;
+
+    height: 65px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,0.94);
+
+    color: #555;
+
+    font-size: 31px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 20px
+        rgba(60,80,100,0.18);
+
+    z-index: 1000;
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 115px;
+
+    right: 35px;
+
+    width: 245px;
+
+    padding: 18px;
+
+    border-radius: 28px;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    backdrop-filter:
+        blur(12px);
+
+    box-shadow:
+        0 12px 35px
+        rgba(60,80,100,0.20);
+
+    transform:
+        translateX(130%);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease;
+
+    z-index: 999;
+}
+
+.side-menu.show {
+
+    transform:
+        translateX(0);
+
+    opacity: 1;
+
+    pointer-events: auto;
+}
+
+.side-menu button {
+
+    width: 100%;
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: transparent;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    text-align: right;
+
+    padding: 0 18px;
+
+    margin-bottom: 8px;
+
+    cursor: pointer;
+}
+
+.side-menu button:hover {
+
+    background: #e4f2ff;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+
+    width:
+        min(1100px, 96vw);
+
+    margin: 0 auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+
+/* =====================================================
+   FEELING CARD
+===================================================== */
+
+.feeling-card {
+
+    width: 650px;
+
+    max-width: 92vw;
+
+    min-height: 125px;
+
+    background: #e4f2ff;
+
+    border-radius: 32px;
+
+    padding:
+        20px 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 25px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(70,100,120,0.17);
+
+    animation:
+        cardFloat 4s ease-in-out infinite;
+}
+
+@keyframes cardFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-5px);
+    }
+}
+
+
+/* =====================================================
+   ROBOT
+===================================================== */
+
+.robot {
+
+    font-size: 66px;
+
+    display: inline-block;
+
+    animation:
+        robotBounce 2.4s
+        ease-in-out infinite;
+}
+
+@keyframes robotBounce {
+
+    0%,
+    100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    30% {
+        transform:
+            translateY(-7px)
+            rotate(-4deg);
+    }
+
+    60% {
+        transform:
+            translateY(0)
+            rotate(4deg);
+    }
+}
+
+
+/* =====================================================
+   FEELING TEXT
+===================================================== */
+
+.feeling-text {
+
+    text-align: right;
+}
+
+.feeling-text h2 {
+
+    margin:
+        0 0 7px;
+
+    font-size: 29px;
+
+    font-weight: 900;
+
+    color: #555;
+}
+
+.feeling-text p {
+
+    margin: 0;
+
+    font-size: 20px;
+
+    font-weight: 600;
+
+    color: #777;
+}
+
+
+/* =====================================================
+   DRAWING TOOLS AREA
+===================================================== */
+
+.drawing-tools-area {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 25px;
+
+    position: relative;
+
+    z-index: 30;
+}
+
+
+/* =====================================================
+   COLORS
+===================================================== */
+
+.colors {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    flex-wrap: wrap;
+
+    position: relative;
+
+    z-index: 30;
+}
+
+.color {
+
+    width: 52px;
+
+    height: 52px;
+
+    border-radius: 50%;
+
+    border: 5px solid #fff;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px
+        rgba(50,70,90,0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.color:hover {
+
+    transform:
+        scale(1.12);
+}
+
+.color:active {
+
+    transform:
+        scale(0.95);
+}
+
+.color.active {
+
+    transform:
+        scale(1.18);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(120,150,170,0.28),
+        0 6px 15px
+        rgba(50,70,90,0.20);
+}
+
+
+/* =====================================================
+   COLORS
+===================================================== */
+
+.yellow {
+    background: #f4d35e;
+}
+
+.light-blue {
+    background: #9ed5ed;
+}
+
+.purple {
+    background: #9b6bb3;
+}
+
+.dark-blue {
+    background: #263b4d;
+}
+
+.green {
+    background: #4f8b50;
+}
+
+.red {
+    background: #c94c55;
+}
+
+.pink {
+    background: #e6a1ae;
+}
+
+
+/* =====================================================
+   TOOLS
+===================================================== */
+
+.tools {
+
+    margin-top: 22px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 20px;
+
+    position: relative;
+
+    z-index: 30;
+}
+
+.tool-button {
+
+    width: 200px;
+
+    height: 62px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background: #e4f2ff;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 16px
+        rgba(70,90,110,0.15);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tool-button:hover {
+
+    transform:
+        translateY(-3px);
+}
+
+.tool-button:active {
+
+    transform:
+        scale(0.97);
+}
+
+.tool-button.active {
+
+    box-shadow:
+        0 0 0 4px
+        rgba(120,150,170,0.25),
+        0 8px 18px
+        rgba(70,90,110,0.18);
+}
+
+
+/* =====================================================
+   SEND BUTTON
+===================================================== */
+
+.send-button {
+
+    width: 330px;
+
+    height: 68px;
+
+    margin-top: 22px;
+
+    border: none;
+
+    border-radius: 24px;
+
+    background: #e4f2ff;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 23px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(70,90,110,0.17);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+    position: relative;
+
+    z-index: 30;
+}
+
+.send-button:hover {
+
+    transform:
+        translateY(-4px);
+}
+
+.send-button:active {
+
+    transform:
+        scale(0.97);
+}
+
+.send-button:disabled {
+
+    opacity: 0.65;
+
+    cursor: wait;
+}
+
+
+/* =====================================================
+   ROCKET STAGE
+===================================================== */
+
+.rocket-stage {
+
+    position: relative;
+
+    width: 955px;
+
+    height: 580px;
+
+    max-width: 96vw;
+
+    margin-top: 100px;
+
+    overflow: visible;
+
+    z-index: 10;
+}
+
+
+/* =====================================================
+   ROCKET IMAGE
+===================================================== */
+
+.space-image {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: fill;
+
+    display: block;
+
+    user-select: none;
+
+    -webkit-user-drag: none;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+
+/* =====================================================
+   CANVAS
+===================================================== */
+
+#drawingCanvas {
+
+    position: absolute;
+
+    z-index: 2;
+
+    left: 17%;
+
+    top: 9%;
+
+    width: 66%;
+
+    height: 65%;
+
+    background: transparent;
+
+    border: none;
+
+    border-radius: 0;
+
+    box-shadow: none;
+
+    touch-action: none;
+
+    cursor: crosshair;
+
+}
+
+
+/* =====================================================
+   RESULT POPUP
+===================================================== */
+
+.success-message {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(35,55,75,0.35);
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 5000;
+}
+
+.success-box {
+
+    width: 520px;
+
+    max-width: 88vw;
+
+    background: white;
+
+    border-radius: 35px;
+
+    padding: 35px;
+
+    text-align: center;
+
+    box-shadow:
+        0 12px 35px
+        rgba(0,0,0,0.25);
+
+    animation:
+        popupIn 0.25s ease;
+}
+
+@keyframes popupIn {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            scale(0.9);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+.success-emoji {
+
+    font-size: 65px;
+
+    line-height: 1.2;
+}
+
+.success-box h2 {
+
+    color: #55718b;
+
+    font-size: 32px;
+
+    margin:
+        10px 0;
+}
+
+.success-box p {
+
+    color: #71879b;
+
+    font-size: 21px;
+
+    line-height: 1.6;
+
+    margin:
+        0 0 25px;
+}
+
+
+/* =====================================================
+   RESULT BUTTONS
+===================================================== */
+
+.result-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.result-buttons button {
+
+    min-width: 180px;
+
+    height: 55px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #e4f2ff;
+
+    color: #55718b;
+
+    font-family: inherit;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 12px
+        rgba(70,90,110,0.12);
+}
+
+.result-buttons button:active {
+
+    transform:
+        scale(0.96);
+}
+
+
+/* =====================================================
+   iPAD PORTRAIT
+===================================================== */
+
+@media (min-width: 768px) {
+
+    .page {
+
+        min-height: 1366px;
+
+        padding-top: 105px;
+    }
+
+
+    .feeling-card {
+
+        width: 650px;
+
+        margin-top: 80px;
+    }
+
+
+    .drawing-tools-area {
+
+        margin-top: 22px;
+
+        width: 100%;
+
+        align-items: center;
+    }
+
+
+    .colors {
+
+        justify-content: center;
+
+        width: 100%;
+    }
+
+
+    .tools {
+
+        justify-content: center;
+
+        width: 100%;
+    }
+
+
+    .send-button {
+
+        align-self: center;
+    }
+
+
+    .rocket-stage {
+
+        width: 900px;
+
+        height: 547px;
+
+        margin-top: 120px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE / SMALL SCREEN
+===================================================== */
+
+@media (max-width: 767px) {
+
+    .page {
+
+        padding:
+            95px 10px 50px;
+    }
+
+
+    .previous-button {
+
+        top: 20px;
+
+        left: 20px;
+
+        width: 125px;
+
+        height: 52px;
+
+        font-size: 18px;
+    }
+
+
+    .menu-button {
+
+        top: 20px;
+
+        right: 20px;
+
+        width: 55px;
+
+        height: 55px;
+
+        font-size: 27px;
+    }
+
+
+    .side-menu {
+
+        top: 90px;
+
+        right: 20px;
+
+        width: 220px;
+    }
+
+
+    /* =================================================
+       FEELING CARD
+    ================================================= */
+
+    .feeling-card {
+
+        width: 94vw;
+
+        min-height: 105px;
+
+        padding: 15px;
+
+        gap: 12px;
+
+        margin-top: 25px;
+    }
+
+
+    .robot {
+
+        font-size: 48px;
+    }
+
+
+    .feeling-text h2 {
+
+        font-size: 21px;
+    }
+
+
+    .feeling-text p {
+
+        font-size: 15px;
+    }
+
+
+    /* =================================================
+       TOOLS
+    ================================================= */
+
+    .drawing-tools-area {
+
+        margin-top: 18px;
+
+        align-items: center;
+    }
+
+
+    .colors {
+
+        gap: 9px;
+
+        justify-content: center;
+
+        width: 100%;
+    }
+
+
+    .color {
+
+        width: 42px;
+
+        height: 42px;
+
+        border-width: 4px;
+    }
+
+
+    .tools {
+
+        gap: 10px;
+
+        margin-top: 18px;
+
+        justify-content: center;
+
+        width: 100%;
+    }
+
+
+    .tool-button {
+
+        width: 160px;
+
+        height: 56px;
+
+        font-size: 17px;
+    }
+
+
+    .send-button {
+
+        width: 280px;
+
+        height: 62px;
+
+        margin-top: 18px;
+
+        font-size: 20px;
+    }
+
+
+    /* =================================================
+       ROCKET
+    ================================================= */
+
+    .rocket-stage {
+
+        width: 96vw;
+
+        height:
+            calc(96vw * 0.6073);
+
+        margin-top: 45px;
+    }
+
+
+    #drawingCanvas {
+
+        left: 17%;
+
+        top: 9%;
+
+        width: 66%;
+
+        height: 65%;
+    }
+
+
+    /* =================================================
+       POPUP
+    ================================================= */
+
+    .success-box {
+
+        width: 88vw;
+
+        padding:
+            28px 22px;
+    }
+
+
+    .success-emoji {
+
+        font-size: 55px;
+    }
+
+
+    .success-box h2 {
+
+        font-size: 28px;
+    }
+
+
+    .success-box p {
+
+        font-size: 18px;
+    }
+
+
+    .result-buttons {
+
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+
+    .result-buttons button {
+
+        width: 100%;
+    }
+
+}
+
+
+/* =====================================================
+   TABLET / iPAD SMALL
+===================================================== */
+
+@media (min-width: 768px) and (max-width: 1100px) {
+
+    .feeling-card {
+
+        width: 650px;
+
+        max-width: 82vw;
+    }
+
+
+    .colors {
+
+        width: 90%;
+    }
+
+
+    .rocket-stage {
+
+        width: 90vw;
+
+        height:
+            calc(90vw * 0.6073);
+
+        margin-top: 100px;
+    }
+
+
+    #drawingCanvas {
+
+        left: 17%;
+
+        top: 9%;
+
+        width: 66%;
+
+        height: 65%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PREVIOUS
+===================================================== -->
+
+<button
+    class="previous-button"
+    onclick="location.href='emotions.html'">
+
+    ← السابق
+
+</button>
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton">
+
+    ☰
+
+</button>
+
+
+<!-- =====================================================
+     SIDE MENU
+===================================================== -->
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+    <button onclick="location.href='home.html'">
+        🏠 الرئيسية
+    </button>
+
+    <button onclick="alert('👤 الملف الشخصي')">
+        👤 الملف الشخصي
+    </button>
+
+    <button onclick="alert('📊 التقدم')">
+        📊 التقدم
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="page">
+
+<div class="content">
+
+
+    <!-- =================================================
+         FEELING CARD
+    ================================================== -->
+
+    <div class="feeling-card">
+
+
+        <div class="robot">
+
+            🤖
+
+        </div>
+
+
+        <div class="feeling-text">
+
+
+            <h2>
+
+                أرني وجهًا سعيدًا!
+
+            </h2>
+
+
+            <p>
+
+                ارسم وجهًا يعبر عن السعادة
+
+            </p>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         DRAWING TOOLS
+    ================================================== -->
+
+    <div class="drawing-tools-area">
+
+
+        <!-- COLORS -->
+
+        <div class="colors">
+
+
+            <button
+                class="color yellow active"
+                data-color="#f4d35e"
+                aria-label="أصفر">
+            </button>
+
+
+            <button
+                class="color light-blue"
+                data-color="#9ed5ed"
+                aria-label="أزرق فاتح">
+            </button>
+
+
+            <button
+                class="color purple"
+                data-color="#9b6bb3"
+                aria-label="بنفسجي">
+            </button>
+
+
+            <button
+                class="color dark-blue"
+                data-color="#263b4d"
+                aria-label="أزرق غامق">
+            </button>
+
+
+            <button
+                class="color green"
+                data-color="#4f8b50"
+                aria-label="أخضر">
+            </button>
+
+
+            <button
+                class="color red"
+                data-color="#c94c55"
+                aria-label="أحمر">
+            </button>
+
+
+            <button
+                class="color pink"
+                data-color="#e6a1ae"
+                aria-label="وردي">
+            </button>
+
+
+        </div>
+
+
+        <!-- TOOLS -->
+
+        <div class="tools">
+
+
+            <button
+                class="tool-button"
+                id="clearButton">
+
+                🗑️ مسح الكل
+
+            </button>
+
+
+            <button
+                class="tool-button"
+                id="eraserButton">
+
+                🧽 مسح جزء
+
+            </button>
+
+
+        </div>
+
+
+        <!-- SEND -->
+
+        <button
+            class="send-button"
+            id="sendButton">
+
+            📤 إرسال رسمتي
+
+        </button>
+
+
+    </div>
+
+
+    <!-- =================================================
+         ROCKET
+    ================================================== -->
+
+    <div class="rocket-stage">
+
+
+        <img
+            src="images/saro.png"
+            class="space-image"
+            alt="صاروخ للرسم">
+
+
+        <!--
+             Canvas شفاف تمامًا.
+             لا يظهر أي مربع أبيض.
+        -->
+
+        <canvas
+            id="drawingCanvas">
+        </canvas>
+
+
+    </div>
+
+
+</div>
+
+</main>
+
+
+<!-- =====================================================
+     AI RESULT POPUP
+===================================================== -->
+
+<div
+    class="success-message"
+    id="successMessage">
+
+
+    <div class="success-box">
+
+
+        <div
+            class="success-emoji"
+            id="resultEmoji">
+
+            🌈🎨✨
+
+        </div>
+
+
+        <h2
+            id="resultTitle">
+
+            أحسنت!
+
+        </h2>
+
+
+        <p
+            id="successText">
+
+            تم إرسال رسمتك بنجاح 🎉
+
+        </p>
+
+
+        <div class="result-buttons">
+
+
+            <button
+                id="tryAgainButton">
+
+                🔄 إعادة المحاولة
+
+            </button>
+
+
+            <button
+                id="closeSuccess">
+
+                رائع! 💙
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   MENU
+===================================================== */
+
+document
+    .getElementById("menuButton")
+    .addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            document
+                .getElementById("sideMenu")
+                .classList
+                .toggle("show");
+
+        }
+    );
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const menu =
+            document.getElementById(
+                "sideMenu"
+            );
+
+        const button =
+            document.getElementById(
+                "menuButton"
+            );
+
+
+        if (
+            !menu.contains(event.target) &&
+            !button.contains(event.target)
+        ) {
+
+            menu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CANVAS
+===================================================== */
+
+const canvas =
+    document.getElementById(
+        "drawingCanvas"
+    );
+
+const ctx =
+    canvas.getContext("2d");
+
+
+let currentColor =
+    "#f4d35e";
+
+let isDrawing =
+    false;
+
+let isErasing =
+    false;
+
+let hasDrawing =
+    false;
+
+
+/* =====================================================
+   CANVAS SETUP
+===================================================== */
+
+function resizeCanvas() {
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+
+    const oldCanvas =
+        document.createElement(
+            "canvas"
+        );
+
+
+    oldCanvas.width =
+        canvas.width;
+
+    oldCanvas.height =
+        canvas.height;
+
+
+    if (
+        canvas.width > 0 &&
+        canvas.height > 0
+    ) {
+
+        oldCanvas
+            .getContext("2d")
+            .drawImage(
+                canvas,
+                0,
+                0
+            );
+
+    }
+
+
+    const dpr =
+        window.devicePixelRatio || 1;
+
+
+    canvas.width =
+        Math.round(
+            rect.width * dpr
+        );
+
+    canvas.height =
+        Math.round(
+            rect.height * dpr
+        );
+
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
+
+
+    ctx.lineCap =
+        "round";
+
+    ctx.lineJoin =
+        "round";
+
+    ctx.lineWidth =
+        8;
+
+
+    if (
+        oldCanvas.width > 0 &&
+        oldCanvas.height > 0
+    ) {
+
+        ctx.drawImage(
+            oldCanvas,
+            0,
+            0,
+            oldCanvas.width,
+            oldCanvas.height,
+            0,
+            0,
+            rect.width,
+            rect.height
+        );
+
+    }
+
+}
+
+
+resizeCanvas();
+
+
+window.addEventListener(
+    "resize",
+    function() {
+
+        if (!isDrawing) {
+
+            resizeCanvas();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   GET POSITION
+===================================================== */
+
+function getPosition(event) {
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+
+    return {
+
+        x:
+            event.clientX -
+            rect.left,
+
+        y:
+            event.clientY -
+            rect.top
+
+    };
+
+}
+
+
+/* =====================================================
+   START DRAWING
+===================================================== */
+
+canvas.addEventListener(
+    "pointerdown",
+    function(event) {
+
+
+        event.preventDefault();
+
+
+        isDrawing =
+            true;
+
+
+        hasDrawing =
+            true;
+
+
+        canvas.setPointerCapture(
+            event.pointerId
+        );
+
+
+        const pos =
+            getPosition(event);
+
+
+        ctx.beginPath();
+
+
+        ctx.moveTo(
+            pos.x,
+            pos.y
+        );
+
+
+        /*
+         * نقطة البداية
+         */
+
+        ctx.fillStyle =
+            currentColor;
+
+
+        if (!isErasing) {
+
+            ctx.beginPath();
+
+            ctx.arc(
+                pos.x,
+                pos.y,
+                4,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   DRAW
+===================================================== */
+
+canvas.addEventListener(
+    "pointermove",
+    function(event) {
+
+
+        if (!isDrawing) {
+
+            return;
+        }
+
+
+        event.preventDefault();
+
+
+        const pos =
+            getPosition(event);
+
+
+        ctx.beginPath();
+
+
+        ctx.moveTo(
+            lastX,
+            lastY
+        );
+
+
+        ctx.lineTo(
+            pos.x,
+            pos.y
+        );
+
+
+        if (isErasing) {
+
+
+            ctx.globalCompositeOperation =
+                "destination-out";
+
+
+            ctx.lineWidth =
+                35;
+
+        }
+
+        else {
+
+
+            ctx.globalCompositeOperation =
+                "source-over";
+
+
+            ctx.strokeStyle =
+                currentColor;
+
+
+            ctx.lineWidth =
+                8;
+
+        }
+
+
+        /*
+         * أول حركة تحتاج lastX/lastY
+         */
+
+        if (
+            typeof lastX === "number" &&
+            typeof lastY === "number"
+        ) {
+
+            ctx.stroke();
+
+        }
+
+
+        lastX =
+            pos.x;
+
+        lastY =
+            pos.y;
+
+
+        ctx.globalCompositeOperation =
+            "source-over";
+
+    }
+);
+
+
+/* =====================================================
+   POINTER DOWN - SAVE LAST POSITION
+===================================================== */
+
+canvas.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        const pos =
+            getPosition(event);
+
+        lastX =
+            pos.x;
+
+        lastY =
+            pos.y;
+
+    }
+);
+
+
+/* =====================================================
+   STOP DRAWING
+===================================================== */
+
+function stopDrawing() {
+
+    isDrawing =
+        false;
+
+    ctx.globalCompositeOperation =
+        "source-over";
+
+}
+
+
+canvas.addEventListener(
+    "pointerup",
+    stopDrawing
+);
+
+canvas.addEventListener(
+    "pointercancel",
+    stopDrawing
+);
+
+canvas.addEventListener(
+    "pointerleave",
+    stopDrawing
+);
+
+
+/* =====================================================
+   COLORS
+===================================================== */
+
+const colorButtons =
+    document.querySelectorAll(
+        ".color"
+    );
+
+
+colorButtons.forEach(
+    button => {
+
+
+        button.addEventListener(
+            "click",
+            function() {
+
+
+                currentColor =
+                    this.dataset.color;
+
+
+                isErasing =
+                    false;
+
+
+                document
+                    .getElementById(
+                        "eraserButton"
+                    )
+                    .classList
+                    .remove(
+                        "active"
+                    );
+
+
+                colorButtons.forEach(
+                    item => {
+
+                        item.classList
+                            .remove(
+                                "active"
+                            );
+
+                    }
+                );
+
+
+                this.classList.add(
+                    "active"
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   ERASER
+===================================================== */
+
+document
+    .getElementById(
+        "eraserButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+
+            isErasing =
+                !isErasing;
+
+
+            this.classList.toggle(
+                "active",
+                isErasing
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   CLEAR ALL
+===================================================== */
+
+document
+    .getElementById(
+        "clearButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            hasDrawing =
+                false;
+
+
+            isErasing =
+                false;
+
+
+            document
+                .getElementById(
+                    "eraserButton"
+                )
+                .classList
+                .remove(
+                    "active"
+                );
+
+
+            localStorage.removeItem(
+                "rafiqFeelingDrawing"
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   SHOW AI RESULT
+===================================================== */
+
+function showAIResult(result) {
+
+
+    const aiText =
+        result.ai_result || "";
+
+
+    console.log(
+        "🤖 AI RESULT:",
+        aiText
+    );
+
+
+    /* =================================================
+       MATCHES TARGET
+    ================================================= */
+
+    const match =
+        aiText.match(
+            /matches_target\s*:\s*(true|false)/i
+        );
+
+
+    /* =================================================
+       CONFIDENCE
+    ================================================= */
+
+    const confidenceMatch =
+        aiText.match(
+            /confidence\s*:\s*(\d+)/i
+        );
+
+
+    /* =================================================
+       MOUTH
+    ================================================= */
+
+    const mouthMatch =
+        aiText.match(
+            /mouth\s*:\s*(.*)/i
+        );
+
+
+    /* =================================================
+       FEEDBACK
+    ================================================= */
+
+    const feedbackMatch =
+        aiText.match(
+            /feedback\s*:\s*(.*)/i
+        );
+
+
+    let matchesTarget =
+        false;
+
+    let confidence =
+        0;
+
+    let mouth =
+        "";
+
+    let feedback =
+        "";
+
+
+    if (match) {
+
+        matchesTarget =
+            match[1].toLowerCase()
+            === "true";
+
+    }
+
+
+    if (confidenceMatch) {
+
+        confidence =
+            parseInt(
+                confidenceMatch[1]
+            );
+
+    }
+
+
+    if (mouthMatch) {
+
+        mouth =
+            mouthMatch[1]
+            .trim();
+
+    }
+
+
+    if (feedbackMatch) {
+
+        feedback =
+            feedbackMatch[1]
+            .trim();
+
+    }
+
+
+    /* =================================================
+       FINAL DECISION
+
+       true + confidence >= 70
+    ================================================= */
+
+    const isGoodDrawing =
+        matchesTarget &&
+        confidence >= 70;
+
+
+    const resultEmoji =
+        document.getElementById(
+            "resultEmoji"
+        );
+
+
+    const resultTitle =
+        document.getElementById(
+            "resultTitle"
+        );
+
+
+    const successText =
+        document.getElementById(
+            "successText"
+        );
+
+
+    /* =================================================
+       CORRECT
+    ================================================= */
+
+    if (isGoodDrawing) {
+
+
+        resultEmoji.textContent =
+            "🌈😊⭐";
+
+
+        resultTitle.textContent =
+            "أحسنت!";
+
+
+        successText.textContent =
+            feedback ||
+            "رسمتك تعبّر عن السعادة بشكل جميل! 😊";
+
+    }
+
+
+    /* =================================================
+       NEEDS IMPROVEMENT
+    ================================================= */
+
+    else {
+
+
+        resultEmoji.textContent =
+            "🎨💙";
+
+
+        resultTitle.textContent =
+            "محاولة جميلة!";
+
+
+        if (
+            mouth.includes(
+                "غير مبتسم"
+            )
+        ) {
+
+
+            successText.textContent =
+                "رسمتك جميلة! حاول تجعل الابتسامة أوضح قليلًا 😊";
+
+        }
+
+
+        else if (
+            mouth.includes(
+                "غير واضح"
+            )
+        ) {
+
+
+            successText.textContent =
+                "أحسنت! حاول رسم فم مبتسم بشكل أوضح 😊";
+
+        }
+
+
+        else if (
+            mouth.includes(
+                "غير موجود"
+            )
+        ) {
+
+
+            successText.textContent =
+                "رائع! حاول إضافة فم مبتسم إلى الوجه 😊";
+
+        }
+
+
+        else {
+
+
+            successText.textContent =
+                feedback ||
+                "محاولة جميلة! حاول إضافة ابتسامة أوضح 😊";
+
+        }
+
+    }
+
+
+    /* =================================================
+       SHOW
+    ================================================= */
+
+    document
+        .getElementById(
+            "successMessage"
+        )
+        .style.display =
+        "flex";
+
+}
+
+
+/* =====================================================
+   TRY AGAIN
+===================================================== */
+
+document
+    .getElementById(
+        "tryAgainButton"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            hasDrawing =
+                false;
+
+
+            isDrawing =
+                false;
+
+
+            isErasing =
+                false;
+
+
+            document
+                .getElementById(
+                    "eraserButton"
+                )
+                .classList
+                .remove(
+                    "active"
+                );
+
+
+            document
+                .getElementById(
+                    "successMessage"
+                )
+                .style
+                .display =
+                "none";
+
+
+            localStorage.removeItem(
+                "rafiqFeelingDrawing"
+            );
+
+
+            const sendButton =
+                document.getElementById(
+                    "sendButton"
+                );
+
+
+            sendButton.disabled =
+                false;
+
+
+            sendButton.textContent =
+                "📤 إرسال رسمتي";
+
+        }
+    );
+
+
+/* =====================================================
+   CLOSE RESULT
+===================================================== */
+
+document
+    .getElementById(
+        "closeSuccess"
+    )
+    .addEventListener(
+        "click",
+        function() {
+
+
+            document
+                .getElementById(
+                    "successMessage"
+                )
+                .style
+                .display =
+                "none";
+
+        }
+    );
+
+
+/* =====================================================
+   SEND DRAWING TO AI
+===================================================== */
+
+document
+    .getElementById(
+        "sendButton"
+    )
+    .addEventListener(
+        "click",
+        async function() {
+
+
+            /* ---------------------------------------------
+               NO DRAWING
+            --------------------------------------------- */
+
+            if (!hasDrawing) {
+
+
+                alert(
+                    "🎨 ارسم شيئًا أولًا!"
+                );
+
+
+                return;
+
+            }
+
+
+            const sendButton =
+                this;
+
+
+            /* ---------------------------------------------
+               CONVERT DRAWING TO IMAGE
+            --------------------------------------------- */
+
+            const imageData =
+                canvas.toDataURL(
+                    "image/png"
+                );
+
+
+            /* ---------------------------------------------
+               SAVE DRAWING
+            --------------------------------------------- */
+
+            localStorage.setItem(
+                "rafiqFeelingDrawing",
+                imageData
+            );
+
+
+            /* ---------------------------------------------
+               LOADING
+            --------------------------------------------- */
+
+            sendButton.disabled =
+                true;
+
+
+            sendButton.textContent =
+                "🤖 رفيق يحلل رسمتك...";
+
+
+            try {
+
+
+                /* -----------------------------------------
+                   SEND TO RENDER
+                ----------------------------------------- */
+
+                const response =
+                    await fetch(
+                        "https://rafiq-ai-jgtp.onrender.com/analyze-drawing",
+                        {
+
+                            method:
+                                "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    image:
+                                        imageData,
+
+                                    emotion:
+                                        "السعادة"
+
+                                })
+
+                        }
+                    );
+
+
+                /* -----------------------------------------
+                   HTTP ERROR
+                ----------------------------------------- */
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "HTTP Error " +
+                        response.status
+                    );
+
+                }
+
+
+                /* -----------------------------------------
+                   GET RESULT
+                ----------------------------------------- */
+
+                const result =
+                    await response.json();
+
+
+                console.log(
+                    "🤖 Rafiq Backend Result:",
+                    result
+                );
+
+
+                /* -----------------------------------------
+                   SHOW AI RESULT
+                ----------------------------------------- */
+
+                if (
+                    result.success
+                ) {
+
+
+                    showAIResult(
+                        result
+                    );
+
+                }
+
+                else {
+
+
+                    alert(
+                        "😔 حدث خطأ أثناء تحليل الرسمة.\n\n" +
+                        (
+                            result.message ||
+                            "حاولي مرة أخرى."
+                        )
+                    );
+
+                }
+
+            }
+
+
+            catch (error) {
+
+
+                console.error(
+                    "❌ AI Connection Error:",
+                    error
+                );
+
+
+                alert(
+                    "❌ لم نتمكن من الاتصال بخادم رفيق.\n\n" +
+                    "حاولي مرة أخرى بعد قليل."
+                );
+
+            }
+
+
+            /* -----------------------------------------
+               RESTORE BUTTON
+            ----------------------------------------- */
+
+            sendButton.disabled =
+                false;
+
+
+            sendButton.textContent =
+                "📤 إرسال رسمتي";
+
+        }
+    );
+
+</script>
+
+</body>
+
+</html>

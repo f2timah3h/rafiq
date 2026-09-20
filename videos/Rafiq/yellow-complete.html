@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>أحسنت! - رفيق</title>
+
+
+<style>
+
+/* =========================================================
+   الإعدادات العامة
+========================================================= */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+body{
+
+    font-family:"Tajawal","Cairo",Arial,sans-serif;
+
+    color:#40566d;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #f7fcff 55%,
+            #edf8ff 100%
+        );
+
+    position:relative;
+}
+
+
+/* =========================================================
+   صفحة الاحتفال
+========================================================= */
+
+.celebration-page{
+
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+    min-height:700px;
+
+    overflow:hidden;
+}
+
+
+/* =========================================================
+   طبقة الزينة
+========================================================= */
+
+.decorations{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:1;
+}
+
+
+/* =========================================================
+   اللمعات
+========================================================= */
+
+.sparkle{
+
+    position:absolute;
+
+    width:24px;
+    height:24px;
+
+    opacity:.75;
+
+    animation:
+        sparkleAnimation 2.2s
+        ease-in-out
+        infinite;
+}
+
+
+/* شكل النجمة */
+
+.sparkle::before,
+.sparkle::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(
+        -50%,
+        -50%
+    );
+
+    background:#f5c94a;
+
+    border-radius:50%;
+}
+
+
+.sparkle::before{
+
+    width:5px;
+    height:100%;
+}
+
+
+.sparkle::after{
+
+    width:100%;
+    height:5px;
+}
+
+
+/* نجمة مائلة */
+
+.sparkle span{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    width:5px;
+    height:100%;
+
+    background:#f5c94a;
+
+    border-radius:50%;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(45deg);
+}
+
+
+@keyframes sparkleAnimation{
+
+    0%,
+    100%{
+
+        transform:
+            scale(.65)
+            rotate(0deg);
+
+        opacity:.25;
+    }
+
+    50%{
+
+        transform:
+            scale(1.25)
+            rotate(45deg);
+
+        opacity:1;
+    }
+}
+
+
+/* مواقع اللمعات */
+
+.sparkle-1{
+    left:10%;
+    top:23%;
+    animation-delay:.1s;
+}
+
+.sparkle-2{
+    left:28%;
+    top:14%;
+    width:18px;
+    height:18px;
+    animation-delay:.6s;
+}
+
+.sparkle-3{
+    left:47%;
+    top:28%;
+    width:28px;
+    height:28px;
+    animation-delay:1s;
+}
+
+.sparkle-4{
+    left:67%;
+    top:16%;
+    width:21px;
+    height:21px;
+    animation-delay:.4s;
+}
+
+.sparkle-5{
+    left:88%;
+    top:25%;
+    width:27px;
+    height:27px;
+    animation-delay:1.2s;
+}
+
+.sparkle-6{
+    left:18%;
+    top:66%;
+    width:18px;
+    height:18px;
+    animation-delay:1.5s;
+}
+
+.sparkle-7{
+    left:80%;
+    top:68%;
+    width:20px;
+    height:20px;
+    animation-delay:.8s;
+}
+
+
+/* =========================================================
+   سيارات البالونات
+========================================================= */
+
+.balloon-car{
+
+    position:absolute;
+
+    bottom:-180px;
+
+    width:var(--car-size);
+
+    height:calc(
+        var(--car-size) * .72
+    );
+
+    left:var(--car-left);
+
+    opacity:0;
+
+    animation:
+        carFloat
+        var(--duration)
+        ease-in-out
+        infinite;
+
+    animation-delay:
+        var(--delay);
+
+    z-index:2;
+
+    transform:
+        rotate(var(--rotation));
+}
+
+
+/* =========================================================
+   حركة السيارة من الأسفل إلى الأعلى
+========================================================= */
+
+@keyframes carFloat{
+
+    0%{
+
+        bottom:-180px;
+
+        opacity:0;
+
+        transform:
+            translateX(0)
+            rotate(var(--rotation))
+            scale(.92);
+    }
+
+
+    10%{
+
+        opacity:1;
+    }
+
+
+    25%{
+
+        transform:
+            translateX(-25px)
+            rotate(
+                calc(
+                    var(--rotation) - 2deg
+                )
+            )
+            scale(1);
+    }
+
+
+    50%{
+
+        transform:
+            translateX(30px)
+            rotate(
+                calc(
+                    var(--rotation) + 3deg
+                )
+            )
+            scale(1.03);
+    }
+
+
+    70%{
+
+        transform:
+            translateX(-20px)
+            rotate(
+                calc(
+                    var(--rotation) - 2deg
+                )
+            )
+            scale(1);
+    }
+
+
+    88%{
+
+        opacity:1;
+    }
+
+
+    100%{
+
+        bottom:110%;
+
+        opacity:0;
+
+        transform:
+            translateX(25px)
+            rotate(
+                calc(
+                    var(--rotation) + 2deg
+                )
+            )
+            scale(.95);
+    }
+}
+
+
+/* =========================================================
+   جسم السيارة
+========================================================= */
+
+.car-body{
+
+    position:absolute;
+
+    left:5%;
+    right:5%;
+
+    bottom:14%;
+
+    height:48%;
+
+    background:var(--car-color);
+
+    border-radius:
+        22%
+        22%
+        15%
+        15%;
+
+    box-shadow:
+        inset
+        0 -5px 0
+        rgba(0,0,0,.08),
+
+        0 7px 15px
+        rgba(50,70,90,.15);
+}
+
+
+/* =========================================================
+   سقف السيارة
+========================================================= */
+
+.car-roof{
+
+    position:absolute;
+
+    width:48%;
+    height:32%;
+
+    left:26%;
+
+    top:7%;
+
+    background:
+        var(--dark-color);
+
+    border-radius:
+        45% 45% 15% 15%;
+}
+
+
+/* =========================================================
+   نوافذ السيارة
+========================================================= */
+
+.window{
+
+    position:absolute;
+
+    width:19%;
+    height:19%;
+
+    top:16%;
+
+    background:#bfefff;
+
+    border:
+        2px solid
+        rgba(255,255,255,.95);
+
+    border-radius:20%;
+
+    box-shadow:
+        inset
+        0 2px 4px
+        rgba(255,255,255,.5);
+}
+
+
+.window-left{
+
+    left:29%;
+}
+
+
+.window-right{
+
+    right:29%;
+}
+
+
+/* =========================================================
+   العجلات
+========================================================= */
+
+.wheel{
+
+    position:absolute;
+
+    width:25%;
+    aspect-ratio:1;
+
+    bottom:3%;
+
+    border-radius:50%;
+
+    background:#40566d;
+
+    border:
+        5px solid
+        #ffffff;
+
+    box-shadow:
+        0 3px 6px
+        rgba(50,70,90,.2);
+}
+
+
+.wheel-left{
+
+    left:13%;
+}
+
+
+.wheel-right{
+
+    right:13%;
+}
+
+
+/* =========================================================
+   داخل العجلة
+========================================================= */
+
+.wheel::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:38%;
+    height:38%;
+
+    left:31%;
+    top:31%;
+
+    border-radius:50%;
+
+    background:#dceaf2;
+}
+
+
+/* =========================================================
+   المصابيح
+========================================================= */
+
+.light{
+
+    position:absolute;
+
+    width:7%;
+
+    aspect-ratio:1;
+
+    border-radius:50%;
+
+    top:43%;
+
+    box-shadow:
+        0 0 7px
+        rgba(255,235,130,.9);
+}
+
+
+.light-left{
+
+    left:6%;
+
+    background:#ff8a80;
+}
+
+
+.light-right{
+
+    right:6%;
+
+    background:#fff4a3;
+}
+
+
+/* =========================================================
+   سيارات مختلفة
+========================================================= */
+
+.car-1{
+
+    --car-size:115px;
+    --car-left:6%;
+    --car-color:#e53935;
+    --dark-color:#c62828;
+    --rotation:-4deg;
+    --duration:7s;
+    --delay:0s;
+}
+
+
+.car-2{
+
+    --car-size:95px;
+    --car-left:21%;
+    --car-color:#ffc107;
+    --dark-color:#e0a800;
+    --rotation:3deg;
+    --duration:8s;
+    --delay:1s;
+}
+
+
+.car-3{
+
+    --car-size:125px;
+    --car-left:37%;
+    --car-color:#1e88e5;
+    --dark-color:#1565c0;
+    --rotation:-3deg;
+    --duration:7.5s;
+    --delay:.4s;
+}
+
+
+.car-4{
+
+    --car-size:105px;
+    --car-left:53%;
+    --car-color:#ec407a;
+    --dark-color:#d81b60;
+    --rotation:5deg;
+    --duration:8.5s;
+    --delay:1.4s;
+}
+
+
+.car-5{
+
+    --car-size:120px;
+    --car-left:68%;
+    --car-color:#9c4dcc;
+    --dark-color:#7b35a8;
+    --rotation:-4deg;
+    --duration:7.8s;
+    --delay:.7s;
+}
+
+
+.car-6{
+
+    --car-size:100px;
+    --car-left:83%;
+    --car-color:#26a69a;
+    --dark-color:#16877e;
+    --rotation:3deg;
+    --duration:8.3s;
+    --delay:1.7s;
+}
+
+
+/* =========================================================
+   محتوى الاحتفال
+========================================================= */
+
+.celebration-content{
+
+    position:absolute;
+
+    z-index:20;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:min(
+        760px,
+        85vw
+    );
+
+    text-align:center;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+/* =========================================================
+   إيموجي الاحتفال
+========================================================= */
+
+.celebration-emoji{
+
+    font-size:82px;
+
+    line-height:1;
+
+    margin-bottom:15px;
+
+    animation:
+        emojiBounce 2s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes emojiBounce{
+
+    0%,
+    100%{
+
+        transform:
+            translateY(0)
+            rotate(-3deg);
+    }
+
+    50%{
+
+        transform:
+            translateY(-10px)
+            rotate(3deg);
+    }
+}
+
+
+/* =========================================================
+   عنوان أحسنت
+========================================================= */
+
+.main-title{
+
+    margin:0;
+
+    color:#d6a91b;
+
+    font-size:58px;
+
+    font-weight:900;
+
+    line-height:1.3;
+
+    text-shadow:
+        0 3px 0
+        rgba(214,169,27,.08);
+}
+
+
+/* =========================================================
+   الرسالة
+========================================================= */
+
+.complete-message{
+
+    margin:20px 0 0;
+
+    color:#55718b;
+
+    font-size:32px;
+
+    font-weight:800;
+
+    line-height:1.6;
+}
+
+
+/* =========================================================
+   رسالة المرحلة الثانية
+========================================================= */
+
+.next-message{
+
+    margin:15px 0 0;
+
+    color:#6b8092;
+
+    font-size:23px;
+
+    font-weight:700;
+}
+
+
+/* =========================================================
+   زر المرحلة الثانية
+========================================================= */
+
+.next-stage-button{
+
+    margin-top:35px;
+
+    width:245px;
+
+    height:70px;
+
+    border:none;
+
+    border-radius:22px;
+
+    background:#e4f2ff;
+
+    color:#55718b;
+
+    font-family:inherit;
+
+    font-size:24px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(60,80,100,.18);
+
+    transition:
+        transform .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
+}
+
+
+.next-stage-button:hover{
+
+    transform:
+        translateY(-4px);
+
+    background:#d8edfc;
+
+    box-shadow:
+        0 12px 25px
+        rgba(60,80,100,.22);
+}
+
+
+.next-stage-button:active{
+
+    transform:
+        scale(.96);
+}
+
+
+/* =========================================================
+   iPad Portrait
+========================================================= */
+
+@media
+(min-width:768px)
+and (max-width:1100px){
+
+    .celebration-page{
+
+        min-height:1366px;
+
+        height:100vh;
+    }
+
+
+    .celebration-content{
+
+        width:760px;
+
+        max-width:82vw;
+    }
+
+
+    .celebration-emoji{
+
+        font-size:90px;
+    }
+
+
+    .main-title{
+
+        font-size:58px;
+    }
+
+
+    .complete-message{
+
+        font-size:32px;
+    }
+
+
+    .next-message{
+
+        font-size:24px;
+    }
+
+
+    .next-stage-button{
+
+        width:250px;
+
+        height:72px;
+
+        font-size:25px;
+    }
+}
+
+
+/* =========================================================
+   الشاشات الصغيرة
+========================================================= */
+
+@media(max-width:767px){
+
+    .celebration-content{
+
+        width:90vw;
+    }
+
+
+    .celebration-emoji{
+
+        font-size:65px;
+    }
+
+
+    .main-title{
+
+        font-size:42px;
+    }
+
+
+    .complete-message{
+
+        font-size:23px;
+    }
+
+
+    .next-message{
+
+        font-size:18px;
+    }
+
+
+    .next-stage-button{
+
+        width:200px;
+
+        height:58px;
+
+        font-size:20px;
+    }
+
+
+    .balloon-car{
+
+        transform:
+            scale(.75);
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="celebration-page">
+
+
+    <!-- =====================================================
+         الزينة
+    ====================================================== -->
+
+    <div class="decorations">
+
+
+        <!-- =================================================
+             اللمعات
+        ================================================== -->
+
+        <div class="sparkle sparkle-1">
+            <span></span>
+        </div>
+
+        <div class="sparkle sparkle-2">
+            <span></span>
+        </div>
+
+        <div class="sparkle sparkle-3">
+            <span></span>
+        </div>
+
+        <div class="sparkle sparkle-4">
+            <span></span>
+        </div>
+
+        <div class="sparkle sparkle-5">
+            <span></span>
+        </div>
+
+        <div class="sparkle sparkle-6">
+            <span></span>
+        </div>
+
+        <div class="sparkle sparkle-7">
+            <span></span>
+        </div>
+
+
+
+        <!-- =================================================
+             سيارة 1
+        ================================================== -->
+
+        <div class="balloon-car car-1">
+
+            <div class="car-roof"></div>
+
+            <div class="car-body"></div>
+
+            <div class="window window-left"></div>
+
+            <div class="window window-right"></div>
+
+            <div class="wheel wheel-left"></div>
+
+            <div class="wheel wheel-right"></div>
+
+            <div class="light light-left"></div>
+
+            <div class="light light-right"></div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             سيارة 2
+        ================================================== -->
+
+        <div class="balloon-car car-2">
+
+            <div class="car-roof"></div>
+
+            <div class="car-body"></div>
+
+            <div class="window window-left"></div>
+
+            <div class="window window-right"></div>
+
+            <div class="wheel wheel-left"></div>
+
+            <div class="wheel wheel-right"></div>
+
+            <div class="light light-left"></div>
+
+            <div class="light light-right"></div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             سيارة 3
+        ================================================== -->
+
+        <div class="balloon-car car-3">
+
+            <div class="car-roof"></div>
+
+            <div class="car-body"></div>
+
+            <div class="window window-left"></div>
+
+            <div class="window window-right"></div>
+
+            <div class="wheel wheel-left"></div>
+
+            <div class="wheel wheel-right"></div>
+
+            <div class="light light-left"></div>
+
+            <div class="light light-right"></div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             سيارة 4
+        ================================================== -->
+
+        <div class="balloon-car car-4">
+
+            <div class="car-roof"></div>
+
+            <div class="car-body"></div>
+
+            <div class="window window-left"></div>
+
+            <div class="window window-right"></div>
+
+            <div class="wheel wheel-left"></div>
+
+            <div class="wheel wheel-right"></div>
+
+            <div class="light light-left"></div>
+
+            <div class="light light-right"></div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             سيارة 5
+        ================================================== -->
+
+        <div class="balloon-car car-5">
+
+            <div class="car-roof"></div>
+
+            <div class="car-body"></div>
+
+            <div class="window window-left"></div>
+
+            <div class="window window-right"></div>
+
+            <div class="wheel wheel-left"></div>
+
+            <div class="wheel wheel-right"></div>
+
+            <div class="light light-left"></div>
+
+            <div class="light light-right"></div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             سيارة 6
+        ================================================== -->
+
+        <div class="balloon-car car-6">
+
+            <div class="car-roof"></div>
+
+            <div class="car-body"></div>
+
+            <div class="window window-left"></div>
+
+            <div class="window window-right"></div>
+
+            <div class="wheel wheel-left"></div>
+
+            <div class="wheel wheel-right"></div>
+
+            <div class="light light-left"></div>
+
+            <div class="light light-right"></div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         محتوى الاحتفال
+    ====================================================== -->
+
+    <div class="celebration-content">
+
+
+        <!-- إيموجي -->
+
+        <div class="celebration-emoji">
+
+            🎉
+
+        </div>
+
+
+
+        <!-- العنوان -->
+
+        <h1 class="main-title">
+
+            أحسنت! 🌟
+
+        </h1>
+
+
+
+        <!-- الرسالة الأساسية -->
+
+        <div class="complete-message">
+
+            لقد أنهيت مرحلة تعلم الألوان! 💛
+
+        </div>
+
+
+
+        <!-- رسالة الانتقال -->
+
+        <div class="next-message">
+
+            هيا ننتقل إلى المرحلة التالية ✨
+
+        </div>
+
+
+
+        <!-- زر المرحلة الثانية -->
+
+        <button
+            class="next-stage-button"
+            onclick="goToStageTwo()">
+
+            المرحلة الثانية →
+
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================================
+   الانتقال إلى المرحلة الثانية
+========================================================= */
+
+function goToStageTwo(){
+
+    /*
+       نتأكد مرة أخرى أن المرحلة الأولى مكتملة.
+    */
+
+    localStorage.setItem(
+        "colorsStage1Completed",
+        "true"
+    );
+
+
+    /*
+       الانتقال إلى صفحة الألوان.
+    */
+
+    window.location.href =
+        "colors.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

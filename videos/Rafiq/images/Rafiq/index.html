@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
+
+    <title>رفيق - تسجيل الدخول</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+        }
+
+
+        /* =================================
+           شاشة رفيق
+           iPad Portrait
+           ================================= */
+
+        body {
+            background: #dff1f8;
+        }
+
+
+        .ipad-screen {
+
+            position: relative;
+
+            width: 100vw;
+            height: 100vh;
+
+            overflow: hidden;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* =================================
+           الخلفية
+           ================================= */
+
+        .background {
+
+            position: absolute;
+
+            inset: 0;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            object-position: center;
+
+            z-index: 0;
+        }
+
+
+        /* =================================
+           طبقة خفيفة
+           ================================= */
+
+        .background-overlay {
+
+            position: absolute;
+
+            inset: 0;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.06
+                );
+
+            z-index: 1;
+        }
+
+
+        /* =================================
+           البطاقة الشفافة
+           ================================= */
+
+        .login-card {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 720px;
+
+            height: 1150px;
+
+            padding:
+                45px
+                65px
+                45px
+                65px;
+
+            border-radius: 45px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.58
+                );
+
+            border:
+                2px solid
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.75
+                );
+
+            box-shadow:
+                0 20px 60px
+                rgba(
+                    60,
+                    80,
+                    90,
+                    0.15
+                );
+
+            backdrop-filter:
+                blur(7px);
+
+            -webkit-backdrop-filter:
+                blur(7px);
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+        }
+
+
+        /* =================================
+           اللوقو
+           ================================= */
+
+        .team-logo {
+
+            width: 300px;
+
+            height: auto;
+
+            object-fit: contain;
+
+            display: block;
+
+            margin-bottom: 5px;
+        }
+
+
+        /* =================================
+           رفيقك في كل خطوة
+           ================================= */
+
+        .tagline {
+
+            font-size: 28px;
+
+            color: #555;
+
+            margin-bottom: 45px;
+
+            text-align: center;
+        }
+
+
+        /* =================================
+           حقول الإدخال
+           ================================= */
+
+        .input-box {
+
+            position: relative;
+
+            width: 100%;
+
+            height: 82px;
+
+            margin-bottom: 20px;
+
+            background:
+                rgba(
+                    255,
+                    255,
+                    255,
+                    0.92
+                );
+
+            border:
+                1.5px solid
+                rgba(
+                    100,
+                    100,
+                    100,
+                    0.20
+                );
+
+            border-radius: 24px;
+
+            display: flex;
+
+            align-items: center;
+        }
+
+
+        .input-box input {
+
+            width: 100%;
+
+            height: 100%;
+
+            border: none;
+
+            outline: none;
+
+            background: transparent;
+
+            direction: rtl;
+
+            text-align: right;
+
+            font-family: inherit;
+
+            font-size: 24px;
+
+            color: #444;
+
+            padding:
+                0
+                75px
+                0
+                65px;
+        }
+
+
+        .input-box input::placeholder {
+
+            color: #777;
+
+            opacity: 1;
+        }
+
+
+        /* أيقونة الحقل */
+
+        .input-icon {
+
+            position: absolute;
+
+            right: 25px;
+
+            font-size: 27px;
+
+            color: #666;
+
+            pointer-events: none;
+        }
+
+
+        /* زر العين */
+
+        .eye-button {
+
+            position: absolute;
+
+            left: 18px;
+
+            width: 48px;
+
+            height: 48px;
+
+            border: none;
+
+            background: transparent;
+
+            font-size: 24px;
+
+            cursor: pointer;
+        }
+
+
+        /* =================================
+           نسيت كلمة المرور
+           ================================= */
+
+        .forgot-button {
+
+            align-self: flex-start;
+
+            border: none;
+
+            background: transparent;
+
+            color: #287fc2;
+
+            font-family: inherit;
+
+            font-size: 21px;
+
+            cursor: pointer;
+
+            margin:
+                0
+                0
+                28px
+                0;
+
+            padding: 5px;
+        }
+
+
+        /* =================================
+           تسجيل الدخول
+           ================================= */
+
+        .login-button {
+
+            width: 100%;
+
+            height: 78px;
+
+            border: none;
+
+            border-radius: 25px;
+
+            background: #c78391;
+
+            color: white;
+
+            font-family: inherit;
+
+            font-size: 29px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 18px
+                rgba(
+                    160,
+                    90,
+                    105,
+                    0.20
+                );
+
+            transition:
+                transform 0.15s ease;
+        }
+
+
+        .login-button:active {
+
+            transform: scale(0.98);
+        }
+
+
+        /* =================================
+           أو
+           ================================= */
+
+        .divider {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            margin:
+                28px
+                0
+                25px;
+        }
+
+
+        .divider-line {
+
+            flex: 1;
+
+            height: 1px;
+
+            background:
+                rgba(
+                    90,
+                    90,
+                    90,
+                    0.30
+                );
+        }
+
+
+        .divider-text {
+
+            font-size: 22px;
+
+            color: #555;
+        }
+
+
+        /* =================================
+           Apple / Google
+           ================================= */
+
+        .social-row {
+
+            width: 100%;
+
+            display: flex;
+
+            gap: 20px;
+        }
+
+
+        .social-button {
+
+            flex: 1;
+
+            height: 75px;
+
+            border: none;
+
+            border-radius: 23px;
+
+            background: white;
+
+            color: #333;
+
+            font-family: Arial, sans-serif;
+
+            font-size: 23px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 5px 15px
+                rgba(
+                    0,
+                    0,
+                    0,
+                    0.06
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 12px;
+        }
+
+
+        .apple-icon {
+
+            font-size: 23px;
+
+            color: #111;
+        }
+
+
+        .google-icon {
+
+            font-size: 27px;
+
+            font-weight: bold;
+
+            color: #4285F4;
+        }
+
+
+        /* =================================
+           إنشاء حساب
+           ================================= */
+
+        .signup {
+
+            margin-top: 40px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            font-size: 22px;
+
+            color: #555;
+
+            text-align: center;
+        }
+
+
+        .signup-button {
+
+            border: none;
+
+            background: transparent;
+
+            color: #c78391;
+
+            font-family: inherit;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        /* =================================
+           عند تصغير نافذة المتصفح
+           ================================= */
+
+        @media (max-width: 800px) {
+
+            .login-card {
+
+                width: 90vw;
+
+                height: 90vh;
+
+                padding:
+                    35px
+                    45px;
+            }
+
+
+            .team-logo {
+
+                width: 240px;
+            }
+
+
+            .tagline {
+
+                font-size: 23px;
+            }
+
+
+            .input-box {
+
+                height: 70px;
+            }
+
+
+            .input-box input {
+
+                font-size: 20px;
+            }
+
+
+            .login-button {
+
+                height: 68px;
+
+                font-size: 25px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <div class="ipad-screen">
+
+
+        <!-- الخلفية الأصلية -->
+        <img
+            src="images/background.png"
+            class="background"
+            alt=""
+        >
+
+
+        <!-- شفافية -->
+        <div class="background-overlay"></div>
+
+
+        <!-- البطاقة -->
+        <div class="login-card">
+
+
+            <!-- شعار الفريق -->
+            <img
+                src="images/team-logo.png"
+                class="team-logo"
+                alt="رفيق"
+            >
+
+
+            <!-- العبارة -->
+            <div class="tagline">
+                رفيقك في كل خطوة
+            </div>
+
+
+            <!-- البريد -->
+            <div class="input-box">
+
+                <span class="input-icon">
+                    ✉
+                </span>
+
+                <input
+                    type="text"
+                    id="email"
+                    placeholder="البريد الإلكتروني أو رقم الجوال"
+                >
+
+            </div>
+
+
+            <!-- كلمة المرور -->
+            <div class="input-box">
+
+                <span class="input-icon">
+                    🔒
+                </span>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="كلمة المرور"
+                >
+
+                <button
+                    class="eye-button"
+                    type="button"
+                    onclick="togglePassword()">
+
+                    👁
+
+                </button>
+
+            </div>
+
+
+            <!-- نسيت كلمة المرور -->
+            <button
+                class="forgot-button"
+                type="button"
+                onclick="forgotPassword()">
+
+                هل نسيت كلمة المرور؟
+
+            </button>
+
+
+            <!-- تسجيل الدخول -->
+            <button
+                class="login-button"
+                type="button"
+                onclick="login()">
+
+                تسجيل الدخول
+
+            </button>
+
+
+            <!-- أو -->
+            <div class="divider">
+
+                <span class="divider-line"></span>
+
+                <span class="divider-text">
+                    أو
+                </span>
+
+                <span class="divider-line"></span>
+
+            </div>
+
+
+            <!-- Apple / Google -->
+            <div class="social-row">
+
+
+                <button
+                    class="social-button"
+                    type="button"
+                    onclick="appleLogin()">
+
+                    <span class="apple-icon">
+                        ●
+                    </span>
+
+                    Apple
+
+                </button>
+
+
+                <button
+                    class="social-button"
+                    type="button"
+                    onclick="googleLogin()">
+
+                    <span class="google-icon">
+                        G
+                    </span>
+
+                    Google
+
+                </button>
+
+
+            </div>
+
+
+            <!-- إنشاء حساب -->
+            <div class="signup">
+
+                <span>
+                    ليس لديك حساب؟
+                </span>
+
+                <button
+                    class="signup-button"
+                    type="button"
+                    onclick="createAccount()">
+
+                    إنشاء حساب جديد
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // إظهار وإخفاء كلمة المرور
+        function togglePassword() {
+
+            const password =
+                document.getElementById("password");
+
+            const eye =
+                document.querySelector(".eye-button");
+
+
+            if (password.type === "password") {
+
+                password.type = "text";
+
+                eye.textContent = "🙈";
+
+            } else {
+
+                password.type = "password";
+
+                eye.textContent = "👁";
+            }
+        }
+
+
+        // تسجيل الدخول
+        function login() {
+
+            const email =
+                document.getElementById("email")
+                .value
+                .trim();
+
+            const password =
+                document.getElementById("password")
+                .value
+                .trim();
+
+
+            if (email === "") {
+
+                alert(
+                    "فضلاً أدخل البريد الإلكتروني أو رقم الجوال"
+                );
+
+                return;
+            }
+
+
+            if (password === "") {
+
+                alert(
+                    "فضلاً أدخل كلمة المرور"
+                );
+
+                return;
+            }
+
+
+            alert(
+                "تم تسجيل الدخول بنجاح 🌈"
+            );
+        }
+
+
+        // نسيت كلمة المرور
+        function forgotPassword() {
+
+            alert(
+                "سيتم الانتقال إلى صفحة استعادة كلمة المرور."
+            );
+        }
+
+
+        // Apple
+        function appleLogin() {
+
+            alert(
+                "تسجيل الدخول باستخدام Apple"
+            );
+        }
+
+
+        // Google
+        function googleLogin() {
+
+            alert(
+                "تسجيل الدخول باستخدام Google"
+            );
+        }
+
+
+        // إنشاء حساب
+        function createAccount() {
+
+            alert(
+                "سيتم الانتقال إلى صفحة إنشاء حساب جديد."
+            );
+        }
+
+    </script>
+
+</body>
+
+</html>

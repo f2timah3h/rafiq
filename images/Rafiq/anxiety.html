@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>القلق - رفيق</title>
+
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    direction: rtl;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    color: #263746;
+
+    /* الخلفية الافتراضية */
+    background-image:
+        url("images/af.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    padding: 35px 45px 55px;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.top-bar {
+
+    width: 100%;
+
+    max-width: 950px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    position: relative;
+
+    z-index: 20;
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+.menu-container {
+
+    position: relative;
+
+    order: 1;
+}
+
+
+.menu-button {
+
+    width: 62px;
+
+    height: 62px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.42);
+
+    color: #30465b;
+
+    font-size: 29px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px
+        rgba(50,70,90,0.12);
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.menu-button:hover {
+
+    transform: scale(1.08);
+}
+
+
+/* =========================
+   DROPDOWN MENU
+========================= */
+
+.menu {
+
+    display: none;
+
+    position: absolute;
+
+    top: 72px;
+
+    left: 0;
+
+    width: 215px;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border-radius: 22px;
+
+    padding: 12px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(50,70,90,0.18);
+
+    z-index: 100;
+}
+
+
+.menu.show {
+
+    display: block;
+}
+
+
+.menu a {
+
+    display: block;
+
+    text-decoration: none;
+
+    color: #30465b;
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+    padding: 15px 18px;
+
+    border-radius: 14px;
+
+    margin: 4px 0;
+
+    text-align: right;
+
+    transition:
+        background 0.2s ease;
+}
+
+
+.menu a:hover {
+
+    background: #e4f2ff;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-button {
+
+    order: 2;
+
+    width: 62px;
+
+    height: 62px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #30465b;
+
+    font-size: 45px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.back-button:hover {
+
+    transform: scale(1.12);
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title {
+
+    margin-top: 22px;
+
+    margin-bottom: 0;
+
+    font-size: 48px;
+
+    font-weight: 700;
+
+    color: #263746;
+
+    text-align: center;
+}
+
+
+/* =========================
+   SOUND BUTTON
+========================= */
+
+.sound-button {
+
+    position: absolute;
+
+    top: 145px;
+
+    right: 105px;
+
+    width: 65px;
+
+    height: 65px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.40);
+
+    font-size: 32px;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow:
+        0 5px 15px
+        rgba(50,70,90,0.10);
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.sound-button:hover {
+
+    transform: scale(1.08);
+}
+
+
+.sound-button:active {
+
+    transform: scale(0.94);
+}
+
+
+/* =========================
+   ANXIETY CHARACTER
+========================= */
+
+.character-area {
+
+    margin-top: 20px;
+
+    width: 100%;
+
+    height: 280px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+}
+
+
+.anxiety-character {
+
+    width: 255px;
+
+    max-width: 30vw;
+
+    object-fit: contain;
+
+    animation:
+        anxiousMove 2.4s
+        ease-in-out
+        infinite;
+}
+
+
+/* =========================
+   ANXIETY ANIMATION
+========================= */
+
+@keyframes anxiousMove {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    20% {
+
+        transform:
+            translateY(-7px)
+            rotate(-1deg);
+    }
+
+    40% {
+
+        transform:
+            translateY(4px)
+            rotate(1deg);
+    }
+
+    60% {
+
+        transform:
+            translateY(-5px)
+            rotate(-1deg);
+    }
+
+    80% {
+
+        transform:
+            translateY(3px)
+            rotate(1deg);
+    }
+
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+}
+
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.description {
+
+    width: 90%;
+
+    max-width: 720px;
+
+    text-align: center;
+
+    font-size: 23px;
+
+    line-height: 2;
+
+    font-weight: 600;
+
+    color: #263746;
+
+    margin-top: 0;
+}
+
+
+/* =========================
+   LEVEL TITLE
+========================= */
+
+.level-title {
+
+    margin-top: 42px;
+
+    font-size: 28px;
+
+    font-weight: bold;
+
+    color: #263746;
+
+    text-align: center;
+}
+
+
+/* =========================
+   ANXIETY SCALE IMAGE
+========================= */
+
+.scale-image {
+
+    width: 650px;
+
+    max-width: 78%;
+
+    height: auto;
+
+    object-fit: contain;
+
+    display: block;
+
+    margin-top: 18px;
+}
+
+
+/* =========================
+   NEXT BUTTON
+========================= */
+
+.next-button {
+
+    margin-top: 42px;
+
+    border: none;
+
+    background: #e4f2ff;
+
+    color: #30465b;
+
+    font-size: 24px;
+
+    font-weight: bold;
+
+    padding: 15px 55px;
+
+    border-radius: 22px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 6px 15px
+        rgba(50,80,100,0.12);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.next-button:hover {
+
+    transform: translateY(-3px);
+
+    background: #d8edff;
+}
+
+
+/* =========================
+   IPAD PORTRAIT
+========================= */
+
+@media (min-width: 800px) {
+
+    .page {
+
+        max-width: 1024px;
+
+        min-height: 1366px;
+
+        margin: 0 auto;
+
+        padding-top: 45px;
+    }
+
+
+    .title {
+
+        font-size: 48px;
+    }
+
+
+    .anxiety-character {
+
+        width: 255px;
+    }
+
+
+    .description {
+
+        font-size: 24px;
+    }
+
+
+    .scale-image {
+
+        width: 600px;
+
+        max-width: 70%;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .page {
+
+        padding: 20px;
+    }
+
+
+    .title {
+
+        font-size: 35px;
+    }
+
+
+    .sound-button {
+
+        top: 95px;
+
+        right: 25px;
+
+        width: 52px;
+
+        height: 52px;
+
+        font-size: 25px;
+    }
+
+
+    .character-area {
+
+        height: 230px;
+    }
+
+
+    .anxiety-character {
+
+        width: 200px;
+
+        max-width: 55vw;
+    }
+
+
+    .description {
+
+        font-size: 18px;
+    }
+
+
+    .level-title {
+
+        font-size: 24px;
+
+        margin-top: 35px;
+    }
+
+
+    .scale-image {
+
+        width: 90%;
+
+        max-width: 90%;
+
+        margin-top: 15px;
+    }
+
+
+    .next-button {
+
+        font-size: 20px;
+
+        padding: 13px 40px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+    <!-- =========================
+         TOP BAR
+    ========================== -->
+
+    <div class="top-bar">
+
+
+        <!-- القائمة -->
+
+        <div class="menu-container">
+
+            <button
+                class="menu-button"
+                onclick="toggleMenu()"
+                aria-label="القائمة">
+
+                ☰
+
+            </button>
+
+
+            <div
+                class="menu"
+                id="menu">
+
+                <a href="home.html">
+                    🏠 الرئيسية
+                </a>
+
+                <a href="profile.html">
+                    👤 ملفي
+                </a>
+
+                <a href="reports.html">
+                    📊 تقاريري
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- السابق -->
+
+        <button
+            class="back-button"
+            onclick="goBack()"
+            aria-label="السابق">
+
+            ›
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         TITLE
+    ========================== -->
+
+    <h1 class="title">
+
+        القلق
+
+    </h1>
+
+
+    <!-- =========================
+         SOUND
+    ========================== -->
+
+    <button
+        class="sound-button"
+        onclick="speakAnxiety()"
+        aria-label="استمع">
+
+        🔊
+
+    </button>
+
+
+    <!-- =========================
+         CHARACTER
+    ========================== -->
+
+    <div class="character-area">
+
+        <img
+            src="images/h33.png"
+            alt="طفلة تشعر بالقلق"
+            class="anxiety-character">
+
+    </div>
+
+
+    <!-- =========================
+         DESCRIPTION
+    ========================== -->
+
+    <div class="description">
+
+        هل تشعر أحيانًا بحياتك فشار تقفز في بطنك؟
+
+        <br>
+
+        أو أن هناك أفكارًا كثيرة
+
+        <br>
+
+        تدور في رأسك وتجعلك خائفًا من شيء لم يحدث بعد؟
+
+        هذا هو القلق.
+
+    </div>
+
+
+    <!-- =========================
+         LEVEL TITLE
+    ========================== -->
+
+    <div class="level-title">
+
+        درجات القلق
+
+    </div>
+
+
+    <!-- =========================
+         ANXIETY SCALE
+    ========================= -->
+
+    <img
+        src="images/h3.png"
+        alt="درجات القلق"
+        class="scale-image">
+
+
+    <!-- =========================
+         NEXT
+    ========================= -->
+
+    <button
+        class="next-button"
+        onclick="goNext()">
+
+        التالي
+
+    </button>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE CONNECTION
+===================================================== */
+
+const SUPABASE_URL =
+    "https://ciwrwmutcrarwtounelg.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =====================================================
+   LOAD CURRENT CHILD THEME
+   SUPABASE ONLY
+===================================================== */
+
+async function loadChildBackground() {
+
+    /*
+       نضع الفضاء كخلفية افتراضية
+       إلى أن نعرف اهتمام الطفل.
+    */
+
+    document.body.style.backgroundImage =
+        'url("images/af.jpeg")';
+
+
+    /*
+       نقرأ ID الطفل الحالي فقط.
+    */
+
+    const childId =
+        localStorage.getItem(
+            "rafiqChildId"
+        );
+
+
+    console.log(
+        "🌈 Current Child ID:",
+        childId
+    );
+
+
+    /*
+       لا يوجد طفل حالي
+    */
+
+    if (!childId) {
+
+        console.warn(
+            "⚠️ لا يوجد rafiqChildId"
+        );
+
+        return;
+    }
+
+
+    try {
+
+        /*
+           جلب اهتمام الطفل الحالي
+           من Supabase.
+        */
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from("children")
+
+            .select(
+                "id, interests"
+            )
+
+            .eq(
+                "id",
+                childId
+            )
+
+            .maybeSingle();
+
+
+        /* =====================================
+           SUPABASE ERROR
+        ====================================== */
+
+        if (error) {
+
+            console.error(
+                "❌ Supabase Theme Error:",
+                error
+            );
+
+            return;
+        }
+
+
+        /* =====================================
+           CHILD NOT FOUND
+        ====================================== */
+
+        if (!data) {
+
+            console.warn(
+                "⚠️ لم يتم العثور على الطفل:",
+                childId
+            );
+
+            return;
+        }
+
+
+        console.log(
+            "👦 Current Child:",
+            data
+        );
+
+
+        console.log(
+            "🎯 Interest:",
+            data.interests
+        );
+
+
+        /*
+           تطبيق الثيمة.
+        */
+
+        applyInterestBackground(
+            data.interests
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "❌ Error loading child theme:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   APPLY INTEREST BACKGROUND
+===================================================== */
+
+function applyInterestBackground(interest) {
+
+    const value =
+        String(
+            interest || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    console.log(
+        "🎨 Applying theme for:",
+        value
+    );
+
+
+    /* =====================================
+       🚗 CARS
+    ====================================== */
+
+    if (
+
+        value === "سيارات" ||
+
+        value === "سيارة" ||
+
+        value === "cars" ||
+
+        value === "car"
+
+    ) {
+
+        document.body.style.backgroundImage =
+            'url("images/ak.jpeg")';
+
+
+        console.log(
+            "🚗 تم اختيار خلفية السيارات: images/ak.jpeg"
+        );
+
+
+        return;
+    }
+
+
+    /* =====================================
+       🚀 SPACE
+    ====================================== */
+
+    if (
+
+        value === "فضاء" ||
+
+        value === "الفضاء" ||
+
+        value === "space"
+
+    ) {
+
+        document.body.style.backgroundImage =
+            'url("images/af.jpeg")';
+
+
+        console.log(
+            "🚀 تم اختيار خلفية الفضاء: images/af.jpeg"
+        );
+
+
+        return;
+    }
+
+
+    /* =====================================
+       DEFAULT
+    ====================================== */
+
+    document.body.style.backgroundImage =
+        'url("images/af.jpeg")';
+
+
+    console.warn(
+        "⚠️ قيمة الاهتمام غير معروفة، تم استخدام خلفية الفضاء."
+    );
+
+}
+
+
+/* =====================================================
+   BACK TO SADNESS
+===================================================== */
+
+function goBack() {
+
+    window.location.href =
+        "sad.html";
+
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById(
+            "menu"
+        );
+
+
+    menu.classList.toggle(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   CLOSE MENU
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const container =
+            document.querySelector(
+                ".menu-container"
+            );
+
+
+        if (
+            !container.contains(
+                event.target
+            )
+        ) {
+
+            document
+                .getElementById(
+                    "menu"
+                )
+                .classList.remove(
+                    "show"
+                );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SPEECH
+===================================================== */
+
+function speakAnxiety() {
+
+    if (
+        "speechSynthesis" in window
+    ) {
+
+        window.speechSynthesis.cancel();
+
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                "القلق"
+            );
+
+
+        speech.lang =
+            "ar-SA";
+
+
+        speech.rate =
+            0.8;
+
+
+        speech.pitch =
+            1.1;
+
+
+        window.speechSynthesis.speak(
+            speech
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   NEXT
+===================================================== */
+
+function goNext() {
+
+    window.location.href =
+        "complete-emotions.html";
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        /*
+           قراءة اهتمام الطفل
+           من Supabase فقط.
+        */
+
+        loadChildBackground();
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

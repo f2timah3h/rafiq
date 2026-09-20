@@ -1,0 +1,1908 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>الألوان - رفيق</title>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Arial,
+        sans-serif;
+
+    color: #40566d;
+
+    overflow-x: hidden;
+
+    background-color: #ffffff;
+
+    background-image:
+        url("images/colorin.jpeg");
+
+    background-size:
+        100% auto;
+
+    background-position:
+        center bottom;
+
+    background-repeat:
+        no-repeat;
+
+    background-attachment:
+        fixed;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: 100%;
+
+    min-height: 1366px;
+
+    padding:
+        115px 35px 100px;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content {
+
+    width: 900px;
+
+    max-width: 94vw;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    transform:
+        translateY(280px);
+}
+
+
+/* =====================================================
+   PREVIOUS BUTTON
+===================================================== */
+
+.previous-button {
+
+    position: fixed;
+
+    top: 35px;
+    left: 35px;
+
+    width: 155px;
+    height: 60px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background:
+        #e4f2ff;
+
+    color:
+        #55718b;
+
+    font-family:
+        inherit;
+
+    font-size:
+        21px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(60,80,100,.18);
+
+    z-index:
+        1001;
+
+    transition:
+        .2s ease;
+}
+
+.previous-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        #d8edfc;
+}
+
+.previous-button:active {
+
+    transform:
+        scale(.96);
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-button {
+
+    position: fixed;
+
+    top: 35px;
+    right: 35px;
+
+    width: 65px;
+    height: 65px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,.96);
+
+    color:
+        #55718b;
+
+    font-size:
+        31px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 7px 20px
+        rgba(60,80,100,.18);
+
+    z-index:
+        1000;
+
+    transition:
+        .2s ease;
+}
+
+.menu-button:hover {
+
+    transform:
+        translateY(-3px);
+}
+
+.menu-button:active {
+
+    transform:
+        scale(.95);
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 115px;
+    right: 35px;
+
+    width: 245px;
+
+    padding: 18px;
+
+    border-radius: 28px;
+
+    background:
+        rgba(255,255,255,.97);
+
+    backdrop-filter:
+        blur(12px);
+
+    box-shadow:
+        0 12px 35px
+        rgba(60,80,100,.20);
+
+    transform:
+        translateX(130%);
+
+    opacity:
+        0;
+
+    pointer-events:
+        none;
+
+    transition:
+        .3s ease;
+
+    z-index:
+        999;
+}
+
+.side-menu.show {
+
+    transform:
+        translateX(0);
+
+    opacity:
+        1;
+
+    pointer-events:
+        auto;
+}
+
+.side-menu button {
+
+    width:
+        100%;
+
+    height:
+        58px;
+
+    border:
+        none;
+
+    border-radius:
+        18px;
+
+    background:
+        transparent;
+
+    color:
+        #55718b;
+
+    font-family:
+        inherit;
+
+    font-size:
+        20px;
+
+    font-weight:
+        700;
+
+    text-align:
+        right;
+
+    padding:
+        0 18px;
+
+    margin-bottom:
+        8px;
+
+    cursor:
+        pointer;
+
+    transition:
+        .2s ease;
+}
+
+.side-menu button:hover {
+
+    background:
+        #e4f2ff;
+
+    transform:
+        translateX(-3px);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+
+    width:
+        100%;
+
+    text-align:
+        center;
+
+    margin-bottom:
+        32px;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title {
+
+    display:
+        inline-block;
+
+    margin:
+        15px 0 8px;
+
+    padding:
+        15px 45px;
+
+    border-radius:
+        40px;
+
+    background:
+        rgba(255,255,255,.88);
+
+    box-shadow:
+        0 8px 25px
+        rgba(90,130,160,.10);
+
+    color:
+        #40566d;
+
+    font-size:
+        40px;
+
+    font-weight:
+        900;
+
+    text-align:
+        center;
+}
+
+
+/* =====================================================
+   SUBTITLE
+===================================================== */
+
+.subtitle {
+
+    margin:
+        8px 0 0;
+
+    color:
+        #8296a9;
+
+    font-size:
+        21px;
+
+    font-weight:
+        700;
+
+    text-align:
+        center;
+}
+
+
+/* =====================================================
+   ACTIVITIES
+===================================================== */
+
+.activities {
+
+    width:
+        850px;
+
+    max-width:
+        100%;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        18px;
+}
+
+
+/* =====================================================
+   ACTIVITY CARD
+===================================================== */
+
+.activity {
+
+    position:
+        relative;
+
+    width:
+        100%;
+
+    min-height:
+        145px;
+
+    border-radius:
+        30px;
+
+    border:
+        3px solid
+        rgba(255,255,255,.92);
+
+    display:
+        flex;
+
+    flex-direction:
+        row;
+
+    direction:
+        ltr;
+
+    align-items:
+        center;
+
+    padding:
+        18px 22px;
+
+    box-shadow:
+        0 9px 25px
+        rgba(70,100,120,.14);
+
+    overflow:
+        hidden;
+
+    transition:
+        transform .22s ease,
+        box-shadow .22s ease;
+}
+
+
+/* =====================================================
+   OPEN CARD
+===================================================== */
+
+.activity.open {
+
+    cursor:
+        pointer;
+}
+
+.activity.open:hover {
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 14px 30px
+        rgba(70,100,120,.20);
+}
+
+.activity.open:active {
+
+    transform:
+        scale(.985);
+}
+
+
+/* =====================================================
+   LOCKED CARD
+===================================================== */
+
+.activity.locked {
+
+    cursor:
+        not-allowed;
+
+    opacity:
+        .92;
+}
+
+
+/* =====================================================
+   CARD COLORS
+===================================================== */
+
+.activity-one {
+
+    background:
+        linear-gradient(
+            135deg,
+            #eefbea,
+            #f9fff3
+        );
+}
+
+.activity-two {
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf6ff,
+            #f5fbff
+        );
+}
+
+.activity-three {
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff8df,
+            #fffdf2
+        );
+}
+
+.activity-four {
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5edff,
+            #fcf8ff
+        );
+}
+
+
+/* =====================================================
+   ACTIVITY IMAGE - RIGHT
+===================================================== */
+
+.activity-image {
+
+    order:
+        3;
+
+    width:
+        105px;
+
+    height:
+        105px;
+
+    object-fit:
+        contain;
+
+    flex-shrink:
+        0;
+}
+
+
+/* =====================================================
+   ACTIVITY TEXT - CENTER
+===================================================== */
+
+.activity-text {
+
+    order:
+        2;
+
+    flex:
+        1;
+
+    direction:
+        rtl;
+
+    text-align:
+        right;
+
+    padding:
+        0 25px;
+}
+
+.activity-title {
+
+    margin:
+        0 0 7px;
+
+    color:
+        #40566d;
+
+    font-size:
+        27px;
+
+    font-weight:
+        900;
+
+    line-height:
+        1.35;
+}
+
+.activity-description {
+
+    margin:
+        0;
+
+    color:
+        #7c91a5;
+
+    font-size:
+        17px;
+
+    font-weight:
+        600;
+
+    line-height:
+        1.5;
+}
+
+
+/* =====================================================
+   LEFT AREA
+===================================================== */
+
+.activity-left {
+
+    order:
+        1;
+
+    width:
+        150px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        10px;
+
+    flex-shrink:
+        0;
+}
+
+
+/* =====================================================
+   STARS
+===================================================== */
+
+.stars {
+
+    display:
+        flex;
+
+    direction:
+        ltr;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    gap:
+        4px;
+
+    font-size:
+        27px;
+
+    line-height:
+        1;
+}
+
+.star {
+
+    color:
+        #cfd6dc;
+
+    transition:
+        color .3s ease,
+        transform .3s ease;
+}
+
+.star.active {
+
+    color:
+        #f5cf62;
+
+    transform:
+        scale(1.05);
+}
+
+
+/* =====================================================
+   START BUTTON
+===================================================== */
+
+.start-button {
+
+    border:
+        none;
+
+    border-radius:
+        16px;
+
+    background:
+        #56bd82;
+
+    color:
+        white;
+
+    font-family:
+        inherit;
+
+    font-size:
+        18px;
+
+    font-weight:
+        900;
+
+    padding:
+        8px 23px;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 5px 12px
+        rgba(70,150,100,.18);
+
+    transition:
+        .2s ease;
+}
+
+.start-button:hover {
+
+    transform:
+        scale(1.05);
+
+    background:
+        #48ad74;
+}
+
+.start-button:active {
+
+    transform:
+        scale(.95);
+}
+
+
+/* =====================================================
+   LOCK
+===================================================== */
+
+.lock {
+
+    width:
+        48px;
+
+    height:
+        48px;
+
+    border-radius:
+        50%;
+
+    background:
+        #e4e9ed;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    font-size:
+        22px;
+
+    color:
+        #55718b;
+}
+
+
+/* =====================================================
+   ARROW
+===================================================== */
+
+.arrow {
+
+    position:
+        absolute;
+
+    left:
+        18px;
+
+    bottom:
+        15px;
+
+    width:
+        48px;
+
+    height:
+        48px;
+
+    border-radius:
+        50%;
+
+    background:
+        #aebbc5;
+
+    color:
+        white;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    font-size:
+        28px;
+
+    font-weight:
+        900;
+
+    box-shadow:
+        0 5px 12px
+        rgba(60,80,100,.12);
+}
+
+.activity.open .arrow {
+
+    background:
+        #55bf83;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 767px) {
+
+    .page {
+
+        min-height:
+            100vh;
+
+        padding:
+            90px 15px 100px;
+    }
+
+
+    .content {
+
+    }
+
+
+    .previous-button {
+
+        top:
+            20px;
+
+        left:
+            20px;
+
+        width:
+            125px;
+
+        height:
+            52px;
+
+        font-size:
+            18px;
+    }
+
+
+    .menu-button {
+
+        top:
+            20px;
+
+        right:
+            20px;
+
+        width:
+            55px;
+
+        height:
+            55px;
+
+        font-size:
+            27px;
+    }
+
+
+    .side-menu {
+
+        top:
+            90px;
+
+        right:
+            20px;
+
+        width:
+            220px;
+    }
+
+
+    .title {
+
+        font-size:
+            29px;
+
+        padding:
+            13px 22px;
+    }
+
+
+    .subtitle {
+
+        font-size:
+            17px;
+    }
+
+
+    .activity {
+
+        min-height:
+            125px;
+
+        padding:
+            15px;
+    }
+
+
+    .activity-image {
+
+        width:
+            75px;
+
+        height:
+            75px;
+    }
+
+
+    .activity-text {
+
+        padding:
+            0 15px;
+    }
+
+
+    .activity-title {
+
+        font-size:
+            21px;
+    }
+
+
+    .activity-description {
+
+        font-size:
+            14px;
+    }
+
+
+    .activity-left {
+
+        width:
+            90px;
+    }
+
+
+    .stars {
+
+        font-size:
+            20px;
+    }
+
+
+    .start-button {
+
+        font-size:
+            15px;
+
+        padding:
+            6px 15px;
+    }
+
+
+    .lock {
+
+        width:
+            42px;
+
+        height:
+            42px;
+
+        font-size:
+            20px;
+    }
+
+
+    .arrow {
+
+        width:
+            42px;
+
+        height:
+            42px;
+
+        left:
+            12px;
+
+        bottom:
+            12px;
+
+        font-size:
+            24px;
+    }
+
+}
+
+
+/* =====================================================
+   IPAD PORTRAIT
+===================================================== */
+
+@media
+(min-width: 768px)
+and (max-width: 1100px) {
+
+    .content {
+
+        width:
+            900px;
+
+        max-width:
+            94vw;
+
+        transform:
+            translateY(280px);
+    }
+
+    .activities {
+
+        width:
+            850px;
+
+        max-width:
+            100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     PREVIOUS
+===================================================== -->
+
+<button
+class="previous-button"
+onclick="goBack()">
+
+← السابق
+
+</button>
+
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<button
+class="menu-button"
+id="menuButton"
+onclick="toggleMenu()">
+
+☰
+
+</button>
+
+
+<div
+class="side-menu"
+id="sideMenu">
+
+    <button onclick="goHome()">
+        🏠 الرئيسية
+    </button>
+
+    <button onclick="goProfile()">
+        👤 ملفي
+    </button>
+
+    <button onclick="goProgress()">
+        ⭐ تقدمي
+    </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="page">
+
+<div class="content">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <div class="header">
+
+        <h1 class="title">
+
+            تعلّم الألوان والعب وتسلّى
+
+        </h1>
+
+        <p class="subtitle">
+
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ACTIVITIES
+    ================================================== -->
+
+    <div class="activities">
+
+
+        <!-- =================================================
+             ACTIVITY 1
+        ================================================== -->
+
+        <div
+        id="activity1"
+        class="activity activity-one open"
+        onclick="openActivity(1)">
+
+
+            <!-- LEFT -->
+
+            <div class="activity-left">
+
+                <div class="stars">
+
+                    <span class="star">
+                        ★
+                    </span>
+
+                    <span class="star">
+                        ★
+                    </span>
+
+                    <span class="star">
+                        ★
+                    </span>
+
+                </div>
+
+
+                <button
+                class="start-button"
+                onclick="
+                    event.stopPropagation();
+                    openActivity(1);
+                ">
+
+                    ابدأ!
+
+                </button>
+
+            </div>
+
+
+
+            <!-- CENTER -->
+
+            <div class="activity-text">
+
+                <h2 class="activity-title">
+
+                    تعلّم الألوان
+
+                </h2>
+
+                <p class="activity-description">
+
+                    تعرّف على الألوان الأساسية واستمع إلى نطقها
+
+                </p>
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+
+            <img
+            src="images/1.png"
+            class="activity-image"
+            alt="تعلّم الألوان">
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             ACTIVITY 2
+        ================================================== -->
+
+        <div
+        id="activity2"
+        class="activity activity-two locked">
+
+
+            <!-- LEFT -->
+
+            <div class="activity-left">
+
+                <div class="stars">
+
+                    <span class="star">
+                        ★
+                    </span>
+
+                    <span class="star">
+                        ★
+                    </span>
+
+                    <span class="star">
+                        ★
+                    </span>
+
+                </div>
+
+
+                <div class="lock">
+
+                    🔒
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CENTER -->
+
+            <div class="activity-text">
+
+                <h2 class="activity-title">
+
+                    اختر اللون الصحيح
+
+                </h2>
+
+                <p class="activity-description">
+
+                    اختر اللون المطلوب من بين الخيارات
+
+                </p>
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+
+            <img
+            src="images/2.png"
+            class="activity-image"
+            alt="اختر اللون الصحيح">
+
+
+            <div class="arrow">
+
+                ‹
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ACTIVITY 3
+        ================================================== -->
+
+       <div
+id="activity3"
+class="activity activity-three locked">
+
+    <div class="activity-left">
+
+        <div class="stars">
+
+            <span class="star">★</span>
+            <span class="star">★</span>
+            <span class="star">★</span>
+
+        </div>
+
+        <div class="lock">
+            🔒
+        </div>
+
+    </div>
+
+
+    <div class="activity-text">
+
+        <h2 class="activity-title">
+            صنّف الألوان
+        </h2>
+
+        <p class="activity-description">
+            ضع الأشياء حسب لونها وتعلّم كيف ترتبها
+        </p>
+
+    </div>
+
+
+    <img
+    src="images/3.png"
+    class="activity-image"
+    alt="صنّف الألوان">
+
+
+    <div class="arrow">
+        ‹
+    </div>
+
+</div>
+
+
+
+        <!-- =================================================
+             ACTIVITY 4
+        ================================================== -->
+
+        <div
+        id="activity4"
+        class="activity activity-four locked">
+
+
+            <!-- LEFT -->
+
+            <div class="activity-left">
+
+                <div class="stars">
+
+                    <span class="star">
+                        ★
+                    </span>
+
+                    <span class="star">
+                        ★
+                    </span>
+
+                    <span class="star">
+                        ★
+                    </span>
+
+                </div>
+
+
+                <div class="lock">
+
+                    🔒
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CENTER -->
+
+            <div class="activity-text">
+
+                <h2 class="activity-title">
+
+                    وقت التلوين
+
+                </h2>
+
+                <p class="activity-description">
+
+                    نشاط مفتوح للإبداع وارسم ما تحب بالألوان
+
+                </p>
+
+            </div>
+
+
+
+            <!-- RIGHT -->
+
+            <img
+            src="images/4.png"
+            class="activity-image"
+            alt="وقت التلوين">
+
+
+            <div class="arrow">
+
+                ‹
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</main>
+
+
+
+<script>
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById("sideMenu");
+
+    menu.classList.toggle("show");
+
+}
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const menu =
+            document.getElementById("sideMenu");
+
+        const button =
+            document.getElementById("menuButton");
+
+        if (
+            !menu.contains(event.target) &&
+            !button.contains(event.target)
+        ) {
+
+            menu.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goBack() {
+
+    window.location.href =
+        "games.html";
+
+}
+
+
+function goHome() {
+
+    window.location.href =
+        "home.html";
+
+}
+
+
+function goProfile() {
+
+    alert(
+        "👤 صفحة ملفي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+function goProgress() {
+
+    alert(
+        "⭐ صفحة تقدمي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+/* =====================================================
+   CHECK COMPLETION
+===================================================== */
+
+function isCompleted(activityNumber) {
+
+    /*
+       المرحلة الأولى لها مفتاحان:
+
+       1. colorsStage1Completed
+          هذا الذي تحفظه صفحة الاحتفال.
+
+       2. colorActivity1
+          هذا المفتاح المستخدم لباقي نظام الأنشطة.
+
+       إذا وجدنا أن المرحلة الأولى اكتملت،
+       نحفظها أيضًا باسم colorActivity1.
+    */
+
+    if (
+        activityNumber === 1 &&
+        localStorage.getItem(
+            "colorsStage1Completed"
+        ) === "true"
+    ) {
+
+        localStorage.setItem(
+            "colorActivity1",
+            "completed"
+        );
+
+        return true;
+
+    }
+
+
+    /*
+       التحقق من باقي الأنشطة
+    */
+
+    return localStorage.getItem(
+        "colorActivity" + activityNumber
+    ) === "completed";
+
+}
+
+
+/* =====================================================
+   SET STARS
+===================================================== */
+
+function setStars(
+    activityNumber,
+    completed
+) {
+
+    const stars =
+        document.querySelectorAll(
+            "#activity" +
+            activityNumber +
+            " .star"
+        );
+
+    stars.forEach(function(star) {
+
+        if (completed) {
+
+            star.classList.add("active");
+
+        } else {
+
+            star.classList.remove("active");
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   UPDATE ACTIVITIES
+===================================================== */
+
+function updateActivities() {
+
+
+    /* =================================================
+       ACTIVITY 1
+    ================================================= */
+
+    setStars(
+        1,
+        isCompleted(1)
+    );
+
+
+    /* =================================================
+       ACTIVITY 2
+    ================================================= */
+
+    const activity2 =
+        document.getElementById(
+            "activity2"
+        );
+
+
+    if (isCompleted(1)) {
+
+        activity2.classList.remove(
+            "locked"
+        );
+
+        activity2.classList.add(
+            "open"
+        );
+
+        activity2.onclick =
+            function() {
+
+                openActivity(2);
+
+            };
+
+
+        const lock2 =
+            activity2.querySelector(
+                ".lock"
+            );
+
+        if (lock2) {
+
+            lock2.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    /* =================================================
+       ACTIVITY 3
+    ================================================= */
+
+    const activity3 =
+        document.getElementById(
+            "activity3"
+        );
+
+
+    if (isCompleted(2)) {
+
+        activity3.classList.remove(
+            "locked"
+        );
+
+        activity3.classList.add(
+            "open"
+        );
+
+        activity3.onclick =
+            function() {
+
+                openActivity(3);
+
+            };
+
+
+        const lock3 =
+            activity3.querySelector(
+                ".lock"
+            );
+
+        if (lock3) {
+
+            lock3.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    /* =================================================
+       ACTIVITY 4
+    ================================================= */
+
+    const activity4 =
+        document.getElementById(
+            "activity4"
+        );
+
+
+    if (isCompleted(3)) {
+
+        activity4.classList.remove(
+            "locked"
+        );
+
+        activity4.classList.add(
+            "open"
+        );
+
+        activity4.onclick =
+            function() {
+
+                openActivity(4);
+
+            };
+
+
+        const lock4 =
+            activity4.querySelector(
+                ".lock"
+            );
+
+        if (lock4) {
+
+            lock4.style.display =
+                "none";
+
+        }
+
+    }
+
+
+    /* =================================================
+       COMPLETED STARS
+    ================================================= */
+
+    setStars(
+        2,
+        isCompleted(2)
+    );
+
+    setStars(
+        3,
+        isCompleted(3)
+    );
+
+    setStars(
+        4,
+        isCompleted(4)
+    );
+
+}
+
+
+/* =====================================================
+   OPEN ACTIVITY
+===================================================== */
+
+function openActivity(activity) {
+
+
+    /* -------------------------------------------------
+       ACTIVITY 1
+    ------------------------------------------------- */
+
+    if (activity === 1) {
+
+        window.location.href =
+            "red-colors.html";
+
+    }
+
+
+    /* -------------------------------------------------
+       ACTIVITY 2
+    ------------------------------------------------- */
+
+    else if (
+        activity === 2 &&
+        isCompleted(1)
+    ) {
+
+        window.location.href =
+            "choose-color.html";
+
+    }
+
+
+    /* -------------------------------------------------
+       ACTIVITY 3
+    ------------------------------------------------- */
+
+    else if (
+        activity === 3 &&
+        isCompleted(2)
+    ) {
+
+        window.location.href =
+            "sort-colors.html";
+
+    }
+
+
+    /* -------------------------------------------------
+       ACTIVITY 4
+    ------------------------------------------------- */
+
+    else if (
+        activity === 4 &&
+        isCompleted(3)
+    ) {
+
+        window.location.href =
+            "coloring.html";
+
+    }
+
+}
+
+
+/* =====================================================
+   LOAD
+===================================================== */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        updateActivities();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

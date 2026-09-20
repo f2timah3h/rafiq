@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>رفيق - المشاعر</title>
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    direction: rtl;
+}
+
+body {
+
+    min-height: 100vh;
+
+    background-image:
+        url("images/emotion.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    color: #555;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding:
+        40px 35px 70px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   TOP MENU BUTTON
+========================= */
+
+.menu-button {
+
+    position: fixed;
+
+    top: 35px;
+
+    right: 35px;
+
+    width: 65px;
+
+    height: 65px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.82);
+
+    box-shadow:
+        0 6px 18px
+        rgba(70,80,90,0.15);
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    z-index: 1000;
+
+    transition: 0.2s ease;
+}
+
+.menu-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(255,255,255,0.95);
+}
+
+.menu-button:active {
+
+    transform:
+        scale(0.95);
+}
+
+
+/* =========================
+   SIDE MENU
+========================= */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 110px;
+
+    right: 35px;
+
+    width: 245px;
+
+    padding: 12px;
+
+    background:
+        rgba(255,255,255,0.94);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(60,70,80,0.18);
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    z-index: 999;
+
+    display: none;
+}
+
+.side-menu.show {
+
+    display: block;
+
+    animation:
+        menuAppear 0.2s ease;
+}
+
+
+@keyframes menuAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-8px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================
+   SIDE MENU ITEM
+========================= */
+
+.side-item {
+
+    width: 100%;
+
+    height: 60px;
+
+    border: none;
+
+    border-radius: 17px;
+
+    background: transparent;
+
+    font-family: inherit;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    color: #555;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 12px;
+
+    padding:
+        0 18px;
+
+    transition: 0.2s ease;
+}
+
+.side-item:hover {
+
+    background:
+        #e4f2ff;
+}
+
+.side-item:active {
+
+    transform:
+        scale(0.98);
+}
+
+.side-icon {
+
+    font-size: 25px;
+}
+
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.content {
+
+    width: min(850px, 94vw);
+
+    margin:
+        0 auto;
+
+    text-align: center;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title {
+
+    margin-top: 90px;
+
+    margin-bottom: 50px;
+
+    color: #555;
+
+    font-size: 36px;
+
+    font-weight: 800;
+
+    text-shadow:
+        0 2px 4px
+        rgba(255,255,255,0.55);
+}
+
+
+/* =========================
+   EMOTION BUTTONS
+========================= */
+
+.emotions-menu {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.emotion-button {
+
+    width: 520px;
+
+    max-width: 90%;
+
+    height: 82px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background:
+        #e4f2ff;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(70,100,120,0.13);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.emotion-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 22px
+        rgba(70,100,120,0.18);
+}
+
+
+.emotion-button:active {
+
+    transform:
+        scale(0.97);
+}
+
+
+/* =========================
+   BOTTOM DECORATION SPACE
+========================= */
+
+.bottom-space {
+
+    height: 310px;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   IPAD PORTRAIT
+========================= */
+
+@media (min-width: 768px) {
+
+    .page {
+
+        min-height: 1366px;
+
+        padding-top:250px;
+    }
+
+    .content {
+
+        width: 850px;
+    }
+
+    .title {
+
+        margin-top: 100px;
+
+        font-size: 38px;
+
+        margin-bottom: 52px;
+    }
+
+    .emotion-button {
+
+        width: 520px;
+
+        height: 82px;
+
+        font-size: 25px;
+    }
+
+}
+
+
+/* =========================
+   SMALL SCREEN
+========================= */
+
+@media (max-width: 600px) {
+
+    .page {
+
+        padding:
+            25px 15px 50px;
+    }
+
+    .menu-button {
+
+        top: 20px;
+
+        right: 20px;
+
+        width: 55px;
+
+        height: 55px;
+
+        font-size: 26px;
+    }
+
+    .side-menu {
+
+        top: 85px;
+
+        right: 20px;
+
+        width: 220px;
+    }
+
+    .title {
+
+        margin-top: 80px;
+
+        font-size: 29px;
+
+        margin-bottom: 40px;
+    }
+
+    .emotion-button {
+
+        width: 100%;
+
+        max-width: 430px;
+
+        height: 70px;
+
+        font-size: 21px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     TOP MENU BUTTON
+========================= -->
+
+<button
+    class="menu-button"
+    id="menuButton"
+    onclick="toggleMenu()"
+    aria-label="فتح القائمة">
+
+    ☰
+
+</button>
+
+
+<!-- =========================
+     SIDE MENU
+========================= -->
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+
+    <button
+        class="side-item"
+        onclick="goHome()">
+
+        <span class="side-icon">
+            🏠
+        </span>
+
+        <span>
+            الرئيسية
+        </span>
+
+    </button>
+
+
+    <button
+        class="side-item"
+        onclick="goProfile()">
+
+        <span class="side-icon">
+            👤
+        </span>
+
+        <span>
+            ملفي
+        </span>
+
+    </button>
+
+
+    <button
+        class="side-item"
+        onclick="goProgress()">
+
+        <span class="side-icon">
+            ⭐
+        </span>
+
+        <span>
+            تقدمي
+        </span>
+
+    </button>
+
+
+</div>
+
+
+<!-- =========================
+     PAGE
+========================= -->
+
+<div class="page">
+
+
+    <main class="content">
+
+
+        <!-- TITLE -->
+
+        
+
+
+        <!-- =========================
+             EMOTIONS MENU
+        ========================= -->
+
+        <div class="emotions-menu">
+
+
+            <!-- LEARN -->
+
+            <button
+                class="emotion-button"
+                onclick="window.location.href='happy.html'">
+
+                تعلم المشاعر
+
+            </button>
+
+
+            <!-- PRACTICE -->
+
+            <button
+                class="emotion-button"
+                onclick="window.location.href=">
+
+                التدريب على المشاعر
+
+            </button>
+
+
+            <!-- EVENTS -->
+
+            <button
+                class="emotion-button"
+                onclick=window.location.href='choose-emotion.html'">
+
+                ربط الأحداث بالمشاعر
+
+            </button>
+
+
+            <!-- FACE -->
+
+            <button
+                class="emotion-button"
+                onclick="showFace()">
+
+                ارسم الشعور
+
+            </button>
+
+
+        </div>
+
+
+        <div class="bottom-space"></div>
+
+
+    </main>
+
+</div>
+
+
+<script>
+
+/* =========================
+   TOP MENU
+========================= */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById("sideMenu");
+
+    menu.classList.toggle("show");
+
+}
+
+
+/* =========================
+   CLOSE MENU WHEN CLICKING
+   OUTSIDE
+========================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const menu =
+            document.getElementById("sideMenu");
+
+        const button =
+            document.getElementById("menuButton");
+
+
+        if (
+            !menu.contains(event.target) &&
+            !button.contains(event.target)
+        ) {
+
+            menu.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function goHome() {
+
+    window.location.href =
+        "home.html";
+
+}
+
+
+function goProfile() {
+
+    alert(
+        "👤 صفحة ملفي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+function goProgress() {
+
+    alert(
+        "⭐ صفحة تقدمي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+/* =========================
+   EMOTIONS PAGES
+========================= */
+
+function learnEmotions() {
+
+    alert(
+        "😊 تعلم المشاعر\n\nسنصمم الصفحة الآن."
+    );
+
+}
+
+
+function practiceEmotions() {
+
+    alert(
+        "🎯 التدريب على المشاعر\n\nسنصمم الصفحة الآن."
+    );
+
+}
+
+
+function linkEvents() {
+
+    alert(
+        "🔗 ربط الأحداث بالمشاعر\n\nسنصمم الصفحة الآن."
+    );
+
+}
+
+
+function showFace() {
+
+    alert(
+        "😊 ارسم الشعور\n\nسنصمم الصفحة الآن."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

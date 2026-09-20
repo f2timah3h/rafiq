@@ -1,0 +1,2358 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>وقت الانتظار - رفيق</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+/* =====================================================
+   الأساس
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    direction: rtl;
+}
+
+body {
+
+    background-color: #ffffff;
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    visibility: hidden;
+}
+
+/* =====================================================
+   بعد تحميل الخلفية
+===================================================== */
+
+body.theme-ready {
+
+    visibility: visible;
+
+}
+
+/* =====================================================
+   الصفحة
+===================================================== */
+
+.page {
+
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+}
+
+/* =====================================================
+   الزخارف
+===================================================== */
+
+.decor {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    opacity: 0.35;
+}
+
+.decor1 {
+
+    width: 180px;
+    height: 180px;
+
+    background: #e4f2ff;
+
+    top: -70px;
+    left: -60px;
+}
+
+.decor2 {
+
+    width: 150px;
+    height: 150px;
+
+    background: #fff0f5;
+
+    bottom: -60px;
+    right: -50px;
+}
+
+/* =====================================================
+   زر السابق
+===================================================== */
+
+.previous-button {
+
+    position: fixed;
+
+    top: 18px;
+    left: 18px;
+
+    z-index: 5000;
+
+    width: 58px;
+    height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.96);
+
+    color: #5B78B8;
+
+    font-size: 38px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 5px 18px
+        rgba(70,110,160,0.14);
+
+    cursor: pointer;
+}
+
+.previous-button:active {
+
+    transform: scale(0.93);
+}
+
+/* =====================================================
+   القائمة
+===================================================== */
+
+.menu-wrapper {
+
+    position: fixed;
+
+    top: 18px;
+    right: 18px;
+
+    z-index: 5000;
+}
+
+.menu-button {
+
+    width: 58px;
+    height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background: rgba(255,255,255,0.96);
+
+    color: #5B78B8;
+
+    font-size: 30px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(70,110,160,0.14);
+
+    cursor: pointer;
+}
+
+.menu-button:active {
+
+    transform: scale(0.93);
+}
+
+/* =====================================================
+   القائمة المنسدلة
+===================================================== */
+
+.dropdown-menu {
+
+    position: absolute;
+
+    top: 67px;
+    right: 0;
+
+    width: 190px;
+
+    padding: 8px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(50,80,120,0.18);
+
+    display: none;
+}
+
+.dropdown-menu.show {
+
+    display: block;
+}
+
+.menu-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px;
+
+    border-radius: 14px;
+
+    text-decoration: none;
+
+    color: #536B91;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+.menu-item:active {
+
+    background: #e4f2ff;
+}
+
+.menu-icon {
+
+    font-size: 22px;
+}
+
+/* =====================================================
+   المحتوى
+===================================================== */
+
+.content {
+
+    position: relative;
+
+    z-index: 10;
+
+    width: 100%;
+    height: 100%;
+
+    padding:
+        85px 25px 20px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+/* =====================================================
+   العنوان
+===================================================== */
+
+.page-title {
+
+    flex-shrink: 0;
+
+    font-size: 34px;
+
+    font-weight: bold;
+
+    color: #5B78B8;
+
+    margin-bottom: 8px;
+
+    text-align: center;
+}
+
+/* =====================================================
+   عداد الخطوات
+===================================================== */
+
+.step-counter {
+
+    flex-shrink: 0;
+
+    padding: 6px 17px;
+
+    border-radius: 20px;
+
+    background: #e4f2ff;
+
+    color: #5B78B8;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+}
+
+/* =====================================================
+   منطقة القصة
+===================================================== */
+
+.story-area {
+
+    width: 100%;
+
+    max-width: 1000px;
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+/* =====================================================
+   الفيديو
+===================================================== */
+
+.video-container {
+
+    width: min(900px, 90vw);
+
+    max-height: 55vh;
+
+    border-radius: 28px;
+
+    overflow: hidden;
+
+    background: #eef7ff;
+
+    border: 4px solid white;
+
+    box-shadow:
+        0 8px 25px
+        rgba(70,110,160,0.15);
+
+    transform:
+        translateY(-150px);
+}
+
+.story-video {
+
+    display: block;
+
+    width: 100%;
+
+    max-height: 55vh;
+
+    object-fit: contain;
+
+    background: #eef7ff;
+}
+
+/* =====================================================
+   النص
+===================================================== */
+
+.story-text {
+
+    width: 50%;
+
+    margin-top: 14px;
+
+    padding: 13px 22px;
+
+    border-radius: 24px;
+
+    background: #e4f2ff;
+
+    color: #40566D;
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+    line-height: 1.6;
+
+    text-align: center;
+
+    transform:
+        translateY(75px);
+}
+
+/* =====================================================
+   السؤال
+===================================================== */
+
+.question-box {
+
+    width: min(950px, 92vw);
+
+    padding: 22px;
+
+    border-radius: 30px;
+
+    background: white;
+
+    box-shadow:
+        0 8px 25px
+        rgba(70,110,160,0.12);
+
+    text-align: center;
+}
+
+/* =====================================================
+   السؤال + المايك
+===================================================== */
+
+.question-row {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 16px;
+
+    margin-bottom: 22px;
+}
+
+.question {
+
+    flex: 1;
+
+    font-size: 28px;
+
+    line-height: 1.6;
+
+    color: #40566D;
+
+    font-weight: bold;
+
+    margin: 0;
+}
+
+/* =====================================================
+   زر المايك
+===================================================== */
+
+.mic-button {
+
+    flex-shrink: 0;
+
+    width: 70px;
+    height: 70px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #e4f2ff;
+
+    font-size: 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px
+        rgba(70,110,160,0.15);
+
+    transition:
+        transform 0.15s,
+        background 0.15s;
+}
+
+.mic-button:active {
+
+    transform: scale(0.90);
+}
+
+.mic-button.speaking {
+
+    background: #d8f5e2;
+
+    transform: scale(1.08);
+}
+
+/* =====================================================
+   الإجابات
+===================================================== */
+
+.answers {
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+.answer-button {
+
+    min-height: 105px;
+
+    padding: 15px;
+
+    border: 3px solid #e4f2ff;
+
+    border-radius: 25px;
+
+    background: #f7fbff;
+
+    color: #4B6385;
+
+    font-family: inherit;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    line-height: 1.5;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s,
+        background 0.15s;
+}
+
+.answer-button:active {
+
+    transform: scale(0.96);
+}
+
+.answer-button.correct {
+
+    background: #e8f9ee;
+
+    border-color: #55C878;
+
+    color: #34894f;
+}
+
+.answer-button.wrong {
+
+    background: #fff0f2;
+
+    border-color: #ff9aa5;
+
+    color: #c75a66;
+}
+
+/* =====================================================
+   التغذية الراجعة
+===================================================== */
+
+.feedback {
+
+    width: min(850px, 90vw);
+
+    margin-top: 12px;
+
+    padding: 12px 20px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    display: none;
+}
+
+.feedback.show {
+
+    display: block;
+}
+
+.feedback.good {
+
+    background: #e8f9ee;
+
+    color: #34894f;
+}
+
+.feedback.bad {
+
+    background: #fff2f4;
+
+    color: #b85a65;
+}
+
+/* =====================================================
+   النهاية
+===================================================== */
+
+.final-message {
+
+    width: min(850px, 90vw);
+
+    padding: 35px 30px;
+
+    border-radius: 35px;
+
+    background: white;
+
+    box-shadow:
+        0 10px 35px
+        rgba(70,110,160,0.15);
+
+    text-align: center;
+}
+
+.final-icon {
+
+    font-size: 70px;
+
+    margin-bottom: 10px;
+}
+
+.final-title {
+
+    font-size: 36px;
+
+    font-weight: bold;
+
+    color: #5B78B8;
+
+    margin-bottom: 18px;
+}
+
+.final-text {
+
+    font-size: 24px;
+
+    line-height: 1.8;
+
+    color: #536B91;
+
+    font-weight: bold;
+}
+
+/* =====================================================
+   زر التالي
+===================================================== */
+
+.next-button {
+
+    flex-shrink: 0;
+
+    margin-top: 10px;
+
+    min-width: 210px;
+
+    padding: 12px 32px;
+
+    border: none;
+
+    border-radius: 25px;
+
+    background: #e4f2ff;
+
+    color: #4D6E9F;
+
+    font-family: inherit;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 5px 15px
+        rgba(70,130,180,0.15);
+
+    cursor: pointer;
+}
+
+.next-button:active {
+
+    transform: scale(0.96);
+}
+
+/* =====================================================
+   مخفي
+===================================================== */
+
+.hidden {
+
+    display: none !important;
+}
+
+/* =====================================================
+   الآيباد بالطول
+===================================================== */
+
+@media (orientation: portrait) {
+
+    .content {
+
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .video-container {
+
+        width: 90vw;
+
+        max-height: 48vh;
+
+        transform:
+            translateY(-100px);
+    }
+
+    .story-video {
+
+        max-height: 48vh;
+    }
+
+    .story-text {
+
+        font-size: 21px;
+
+        padding: 12px 18px;
+
+        transform:
+            translateY(-75px);
+    }
+
+    .question {
+
+        font-size: 24px;
+    }
+
+    .answer-button {
+
+        min-height: 92px;
+
+        font-size: 18px;
+    }
+}
+
+/* =====================================================
+   الشاشات الصغيرة
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .page-title {
+
+        font-size: 27px;
+    }
+
+    .question-row {
+
+        gap: 9px;
+    }
+
+    .mic-button {
+
+        width: 58px;
+        height: 58px;
+
+        font-size: 27px;
+    }
+
+    .answers {
+
+        grid-template-columns: 1fr;
+
+        gap: 8px;
+    }
+
+    .answer-button {
+
+        min-height: 65px;
+    }
+
+    .story-text {
+
+        font-size: 19px;
+
+        transform:
+            translateY(-75px);
+    }
+
+    .question {
+
+        font-size: 21px;
+    }
+
+    .video-container {
+
+        transform:
+            translateY(-100px);
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="decor decor1"></div>
+
+    <div class="decor decor2"></div>
+
+    <button
+        class="previous-button"
+        id="previousButton"
+        aria-label="السابق">
+
+        ‹
+
+    </button>
+
+    <div class="menu-wrapper">
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="القائمة">
+
+            ☰
+
+        </button>
+
+        <div
+            class="dropdown-menu"
+            id="dropdownMenu">
+
+            <a
+                href="index.html"
+                class="menu-item">
+
+                <span class="menu-icon">
+                    🏠
+                </span>
+
+                <span>
+                    الرئيسية
+                </span>
+
+            </a>
+
+            <a
+                href="reports.html"
+                class="menu-item">
+
+                <span class="menu-icon">
+                    📊
+                </span>
+
+                <span>
+                    تقاريري
+                </span>
+
+            </a>
+
+            <a
+                href="progress.html"
+                class="menu-item">
+
+                <span class="menu-icon">
+                    ⭐
+                </span>
+
+                <span>
+                    تقدمي
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <main class="content">
+
+        <div class="page-title"></div>
+
+        <div
+            class="step-counter"
+            id="stepCounter">
+
+            ١ / ١١
+
+        </div>
+
+        <div
+            class="story-area"
+            id="storyArea">
+
+        </div>
+
+        <button
+            class="next-button"
+            id="nextButton">
+
+            التالي ›
+
+        </button>
+
+    </main>
+
+</div>
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://ciwrwmutcrarwtounelg.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+/* =====================================================
+   GET CURRENT CHILD ID
+===================================================== */
+
+function getCurrentChildId() {
+
+    return localStorage.getItem(
+        "rafiqChildId"
+    );
+
+}
+
+/* =====================================================
+   ثيم الطفل
+===================================================== */
+
+let childTheme = "space";
+
+let childBackground =
+    "images/1166.jpeg";
+
+let questionBackground =
+    "images/1199.jpeg";
+
+/* =====================================================
+   PRELOAD BACKGROUND
+===================================================== */
+
+function preloadBackground(
+    imagePath
+) {
+
+    return new Promise(
+        function(resolve) {
+
+            const image =
+                new Image();
+
+            image.onload =
+                function() {
+
+                    resolve(true);
+
+                };
+
+            image.onerror =
+                function() {
+
+                    console.warn(
+                        "تعذر تحميل الخلفية:",
+                        imagePath
+                    );
+
+                    resolve(false);
+
+                };
+
+            image.src =
+                imagePath;
+
+        }
+    );
+
+}
+
+/* =====================================================
+   APPLY BACKGROUND
+===================================================== */
+
+async function applyBackground(
+    imagePath
+) {
+
+    await preloadBackground(
+        imagePath
+    );
+
+    document.body.style.backgroundImage =
+        'url("' +
+        imagePath +
+        '")';
+
+    document.body.classList.add(
+        "theme-ready"
+    );
+
+}
+
+/* =====================================================
+   LOAD CHILD INTEREST
+===================================================== */
+
+async function loadChildInterest() {
+
+    const childId =
+        getCurrentChildId();
+
+    if (!childId) {
+
+        console.warn(
+            "rafiqChildId غير موجود"
+        );
+
+        childTheme =
+            "space";
+
+        childBackground =
+            "images/1166.jpeg";
+
+        questionBackground =
+            "images/1199.jpeg";
+
+        await preloadBackground(
+            questionBackground
+        );
+
+        await applyBackground(
+            childBackground
+        );
+
+        return;
+
+    }
+
+    try {
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from("children")
+
+            .select("interests")
+
+            .eq(
+                "id",
+                childId
+            )
+
+            .maybeSingle();
+
+        if (error) {
+
+            console.error(
+                "Supabase Error:",
+                error
+            );
+
+            childTheme =
+                "space";
+
+            childBackground =
+                "images/1166.jpeg";
+
+            questionBackground =
+                "images/1199.jpeg";
+
+            await preloadBackground(
+                questionBackground
+            );
+
+            await applyBackground(
+                childBackground
+            );
+
+            return;
+
+        }
+
+        if (!data) {
+
+            console.warn(
+                "لم يتم العثور على الطفل"
+            );
+
+            childTheme =
+                "space";
+
+            childBackground =
+                "images/1166.jpeg";
+
+            questionBackground =
+                "images/1199.jpeg";
+
+            await preloadBackground(
+                questionBackground
+            );
+
+            await applyBackground(
+                childBackground
+            );
+
+            return;
+
+        }
+
+        let interest =
+            data.interests;
+
+        if (
+            interest !== null &&
+            interest !== undefined
+        ) {
+
+            interest =
+                String(interest)
+                    .trim()
+                    .toLowerCase();
+
+        }
+
+        console.log(
+            "Child Interest:",
+            interest
+        );
+
+        /* =========================
+           سيارات
+        ========================= */
+
+        if (
+
+            interest === "سيارات" ||
+
+            interest === "سيارة" ||
+
+            interest === "cars" ||
+
+            interest === "car"
+
+        ) {
+
+            childTheme =
+                "car";
+
+            childBackground =
+                "images/1167.jpeg";
+
+            questionBackground =
+                "images/1188.jpeg";
+
+            await preloadBackground(
+                questionBackground
+            );
+
+            await applyBackground(
+                childBackground
+            );
+
+            return;
+
+        }
+
+        /* =========================
+           فضاء
+        ========================= */
+
+        if (
+
+            interest === "فضاء" ||
+
+            interest === "space"
+
+        ) {
+
+            childTheme =
+                "space";
+
+            childBackground =
+                "images/1166.jpeg";
+
+            questionBackground =
+                "images/1199.jpeg";
+
+            await preloadBackground(
+                questionBackground
+            );
+
+            await applyBackground(
+                childBackground
+            );
+
+            return;
+
+        }
+
+        /* =========================
+           الافتراضي
+        ========================= */
+
+        childTheme =
+            "space";
+
+        childBackground =
+            "images/1166.jpeg";
+
+        questionBackground =
+            "images/1199.jpeg";
+
+        await preloadBackground(
+            questionBackground
+        );
+
+        await applyBackground(
+            childBackground
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Unexpected Error:",
+            error
+        );
+
+        childTheme =
+            "space";
+
+        childBackground =
+            "images/1166.jpeg";
+
+        questionBackground =
+            "images/1199.jpeg";
+
+        await preloadBackground(
+            questionBackground
+        );
+
+        await applyBackground(
+            childBackground
+        );
+
+    }
+
+}
+
+/* =====================================================
+   الحالة
+===================================================== */
+
+let currentStep = 0;
+
+let selectedAnswer = false;
+
+/* =====================================================
+   عناصر الصفحة
+===================================================== */
+
+const storyArea =
+    document.getElementById(
+        "storyArea"
+    );
+
+const nextButton =
+    document.getElementById(
+        "nextButton"
+    );
+
+const stepCounter =
+    document.getElementById(
+        "stepCounter"
+    );
+
+const previousButton =
+    document.getElementById(
+        "previousButton"
+    );
+
+/* =====================================================
+   خطوات القصة
+===================================================== */
+
+const steps = [
+
+    {
+        type: "video",
+
+        video: "videos/v1.mp4",
+
+        text:
+            "قررت هذه العائلة الذهاب إلى مطعمها المفضّل."
+    },
+
+    {
+        type: "video",
+
+        video: "videos/v2.mp4",
+
+        text:
+            "عندما دخلوا المطعم، وجدوا المكان مزدحمًا بالناس."
+    },
+
+    {
+        type: "question",
+
+        question:
+            "برأيك، ماذا يجب على الطفل أن يفعل في هذه اللحظة؟",
+
+        answers: [
+
+            {
+                text:
+                    "يخرج من المطعم",
+
+                correct: false,
+
+                feedback:
+                    "ولكن الطفل يريد تناول طعامه المفضّل! 🍔💛"
+            },
+
+            {
+                text:
+                    "يصرخ ويبكي",
+
+                correct: false,
+
+                feedback:
+                    "لكن الصراخ والبكاء قد يسببان إزعاجًا للآخرين. 🌷"
+            },
+
+            {
+                text:
+                    "ينتظر دوره مع والديه ويقف معهم في الطابور",
+
+                correct: true,
+
+                feedback:
+                    "أحسنت! ننتظر دورنا بهدوء مع والدينا. ⭐"
+            }
+
+        ]
+    },
+
+    {
+        type: "video",
+
+        video: "videos/v3.mp4",
+
+        text:
+            "وقف الطفل مع والديه في الطابور، وانتظر دوره بهدوء."
+    },
+
+    {
+        type: "video",
+
+        video: "videos/v4.mp4",
+
+        text:
+            "وأخيرًا، حان دورهم واستلموا رقم طلبهم! 🎉"
+    },
+
+    {
+        type: "video",
+
+        video: "videos/v5.mp4",
+
+        text:
+            "الآن حان وقت الانتظار حتى يصبح الطلب جاهزًا."
+    },
+
+    {
+        type: "question",
+
+        question:
+            "برأيك، ماذا يجب على الطفل أن يفعل في وقت الانتظار؟",
+
+        answers: [
+
+            {
+                text:
+                    "يجلس بهدوء وينتظر رقمه",
+
+                correct: true,
+
+                feedback:
+                    "أحسنت! الجلوس بهدوء وانتظار الرقم يساعدنا على الانتظار بطريقة مريحة. ⭐"
+            },
+
+            {
+                text:
+                    "يركض بين الناس",
+
+                correct: false,
+
+                feedback:
+                    "الركض بين الناس قد يسبب إزعاجًا أو يجعل المكان غير آمن. لننتظر بهدوء. 🌷"
+            },
+
+            {
+                text:
+                    "يصرخ لأنه يريد الطعام",
+
+                correct: false,
+
+                feedback:
+                    "أفهم أنك تريد طعامك، لكن الصراخ لن يجعل الطلب جاهزًا أسرع. لننتظر بهدوء. 💛"
+            }
+
+        ]
+    },
+
+    {
+        type: "video",
+
+        video: "videos/v6.mp4",
+
+        text: ""
+    },
+
+    {
+        type: "video",
+
+        video: "videos/v7.mp4",
+
+        text: ""
+    },
+
+    {
+        type: "question",
+
+        question:
+            "برأيك، ما هو شعور الطفل بعدما انتظر؟",
+
+        answers: [
+
+            {
+                text:
+                    "سعيد، وكان الأمر يستحق الانتظار 😊",
+
+                correct: true,
+
+                feedback:
+                    "أحسنت! انتظر الطفل بهدوء، وفي النهاية حصل على طعامه المفضّل. 🌟"
+            },
+
+            {
+                text:
+                    "قلق، لأن المكان لا يناسبه",
+
+                correct: false,
+
+                feedback:
+                    "قد يكون المكان مزدحمًا، لكن الطفل تعلّم كيف ينتظر ويتعامل مع الموقف بهدوء. 💛"
+            },
+
+            {
+                text:
+                    "حزين وندم على الانتظار",
+
+                correct: false,
+
+                feedback:
+                    "لقد انتظر الطفل بهدوء، وفي النهاية حصل على ما كان يريده. الانتظار كان يستحق ذلك! 🌈"
+            }
+
+        ]
+    },
+
+    {
+        type: "final",
+
+        title:
+            "أحسنت! 🌟",
+
+        text:
+            "لقد تعلمنا اليوم كيف ننتظر دورنا بهدوء في الأماكن المزدحمة، وكيف نتحلى بالصبر حتى يأتي دورنا ونحصل على ما نريد. 💛"
+    }
+
+];
+
+/* =====================================================
+   تحويل الأرقام
+===================================================== */
+
+function arabicNumber(number) {
+
+    return String(number).replace(
+        /\d/g,
+        digit =>
+            "٠١٢٣٤٥٦٧٨٩"[digit]
+    );
+
+}
+
+/* =====================================================
+   إيقاف القراءة
+===================================================== */
+
+function stopSpeech() {
+
+    if (
+        "speechSynthesis" in window
+    ) {
+
+        speechSynthesis.cancel();
+
+    }
+
+}
+
+/* =====================================================
+   قراءة النص
+===================================================== */
+
+function speak(text) {
+
+    if (
+        !text ||
+        !("speechSynthesis" in window)
+    ) {
+
+        return;
+
+    }
+
+    speechSynthesis.cancel();
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+    utterance.lang =
+        "ar-SA";
+
+    utterance.rate =
+        0.82;
+
+    utterance.pitch =
+        1.05;
+
+    speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+/* =====================================================
+   تحديث زر السابق
+===================================================== */
+
+function updatePreviousButton() {
+
+    previousButton.style.opacity =
+        "1";
+
+}
+
+/* =====================================================
+   تشغيل الفيديو
+===================================================== */
+
+function startVideo(video) {
+
+    /*
+       محاولة التشغيل التلقائي
+       يبدأ مكتومًا حتى يسمح iPad/Safari
+       بالتشغيل التلقائي
+    */
+
+    video.muted = true;
+
+    video.play()
+        .then(
+            function() {
+
+                /*
+                   الفيديو بدأ بالفعل.
+                   نحاول تشغيل الصوت بعد ذلك.
+                */
+
+                setTimeout(
+                    function() {
+
+                        video.muted = false;
+
+                        video.play()
+                            .catch(
+                                function() {
+
+                                    /*
+                                       إذا منع Safari الصوت،
+                                       يبقى الفيديو شغالًا Loop.
+                                    */
+
+                                }
+                            );
+
+                    },
+                    100
+                );
+
+            }
+        )
+        .catch(
+            function() {
+
+                /*
+                   إذا منع المتصفح التشغيل،
+                   أول لمسة من الطفل تشغله.
+                */
+
+                const startAfterTouch =
+                    function() {
+
+                        video.muted = false;
+
+                        video.play()
+                            .catch(
+                                function() {}
+                            );
+
+                    };
+
+                document.addEventListener(
+                    "pointerdown",
+                    startAfterTouch,
+                    {
+                        once: true
+                    }
+                );
+
+            }
+        );
+
+}
+
+/* =====================================================
+   عرض الخطوة
+===================================================== */
+
+function renderStep() {
+
+    stopSpeech();
+
+    selectedAnswer = false;
+
+    const step =
+        steps[currentStep];
+
+    /* =================================================
+       تغيير الخلفية حسب نوع الصفحة
+    ================================================= */
+
+    if (
+        step.type === "question"
+    ) {
+
+        document.body.style.backgroundImage =
+            'url("' +
+            questionBackground +
+            '")';
+
+    }
+
+    else {
+
+        document.body.style.backgroundImage =
+            'url("' +
+            childBackground +
+            '")';
+
+    }
+
+    stepCounter.textContent =
+        arabicNumber(
+            currentStep + 1
+        )
+        +
+        " / "
+        +
+        arabicNumber(
+            steps.length
+        );
+
+    storyArea.innerHTML = "";
+
+    /* =================================================
+       فيديو
+    ================================================= */
+
+    if (
+        step.type === "video"
+    ) {
+
+        const videoContainer =
+            document.createElement(
+                "div"
+            );
+
+        videoContainer.className =
+            "video-container";
+
+        const video =
+            document.createElement(
+                "video"
+            );
+
+        video.className =
+            "story-video";
+
+        video.src =
+            step.video;
+
+        video.autoplay =
+            true;
+
+        /*
+           مهم للـ iPad:
+           يبدأ مكتومًا للسماح بالـ autoplay
+        */
+        video.muted =
+            true;
+
+        /*
+           Loop دائم
+        */
+        video.loop =
+            true;
+
+        
+        video.playsInline =
+            true;
+
+        video.setAttribute(
+            "webkit-playsinline",
+            ""
+        );
+
+        video.preload =
+            "auto";
+
+        videoContainer.appendChild(
+            video
+        );
+
+        storyArea.appendChild(
+            videoContainer
+        );
+
+        if (
+            step.text
+        ) {
+
+            const text =
+                document.createElement(
+                    "div"
+                );
+
+            text.className =
+                "story-text";
+
+            text.textContent =
+                step.text;
+
+            storyArea.appendChild(
+                text
+            );
+
+        }
+
+        /*
+           تحميل الفيديو ثم تشغيله مباشرة
+        */
+
+        video.load();
+
+        startVideo(
+            video
+        );
+
+    }
+
+    /* =================================================
+       سؤال
+    ================================================= */
+
+    else if (
+        step.type === "question"
+    ) {
+
+        const box =
+            document.createElement(
+                "div"
+            );
+
+        box.className =
+            "question-box";
+
+        const questionRow =
+            document.createElement(
+                "div"
+            );
+
+        questionRow.className =
+            "question-row";
+
+        const question =
+            document.createElement(
+                "div"
+            );
+
+        question.className =
+            "question";
+
+        question.textContent =
+            step.question;
+
+        const micButton =
+            document.createElement(
+                "button"
+            );
+
+        micButton.className =
+            "mic-button";
+
+        micButton.innerHTML =
+            "🎙️";
+
+        micButton.setAttribute(
+            "aria-label",
+            "استمع إلى السؤال"
+        );
+
+        micButton.addEventListener(
+            "click",
+            function() {
+
+                speak(
+                    step.question
+                );
+
+                micButton.classList.add(
+                    "speaking"
+                );
+
+                setTimeout(
+                    function() {
+
+                        micButton.classList.remove(
+                            "speaking"
+                        );
+
+                    },
+                    1200
+                );
+
+            }
+        );
+
+        questionRow.appendChild(
+            question
+        );
+
+        questionRow.appendChild(
+            micButton
+        );
+
+        box.appendChild(
+            questionRow
+        );
+
+        const answers =
+            document.createElement(
+                "div"
+            );
+
+        answers.className =
+            "answers";
+
+        const feedback =
+            document.createElement(
+                "div"
+            );
+
+        feedback.className =
+            "feedback";
+
+        step.answers.forEach(
+            function(answer) {
+
+                const button =
+                    document.createElement(
+                        "button"
+                    );
+
+                button.className =
+                    "answer-button";
+
+                button.textContent =
+                    answer.text;
+
+                button.addEventListener(
+                    "click",
+                    function() {
+
+                        chooseAnswer(
+                            button,
+                            answer,
+                            answers,
+                            feedback
+                        );
+
+                    }
+                );
+
+                answers.appendChild(
+                    button
+                );
+
+            }
+        );
+
+        box.appendChild(
+            answers
+        );
+
+        storyArea.appendChild(
+            box
+        );
+
+        storyArea.appendChild(
+            feedback
+        );
+
+        setTimeout(
+            function() {
+
+                speak(
+                    step.question
+                );
+
+            },
+            300
+        );
+
+        nextButton.classList.add(
+            "hidden"
+        );
+
+    }
+
+    /* =================================================
+       النهاية
+    ================================================= */
+
+    else if (
+        step.type === "final"
+    ) {
+
+        const final =
+            document.createElement(
+                "div"
+            );
+
+        final.className =
+            "final-message";
+
+        final.innerHTML = `
+
+            <div class="final-icon">
+                🌟
+            </div>
+
+            <div class="final-title">
+                ${step.title}
+            </div>
+
+            <div class="final-text">
+                ${step.text}
+            </div>
+
+        `;
+
+        storyArea.appendChild(
+            final
+        );
+
+        setTimeout(
+            function() {
+
+                speak(
+                    step.text
+                );
+
+            },
+            300
+        );
+
+        nextButton.classList.remove(
+            "hidden"
+        );
+
+        nextButton.textContent =
+            "إعادة القصة ↻";
+
+    }
+
+    if (
+        step.type === "video"
+    ) {
+
+        nextButton.classList.remove(
+            "hidden"
+        );
+
+        nextButton.textContent =
+            "التالي ›";
+
+    }
+
+    updatePreviousButton();
+
+}
+
+/* =====================================================
+   اختيار الإجابة
+===================================================== */
+
+function chooseAnswer(
+    clickedButton,
+    answer,
+    answersContainer,
+    feedback
+) {
+
+    if (
+        selectedAnswer
+    ) {
+
+        return;
+
+    }
+
+    if (
+        answer.correct
+    ) {
+
+        selectedAnswer =
+            true;
+
+        const buttons =
+            answersContainer.querySelectorAll(
+                ".answer-button"
+            );
+
+        buttons.forEach(
+            function(button) {
+
+                button.disabled =
+                    true;
+
+            }
+        );
+
+        clickedButton.classList.add(
+            "correct"
+        );
+
+        feedback.className =
+            "feedback show good";
+
+        feedback.textContent =
+            "🌟 "
+            +
+            answer.feedback;
+
+        speak(
+            answer.feedback
+        );
+
+        setTimeout(
+            function() {
+
+                nextButton.classList.remove(
+                    "hidden"
+                );
+
+                nextButton.textContent =
+                    "التالي ›";
+
+            },
+            900
+        );
+
+    }
+
+    else {
+
+        clickedButton.classList.add(
+            "wrong"
+        );
+
+        feedback.className =
+            "feedback show bad";
+
+        feedback.textContent =
+            "💡 "
+            +
+            answer.feedback;
+
+        speak(
+            answer.feedback
+        );
+
+        setTimeout(
+            function() {
+
+                clickedButton.classList.remove(
+                    "wrong"
+                );
+
+            },
+            1300
+        );
+
+    }
+
+}
+
+/* =====================================================
+   التالي
+===================================================== */
+
+nextButton.addEventListener(
+    "click",
+    function() {
+
+        stopSpeech();
+
+        if (
+            steps[currentStep].type ===
+            "final"
+        ) {
+
+            currentStep =
+                0;
+
+            selectedAnswer =
+                false;
+
+            renderStep();
+
+            return;
+
+        }
+
+        if (
+            steps[currentStep].type ===
+            "question"
+        ) {
+
+            if (
+                !selectedAnswer
+            ) {
+
+                return;
+
+            }
+
+        }
+
+        if (
+            currentStep <
+            steps.length - 1
+        ) {
+
+            currentStep++;
+
+            selectedAnswer =
+                false;
+
+            renderStep();
+
+        }
+
+    }
+);
+
+/* =====================================================
+   السابق
+===================================================== */
+
+previousButton.addEventListener(
+    "click",
+    function() {
+
+        stopSpeech();
+
+        if (
+            currentStep > 0
+        ) {
+
+            currentStep--;
+
+            selectedAnswer =
+                false;
+
+            renderStep();
+
+        }
+
+        else {
+
+            window.location.href =
+                "games.html";
+
+        }
+
+    }
+);
+
+/* =====================================================
+   القائمة
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const dropdownMenu =
+    document.getElementById(
+        "dropdownMenu"
+    );
+
+menuButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+        dropdownMenu.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+document.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        if (
+            !event.target.closest(
+                ".menu-wrapper"
+            )
+        ) {
+
+            dropdownMenu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+/* =====================================================
+   تشغيل الصفحة
+===================================================== */
+
+async function initializePage() {
+
+    await loadChildInterest();
+
+    renderStep();
+
+}
+
+initializePage();
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,2381 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>ما لون هذه السمكة؟</title>
+
+
+<style>
+
+/* =========================================================
+   إعدادات الصفحة الأساسية
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+body {
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Arial,
+        sans-serif;
+
+    background-image:
+        url("images/gt.jpeg");
+
+    background-size:
+        100% 100%;
+
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
+
+    color:
+        #55718b;
+}
+
+
+/* =========================================================
+   زر السابق
+========================================================= */
+
+.previous-btn {
+
+    position: fixed;
+
+    top: 35px;
+    left: 35px;
+
+    width: 155px;
+    height: 60px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background:
+        #e4f2ff;
+
+    color:
+        #55718b;
+
+    font-family:
+        inherit;
+
+    font-size:
+        24px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+    z-index:
+        1000;
+
+    transition:
+        0.2s ease;
+}
+
+
+.previous-btn:hover {
+
+    background:
+        #d8edfc;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   زر القائمة
+========================================================= */
+
+.menu-btn {
+
+    position: fixed;
+
+    top: 32px;
+    right: 35px;
+
+    width: 65px;
+    height: 65px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,0.82);
+
+    font-size:
+        31px;
+
+    cursor:
+        pointer;
+
+    z-index:
+        1100;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.06);
+}
+
+
+/* =========================================================
+   القائمة الجانبية
+========================================================= */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 108px;
+    right: 35px;
+
+    width: 245px;
+
+    background:
+        rgba(255,255,255,0.94);
+
+    border-radius:
+        28px;
+
+    padding:
+        15px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.10);
+
+    backdrop-filter:
+        blur(10px);
+
+    z-index:
+        1050;
+
+    display:
+        none;
+}
+
+
+.side-menu.show {
+
+    display:
+        block;
+}
+
+
+.side-menu button {
+
+    width:
+        100%;
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    padding:
+        15px;
+
+    border-radius:
+        18px;
+
+    font-family:
+        inherit;
+
+    font-size:
+        20px;
+
+    font-weight:
+        700;
+
+    color:
+        #55718b;
+
+    cursor:
+        pointer;
+}
+
+
+.side-menu button:hover {
+
+    background:
+        #eaf5ff;
+}
+
+
+/* =========================================================
+   الفقاعات
+========================================================= */
+
+.bubbles {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    overflow:
+        hidden;
+
+    z-index:
+        1;
+
+    transition:
+        opacity 0.4s ease;
+}
+
+
+.bubble {
+
+    position:
+        absolute;
+
+    bottom:
+        -60px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,0.45);
+
+    border:
+        2px solid
+        rgba(255,255,255,0.55);
+
+    box-shadow:
+        inset 3px 3px 5px
+        rgba(255,255,255,0.45);
+
+    animation:
+        bubbleUp
+        linear
+        infinite;
+}
+
+
+.bubble:nth-child(1) {
+
+    width:
+        18px;
+
+    height:
+        18px;
+
+    left:
+        15%;
+
+    animation-duration:
+        7s;
+
+    animation-delay:
+        0s;
+}
+
+
+.bubble:nth-child(2) {
+
+    width:
+        28px;
+
+    height:
+        28px;
+
+    left:
+        27%;
+
+    animation-duration:
+        9s;
+
+    animation-delay:
+        2s;
+}
+
+
+.bubble:nth-child(3) {
+
+    width:
+        13px;
+
+    height:
+        13px;
+
+    left:
+        42%;
+
+    animation-duration:
+        6.5s;
+
+    animation-delay:
+        1s;
+}
+
+
+.bubble:nth-child(4) {
+
+    width:
+        22px;
+
+    height:
+        22px;
+
+    left:
+        58%;
+
+    animation-duration:
+        8s;
+
+    animation-delay:
+        3s;
+}
+
+
+.bubble:nth-child(5) {
+
+    width:
+        16px;
+
+    height:
+        16px;
+
+    left:
+        72%;
+
+    animation-duration:
+        7.5s;
+
+    animation-delay:
+        1.5s;
+}
+
+
+.bubble:nth-child(6) {
+
+    width:
+        31px;
+
+    height:
+        31px;
+
+    left:
+        86%;
+
+    animation-duration:
+        10s;
+
+    animation-delay:
+        0.5s;
+}
+
+
+@keyframes bubbleUp {
+
+    0% {
+
+        transform:
+            translateY(0)
+            translateX(0)
+            scale(0.8);
+
+        opacity:
+            0;
+    }
+
+    10% {
+
+        opacity:
+            0.8;
+    }
+
+    50% {
+
+        transform:
+            translateY(-45vh)
+            translateX(15px)
+            scale(1);
+    }
+
+    100% {
+
+        transform:
+            translateY(-115vh)
+            translateX(-12px)
+            scale(1.1);
+
+        opacity:
+            0;
+    }
+}
+
+
+/* =========================================================
+   المحتوى الرئيسي
+========================================================= */
+
+.content {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width:
+        900px;
+
+    max-width:
+        90vw;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+    z-index:
+        10;
+}
+
+
+/* =========================================================
+   السؤال
+========================================================= */
+
+.question {
+
+    margin:
+        0;
+
+    font-size:
+        48px;
+
+    font-weight:
+        800;
+
+    color:
+        #55718b;
+
+    text-shadow:
+        0 2px 0
+        rgba(255,255,255,0.8);
+}
+
+
+/* =========================================================
+   التوجيه
+========================================================= */
+
+.hint {
+
+    margin-top:
+        12px;
+
+    margin-bottom:
+        20px;
+
+    font-size:
+        24px;
+
+    font-weight:
+        600;
+
+    color:
+        #7892a6;
+}
+
+
+/* =========================================================
+   منطقة السمكة
+========================================================= */
+
+.fish-wrapper {
+
+    width:
+        380px;
+
+    height:
+        260px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-bottom:
+        18px;
+
+    position:
+        relative;
+}
+
+
+/* =========================================================
+   السمكة
+========================================================= */
+
+.fish {
+
+    width:
+        330px;
+
+    max-height:
+        245px;
+
+    object-fit:
+        contain;
+
+    transform-origin:
+        center center;
+
+    animation:
+        fishSwim
+        4s
+        ease-in-out
+        infinite;
+
+    will-change:
+        transform;
+}
+
+
+@keyframes fishSwim {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(-7px)
+            translateY(0)
+            rotate(-1deg);
+    }
+
+    25% {
+
+        transform:
+            translateX(5px)
+            translateY(-7px)
+            rotate(1deg);
+    }
+
+    50% {
+
+        transform:
+            translateX(10px)
+            translateY(0)
+            rotate(2deg);
+    }
+
+    75% {
+
+        transform:
+            translateX(-4px)
+            translateY(-6px)
+            rotate(-1deg);
+    }
+}
+
+
+.fish.stop {
+
+    animation-play-state:
+        paused;
+}
+
+
+/* =========================================================
+   خيارات الإجابة
+========================================================= */
+
+.answers {
+
+    display:
+        flex;
+
+    flex-direction:
+        row;
+
+    direction:
+        rtl;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        28px;
+
+    margin-top:
+        3px;
+}
+
+
+.answer-btn {
+
+    width:
+        210px;
+
+    height:
+        82px;
+
+    border:
+        4px solid transparent;
+
+    border-radius:
+        26px;
+
+    background:
+        #e4f2ff;
+
+    color:
+        #222222;
+
+    font-family:
+        inherit;
+
+    font-size:
+        29px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+
+    box-shadow:
+        0 8px 18px
+        rgba(0,0,0,0.08);
+}
+
+
+.answer-btn:hover {
+
+    transform:
+        translateY(-5px);
+
+    background:
+        #d8edfc;
+
+    box-shadow:
+        0 12px 22px
+        rgba(85,113,139,0.15);
+}
+
+
+.answer-btn.correct {
+
+    border-color:
+        #72ad7d;
+
+    background:
+        #e4f2ff;
+
+    color:
+        #222222;
+
+    transform:
+        scale(1.06);
+
+    box-shadow:
+
+        0 0 0 6px
+        rgba(114,173,125,0.15),
+
+        0 12px 25px
+        rgba(0,0,0,0.10);
+}
+
+
+.answer-btn.wrong {
+
+    animation:
+        wrongShake
+        0.35s
+        ease;
+}
+
+
+@keyframes wrongShake {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(0);
+    }
+
+    25% {
+
+        transform:
+            translateX(-8px);
+    }
+
+    75% {
+
+        transform:
+            translateX(8px);
+    }
+}
+
+
+/* =========================================================
+   رسالة النتيجة
+========================================================= */
+
+.feedback {
+
+    min-height:
+        42px;
+
+    margin-top:
+        12px;
+
+    font-size:
+        24px;
+
+    font-weight:
+        800;
+
+    opacity:
+        0;
+
+    transition:
+        opacity 0.2s ease;
+}
+
+
+.feedback.show {
+
+    opacity:
+        1;
+}
+
+
+.feedback.correct-message {
+
+    color:
+        #4f9b63;
+}
+
+
+.feedback.wrong-message {
+
+    color:
+        #c47c7c;
+}
+
+
+/* =========================================================
+   زينة الاحتفال
+========================================================= */
+
+.celebration {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    z-index:
+        1500;
+
+    overflow:
+        hidden;
+
+    display:
+        none;
+}
+
+
+.celebration.show {
+
+    display:
+        block;
+}
+
+
+/* =========================================================
+   البالونات
+========================================================= */
+
+.balloon {
+
+    position:
+        absolute;
+
+    font-size:
+        65px;
+
+    animation:
+        balloonFloat
+        2.5s
+        ease-out
+        forwards;
+}
+
+
+.balloon.b1 {
+
+    left:
+        8%;
+
+    bottom:
+        -80px;
+
+    animation-delay:
+        0s;
+}
+
+
+.balloon.b2 {
+
+    left:
+        25%;
+
+    bottom:
+        -90px;
+
+    animation-delay:
+        0.25s;
+}
+
+
+.balloon.b3 {
+
+    right:
+        25%;
+
+    bottom:
+        -90px;
+
+    animation-delay:
+        0.15s;
+}
+
+
+.balloon.b4 {
+
+    right:
+        8%;
+
+    bottom:
+        -80px;
+
+    animation-delay:
+        0.35s;
+}
+
+
+@keyframes balloonFloat {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity:
+            0;
+    }
+
+    20% {
+
+        opacity:
+            1;
+    }
+
+    100% {
+
+        transform:
+            translateY(-105vh)
+            rotate(12deg);
+
+        opacity:
+            1;
+    }
+}
+
+
+/* =========================================================
+   سيارات الاحتفال
+========================================================= */
+
+.celebration-car {
+
+    position:
+        absolute;
+
+    font-size:
+        62px;
+
+    animation:
+        carDrive
+        2.7s
+        ease-in-out
+        forwards;
+}
+
+
+.car1 {
+
+    bottom:
+        12%;
+
+    left:
+        -100px;
+
+    animation-delay:
+        0.1s;
+}
+
+
+.car2 {
+
+    bottom:
+        20%;
+
+    right:
+        -100px;
+
+    animation:
+        carDriveRight
+        2.7s
+        ease-in-out
+        forwards;
+
+    animation-delay:
+        0.3s;
+}
+
+
+@keyframes carDrive {
+
+    0% {
+
+        left:
+            -100px;
+
+        transform:
+            scale(1);
+    }
+
+    100% {
+
+        left:
+            45%;
+
+        transform:
+            scale(1.1);
+    }
+}
+
+
+@keyframes carDriveRight {
+
+    0% {
+
+        right:
+            -100px;
+
+        transform:
+            scaleX(-1);
+    }
+
+    100% {
+
+        right:
+            45%;
+
+        transform:
+            scaleX(-1.1);
+    }
+}
+
+
+/* =========================================================
+   POP-UP النجاح
+========================================================= */
+
+.success-popup {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    background:
+        rgba(70,95,110,0.28);
+
+    backdrop-filter:
+        blur(4px);
+
+    -webkit-backdrop-filter:
+        blur(4px);
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    z-index:
+        2000;
+
+    padding:
+        30px;
+}
+
+
+.success-popup.show {
+
+    display:
+        flex;
+
+    animation:
+        popupFade
+        0.3s
+        ease;
+}
+
+
+@keyframes popupFade {
+
+    from {
+
+        opacity:
+            0;
+    }
+
+    to {
+
+        opacity:
+            1;
+    }
+}
+
+
+/* =========================================================
+   صندوق النجاح
+========================================================= */
+
+.success-box {
+
+    width:
+        560px;
+
+    max-width:
+        92vw;
+
+    padding:
+        42px 35px 35px;
+
+    background:
+        rgba(255,255,255,0.97);
+
+    border-radius:
+        35px;
+
+    text-align:
+        center;
+
+    box-shadow:
+        0 20px 60px
+        rgba(50,80,100,0.22);
+
+    animation:
+        popupScale
+        0.4s
+        ease;
+}
+
+
+@keyframes popupScale {
+
+    0% {
+
+        transform:
+            scale(0.7);
+
+        opacity:
+            0;
+    }
+
+    70% {
+
+        transform:
+            scale(1.05);
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
+        opacity:
+            1;
+    }
+}
+
+
+/* =========================================================
+   أيقونة النجاح
+========================================================= */
+
+.success-icon {
+
+    font-size:
+        75px;
+
+    margin-bottom:
+        10px;
+
+    animation:
+        successBounce
+        1s
+        ease;
+}
+
+
+@keyframes successBounce {
+
+    0% {
+
+        transform:
+            scale(0);
+    }
+
+    60% {
+
+        transform:
+            scale(1.2);
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   عنوان النجاح
+========================================================= */
+
+.success-title {
+
+    margin:
+        0 0 12px;
+
+    font-size:
+        38px;
+
+    font-weight:
+        900;
+
+    color:
+        #a96f7a;
+}
+
+
+/* =========================================================
+   رسالة النجاح
+========================================================= */
+
+.success-text {
+
+    margin:
+        0 0 28px;
+
+    font-size:
+        24px;
+
+    line-height:
+        1.8;
+
+    font-weight:
+        700;
+
+    color:
+        #55718b;
+}
+
+
+/* =========================================================
+   زر التالي داخل POP-UP
+========================================================= */
+
+.success-next {
+
+    width:
+        260px;
+
+    height:
+        68px;
+
+    border:
+        none;
+
+    border-radius:
+        22px;
+
+    background:
+        #e4f2ff;
+
+    color:
+        #55718b;
+
+    font-family:
+        inherit;
+
+    font-size:
+        25px;
+
+    font-weight:
+        900;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(85,113,139,0.14);
+
+    transition:
+        0.2s ease;
+}
+
+
+.success-next:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        #d8edfc;
+}
+
+
+.success-next:active {
+
+    transform:
+        scale(0.97);
+}
+
+
+/* =========================================================
+   iPad Portrait
+========================================================= */
+
+@media (min-width: 768px)
+       and (max-width: 1100px) {
+
+    .question {
+
+        font-size:
+            46px;
+    }
+
+
+    .fish-wrapper {
+
+        width:
+            350px;
+
+        height:
+            245px;
+    }
+
+
+    .fish {
+
+        width:
+            310px;
+    }
+
+
+    .answer-btn {
+
+        width:
+            195px;
+
+        height:
+            78px;
+
+        font-size:
+            27px;
+    }
+
+
+    .answers {
+
+        gap:
+            25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     الفقاعات
+======================================================= -->
+
+<div
+    class="bubbles"
+    id="bubbles">
+
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+</div>
+
+
+<!-- =======================================================
+     زر السابق
+======================================================= -->
+
+<button
+    class="previous-btn"
+    onclick="goPrevious()">
+
+    السابق
+
+</button>
+
+
+<!-- =======================================================
+     زر القائمة
+======================================================= -->
+
+<button
+    class="menu-btn"
+    onclick="toggleMenu()">
+
+    ☰
+
+</button>
+
+
+<!-- =======================================================
+     القائمة
+======================================================= -->
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+
+    <button onclick="goHome()">
+
+        🏠 الرئيسية
+
+    </button>
+
+
+    <button onclick="goProfile()">
+
+        👤 الملف الشخصي
+
+    </button>
+
+
+    <button onclick="goProgress()">
+
+        ⭐ تقدمي
+
+    </button>
+
+
+</div>
+
+
+<!-- =======================================================
+     زينة الاحتفال
+======================================================= -->
+
+<div
+    class="celebration"
+    id="celebration">
+
+
+    <div class="balloon b1">
+        🎈
+    </div>
+
+
+    <div class="balloon b2">
+        🎈
+    </div>
+
+
+    <div class="balloon b3">
+        🎈
+    </div>
+
+
+    <div class="balloon b4">
+        🎈
+    </div>
+
+
+    <div class="celebration-car car1">
+        🚗
+    </div>
+
+
+    <div class="celebration-car car2">
+        🚙
+    </div>
+
+
+</div>
+
+
+<!-- =======================================================
+     المحتوى
+======================================================= -->
+
+<main class="content">
+
+
+    <h1 class="question">
+
+        ما لون هذه السمكة؟
+
+    </h1>
+
+
+    <p class="hint">
+
+        اختر اللون الصحيح
+
+    </p>
+
+
+    <div class="fish-wrapper">
+
+        <img
+            src="images/f.png"
+            class="fish"
+            id="fish"
+            alt="سمكة">
+
+    </div>
+
+
+    <!-- ===================================================
+         خيارات الإجابة
+    ==================================================== -->
+
+    <div class="answers">
+
+
+        <button
+            class="answer-btn"
+            data-color="green"
+            onclick="checkAnswer('green', this)">
+
+            أخضر
+
+        </button>
+
+
+        <button
+            class="answer-btn"
+            data-color="red"
+            onclick="checkAnswer('red', this)">
+
+            أحمر
+
+        </button>
+
+
+        <button
+            class="answer-btn"
+            data-color="blue"
+            onclick="checkAnswer('blue', this)">
+
+            أزرق
+
+        </button>
+
+
+    </div>
+
+
+    <div
+        id="feedback"
+        class="feedback">
+
+    </div>
+
+
+</main>
+
+
+<!-- =======================================================
+     POP-UP النجاح
+======================================================= -->
+
+<div
+    class="success-popup"
+    id="successPopup">
+
+
+    <div class="success-box">
+
+
+        <div class="success-icon">
+
+            🎉
+
+        </div>
+
+
+        <h2 class="success-title">
+
+            مبارك لك! 🌟
+
+        </h2>
+
+
+        <p class="success-text">
+
+            أنهيت هذه المرحلة بنجاح! 💚
+
+            <br>
+
+            أحسنت يا بطل! 🚗🎈
+
+        </p>
+
+
+        <button
+            class="success-next"
+            onclick="goNext()">
+
+            التالي →
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   إعداد السؤال
+========================================================= */
+
+const correctAnswer =
+    "green";
+
+
+/*
+   عدد المحاولات الخاطئة
+*/
+
+let wrongAttempts = 0;
+
+
+/*
+   هل تمت الإجابة الصحيحة؟
+*/
+
+let answered = false;
+
+
+/* =========================================================
+   نطق عربي
+========================================================= */
+
+function speakArabic(text) {
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+
+    speech.lang =
+        "ar-SA";
+
+
+    speech.rate =
+        0.78;
+
+
+    speech.pitch =
+        1.05;
+
+
+    speech.volume =
+        1;
+
+
+    window.speechSynthesis.speak(
+        speech
+    );
+
+}
+
+
+/* =========================================================
+   نطق السؤال
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        setTimeout(
+            function() {
+
+                speakArabic(
+                    "ما لون هذه السمكة؟"
+                );
+
+            },
+            700
+        );
+
+    }
+);
+
+
+/* =========================================================
+   قراءة الأخطاء السابقة
+========================================================= */
+
+function getErrors() {
+
+    const saved =
+        localStorage.getItem(
+            "colorLearningErrors"
+        );
+
+
+    if (!saved) {
+
+        return {
+
+            green: 0,
+            red: 0,
+            blue: 0
+
+        };
+
+    }
+
+
+    try {
+
+        return JSON.parse(
+            saved
+        );
+
+    }
+
+    catch (error) {
+
+        return {
+
+            green: 0,
+            red: 0,
+            blue: 0
+
+        };
+
+    }
+
+}
+
+
+/* =========================================================
+   حفظ خطأ
+========================================================= */
+
+function saveError(color) {
+
+    const errors =
+        getErrors();
+
+
+    if (!errors[color]) {
+
+        errors[color] =
+            0;
+
+    }
+
+
+    errors[color]++;
+
+
+    localStorage.setItem(
+
+        "colorLearningErrors",
+
+        JSON.stringify(
+            errors
+        )
+
+    );
+
+}
+
+
+/* =========================================================
+   حفظ اللون الذي يحتاج تعزيز
+========================================================= */
+
+function saveReinforcementColor(
+    color
+) {
+
+    localStorage.setItem(
+
+        "colorNeedsReinforcement",
+
+        color
+
+    );
+
+}
+
+
+/* =========================================================
+   فحص الإجابة
+========================================================= */
+
+function checkAnswer(
+    selectedColor,
+    button
+) {
+
+
+    /*
+       إذا أجاب الطفل صحيحًا وانتهى
+       السؤال، لا نسمح بإجابة أخرى.
+    */
+
+    if (answered) {
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       نطق الإجابة
+    ===================================================== */
+
+    const optionNames = {
+
+        green:
+            "أخضر",
+
+        red:
+            "أحمر",
+
+        blue:
+            "أزرق"
+
+    };
+
+
+    speakArabic(
+        optionNames[selectedColor]
+    );
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    /* =====================================================
+       ❌ الإجابة الخاطئة
+    ===================================================== */
+
+    if (
+        selectedColor !==
+        correctAnswer
+    ) {
+
+
+        /*
+           زيادة عدد الأخطاء
+        */
+
+        wrongAttempts++;
+
+
+        /*
+           حفظ الخطأ
+        */
+
+        saveError(
+            correctAnswer
+        );
+
+
+        /*
+           حفظ اللون الذي يحتاج تعزيز
+        */
+
+        saveReinforcementColor(
+            correctAnswer
+        );
+
+
+        /*
+           اهتزاز الزر
+        */
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        /*
+           رسالة تشجيعية
+        */
+
+        feedback.textContent =
+            "حاول مرة أخرى 🌱";
+
+
+        feedback.className =
+            "feedback show wrong-message";
+
+
+        /*
+           إزالة الاهتزاز
+        */
+
+        setTimeout(
+            function() {
+
+                button.classList.remove(
+                    "wrong"
+                );
+
+            },
+            400
+        );
+
+
+        /*
+           إخفاء الرسالة بعد فترة
+        */
+
+        setTimeout(
+            function() {
+
+                feedback.classList.remove(
+                    "show"
+                );
+
+            },
+            1200
+        );
+
+
+        /*
+           مهم جدًا:
+           لا يوجد انتقال هنا.
+
+           الطفل يبقى في نفس السؤال.
+        */
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       ✅ الإجابة الصحيحة
+    ===================================================== */
+
+    answered =
+        true;
+
+
+    /*
+       تمييز الزر الصحيح
+    */
+
+    button.classList.add(
+        "correct"
+    );
+
+
+    /*
+       إيقاف حركة السمكة
+    */
+
+    document
+        .getElementById("fish")
+        .classList.add("stop");
+
+
+    /*
+       إيقاف الفقاعات
+    */
+
+    document
+        .getElementById("bubbles")
+        .style.opacity =
+        "0";
+
+
+    /*
+       رسالة النجاح
+    */
+
+    feedback.textContent =
+        "أحسنت! 🌟 هذا اللون أخضر 💚";
+
+
+    feedback.className =
+        "feedback show correct-message";
+
+
+    /*
+       حفظ إكمال السؤال
+    */
+
+    localStorage.setItem(
+
+        "greenQuestionCompleted",
+
+        "true"
+
+    );
+
+
+    /* =====================================================
+       إذا كان الطفل قد أخطأ سابقًا
+    ===================================================== */
+
+    if (
+        wrongAttempts > 0
+    ) {
+
+
+        /*
+           حفظ عدد الأخطاء
+           لكي تستطيع صفحة التعزيز
+           استخدامه لاحقًا.
+        */
+
+        localStorage.setItem(
+
+            "greenQuestionWrongAttempts",
+
+            wrongAttempts
+
+        );
+
+
+        /*
+           ننتظر قليلًا حتى يرى الطفل
+           أنه اختار الإجابة الصحيحة.
+        */
+
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    "green-reinforcement.html";
+
+            },
+            900
+        );
+
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       🎉 صحيح من أول محاولة
+    ===================================================== */
+
+    /*
+       حفظ نجاح الطفل من أول محاولة
+    */
+
+    localStorage.setItem(
+
+        "greenQuestionFirstTry",
+
+        "true"
+
+    );
+
+
+    /*
+       إظهار زينة الاحتفال
+    */
+
+    document
+        .getElementById(
+            "celebration"
+        )
+        .classList.add(
+            "show"
+        );
+
+
+    /*
+       تشغيل التصفيق
+    */
+
+    playApplause();
+
+
+    /*
+       إظهار POP-UP
+    */
+
+    setTimeout(
+        function() {
+
+            document
+                .getElementById(
+                    "successPopup"
+                )
+                .classList.add(
+                    "show"
+                );
+
+        },
+        900
+    );
+
+}
+
+
+/* =========================================================
+   صوت التصفيق
+========================================================= */
+
+function playApplause() {
+
+    try {
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+
+        const audioContext =
+            new AudioContext();
+
+
+        const startTime =
+            audioContext.currentTime;
+
+
+        for (
+            let i = 0;
+            i < 24;
+            i++
+        ) {
+
+
+            const oscillator =
+                audioContext
+                .createOscillator();
+
+
+            const gain =
+                audioContext
+                .createGain();
+
+
+            oscillator.type =
+                "square";
+
+
+            oscillator.frequency.value =
+                700 +
+                Math.random() * 500;
+
+
+            const time =
+                startTime +
+                i * 0.055;
+
+
+            gain.gain.setValueAtTime(
+                0,
+                time
+            );
+
+
+            gain.gain.linearRampToValueAtTime(
+                0.07,
+                time + 0.01
+            );
+
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.001,
+                time + 0.045
+            );
+
+
+            oscillator.connect(
+                gain
+            );
+
+
+            gain.connect(
+                audioContext.destination
+            );
+
+
+            oscillator.start(
+                time
+            );
+
+
+            oscillator.stop(
+                time + 0.05
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Audio غير متاح:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   التالي من POP-UP
+========================================================= */
+
+function goNext() {
+
+    /*
+       النجاح من أول محاولة
+       → صفحة الألوان
+    */
+
+    window.location.href =
+        "colors.html";
+
+}
+
+
+/* =========================================================
+   السابق
+========================================================= */
+
+function goPrevious() {
+
+    window.location.href =
+        "colors.html";
+
+}
+
+
+/* =========================================================
+   القائمة
+========================================================= */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById(
+            "sideMenu"
+        );
+
+
+    menu.classList.toggle(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   صفحات القائمة
+========================================================= */
+
+function goHome() {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+function goProfile() {
+
+    window.location.href =
+        "profile.html";
+
+}
+
+
+function goProgress() {
+
+    window.location.href =
+        "progress.html";
+
+}
+
+
+/* =========================================================
+   إغلاق القائمة عند الضغط خارجها
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+
+        const menu =
+            document.getElementById(
+                "sideMenu"
+            );
+
+
+        const menuButton =
+            document.querySelector(
+                ".menu-btn"
+            );
+
+
+        if (
+            !menu.contains(
+                event.target
+            ) &&
+            !menuButton.contains(
+                event.target
+            )
+        ) {
+
+            menu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

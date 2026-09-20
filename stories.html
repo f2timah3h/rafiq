@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>رفيق - القصص</title>
+
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    direction: rtl;
+}
+
+body {
+
+    min-height: 100vh;
+
+    background-image:
+        url("images/st.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    color: #555;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding:
+        40px 35px 70px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   TOP MENU BUTTON
+========================= */
+
+.menu-button {
+
+    position: fixed;
+
+    top: 35px;
+
+    right: 35px;
+
+    width: 65px;
+
+    height: 65px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.82);
+
+    box-shadow:
+        0 6px 18px
+        rgba(70,80,90,0.15);
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    z-index: 1000;
+
+    transition: 0.2s ease;
+}
+
+.menu-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(255,255,255,0.95);
+}
+
+.menu-button:active {
+
+    transform:
+        scale(0.95);
+}
+
+
+/* =========================
+   SIDE MENU
+========================= */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 110px;
+
+    right: 35px;
+
+    width: 245px;
+
+    padding: 12px;
+
+    background:
+        rgba(255,255,255,0.94);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(60,70,80,0.18);
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    z-index: 999;
+
+    display: none;
+}
+
+.side-menu.show {
+
+    display: block;
+
+    animation:
+        menuAppear 0.2s ease;
+}
+
+
+@keyframes menuAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-8px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================
+   SIDE MENU ITEMS
+========================= */
+
+.side-item {
+
+    width: 100%;
+
+    height: 60px;
+
+    border: none;
+
+    border-radius: 17px;
+
+    background:
+        transparent;
+
+    font-family: inherit;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    color: #555;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 12px;
+
+    padding:
+        0 18px;
+
+    transition:
+        0.2s ease;
+}
+
+.side-item:hover {
+
+    background:
+        #e4f2ff;
+}
+
+.side-item:active {
+
+    transform:
+        scale(0.98);
+}
+
+.side-icon {
+
+    font-size: 25px;
+}
+
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.content {
+
+    width: min(850px, 94vw);
+
+    margin: 0 auto;
+
+    text-align: center;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title {
+
+    margin-top: 90px;
+
+    margin-bottom: 55px;
+
+    color: #555;
+
+    font-size: 34px;
+
+    font-weight: 800;
+
+    text-shadow:
+        0 2px 4px
+        rgba(255,255,255,0.55);
+
+}
+
+
+/* =========================
+   STORIES MENU
+========================= */
+
+.stories-menu {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+
+/* =========================
+   STORY BUTTON
+========================= */
+
+.story-button {
+
+    width: 560px;
+
+    max-width: 90%;
+
+    height: 105px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background: #e4f2ff;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(70,100,120,0.14);
+
+    border:
+        2px solid
+        rgba(255,255,255,0.65);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =========================
+   BUTTON HOVER
+========================= */
+
+.story-button:hover {
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(70,100,120,0.19);
+}
+
+
+/* =========================
+   BUTTON ACTIVE
+========================= */
+
+.story-button:active {
+
+    transform:
+        scale(0.97);
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.story-icon {
+
+    font-size: 34px;
+
+    line-height: 1;
+}
+
+
+/* =========================
+   IPAD PORTRAIT
+========================= */
+
+@media (min-width: 768px) {
+
+    .page {
+
+        min-height: 1366px;
+
+        padding-top: 250px;
+    }
+
+
+    .content {
+
+        width: 850px;
+    }
+
+
+    /* العنوان فقط يرتفع */
+
+    .title {
+
+        margin-top: 105px;
+
+        margin-bottom: 60px;
+
+        font-size: 37px;
+
+        position: relative;
+
+        transform: translateY(-80px);
+    }
+
+
+    /* الأزرار بدون أي تغيير */
+
+    .stories-menu {
+
+        gap: 25px;
+    }
+
+
+    .story-button {
+
+        width: 560px;
+
+        height: 105px;
+
+        font-size: 26px;
+    }
+
+}
+
+
+/* =========================
+   SMALL SCREEN
+========================= */
+
+@media (max-width: 600px) {
+
+    .page {
+
+        padding:
+            25px 15px 50px;
+    }
+
+
+    .menu-button {
+
+        top: 20px;
+
+        right: 20px;
+
+        width: 55px;
+
+        height: 55px;
+
+        font-size: 26px;
+    }
+
+
+    .side-menu {
+
+        top: 85px;
+
+        right: 20px;
+
+        width: 220px;
+    }
+
+
+    .title {
+
+        margin-top: 80px;
+
+        font-size: 27px;
+
+        margin-bottom: 40px;
+    }
+
+
+    .story-button {
+
+        width: 100%;
+
+        max-width: 430px;
+
+        height: 80px;
+
+        font-size: 20px;
+
+        border-radius: 20px;
+    }
+
+
+    .story-icon {
+
+        font-size: 29px;
+    }
+
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     TOP MENU BUTTON
+========================= -->
+
+<button
+    class="menu-button"
+    id="menuButton"
+    onclick="toggleMenu()"
+    aria-label="فتح القائمة">
+
+    ☰
+
+</button>
+
+
+
+<!-- =========================
+     SIDE MENU
+========================= -->
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+
+    <!-- HOME -->
+
+    <button
+        class="side-item"
+        onclick="goHome()">
+
+        <span class="side-icon">
+            🏠
+        </span>
+
+        <span>
+            الرئيسية
+        </span>
+
+    </button>
+
+
+    <!-- PROFILE -->
+
+    <button
+        class="side-item"
+        onclick="goProfile()">
+
+        <span class="side-icon">
+            👤
+        </span>
+
+        <span>
+            ملفي
+        </span>
+
+    </button>
+
+
+    <!-- PROGRESS -->
+
+    <button
+        class="side-item"
+        onclick="goProgress()">
+
+        <span class="side-icon">
+            ⭐
+        </span>
+
+        <span>
+            تقدمي
+        </span>
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =========================
+     MAIN PAGE
+========================= -->
+
+<div class="page">
+
+
+    <main class="content">
+
+
+        <!-- TITLE -->
+
+        <h1 class="title">
+
+            استكشف وتعلم بطريقة ممتعة ✨
+
+        </h1>
+
+
+
+        <!-- =========================
+             STORY BUTTONS
+        ========================= -->
+
+        <div class="stories-menu">
+
+
+            <!-- EDUCATIONAL STORIES -->
+
+            <button
+                class="story-button"
+                onclick="openEducationalStories()">
+
+                <span class="story-icon">
+                    📚
+                </span>
+
+                <span>
+                    قصص تعليمية
+                </span>
+
+            </button>
+
+
+
+            <!-- AI STORIES -->
+
+            <button
+                class="story-button"
+                onclick="openAIStories()">
+
+                <span class="story-icon">
+                    🤖
+                </span>
+
+                <span>
+                    قصص تفاعلية باستخدام الذكاء الاصطناعي
+                </span>
+
+            </button>
+
+
+        </div>
+
+
+
+        <div class="bottom-space"></div>
+
+
+    </main>
+
+</div>
+
+
+
+<script>
+
+/* =========================
+   TOGGLE MENU
+========================= */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById("sideMenu");
+
+    menu.classList.toggle("show");
+
+}
+
+
+
+/* =========================
+   CLOSE MENU
+========================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const menu =
+            document.getElementById("sideMenu");
+
+        const button =
+            document.getElementById("menuButton");
+
+
+        if (
+            !menu.contains(event.target) &&
+            !button.contains(event.target)
+        ) {
+
+            menu.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+function goHome() {
+
+    window.location.href =
+        "home.html";
+
+}
+
+
+
+function goProfile() {
+
+    alert(
+        "👤 صفحة ملفي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+
+function goProgress() {
+
+    alert(
+        "⭐ صفحة تقدمي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+
+/* =========================
+   EDUCATIONAL STORIES
+========================= */
+
+function openEducationalStories() {
+
+    
+    window.location.href = "educational-stories.html";
+}
+
+
+
+
+/* =========================
+   AI STORIES
+========================= */
+
+function openAIStories() {
+
+    alert(
+        "🤖 القصص التفاعلية باستخدام الذكاء الاصطناعي\n\nسنضيف القصص التفاعلية هنا."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

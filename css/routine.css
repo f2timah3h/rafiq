@@ -1,0 +1,1098 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    direction: rtl;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            180deg,
+            #dff4fa 0%,
+            #eef8ed 55%,
+            #e8f4dd 100%
+        );
+
+    color: #4e4b75;
+}
+
+
+/* الصفحة كاملة */
+
+#game {
+    width: 100%;
+    max-width: 1100px;
+    min-height: 100vh;
+
+    margin: auto;
+    padding: 25px;
+}
+
+
+/* الشريط العلوي */
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    direction: ltr;
+
+    margin-bottom: 20px;
+}
+
+
+#pageNumber {
+    background: rgba(255,255,255,0.85);
+
+    padding: 12px 22px;
+
+    border-radius: 25px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    color: #575486;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+
+.circle-btn {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: #fff8f1;
+
+    color: #a75b70;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+
+.circle-btn:hover {
+    transform: scale(1.05);
+}
+
+
+/* البطاقة الرئيسية */
+
+.page-card {
+    position: relative;
+
+    min-height: 760px;
+
+    border-radius: 45px;
+
+    overflow: hidden;
+
+    padding: 45px;
+
+    background: rgba(255,255,255,0.82);
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+
+    text-align: center;
+}
+
+
+/* العناوين */
+
+h1 {
+    color: #a54f69;
+
+    font-size: 52px;
+
+    margin: 10px 0 15px;
+}
+
+
+h2 {
+    color: #a54f69;
+
+    font-size: 42px;
+
+    margin: 10px 0 15px;
+}
+
+
+.subtitle {
+    font-size: 24px;
+
+    line-height: 1.8;
+
+    margin: 0 auto 25px;
+
+    max-width: 750px;
+}
+
+
+/* الصور العادية */
+
+.main-image {
+    display: block;
+
+    max-width: 330px;
+    max-height: 330px;
+
+    object-fit: contain;
+
+    margin: 25px auto;
+}
+
+
+.small-image {
+    width: 130px;
+    height: 130px;
+
+    object-fit: contain;
+}
+
+
+/* رفيق */
+
+.cloud-image {
+    width: 180px;
+    max-height: 180px;
+
+    object-fit: contain;
+}
+
+
+/* الأزرار */
+
+.main-btn {
+    border: none;
+
+    background: #a54f69;
+
+    color: white;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    padding: 16px 55px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    margin: 15px 8px;
+
+    box-shadow: 0 8px 18px rgba(165,79,105,0.25);
+}
+
+
+.main-btn:hover {
+    transform: translateY(-2px);
+}
+
+
+.secondary-btn {
+    border: 2px solid #a54f69;
+
+    background: white;
+
+    color: #a54f69;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    padding: 14px 35px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    margin: 10px;
+}
+
+
+/* الروتين */
+
+.routine-row {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 15px;
+
+    margin-top: 30px;
+
+    direction: rtl;
+}
+
+
+.routine-item {
+    background: rgba(255,255,255,0.9);
+
+    border: 2px solid #eadce0;
+
+    border-radius: 25px;
+
+    padding: 18px 10px;
+
+    min-height: 210px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+.routine-item img {
+    width: 105px;
+    height: 105px;
+
+    object-fit: contain;
+}
+
+
+.routine-item p {
+    margin: 0;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+}
+
+
+/* المشاعر */
+
+.emotions {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    max-width: 850px;
+
+    margin: 35px auto;
+}
+
+
+.emotion {
+    border: 3px solid transparent;
+
+    background: #fff;
+
+    border-radius: 28px;
+
+    padding: 25px 10px;
+
+    cursor: pointer;
+
+    font-size: 19px;
+
+    transition: 0.2s;
+
+    color: #4e4b75;
+}
+
+
+.emotion .emoji {
+    font-size: 65px;
+
+    display: block;
+
+    margin-bottom: 12px;
+}
+
+
+.emotion:hover,
+.emotion.selected {
+    border-color: #a54f69;
+
+    transform: translateY(-5px);
+
+    background: #fff8fa;
+}
+
+
+/* اختيار الحذاء */
+
+.shoes {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    flex-wrap: wrap;
+
+    margin: 30px auto;
+}
+
+
+.shoe-option {
+    width: 250px;
+
+    border: 3px solid transparent;
+
+    border-radius: 30px;
+
+    padding: 20px;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.shoe-option:hover {
+    transform: translateY(-5px);
+
+    border-color: #a54f69;
+}
+
+
+.shoe-option img {
+    width: 190px;
+    height: 150px;
+
+    object-fit: contain;
+}
+
+
+.shoe-option p {
+    font-size: 21px;
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+
+.unavailable {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+.unavailable:hover {
+    transform: none;
+
+    border-color: transparent;
+}
+
+
+/* رسالة رفيق */
+
+.rafiq-message {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 25px;
+
+    max-width: 750px;
+
+    margin: 30px auto;
+
+    background: #f5f8ff;
+
+    border-radius: 30px;
+
+    padding: 25px;
+}
+
+
+.rafiq-message p {
+    font-size: 23px;
+
+    line-height: 1.8;
+
+    text-align: right;
+}
+
+
+/* خلفيات القصص */
+
+.background-page {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: 0;
+}
+
+
+/* طبقة فوق الخلفية */
+
+.background-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 50px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(255,255,255,0.96) 0%,
+            rgba(255,255,255,0.72) 28%,
+            rgba(255,255,255,0.08) 65%
+        );
+}
+
+
+/* عشان الخلفية تبان كبيرة وواضحة */
+
+.scene-card {
+    padding: 0;
+
+    min-height: 760px;
+}
+
+
+/* صندوق النص فوق الخلفية */
+
+.scene-text {
+    background: rgba(255,255,255,0.93);
+
+    padding: 22px 35px;
+
+    border-radius: 28px;
+
+    max-width: 700px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+}
+
+
+.scene-text h2 {
+    margin: 0 0 10px;
+
+    font-size: 38px;
+}
+
+
+.scene-text p {
+    font-size: 22px;
+
+    margin: 0;
+
+    line-height: 1.7;
+}
+
+
+/* صفحة الدروس */
+
+.lessons {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+
+    max-width: 750px;
+
+    margin: 30px auto;
+}
+
+
+.lesson {
+    background: #fff;
+
+    border-radius: 25px;
+
+    padding: 25px;
+
+    font-size: 21px;
+
+    box-shadow: 0 7px 18px rgba(0,0,0,0.06);
+}
+
+
+/* النهاية */
+
+.last-page {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: 0;
+}
+
+
+.last-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 45px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(255,255,255,0.95),
+            rgba(255,255,255,0.25) 60%,
+            transparent
+        );
+}
+
+
+.success-box {
+    background: rgba(255,255,255,0.94);
+
+    border-radius: 35px;
+
+    padding: 25px 45px;
+
+    max-width: 700px;
+}
+
+
+.success-box h1 {
+    margin: 0 0 10px;
+}
+
+
+.success-box p {
+    font-size: 23px;
+
+    line-height: 1.7;
+}
+
+
+/* الجوال */
+
+@media (max-width: 800px) {
+
+    #game {
+        padding: 12px;
+    }
+
+    .page-card {
+        min-height: 680px;
+
+        padding: 25px 15px;
+
+        border-radius: 30px;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    .subtitle {
+        font-size: 19px;
+    }
+
+    .routine-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .emotions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lessons {
+        grid-template-columns: 1fr;
+    }
+
+    .main-image {
+        max-width: 250px;
+    }
+}
+/* ===== إصلاح ظهور الخلفيات ===== */
+
+.scene-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* صورة الخلفية */
+.background-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain !important;
+    object-position: center center !important;
+
+    z-index: 0;
+
+    background-color: #f7f3ea;
+}
+
+/* الطبقة الموجودة فوق الخلفية */
+.background-overlay {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+}
+/* ===== صفحة الحذاء المفقود ===== */
+
+.lost-page {
+    position: relative;
+    overflow: hidden;
+}
+
+.lost-page .background-page {
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    z-index: 0 !important;
+}
+
+/* المحتوى فوق الخلفية */
+.lost-page .background-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+
+    padding: 30px 35px 45px !important;
+    box-sizing: border-box !important;
+
+    background: transparent !important;
+    z-index: 2 !important;
+}
+
+/* مربع الكلام */
+.lost-page .scene-text {
+    width: min(760px, 90%) !important;
+    padding: 22px 30px !important;
+    margin: 0 auto 18px !important;
+
+    background: rgba(255,255,255,0.90) !important;
+    border-radius: 28px !important;
+
+    text-align: center !important;
+}
+
+/* العنوان */
+.lost-page .scene-text h2 {
+    margin: 0 0 10px !important;
+}
+
+/* النص */
+.lost-page .scene-text p {
+    margin: 0 !important;
+}
+
+/* زر التالي */
+.lost-page .main-btn {
+    position: relative !important;
+    margin: 0 auto !important;
+    z-index: 3 !important;
+}
+/* ==================================
+   صفحة المدرسة
+================================== */
+
+.school-page {
+    position: relative;
+    overflow: hidden;
+}
+
+.school-page .background-page {
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    z-index: 0 !important;
+}
+
+.school-page .background-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+
+    padding: 30px 35px 45px !important;
+    box-sizing: border-box !important;
+
+    background: transparent !important;
+    z-index: 2 !important;
+}
+
+.school-page .scene-text {
+    width: min(760px, 90%) !important;
+    padding: 22px 30px !important;
+    margin: 0 auto 18px !important;
+
+    background: rgba(255,255,255,0.90) !important;
+    border-radius: 28px !important;
+
+    text-align: center !important;
+}
+
+.school-page .scene-text h2 {
+    margin: 0 0 10px !important;
+}
+
+.school-page .scene-text p {
+    margin: 0 !important;
+}
+
+.school-page .main-btn {
+    position: relative !important;
+    margin: 0 auto !important;
+    z-index: 5 !important;
+}
+
+
+/* ==================================
+   صفحة أحسنت
+================================== */
+
+.last-page {
+    position: relative;
+    overflow: hidden;
+}
+
+.last-page .background-page {
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    z-index: 0 !important;
+}
+
+.last-page .background-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+
+    padding: 30px 35px 45px !important;
+    box-sizing: border-box !important;
+
+    background: transparent !important;
+    z-index: 2 !important;
+}
+
+.last-page .scene-text {
+    width: min(760px, 90%) !important;
+    padding: 22px 30px !important;
+    margin: 0 auto 18px !important;
+
+    background: rgba(255,255,255,0.90) !important;
+    border-radius: 28px !important;
+
+    text-align: center !important;
+}
+
+.last-page .scene-text h2 {
+    margin: 0 0 10px !important;
+}
+
+.last-page .scene-text p {
+    margin: 0 !important;
+}
+
+.last-page .main-btn {
+    position: relative !important;
+    margin: 0 auto !important;
+    z-index: 5 !important;
+}
+/* ==================================
+   الصفحة الأولى - روتيني يتغير
+================================== */
+
+.intro-page {
+    min-height: 0 !important;
+    height: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    padding: 25px 35px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* الغيمة */
+.intro-page .cloud-image {
+    width: 120px !important;
+    height: auto !important;
+    max-height: 110px !important;
+
+    object-fit: contain !important;
+
+    margin: 0 auto 5px !important;
+}
+
+/* العنوان */
+.intro-page h1,
+.intro-page h2 {
+    margin: 5px 0 8px !important;
+}
+
+/* النص */
+.intro-page p {
+    margin: 0 0 15px !important;
+    line-height: 1.7 !important;
+}
+
+/* صورة الطفل */
+.intro-page .boy-image {
+    width: 280px !important;
+    height: 330px !important;
+
+    object-fit: contain !important;
+
+    margin: 5px auto 15px !important;
+}
+
+/* زر لنبدأ */
+.intro-page .main-btn {
+    margin: 5px auto 0 !important;
+}
+/* الطفل أمام المدرسة */
+.school-page .school-boy {
+    position: absolute;
+
+    width: 125px;
+    height: auto;
+    max-height: 200px;
+
+    object-fit: contain;
+
+    left: 1%;
+    bottom: 4%;
+
+    z-index: 2;
+}
+/* ===== الصفحة الأولى ===== */
+
+.intro-page {
+    position: relative;
+    overflow: hidden;
+    min-height: 850px;
+}
+
+.intro-page .intro-background {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+
+    z-index: 0;
+}
+
+.intro-page .intro-overlay {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    min-height: 850px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 35px 35px 45px;
+    box-sizing: border-box;
+
+    background: rgba(255,255,255,0.20);
+}
+
+.intro-page .cloud-image {
+    width: 150px;
+    height: auto;
+}
+
+.intro-page .intro-text {
+    background: rgba(255,255,255,0.88);
+    border-radius: 30px;
+    padding: 25px 40px;
+    text-align: center;
+    width: min(85%, 750px);
+}
+
+.intro-page .intro-text h1 {
+    margin: 0 0 15px;
+}
+
+.intro-page .intro-text .subtitle {
+    margin: 0;
+}
+/* ===== الصفحة الثانية ===== */
+
+.morning-page {
+    position: relative;
+    overflow: hidden;
+    min-height: 850px;
+}
+
+.morning-page .morning-background {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+
+    z-index: 0;
+}
+
+.morning-page .morning-overlay {
+    position: relative;
+    z-index: 1;
+
+    min-height: 850px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+    box-sizing: border-box;
+
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.morning-text {
+    background: rgba(255,255,255,0.90);
+    padding: 20px 35px;
+    border-radius: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.morning-text h2 {
+    margin: 0 0 10px;
+}
+
+.morning-text p {
+    margin: 0;
+}
+
+.routine-steps {
+    width: 90%;
+
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 12px;
+
+    background: rgba(255,255,255,0.88);
+    padding: 20px;
+    border-radius: 30px;
+
+    margin-bottom: 30px;
+}
+
+.routine-step {
+    flex: 1;
+    min-width: 0;
+
+    background: rgba(255,255,255,0.92);
+    border-radius: 20px;
+    padding: 12px 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    text-align: center;
+}
+
+.routine-step img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+.routine-step span {
+    font-size: 17px;
+    font-weight: 600;
+}

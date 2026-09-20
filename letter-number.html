@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>الحروف والأرقام - رفيق</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+/* =========================
+   الأساس
+========================= */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Tahoma,
+        Arial,
+        sans-serif;
+
+}
+
+body {
+
+    background: white;
+
+}
+
+
+/* =========================
+   الصفحة
+========================= */
+
+.page {
+
+    width: 100%;
+    height: 100vh;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background-image:
+        url("images/899.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+}
+
+
+/* طبقة بيضاء خفيفة حتى تبقى الأزرار واضحة */
+
+.page::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    pointer-events: none;
+
+}
+
+
+/* =========================
+   زر السابق
+========================= */
+
+.previous-button {
+
+    position: fixed;
+
+    top: 20px;
+
+    left: 20px;
+
+    z-index: 1000;
+
+    width: 58px;
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,0.94);
+
+    color: #5B78B8;
+
+    font-size: 38px;
+
+    line-height: 1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 16px
+        rgba(70,110,160,0.16);
+
+    transition:
+        transform 0.15s ease;
+
+}
+
+.previous-button:active {
+
+    transform:
+        scale(0.92);
+
+}
+
+
+/* =========================
+   القائمة
+========================= */
+
+.menu-wrapper {
+
+    position: fixed;
+
+    top: 20px;
+
+    right: 20px;
+
+    z-index: 2000;
+
+}
+
+.menu-button {
+
+    width: 58px;
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255,255,255,0.94);
+
+    color: #5B78B8;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 16px
+        rgba(70,110,160,0.16);
+
+    transition:
+        transform 0.15s ease;
+
+}
+
+.menu-button:active {
+
+    transform:
+        scale(0.92);
+
+}
+
+
+/* =========================
+   القائمة المنسدلة
+========================= */
+
+.dropdown-menu {
+
+    position: absolute;
+
+    top: 68px;
+
+    right: 0;
+
+    width: 190px;
+
+    padding: 9px;
+
+    background: white;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(50,80,120,0.18);
+
+    display: none;
+
+}
+
+.dropdown-menu.show {
+
+    display: block;
+
+}
+
+.menu-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px 12px;
+
+    text-decoration: none;
+
+    color: #536B91;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    border-radius: 14px;
+
+}
+
+.menu-item:active {
+
+    background:
+        #e4f2ff;
+
+}
+
+.menu-icon {
+
+    font-size: 22px;
+
+}
+
+
+/* =========================
+   المحتوى
+========================= */
+
+.content {
+
+    position: relative;
+
+    z-index: 10;
+
+    width: 100%;
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 28px;
+
+    padding:
+        90px 30px 40px;
+
+}
+
+
+/* =========================
+   العنوان
+========================= */
+
+.title {
+
+    position: absolute;
+
+    top: 95px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    color: #5B78B8;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+
+    text-shadow:
+        0 2px 5px
+        rgba(255,255,255,0.8);
+
+}
+
+
+/* =========================
+   الأزرار
+========================= */
+
+.choice-button {
+
+    width:
+        min(650px, 78vw);
+
+    height: 145px;
+
+    border: 3px solid
+            rgba(255,255,255,0.8);
+
+    border-radius: 38px;
+
+    background:
+        #e4f2ff;
+
+    color: #41618F;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 9px 22px
+        rgba(85,130,180,0.18),
+
+        inset 0 2px 5px
+        rgba(255,255,255,0.8);
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+
+}
+
+.choice-button:active {
+
+    transform:
+        scale(0.97);
+
+    box-shadow:
+        0 4px 10px
+        rgba(85,130,180,0.16);
+
+}
+
+
+/* =========================
+   رمز الزر
+========================= */
+
+.button-symbols {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    direction: ltr;
+
+}
+
+.symbol {
+
+    width: 62px;
+
+    height: 62px;
+
+    border-radius: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 42px;
+
+    font-weight: bold;
+
+    color: white;
+
+    text-shadow:
+        0 2px 3px
+        rgba(0,0,0,0.12);
+
+}
+
+.symbol-pink {
+
+    background: #F48BAE;
+
+}
+
+.symbol-yellow {
+
+    background: #F7C957;
+
+}
+
+.symbol-blue {
+
+    background: #72B4EF;
+
+}
+
+.symbol-purple {
+
+    background: #A994E8;
+
+}
+
+
+/* =========================
+   سهم الزر
+========================= */
+
+.arrow {
+
+    width: 54px;
+
+    height: 54px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(91,141,239,0.72);
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 32px;
+
+    flex-shrink: 0;
+
+}
+
+
+/* =========================
+   استجابة الآيباد
+========================= */
+
+@media (max-width: 900px) {
+
+    .choice-button {
+
+        width: 82vw;
+
+        height: 125px;
+
+        font-size: 32px;
+
+    }
+
+    .symbol {
+
+        width: 54px;
+
+        height: 54px;
+
+        font-size: 36px;
+
+    }
+
+    .arrow {
+
+        width: 48px;
+
+        height: 48px;
+
+        font-size: 28px;
+
+    }
+
+}
+
+
+/* =========================
+   شاشة صغيرة
+========================= */
+
+@media (max-height: 750px) {
+
+    .content {
+
+        gap: 18px;
+
+        padding-top: 70px;
+
+    }
+
+    .title {
+
+        top: 70px;
+
+        font-size: 30px;
+
+    }
+
+    .choice-button {
+
+        height: 110px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =====================
+         زر السابق
+    ====================== -->
+
+    <button
+        class="previous-button"
+        id="previousButton"
+        aria-label="السابق">
+
+        ‹
+
+    </button>
+
+
+    <!-- =====================
+         القائمة
+    ====================== -->
+
+    <div class="menu-wrapper">
+
+
+        <button
+            class="menu-button"
+            id="menuButton"
+            aria-label="فتح القائمة">
+
+            ☰
+
+        </button>
+
+
+        <div
+            class="dropdown-menu"
+            id="dropdownMenu">
+
+
+            <a
+                href="index.html"
+                class="menu-item">
+
+                <span class="menu-icon">
+                    🏠
+                </span>
+
+                <span>
+                    الرئيسية
+                </span>
+
+            </a>
+
+
+            <a
+                href="reports.html"
+                class="menu-item">
+
+                <span class="menu-icon">
+                    📊
+                </span>
+
+                <span>
+                    تقاريري
+                </span>
+
+            </a>
+
+
+            <a
+                href="progress.html"
+                class="menu-item">
+
+                <span class="menu-icon">
+                    ⭐
+                </span>
+
+                <span>
+                    تقدمي
+                </span>
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================
+         المحتوى
+    ====================== -->
+
+    <main class="content">
+
+
+        <!-- العنوان -->
+
+        <div class="title">
+
+            ماذا سنتعلم؟ 🌟
+
+        </div>
+
+
+        <!-- =====================
+             زر الحروف
+        ====================== -->
+
+        <button
+            class="choice-button"
+            id="lettersButton">
+
+
+            <div class="button-symbols">
+
+                <span
+                    class="symbol symbol-blue">
+                    ب
+                </span>
+
+                <span
+                    class="symbol symbol-yellow">
+                    ت
+                </span>
+
+                <span
+                    class="symbol symbol-pink">
+                    ا
+                </span>
+
+            </div>
+
+
+            <span>
+                الحروف
+            </span>
+
+
+            <span class="arrow">
+                ‹
+            </span>
+
+
+        </button>
+
+
+        <!-- =====================
+             زر الأرقام
+        ====================== -->
+
+        <button
+            class="choice-button"
+            id="numbersButton">
+
+
+            <div class="button-symbols">
+
+                <span
+                    class="symbol symbol-pink">
+                    ١
+                </span>
+
+                <span
+                    class="symbol symbol-yellow">
+                    ٢
+                </span>
+
+                <span
+                    class="symbol symbol-blue">
+                    ٣
+                </span>
+
+            </div>
+
+
+            <span>
+                الأرقام
+            </span>
+
+
+            <span class="arrow">
+                ‹
+            </span>
+
+
+        </button>
+
+
+    </main>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://ciwrwmutcrarwtounelg.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =====================================================
+   CHILD ID
+===================================================== */
+
+const childId =
+    localStorage.getItem(
+        "rafiqChildId"
+    );
+
+
+/* =====================================================
+   النطق
+===================================================== */
+
+function speak(text) {
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        return;
+
+    }
+
+    speechSynthesis.cancel();
+
+
+    const utterance =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+
+    utterance.lang =
+        "ar-SA";
+
+    utterance.rate =
+        0.85;
+
+    utterance.pitch =
+        1.05;
+
+
+    speechSynthesis.speak(
+        utterance
+    );
+
+}
+
+
+/* =====================================================
+   جلب interests
+===================================================== */
+
+async function getChildInterest(){
+
+    if(!childId){
+
+        console.warn(
+            "لا يوجد rafiqChildId في localStorage."
+        );
+
+        return null;
+
+    }
+
+
+    try{
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from("children")
+
+            .select("interests")
+
+            .eq(
+                "id",
+                childId
+            )
+
+            .maybeSingle();
+
+
+        if(error){
+
+            console.error(
+                "خطأ في جلب interests:",
+                error
+            );
+
+            return null;
+
+        }
+
+
+        if(
+            !data ||
+            data.interests === null ||
+            data.interests === undefined ||
+            String(data.interests).trim() === ""
+        ){
+
+            console.warn(
+                "لا توجد قيمة interests للطفل."
+            );
+
+            return null;
+
+        }
+
+
+        return String(
+            data.interests
+        )
+        .trim()
+        .toLowerCase();
+
+    }
+
+    catch(error){
+
+        console.error(
+            "حدث خطأ أثناء جلب بيانات الطفل:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =====================================================
+   تحديد نوع الاهتمام
+===================================================== */
+
+function isSpace(interest){
+
+    return (
+        interest === "فضاء" ||
+        interest === "space"
+    );
+
+}
+
+
+function isCars(interest){
+
+    return (
+        interest === "سيارات" ||
+        interest === "سيارة" ||
+        interest === "cars" ||
+        interest === "car"
+    );
+
+}
+
+
+/* =====================================================
+   زر الحروف
+===================================================== */
+
+document
+    .getElementById("lettersButton")
+    .addEventListener(
+        "click",
+        async function() {
+
+            speak(
+                "الحروف"
+            );
+
+
+            const interest =
+                await getChildInterest();
+
+
+            /* =========================
+               الفضاء
+            ========================= */
+
+            if(
+                isSpace(interest)
+            ){
+
+                setTimeout(
+                    function(){
+
+                        window.location.href =
+                            "lettspa.html";
+
+                    },
+                    350
+                );
+
+                return;
+
+            }
+
+
+            /* =========================
+               السيارات
+            ========================= */
+
+            if(
+                isCars(interest)
+            ){
+
+                setTimeout(
+                    function(){
+
+                        window.location.href =
+                            "lettcar.html";
+
+                    },
+                    350
+                );
+
+                return;
+
+            }
+
+
+            console.warn(
+                "لم يتم تحديد اهتمام مدعوم للحروف."
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   زر الأرقام
+===================================================== */
+
+document
+    .getElementById("numbersButton")
+    .addEventListener(
+        "click",
+        async function() {
+
+            speak(
+                "الأرقام"
+            );
+
+
+            const interest =
+                await getChildInterest();
+
+
+            /* =========================
+               الفضاء
+            ========================= */
+
+            if(
+                isSpace(interest)
+            ){
+
+                setTimeout(
+                    function(){
+
+                        window.location.href =
+                            "number-oness.html";
+
+                    },
+                    350
+                );
+
+                return;
+
+            }
+
+
+            /* =========================
+               السيارات
+            ========================= */
+
+            if(
+                isCars(interest)
+            ){
+
+                setTimeout(
+                    function(){
+
+                        window.location.href =
+                            "number-one.html";
+
+                    },
+                    350
+                );
+
+                return;
+
+            }
+
+
+            console.warn(
+                "لم يتم تحديد اهتمام مدعوم للأرقام."
+            );
+
+        }
+    );
+
+
+/* =====================================================
+   زر السابق
+===================================================== */
+
+document
+    .getElementById("previousButton")
+    .addEventListener(
+        "click",
+        function() {
+
+            window.location.href =
+                "games.html";
+
+        }
+    );
+
+
+/* =====================================================
+   القائمة
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const dropdownMenu =
+    document.getElementById(
+        "dropdownMenu"
+    );
+
+
+menuButton.addEventListener(
+    "click",
+    function(event) {
+
+        event.stopPropagation();
+
+        dropdownMenu.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        if (
+            !event.target.closest(
+                ".menu-wrapper"
+            )
+        ) {
+
+            dropdownMenu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>حرف الألف</title>
+
+<style>
+
+/* =========================================
+   BASIC
+========================================= */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    font-family:"Tajawal","Cairo",Arial,sans-serif;
+}
+
+body{
+    position:relative;
+    background:#ffffff;
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background{
+    position:absolute;
+    inset:0;
+    z-index:1;
+
+    background-image:url("images/af.jpeg");
+    background-size:cover;
+    background-position:center center;
+    background-repeat:no-repeat;
+}
+
+
+/* =========================================
+   TOP BAR
+========================================= */
+
+.topbar{
+    position:absolute;
+
+    top:30px;
+    left:35px;
+    right:35px;
+
+    height:75px;
+
+    z-index:100;
+}
+
+
+/* =========================================
+   PREVIOUS - LEFT
+========================================= */
+
+.previous-button{
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    width:150px;
+    height:58px;
+
+    border:none;
+    border-radius:30px;
+
+    background:#e4f2ff;
+    color:#315d78;
+
+    font-family:inherit;
+    font-size:22px;
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 15px rgba(50,100,130,.12);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+.previous-button:active{
+    transform:scale(.96);
+}
+
+
+/* =========================================
+   MENU - RIGHT
+========================================= */
+
+.menu-container{
+    position:absolute;
+
+    right:0;
+    top:0;
+
+    z-index:110;
+}
+
+.menu-button{
+    width:58px;
+    height:58px;
+
+    border:none;
+    border-radius:18px;
+
+    background:#ffffff;
+
+    font-size:28px;
+
+    color:#315d78;
+
+    box-shadow:
+        0 5px 15px rgba(50,100,130,.12);
+
+    cursor:pointer;
+}
+
+.menu{
+    position:absolute;
+
+    right:0;
+    top:68px;
+
+    width:190px;
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    padding:10px;
+
+    box-shadow:
+        0 10px 30px rgba(30,80,110,.18);
+
+    display:none;
+}
+
+.menu.show{
+    display:block;
+}
+
+.menu a{
+    display:block;
+
+    text-decoration:none;
+
+    color:#315d78;
+
+    font-size:20px;
+    font-weight:700;
+
+    padding:14px 15px;
+
+    border-radius:14px;
+
+    text-align:right;
+}
+
+.menu a:hover{
+    background:#e4f2ff;
+}
+
+
+/* =========================================
+   QUESTION BOX
+========================================= */
+
+.question-box{
+    position:absolute;
+
+    z-index:30;
+
+    top:180px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:650px;
+
+    min-height:90px;
+
+    padding:18px 30px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    background:rgba(255,255,255,.90);
+
+    border:5px solid #b9def5;
+
+    border-radius:30px;
+
+    box-shadow:
+        0 6px 18px rgba(40,100,130,.10);
+}
+
+.question-text{
+    font-size:27px;
+
+    font-weight:900;
+
+    color:#315d78;
+
+    line-height:1.5;
+}
+
+
+/* =========================================
+   ANSWERS
+========================================= */
+
+.answers{
+    position:absolute;
+
+    z-index:40;
+
+    top:35%;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:760px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:35px;
+}
+
+
+.answer{
+    height:360px;
+
+    border:5px solid #b9def5;
+
+    background:#ffffff;
+
+    border-radius:35px;
+
+    padding:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    font-family:inherit;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 7px 18px rgba(30,100,140,.12);
+
+    transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
+}
+
+.answer:active{
+    transform:scale(.97);
+}
+
+.answer.correct{
+    border-color:#8ed6a8;
+
+    box-shadow:
+        0 8px 22px rgba(100,180,130,.22);
+}
+
+.answer.wrong{
+    border-color:#f1b4b4;
+}
+
+.answer img{
+    width:270px;
+    height:270px;
+
+    object-fit:contain;
+
+    display:block;
+}
+
+.answer-word{
+    font-size:25px;
+
+    font-weight:900;
+
+    color:#315d78;
+}
+
+
+/* =========================================
+   FEEDBACK
+========================================= */
+
+.feedback{
+    position:absolute;
+
+    z-index:50;
+
+    top:78%;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    min-width:430px;
+
+    padding:14px 25px;
+
+    background:rgba(255,255,255,.90);
+
+    border-radius:22px;
+
+    text-align:center;
+
+    font-size:22px;
+
+    font-weight:800;
+
+    color:#315d78;
+
+    opacity:0;
+
+    transition:opacity .25s ease;
+
+    pointer-events:none;
+
+    box-shadow:
+        0 5px 15px rgba(40,100,130,.10);
+}
+
+.feedback.show{
+    opacity:1;
+}
+
+
+/* =========================================
+   NEXT BUTTON
+========================================= */
+
+.next-button{
+    position:absolute;
+
+    z-index:70;
+
+    bottom:35px;
+
+    right:55px;
+
+    width:135px;
+    height:58px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#b7c5cf;
+
+    color:#ffffff;
+
+    font-family:inherit;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    cursor:not-allowed;
+
+    opacity:.7;
+}
+
+.next-button.active{
+    background:#2187c9;
+
+    opacity:1;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 6px 18px rgba(30,120,180,.22);
+}
+
+.next-button.active:active{
+    transform:scale(.95);
+}
+
+
+/* =========================================
+   SPACE CELEBRATION
+========================================= */
+
+.celebration{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:90;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    opacity:0;
+
+    visibility:hidden;
+}
+
+.celebration.show{
+
+    opacity:1;
+
+    visibility:visible;
+}
+
+
+/* =========================================
+   SPACE ITEMS
+========================================= */
+
+.space-item{
+
+    position:absolute;
+
+    bottom:-120px;
+
+    opacity:0;
+
+    font-family:Arial,sans-serif;
+
+    animation:
+        spaceUp 5.5s ease-out forwards;
+}
+
+
+/* الصواريخ */
+
+.rocket{
+
+    font-size:65px;
+
+    filter:
+        drop-shadow(
+            0 5px 8px
+            rgba(60,100,150,.18)
+        );
+}
+
+
+/* الكواكب */
+
+.planet{
+
+    font-size:70px;
+
+    filter:
+        drop-shadow(
+            0 5px 10px
+            rgba(80,90,160,.15)
+        );
+}
+
+
+/* النجوم */
+
+.star{
+
+    font-size:48px;
+
+    filter:
+        drop-shadow(
+            0 4px 8px
+            rgba(255,190,70,.18)
+        );
+}
+
+
+/* الأقمار */
+
+.moon{
+
+    font-size:52px;
+
+    filter:
+        drop-shadow(
+            0 4px 8px
+            rgba(100,110,170,.15)
+        );
+}
+
+
+/* =========================================
+   SPACE POSITIONS
+========================================= */
+
+.rocket1{
+    left:7%;
+    animation-delay:.1s;
+}
+
+.planet1{
+    left:21%;
+    animation-delay:.55s;
+}
+
+.star1{
+    left:35%;
+    animation-delay:.25s;
+}
+
+.moon1{
+    left:48%;
+    animation-delay:.8s;
+}
+
+.rocket2{
+    left:61%;
+    animation-delay:.4s;
+}
+
+.star2{
+    left:73%;
+    animation-delay:.9s;
+}
+
+.planet2{
+    left:84%;
+    animation-delay:.2s;
+}
+
+.moon2{
+    left:14%;
+    animation-delay:1.1s;
+}
+
+.rocket3{
+    left:42%;
+    animation-delay:1.3s;
+}
+
+.star3{
+    left:55%;
+    animation-delay:.7s;
+}
+
+.planet3{
+    left:68%;
+    animation-delay:1.5s;
+}
+
+.star4{
+    left:91%;
+    animation-delay:1s;
+}
+
+
+/* =========================================
+   SPACE MOVEMENT
+========================================= */
+
+@keyframes spaceUp{
+
+    0%{
+        opacity:0;
+
+        transform:
+            translateY(0)
+            rotate(-8deg)
+            scale(.75);
+    }
+
+    8%{
+        opacity:1;
+    }
+
+    30%{
+        opacity:1;
+
+        transform:
+            translateY(-300px)
+            rotate(7deg)
+            scale(1);
+    }
+
+    55%{
+        opacity:1;
+
+        transform:
+            translateY(-650px)
+            rotate(-7deg)
+            scale(1.05);
+    }
+
+    80%{
+        opacity:1;
+
+        transform:
+            translateY(-1000px)
+            rotate(6deg)
+            scale(1);
+    }
+
+    100%{
+        opacity:1;
+
+        transform:
+            translateY(-1450px)
+            rotate(-5deg)
+            scale(.9);
+    }
+}
+
+
+/* =========================================
+   CONFETTI
+========================================= */
+
+.confetti{
+
+    position:absolute;
+
+    inset:0;
+
+    z-index:91;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    overflow:hidden;
+}
+
+.confetti.show{
+    opacity:1;
+}
+
+.confetti span{
+
+    position:absolute;
+
+    top:-30px;
+
+    width:12px;
+    height:22px;
+
+    border-radius:4px;
+
+    animation:
+        confettiFall 4.5s linear forwards;
+}
+
+.confetti span:nth-child(1){
+    left:8%;
+    background:#8ecae6;
+    animation-delay:.1s;
+}
+
+.confetti span:nth-child(2){
+    left:18%;
+    background:#f3c4c4;
+    animation-delay:.4s;
+}
+
+.confetti span:nth-child(3){
+    left:28%;
+    background:#a8d8b9;
+    animation-delay:.8s;
+}
+
+.confetti span:nth-child(4){
+    left:39%;
+    background:#f5d58a;
+    animation-delay:.2s;
+}
+
+.confetti span:nth-child(5){
+    left:50%;
+    background:#b8a9df;
+    animation-delay:.6s;
+}
+
+.confetti span:nth-child(6){
+    left:61%;
+    background:#8ecae6;
+    animation-delay:.9s;
+}
+
+.confetti span:nth-child(7){
+    left:72%;
+    background:#f3c4c4;
+    animation-delay:.3s;
+}
+
+.confetti span:nth-child(8){
+    left:83%;
+    background:#a8d8b9;
+    animation-delay:.7s;
+}
+
+.confetti span:nth-child(9){
+    left:92%;
+    background:#f5d58a;
+    animation-delay:.5s;
+}
+
+@keyframes confettiFall{
+
+    0%{
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity:1;
+    }
+
+    100%{
+        transform:
+            translateY(1200px)
+            rotate(720deg);
+
+        opacity:0;
+    }
+}
+
+
+/* =========================================
+   FINISH POPUP
+========================================= */
+
+.finish-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:200;
+
+    background:rgba(30,70,100,.30);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:30px;
+}
+
+.finish-overlay.show{
+    display:flex;
+}
+
+
+.finish-popup{
+
+    width:520px;
+
+    max-width:90%;
+
+    background:#ffffff;
+
+    border:5px solid #b9def5;
+
+    border-radius:35px;
+
+    padding:35px 35px 30px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 45px rgba(30,80,110,.22);
+
+    animation:
+        popupIn .3s ease-out;
+}
+
+
+.finish-icon{
+
+    font-size:58px;
+
+    margin-bottom:8px;
+}
+
+
+.finish-title{
+
+    margin:0;
+
+    color:#315d78;
+
+    font-size:30px;
+
+    font-weight:900;
+
+    line-height:1.5;
+}
+
+
+.finish-text{
+
+    margin:8px 0 25px;
+
+    color:#5b7b8d;
+
+    font-size:23px;
+
+    font-weight:700;
+
+    line-height:1.6;
+}
+
+
+/* =========================================
+   POPUP BUTTONS
+========================================= */
+
+.finish-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:15px;
+}
+
+
+.cancel-button,
+.continue-button{
+
+    height:58px;
+
+    border:none;
+
+    border-radius:30px;
+
+    padding:0 30px;
+
+    font-family:inherit;
+
+    font-size:21px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+
+.cancel-button{
+
+    background:#eef3f6;
+
+    color:#607987;
+}
+
+
+.continue-button{
+
+    background:#2187c9;
+
+    color:#ffffff;
+
+    box-shadow:
+        0 6px 16px rgba(30,120,180,.20);
+}
+
+
+.cancel-button:active,
+.continue-button:active{
+
+    transform:scale(.96);
+}
+
+
+@keyframes popupIn{
+
+    0%{
+        opacity:0;
+        transform:scale(.88);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:900px){
+
+    .topbar{
+        top:20px;
+        left:20px;
+        right:20px;
+    }
+
+    .previous-button{
+        width:125px;
+        height:52px;
+        font-size:18px;
+    }
+
+    .menu-button{
+        width:52px;
+        height:52px;
+    }
+
+    .question-box{
+        top:170px;
+        width:90%;
+    }
+
+    .question-text{
+        font-size:23px;
+    }
+
+    .answers{
+        width:90%;
+        top:34%;
+        gap:20px;
+    }
+
+    .answer{
+        height:310px;
+    }
+
+    .answer img{
+        width:220px;
+        height:220px;
+    }
+
+    .answer-word{
+        font-size:22px;
+    }
+
+    .feedback{
+        min-width:70%;
+        top:77%;
+    }
+
+    .next-button{
+        right:30px;
+        bottom:25px;
+    }
+
+    .finish-popup{
+        width:90%;
+        padding:30px 20px 25px;
+    }
+
+    .finish-title{
+        font-size:27px;
+    }
+
+    .finish-text{
+        font-size:21px;
+    }
+
+    .finish-buttons{
+        gap:10px;
+    }
+
+    .cancel-button,
+    .continue-button{
+        padding:0 22px;
+        font-size:19px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- الخلفية -->
+
+<div class="background"></div>
+
+
+<!-- =========================================
+     TOP BAR
+========================================= -->
+
+<div class="topbar">
+
+
+    <!-- السابق: يسار -->
+
+    <button
+        class="previous-button"
+        onclick="goPrevious()">
+
+        ← السابق
+
+    </button>
+
+
+    <!-- القائمة: يمين -->
+
+    <div class="menu-container">
+
+        <button
+            class="menu-button"
+            onclick="toggleMenu()">
+
+            ☰
+
+        </button>
+
+
+        <div
+            class="menu"
+            id="menu">
+
+            <a href="home.html">
+                الرئيسية
+            </a>
+
+            <a href="profile.html">
+                ملفي
+            </a>
+
+            <a href="progress.html">
+                تقدمي
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     QUESTION
+========================================= -->
+
+<div class="question-box">
+
+    <div class="question-text">
+
+        أي صورة تبدأ بحرف الألف؟ 🔤
+
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     ANSWERS
+========================================= -->
+
+<div class="answers">
+
+
+    <!-- أسد -->
+
+    <button
+        class="answer"
+        id="lionAnswer"
+        onclick="checkAnswer(true,this)">
+
+        <img
+            src="images/asd.png"
+            alt="أسد">
+
+        <div class="answer-word">
+
+            أسد 🔊
+
+        </div>
+
+    </button>
+
+
+    <!-- رمانة -->
+
+    <button
+        class="answer"
+        id="pomegranateAnswer"
+        onclick="checkAnswer(false,this)">
+
+        <img
+            src="images/ar.png"
+            alt="رمانة">
+
+        <div class="answer-word">
+
+            رمانة 🔊
+
+        </div>
+
+    </button>
+
+
+</div>
+
+
+<!-- =========================================
+     FEEDBACK
+========================================= -->
+
+<div
+    class="feedback"
+    id="feedback">
+</div>
+
+
+<!-- =========================================
+     SPACE ZINA
+========================================= -->
+
+<div
+    class="celebration"
+    id="celebration">
+
+
+    <div class="space-item rocket rocket1">
+        🚀
+    </div>
+
+
+    <div class="space-item planet planet1">
+        🪐
+    </div>
+
+
+    <div class="space-item star star1">
+        ⭐
+    </div>
+
+
+    <div class="space-item moon moon1">
+        🌙
+    </div>
+
+
+    <div class="space-item rocket rocket2">
+        🚀
+    </div>
+
+
+    <div class="space-item star star2">
+        ✨
+    </div>
+
+
+    <div class="space-item planet planet2">
+        🪐
+    </div>
+
+
+    <div class="space-item moon moon2">
+        🌙
+    </div>
+
+
+    <div class="space-item rocket rocket3">
+        🚀
+    </div>
+
+
+    <div class="space-item star star3">
+        ⭐
+    </div>
+
+
+    <div class="space-item planet planet3">
+        🪐
+    </div>
+
+
+    <div class="space-item star star4">
+        ✨
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     CONFETTI
+========================================= -->
+
+<div
+    class="confetti"
+    id="confetti">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+
+<!-- =========================================
+     NEXT
+========================================= -->
+
+<button
+    class="next-button"
+    id="nextButton"
+    onclick="openFinishPopup()">
+
+    التالي →
+
+</button>
+
+
+<!-- =========================================
+     FINISH POPUP
+========================================= -->
+
+<div
+    class="finish-overlay"
+    id="finishOverlay">
+
+    <div class="finish-popup">
+
+        <div class="finish-icon">
+            🎉
+        </div>
+
+        <h2 class="finish-title">
+            أحسنت! خلصنا من أول حرف 🌟
+        </h2>
+
+        <div class="finish-text">
+            هيا بنا إلى التالي
+        </div>
+
+        <div class="finish-buttons">
+
+            <button
+                class="cancel-button"
+                onclick="closeFinishPopup()">
+
+                إلغاء
+
+            </button>
+
+            <button
+                class="continue-button"
+                onclick="goNext()">
+
+                هيا بنا
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================
+   SPEECH
+========================================= */
+
+function speak(text){
+
+    if(!("speechSynthesis" in window)){
+        return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+    utterance.lang="ar-SA";
+
+    utterance.rate=.85;
+
+    utterance.pitch=1.05;
+
+    window.speechSynthesis.speak(utterance);
+}
+
+
+/* =========================================
+   READ QUESTION
+========================================= */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        setTimeout(
+            function(){
+
+                speak(
+                    "أي صورة تبدأ بحرف الألف؟"
+                );
+
+            },
+            700
+        );
+
+    }
+);
+
+
+/* =========================================
+   MENU
+========================================= */
+
+function toggleMenu(){
+
+    const menu =
+        document.getElementById("menu");
+
+    menu.classList.toggle("show");
+
+}
+
+
+/* =========================================
+   PREVIOUS
+========================================= */
+
+function goPrevious(){
+
+    window.location.href =
+        "lettspa.html";
+
+}
+
+
+/* =========================================
+   OPEN FINISH POPUP
+========================================= */
+
+function openFinishPopup(){
+
+    const nextButton =
+        document.getElementById("nextButton");
+
+    if(
+        !nextButton.classList.contains("active")
+    ){
+        return;
+    }
+
+    document
+        .getElementById("finishOverlay")
+        .classList.add("show");
+
+}
+
+
+/* =========================================
+   CLOSE FINISH POPUP
+========================================= */
+
+function closeFinishPopup(){
+
+    document
+        .getElementById("finishOverlay")
+        .classList.remove("show");
+
+}
+
+
+/* =========================================
+   NEXT
+========================================= */
+
+function goNext(){
+
+    window.location.href =
+        "games.html";
+
+}
+
+
+/* =========================================
+   CHECK ANSWER
+========================================= */
+
+function checkAnswer(
+    isCorrect,
+    button
+){
+
+    const feedback =
+        document.getElementById("feedback");
+
+    const nextButton =
+        document.getElementById("nextButton");
+
+
+    if(isCorrect){
+
+        button.classList.add("correct");
+
+
+        feedback.textContent =
+            "أحسنت! هذه صورة أسد تبدأ بحرف الألف 🎉";
+
+
+        feedback.classList.add("show");
+
+
+        nextButton.classList.add("active");
+
+
+        speak(
+            "أحسنت! أسد تبدأ بحرف الألف"
+        );
+
+
+        showCelebration();
+
+    }
+
+    else{
+
+        button.classList.add("wrong");
+
+
+        feedback.textContent =
+            "حاول مرة أخرى 🌟";
+
+
+        feedback.classList.add("show");
+
+
+        speak(
+            "حاول مرة أخرى"
+        );
+
+
+        setTimeout(
+            function(){
+
+                feedback.classList.remove(
+                    "show"
+                );
+
+                button.classList.remove(
+                    "wrong"
+                );
+
+            },
+            1800
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   SHOW CELEBRATION
+========================================= */
+
+function showCelebration(){
+
+    const celebration =
+        document.getElementById(
+            "celebration"
+        );
+
+    const confetti =
+        document.getElementById(
+            "confetti"
+        );
+
+
+    celebration.classList.remove(
+        "show"
+    );
+
+    void celebration.offsetWidth;
+
+    celebration.classList.add(
+        "show"
+    );
+
+
+    confetti.classList.remove(
+        "show"
+    );
+
+    void confetti.offsetWidth;
+
+    confetti.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =========================================
+   CLOSE MENU
+========================================= */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        const menu =
+            document.getElementById(
+                "menu"
+            );
+
+        const container =
+            document.querySelector(
+                ".menu-container"
+            );
+
+        if(
+            !container.contains(
+                event.target
+            )
+        ){
+
+            menu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+
+</html>

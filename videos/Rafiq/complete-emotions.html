@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>أحسنت يا رفيق 💙</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    direction: rtl;
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    color: #263746;
+
+    background-image:
+        url("images/backh.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 45px;
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+.menu-container {
+
+    position: absolute;
+
+    top: 45px;
+
+    left: 45px;
+
+    z-index: 50;
+}
+
+
+.menu-button {
+
+    width: 62px;
+
+    height: 62px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.48);
+
+    color: #30465b;
+
+    font-size: 29px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px
+        rgba(50,70,90,0.12);
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.menu-button:hover {
+
+    transform: scale(1.08);
+}
+
+
+/* =========================
+   DROPDOWN
+========================= */
+
+.menu {
+
+    display: none;
+
+    position: absolute;
+
+    top: 72px;
+
+    left: 0;
+
+    width: 215px;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border-radius: 22px;
+
+    padding: 12px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(50,70,90,0.18);
+
+    z-index: 100;
+}
+
+
+.menu.show {
+
+    display: block;
+}
+
+
+.menu a {
+
+    display: block;
+
+    text-decoration: none;
+
+    color: #30465b;
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+    padding: 15px 18px;
+
+    border-radius: 14px;
+
+    margin: 4px 0;
+
+    text-align: right;
+}
+
+
+.menu a:hover {
+
+    background: #e4f2ff;
+}
+
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.success-content {
+
+    width: 850px;
+
+    max-width: 92%;
+
+    min-height: 760px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    position: relative;
+}
+
+
+/* =========================
+   CONFETTI
+========================= */
+
+.confetti {
+
+    position: absolute;
+
+    font-size: 38px;
+
+    animation:
+        floatConfetti
+        3s
+        ease-in-out
+        infinite;
+}
+
+
+.confetti.one {
+
+    top: 40px;
+
+    left: 90px;
+
+    animation-delay: 0.2s;
+}
+
+
+.confetti.two {
+
+    top: 110px;
+
+    right: 80px;
+
+    animation-delay: 0.7s;
+}
+
+
+.confetti.three {
+
+    top: 280px;
+
+    left: 20px;
+
+    animation-delay: 1s;
+}
+
+
+.confetti.four {
+
+    top: 300px;
+
+    right: 20px;
+
+    animation-delay: 1.4s;
+}
+
+
+.confetti.five {
+
+    bottom: 180px;
+
+    left: 120px;
+
+    animation-delay: 0.5s;
+}
+
+
+.confetti.six {
+
+    bottom: 190px;
+
+    right: 110px;
+
+    animation-delay: 1.2s;
+}
+
+
+@keyframes floatConfetti {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(-15px)
+            rotate(12deg);
+
+    }
+
+    100% {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+    }
+
+}
+
+
+/* =========================
+   MAIN EMOJI
+========================= */
+
+.success-emoji {
+
+    font-size: 110px;
+
+    margin-bottom: 20px;
+
+    animation:
+        celebrate
+        1.8s
+        ease-in-out
+        infinite;
+}
+
+
+@keyframes celebrate {
+
+    0% {
+
+        transform:
+            scale(1)
+            rotate(0deg);
+
+    }
+
+    25% {
+
+        transform:
+            scale(1.08)
+            rotate(-5deg);
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.15)
+            rotate(5deg);
+
+    }
+
+    75% {
+
+        transform:
+            scale(1.08)
+            rotate(-3deg);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1)
+            rotate(0deg);
+
+    }
+
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.title {
+
+    margin: 0;
+
+    font-size: 52px;
+
+    font-weight: 700;
+
+    color: #263746;
+
+    text-align: center;
+}
+
+
+/* =========================
+   SUBTITLE
+========================= */
+
+.subtitle {
+
+    margin-top: 22px;
+
+    font-size: 29px;
+
+    font-weight: 600;
+
+    color: #30465b;
+
+    line-height: 1.8;
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message {
+
+    margin-top: 25px;
+
+    width: 750px;
+
+    max-width: 90%;
+
+    font-size: 24px;
+
+    line-height: 2;
+
+    font-weight: 500;
+
+    color: #30465b;
+}
+
+
+/* =========================
+   EMOTIONS
+========================= */
+
+.emotions {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 28px;
+
+    margin-top: 25px;
+
+    direction: ltr;
+}
+
+
+.emotion {
+
+    font-size: 48px;
+
+    animation:
+        emotionPop
+        1.5s
+        ease-in-out
+        infinite;
+}
+
+
+.emotion:nth-child(1) {
+
+    animation-delay: 0s;
+}
+
+
+.emotion:nth-child(2) {
+
+    animation-delay: 0.2s;
+}
+
+
+.emotion:nth-child(3) {
+
+    animation-delay: 0.4s;
+}
+
+
+@keyframes emotionPop {
+
+    0%,
+    100% {
+
+        transform: translateY(0);
+
+    }
+
+    50% {
+
+        transform: translateY(-8px);
+
+    }
+
+}
+
+
+/* =========================
+   STARS
+========================= */
+
+.stars {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 18px;
+
+    margin-top: 28px;
+}
+
+
+.star {
+
+    font-size: 48px;
+
+    animation:
+        starPop
+        1.4s
+        ease-in-out
+        infinite;
+}
+
+
+.star:nth-child(1) {
+
+    animation-delay: 0s;
+}
+
+
+.star:nth-child(2) {
+
+    animation-delay: 0.2s;
+}
+
+
+.star:nth-child(3) {
+
+    animation-delay: 0.4s;
+}
+
+
+.star:nth-child(4) {
+
+    animation-delay: 0.6s;
+}
+
+
+.star:nth-child(5) {
+
+    animation-delay: 0.8s;
+}
+
+
+@keyframes starPop {
+
+    0%,
+    100% {
+
+        transform:
+            scale(1)
+            rotate(0deg);
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.18)
+            rotate(8deg);
+
+    }
+
+}
+
+
+/* =========================
+   COMPLETE TEXT
+========================= */
+
+.complete-text {
+
+    margin-top: 20px;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    color: #30465b;
+}
+
+
+/* =========================
+   NEXT BUTTON
+========================= */
+
+.next-button {
+
+    margin-top: 38px;
+
+    min-width: 330px;
+
+    border: none;
+
+    background: #e4f2ff;
+
+    color: #30465b;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    padding: 18px 55px;
+
+    border-radius: 24px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 7px 18px
+        rgba(50,80,100,0.14);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.next-button:hover {
+
+    transform:
+        translateY(-4px);
+
+    background: #d8edff;
+}
+
+
+.next-button:active {
+
+    transform:
+        scale(0.96);
+}
+
+
+/* =========================
+   IPAD PORTRAIT
+========================= */
+
+@media (min-width: 800px) {
+
+    .page {
+
+        max-width: 1024px;
+
+        min-height: 1366px;
+
+        margin: 0 auto;
+
+        padding-top: 45px;
+
+        padding-bottom: 60px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    .page {
+
+        padding: 25px;
+    }
+
+
+    .menu-container {
+
+        top: 20px;
+
+        left: 20px;
+    }
+
+
+    .menu-button {
+
+        width: 52px;
+
+        height: 52px;
+
+        font-size: 24px;
+    }
+
+
+    .success-content {
+
+        min-height: 100vh;
+    }
+
+
+    .success-emoji {
+
+        font-size: 80px;
+    }
+
+
+    .title {
+
+        font-size: 38px;
+    }
+
+
+    .subtitle {
+
+        font-size: 22px;
+    }
+
+
+    .message {
+
+        font-size: 18px;
+
+        line-height: 1.9;
+    }
+
+
+    .emotions {
+
+        gap: 15px;
+    }
+
+
+    .emotion {
+
+        font-size: 38px;
+    }
+
+
+    .star {
+
+        font-size: 36px;
+    }
+
+
+    .complete-text {
+
+        font-size: 20px;
+    }
+
+
+    .next-button {
+
+        min-width: 260px;
+
+        font-size: 20px;
+
+        padding: 15px 35px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- =========================
+         MENU
+    ========================== -->
+
+    <div class="menu-container">
+
+        <button
+            class="menu-button"
+            onclick="toggleMenu()"
+            aria-label="القائمة">
+
+            ☰
+
+        </button>
+
+
+        <div
+            class="menu"
+            id="menu">
+
+            <a href="home.html">
+                🏠 الرئيسية
+            </a>
+
+            <a href="profile.html">
+                👤 ملفي
+            </a>
+
+            <a href="reports.html">
+                📊 تقاريري
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         SUCCESS CONTENT
+    ========================== -->
+
+    <div class="success-content">
+
+
+        <!-- زينة -->
+
+      
+
+        <div class="confetti two">
+            ⭐
+        </div>
+
+        <div class="confetti three">
+            ✨
+        </div>
+
+        <div class="confetti four">
+            🌟
+        </div>
+
+        
+
+        
+
+
+        <!-- الإيموجي -->
+
+        <div class="success-emoji">
+
+            🥳
+
+        </div>
+
+
+        <!-- العنوان -->
+
+        <h1 class="title">
+
+            أحسنت يا رفيق! 
+
+        </h1>
+
+
+        <!-- العنوان الفرعي -->
+
+        <div class="subtitle">
+
+            لقد أنهيت المرحلة الأولى! 🎉
+
+        </div>
+
+
+        <!-- الرسالة -->
+
+        <div class="message">
+
+            تعلمنا معًا أن المشاعر كلها مهمة 
+
+            
+
+            <br>
+
+            وكل شعور يخبرنا بشيء عن أنفسنا.
+
+            <br>
+
+            أنت بطل لأنك تعلمت وفهمت مشاعرك! 💕
+
+        </div>
+
+
+        <!-- المشاعر -->
+
+       
+
+
+       
+
+
+        
+
+
+        <!-- التالي -->
+
+        <button
+            class="next-button"
+            onclick="goNext()">
+
+            الانتقال إلى المرحلة التالية ←
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   MENU
+========================= */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById("menu");
+
+    menu.classList.toggle("show");
+
+}
+
+
+/* =========================
+   CLOSE MENU
+========================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const container =
+            document.querySelector(
+                ".menu-container"
+            );
+
+        if (
+            !container.contains(
+                event.target
+            )
+        ) {
+
+            document
+                .getElementById("menu")
+                .classList.remove("show");
+
+        }
+
+    }
+);
+
+
+/* =========================
+   NEXT
+========================= */
+
+function goNext() {
+
+    /*
+       مؤقتًا نضع اسم الصفحة
+       التالية هنا.
+
+       لما نحدد المرحلة الثانية
+       نغيّر اسم الملف فقط.
+    */
+
+    window.location.href =
+        "emotions.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

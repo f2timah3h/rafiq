@@ -1,0 +1,2307 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>صنّف السيارات</title>
+
+<style>
+
+/* =========================
+   الأساس
+========================= */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    font-family: Tahoma, Arial, sans-serif;
+
+    direction: rtl;
+
+    user-select: none;
+
+    touch-action: none;
+}
+
+body {
+    background: white;
+}
+
+
+/* =========================
+   اللعبة
+========================= */
+
+.game {
+    position: relative;
+
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+
+    background: white;
+}
+
+
+/* =========================
+   الغيوم
+========================= */
+
+.cloud {
+    position: absolute;
+
+    background: #EAF4FF;
+
+    opacity: 0.38;
+
+    border-radius: 100px;
+
+    pointer-events: none;
+}
+
+.cloud1 {
+    width: 170px;
+    height: 90px;
+
+    top: -35px;
+    left: -35px;
+}
+
+.cloud2 {
+    width: 150px;
+    height: 80px;
+
+    top: 20px;
+    right: -45px;
+}
+
+.cloud3 {
+    width: 130px;
+    height: 70px;
+
+    top: 270px;
+    left: -55px;
+}
+
+.cloud4 {
+    width: 145px;
+    height: 75px;
+
+    top: 350px;
+    right: -45px;
+}
+
+
+/* =========================
+   المحتوى
+========================= */
+
+.content {
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 10px 20px 8px;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* =========================
+   المستوى + المؤقت
+========================= */
+
+.top-row {
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+
+.info-box {
+
+    padding: 7px 16px;
+
+    border-radius: 20px;
+
+    background: rgba(108,140,213,0.10);
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    color: #6C8CD5;
+}
+
+.info-title {
+
+    font-size: 15px;
+
+    font-weight: bold;
+}
+
+.info-value {
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+/* =========================
+   المؤقت
+========================= */
+
+.timer-box {
+
+    padding: 7px 15px;
+
+    border-radius: 20px;
+
+    background: #F2F8FF;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    transition: 0.25s;
+}
+
+.timer-box.urgent {
+
+    background: #FFEEF0;
+}
+
+.timer-icon {
+
+    font-size: 18px;
+}
+
+.timer-number {
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: #5B78B8;
+}
+
+.timer-box.urgent .timer-number {
+
+    color: #FF4D5A;
+}
+
+.timer-unit {
+
+    font-size: 14px;
+
+    color: #7183A5;
+}
+
+.timer-box.urgent .timer-unit {
+
+    color: #FF4D5A;
+}
+
+
+/* =========================
+   النجوم
+========================= */
+
+.stars-box {
+
+    align-self: center;
+
+    margin-top: 8px;
+
+    padding: 5px 14px;
+
+    background: #F7FAFF;
+
+    border-radius: 28px;
+
+    border: 2px solid #E2ECFA;
+
+    display: flex;
+
+    gap: 6px;
+}
+
+.star {
+
+    font-size: 25px;
+
+    transition:
+        transform 0.25s,
+        color 0.25s;
+}
+
+.star.active {
+
+    transform: scale(1.15);
+}
+
+
+/* =========================
+   العنوان
+========================= */
+
+.title {
+
+    margin: 4px 0 2px;
+
+    text-align: center;
+
+    font-size: 38px;
+
+    font-weight: bold;
+
+    color: #5B78B8;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================
+   التعليمات
+========================= */
+
+.instructions {
+
+    align-self: center;
+
+    padding: 10px 20px;
+
+    border-radius: 25px;
+
+    background: #F2F8FF;
+
+    color: #536B91;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================
+   شريط الوقت
+========================= */
+
+.time-bar {
+
+    width: 100%;
+
+    height: 18px;
+
+    margin-top: 10px;
+
+    padding: 3px;
+
+    border-radius: 20px;
+
+    background: #E9EFF8;
+
+    flex-shrink: 0;
+}
+
+.time-fill {
+
+    height: 100%;
+
+    width: 100%;
+
+    border-radius: 20px;
+
+    background: #6C8CD5;
+
+    transition:
+        width 0.3s linear,
+        background 0.3s;
+}
+
+
+/* =========================
+   السيارات
+========================= */
+
+.cars-area {
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 5px 0;
+}
+
+.car-row {
+
+    width: 100%;
+
+    min-height: 58px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================
+   السيارة
+========================= */
+
+.car {
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: grab;
+
+    touch-action: none;
+
+    transition:
+        opacity 0.2s,
+        transform 0.15s;
+}
+
+.car:active {
+
+    cursor: grabbing;
+}
+
+.car.done {
+
+    opacity: 0.15;
+}
+
+.car.dragging {
+
+    opacity: 0.25;
+}
+
+.car svg {
+
+    width: 58px;
+
+    height: 58px;
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   نسخة السحب
+========================= */
+
+.drag-clone {
+
+    position: fixed;
+
+    width: 65px;
+
+    height: 65px;
+
+    z-index: 99999;
+
+    pointer-events: none;
+
+    transform:
+        translate(-50%, -50%);
+}
+
+.drag-clone svg {
+
+    width: 65px;
+
+    height: 65px;
+}
+
+
+/* =========================
+   المواقف
+========================= */
+
+.parking-area {
+
+    width: 100%;
+
+    height: 135px;
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+.parking {
+
+    flex: 1;
+
+    border-radius: 28px;
+
+    border: 4px solid
+            rgba(255,255,255,0.9);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    box-shadow:
+        0 5px 10px
+        rgba(0,0,0,0.08);
+
+    transition:
+        transform 0.15s,
+        box-shadow 0.15s;
+}
+
+.parking.hover {
+
+    transform: scale(1.06);
+}
+
+
+/* ألوان المواقف */
+
+.parking.red {
+    background: #FF4D5A;
+}
+
+.parking.yellow {
+    background: #FFC928;
+}
+
+.parking.blue {
+    background: #5B8DEF;
+}
+
+.parking.green {
+    background: #55C878;
+}
+
+
+/* =========================
+   النتيجة
+========================= */
+
+.score {
+
+    margin-top: 4px;
+
+    text-align: center;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    color: #7183A5;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================
+   إعادة اللعبة
+========================= */
+
+.restart-btn {
+
+    align-self: center;
+
+    margin-top: 5px;
+
+    border: none;
+
+    padding: 10px 30px;
+
+    border-radius: 22px;
+
+    background: #8267E8;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 4px 8px
+        rgba(130,103,232,0.25);
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+}
+
+.restart-btn:active {
+
+    transform: scale(0.96);
+}
+
+
+/* =========================
+   رسالة الخطأ
+========================= */
+
+.message {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 155px;
+
+    transform:
+        translateX(-50%)
+        translateY(20px);
+
+    z-index: 5000;
+
+    width: min(90%, 550px);
+
+    padding: 14px 20px;
+
+    border-radius: 20px;
+
+    background: white;
+
+    box-shadow:
+        0 8px 30px
+        rgba(50,80,120,0.18);
+
+    color: #536B91;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transition:
+        opacity 0.2s,
+        transform 0.2s;
+
+    pointer-events: none;
+}
+
+.message.show {
+
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+
+/* =========================
+   نافذة النتيجة
+========================= */
+
+.overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 10000;
+
+    background:
+        rgba(40,55,80,0.28);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.overlay.show {
+
+    display: flex;
+}
+
+.dialog {
+
+    width: min(92%, 500px);
+
+    background: white;
+
+    border-radius: 28px;
+
+    padding: 25px 22px;
+
+    box-shadow:
+        0 15px 45px
+        rgba(30,50,80,0.20);
+
+    text-align: center;
+
+    animation:
+        dialogIn 0.25s ease;
+}
+
+@keyframes dialogIn {
+
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.dialog-title {
+
+    font-size: 27px;
+
+    font-weight: bold;
+
+    color: #40566D;
+
+    margin-bottom: 15px;
+}
+
+.dialog-stars {
+
+    font-size: 22px;
+
+    min-height: 30px;
+
+    margin-bottom: 12px;
+}
+
+.dialog-text {
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+    color: #536B91;
+
+    margin-bottom: 10px;
+}
+
+.dialog-mistakes {
+
+    font-size: 16px;
+
+    color: #777;
+
+    margin-bottom: 18px;
+}
+
+.dialog-btn {
+
+    border: none;
+
+    background: #6C8CD5;
+
+    color: white;
+
+    border-radius: 22px;
+
+    padding: 11px 25px;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   الشاشات الصغيرة
+========================= */
+
+@media (max-width: 700px) {
+
+    .content {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .title {
+        font-size: 30px;
+    }
+
+    .instructions {
+        font-size: 15px;
+        padding: 8px 14px;
+    }
+
+    .car {
+        width: 48px;
+        height: 48px;
+    }
+
+    .car svg {
+        width: 48px;
+        height: 48px;
+    }
+
+    .parking-area {
+        height: 105px;
+        gap: 6px;
+    }
+
+    .parking {
+        border-radius: 20px;
+    }
+
+    .cars-area {
+        gap: 7px;
+    }
+
+    .car-row {
+        min-height: 48px;
+        gap: 4px;
+    }
+
+    .restart-btn {
+        font-size: 16px;
+        padding: 8px 24px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="game">
+
+
+    <!-- الغيوم -->
+
+    <div class="cloud cloud1"></div>
+
+    <div class="cloud cloud2"></div>
+
+    <div class="cloud cloud3"></div>
+
+    <div class="cloud cloud4"></div>
+
+
+    <div class="content">
+
+
+        <!-- المستوى والمؤقت -->
+
+        <div class="top-row">
+
+
+            <div class="info-box">
+
+                <span class="info-title">
+                    المستوى
+                </span>
+
+                <span
+                    class="info-value"
+                    id="level">
+
+                    1
+
+                </span>
+
+            </div>
+
+
+            <div
+                class="timer-box"
+                id="timerBox">
+
+                <span class="timer-icon">
+                    ⏱️
+                </span>
+
+                <span
+                    class="timer-number"
+                    id="timer">
+
+                    20
+
+                </span>
+
+                <span class="timer-unit">
+                    ث
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- النجوم -->
+
+        <div class="stars-box">
+
+            <span class="star">☆</span>
+
+            <span class="star">☆</span>
+
+            <span class="star">☆</span>
+
+            <span class="star">☆</span>
+
+            <span class="star">☆</span>
+
+            <span class="star">☆</span>
+
+        </div>
+
+
+        <!-- العنوان -->
+
+        <div class="title">
+
+            صنّف السيارات
+
+        </div>
+
+
+        <!-- التعليمات -->
+
+        <div class="instructions">
+
+            ضع كل سيارة في الموقف الذي نفس لونها
+
+        </div>
+
+
+        <!-- الوقت -->
+
+        <div class="time-bar">
+
+            <div
+                class="time-fill"
+                id="timeFill">
+            </div>
+
+        </div>
+
+
+        <!-- السيارات -->
+
+        <div
+            class="cars-area"
+            id="carsArea">
+
+
+            <div
+                class="car-row"
+                id="redRow">
+            </div>
+
+
+            <div
+                class="car-row"
+                id="yellowRow">
+            </div>
+
+
+            <div
+                class="car-row"
+                id="blueRow">
+            </div>
+
+
+            <div
+                class="car-row"
+                id="greenRow">
+            </div>
+
+
+        </div>
+
+
+        <!-- المواقف -->
+
+        <div class="parking-area">
+
+
+            <div
+                class="parking red"
+                data-color="red">
+            </div>
+
+
+            <div
+                class="parking yellow"
+                data-color="yellow">
+            </div>
+
+
+            <div
+                class="parking blue"
+                data-color="blue">
+            </div>
+
+
+            <div
+                class="parking green"
+                data-color="green">
+            </div>
+
+
+        </div>
+
+
+        <!-- النتيجة -->
+
+        <div
+            class="score"
+            id="score">
+
+            0 / 4
+
+        </div>
+
+
+        <!-- إعادة -->
+
+        <button
+            class="restart-btn"
+            id="restartBtn">
+
+            ↻ &nbsp; إعادة اللعبة
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<!-- رسالة الخطأ -->
+
+<div
+    class="message"
+    id="message">
+
+    💡 حاول وضع السيارة في الموقف المطابق للونها
+
+</div>
+
+
+<!-- نافذة النتيجة -->
+
+<div
+    class="overlay"
+    id="overlay">
+
+
+    <div class="dialog">
+
+
+        <div
+            class="dialog-title"
+            id="dialogTitle">
+        </div>
+
+
+        <div
+            class="dialog-stars"
+            id="dialogStars">
+        </div>
+
+
+        <div
+            class="dialog-text"
+            id="dialogText">
+        </div>
+
+
+        <div
+            class="dialog-mistakes"
+            id="dialogMistakes">
+        </div>
+
+
+        <button
+            class="dialog-btn"
+            id="dialogBtn">
+
+            ▶️ المرحلة التالية
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   المستويات
+===================================================== */
+
+const LEVELS = [
+
+    {
+        level: 1,
+        cars: 4,
+        time: 20
+    },
+
+    {
+        level: 2,
+        cars: 6,
+        time: 25
+    },
+
+    {
+        level: 3,
+        cars: 8,
+        time: 30
+    }
+
+];
+
+
+/* =====================================================
+   حالة اللعبة
+===================================================== */
+
+let level = 1;
+
+let score = 0;
+
+let mistakes = 0;
+
+let timeLeft = 20;
+
+let timer = null;
+
+let stageFinished = false;
+
+let easierNextAttempt = false;
+
+let cars = [];
+
+let activeDrag = null;
+
+
+/* =====================================================
+   العناصر
+===================================================== */
+
+const levelElement =
+    document.getElementById("level");
+
+const timerElement =
+    document.getElementById("timer");
+
+const timerBox =
+    document.getElementById("timerBox");
+
+const timeFill =
+    document.getElementById("timeFill");
+
+const scoreElement =
+    document.getElementById("score");
+
+const stars =
+    document.querySelectorAll(".star");
+
+const message =
+    document.getElementById("message");
+
+const overlay =
+    document.getElementById("overlay");
+
+const dialogTitle =
+    document.getElementById("dialogTitle");
+
+const dialogStars =
+    document.getElementById("dialogStars");
+
+const dialogText =
+    document.getElementById("dialogText");
+
+const dialogMistakes =
+    document.getElementById("dialogMistakes");
+
+const dialogBtn =
+    document.getElementById("dialogBtn");
+
+
+/* =====================================================
+   ألوان السيارات
+===================================================== */
+
+const colors = {
+
+    red: "#FF4D5A",
+
+    yellow: "#FFC928",
+
+    blue: "#5B8DEF",
+
+    green: "#55C878"
+
+};
+
+
+/* =====================================================
+   معلومات المستوى الحالي
+===================================================== */
+
+function getCurrentLevel() {
+
+    return LEVELS[level - 1];
+
+}
+
+
+/* =====================================================
+   عدد السيارات
+===================================================== */
+
+function getCarCount() {
+
+    if (easierNextAttempt) {
+
+        return 2;
+
+    }
+
+    return getCurrentLevel().cars;
+
+}
+
+
+/* =====================================================
+   الوقت
+===================================================== */
+
+function getTime() {
+
+    return getCurrentLevel().time;
+
+}
+
+
+/* =====================================================
+   رسم السيارة
+===================================================== */
+
+function createCarSVG(color) {
+
+    return `
+
+        <svg
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg">
+
+            <path
+                d="
+                M18 58
+                L23 39
+                C24 34 28 31 34 31
+                L66 31
+                C72 31 76 34 77 39
+                L82 58
+                Z"
+                fill="${color}"
+                stroke="white"
+                stroke-width="3"/>
+
+            <rect
+                x="20"
+                y="53"
+                width="60"
+                height="25"
+                rx="8"
+                fill="${color}"
+                stroke="white"
+                stroke-width="3"/>
+
+            <path
+                d="
+                M32 35
+                L68 35
+                L73 49
+                L27 49
+                Z"
+                fill="white"
+                opacity="0.72"/>
+
+            <circle
+                cx="31"
+                cy="78"
+                r="8"
+                fill="#40566D"/>
+
+            <circle
+                cx="69"
+                cy="78"
+                r="8"
+                fill="#40566D"/>
+
+            <circle
+                cx="31"
+                cy="78"
+                r="3"
+                fill="white"/>
+
+            <circle
+                cx="69"
+                cy="78"
+                r="3"
+                fill="white"/>
+
+        </svg>
+
+    `;
+
+}
+
+
+/* =====================================================
+   إنشاء السيارات
+===================================================== */
+
+function createCars() {
+
+    const count =
+        getCarCount();
+
+
+    const available = [
+
+        { colorName: "red" },
+        { colorName: "red" },
+        { colorName: "red" },
+        { colorName: "red" },
+
+        { colorName: "yellow" },
+        { colorName: "yellow" },
+        { colorName: "yellow" },
+        { colorName: "yellow" },
+
+        { colorName: "blue" },
+        { colorName: "blue" },
+        { colorName: "blue" },
+        { colorName: "blue" },
+
+        { colorName: "green" },
+        { colorName: "green" },
+        { colorName: "green" }
+
+    ];
+
+
+    for (
+        let i = available.length - 1;
+        i > 0;
+        i--
+    ) {
+
+        const j =
+            Math.floor(
+                Math.random() * (i + 1)
+            );
+
+        [
+            available[i],
+            available[j]
+        ] =
+        [
+            available[j],
+            available[i]
+        ];
+
+    }
+
+
+    return available
+        .slice(0, count)
+        .map(item => ({
+
+            colorName:
+                item.colorName,
+
+            color:
+                colors[item.colorName],
+
+            done: false
+
+        }));
+
+}
+
+
+/* =====================================================
+   بدء المرحلة
+===================================================== */
+
+function startStage() {
+
+    clearInterval(timer);
+
+    stageFinished = false;
+
+    score = 0;
+
+    mistakes = 0;
+
+    timeLeft = getTime();
+
+    cars = createCars();
+
+    updateUI();
+
+    renderCars();
+
+    startTimer();
+
+}
+
+
+/* =====================================================
+   المؤقت
+===================================================== */
+
+function startTimer() {
+
+    clearInterval(timer);
+
+    timer =
+        setInterval(() => {
+
+            if (stageFinished) {
+
+                clearInterval(timer);
+
+                return;
+
+            }
+
+
+            if (timeLeft > 0) {
+
+                timeLeft--;
+
+                updateTimer();
+
+            }
+
+
+            if (timeLeft <= 0) {
+
+                clearInterval(timer);
+
+                timeUp();
+
+            }
+
+        }, 1000);
+
+}
+
+
+/* =====================================================
+   تحديث الواجهة
+===================================================== */
+
+function updateUI() {
+
+    levelElement.textContent =
+        level;
+
+    scoreElement.textContent =
+        `${score} / ${cars.length}`;
+
+    updateStars();
+
+    updateTimer();
+
+}
+
+
+/* =====================================================
+   النجوم
+===================================================== */
+
+function updateStars() {
+
+    stars.forEach(
+        (star, index) => {
+
+            const active =
+                index <
+                Math.min(score, 6);
+
+            star.textContent =
+                active ? "⭐" : "☆";
+
+            star.classList.toggle(
+                "active",
+                active
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   تحديث المؤقت
+===================================================== */
+
+function updateTimer() {
+
+    timerElement.textContent =
+        timeLeft;
+
+    const total =
+        getTime();
+
+    let progress =
+        timeLeft / total;
+
+    progress =
+        Math.max(
+            0,
+            Math.min(
+                1,
+                progress
+            )
+        );
+
+    timeFill.style.width =
+        `${progress * 100}%`;
+
+
+    timerBox.classList.toggle(
+        "urgent",
+        timeLeft <= 7
+    );
+
+
+    if (progress <= 0.25) {
+
+        timeFill.style.background =
+            "#FF4D5A";
+
+    }
+
+    else if (progress <= 0.50) {
+
+        timeFill.style.background =
+            "#FF9F43";
+
+    }
+
+    else {
+
+        timeFill.style.background =
+            "#6C8CD5";
+
+    }
+
+}
+
+
+/* =====================================================
+   عرض السيارات
+===================================================== */
+
+function renderCars() {
+
+    const rows = {
+
+        red:
+            document.getElementById("redRow"),
+
+        yellow:
+            document.getElementById("yellowRow"),
+
+        blue:
+            document.getElementById("blueRow"),
+
+        green:
+            document.getElementById("greenRow")
+
+    };
+
+
+    Object.values(rows)
+        .forEach(row => {
+
+            row.innerHTML = "";
+
+        });
+
+
+    cars.forEach(
+        (car, index) => {
+
+            const element =
+                document.createElement("div");
+
+            element.className =
+                "car";
+
+            element.dataset.index =
+                index;
+
+            element.innerHTML =
+                createCarSVG(
+                    car.color
+                );
+
+
+            if (car.done) {
+
+                element.classList.add(
+                    "done"
+                );
+
+            }
+
+
+            setupDrag(
+                element,
+                car
+            );
+
+
+            rows[
+                car.colorName
+            ].appendChild(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   السحب
+===================================================== */
+
+function setupDrag(
+    element,
+    car
+) {
+
+    element.addEventListener(
+        "pointerdown",
+        function(event) {
+
+            if (
+                stageFinished ||
+                car.done
+            ) {
+
+                return;
+
+            }
+
+            event.preventDefault();
+
+            startDrag(
+                element,
+                car,
+                event
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   بداية السحب
+===================================================== */
+
+function startDrag(
+    element,
+    car,
+    event
+) {
+
+    activeDrag = {
+
+        element:
+            element,
+
+        car:
+            car,
+
+        clone:
+            null
+
+    };
+
+
+    element.classList.add(
+        "dragging"
+    );
+
+
+    const clone =
+        document.createElement(
+            "div"
+        );
+
+
+    clone.className =
+        "drag-clone";
+
+
+    clone.innerHTML =
+        createCarSVG(
+            car.color
+        );
+
+
+    clone.style.left =
+        `${event.clientX}px`;
+
+    clone.style.top =
+        `${event.clientY}px`;
+
+
+    document.body.appendChild(
+        clone
+    );
+
+
+    activeDrag.clone =
+        clone;
+
+
+    moveDrag(event);
+
+
+    window.addEventListener(
+        "pointermove",
+        moveDrag,
+        {
+            passive: false
+        }
+    );
+
+
+    window.addEventListener(
+        "pointerup",
+        endDrag,
+        {
+            once: true
+        }
+    );
+
+}
+
+
+/* =====================================================
+   تحريك السيارة
+===================================================== */
+
+function moveDrag(event) {
+
+    if (!activeDrag) {
+
+        return;
+
+    }
+
+    event.preventDefault();
+
+
+    activeDrag.clone.style.left =
+        `${event.clientX}px`;
+
+    activeDrag.clone.style.top =
+        `${event.clientY}px`;
+
+
+    document
+        .querySelectorAll(".parking")
+        .forEach(
+            parking => {
+
+                const rect =
+                    parking.getBoundingClientRect();
+
+
+                const inside =
+
+                    event.clientX >= rect.left &&
+
+                    event.clientX <= rect.right &&
+
+                    event.clientY >= rect.top &&
+
+                    event.clientY <= rect.bottom;
+
+
+                parking.classList.toggle(
+                    "hover",
+                    inside
+                );
+
+            }
+        );
+
+}
+
+
+/* =====================================================
+   نهاية السحب
+===================================================== */
+
+function endDrag(event) {
+
+    if (!activeDrag) {
+
+        return;
+
+    }
+
+
+    window.removeEventListener(
+        "pointermove",
+        moveDrag
+    );
+
+
+    const drag =
+        activeDrag;
+
+    activeDrag = null;
+
+
+    if (drag.clone) {
+
+        drag.clone.remove();
+
+    }
+
+
+    drag.element.classList.remove(
+        "dragging"
+    );
+
+
+    document
+        .querySelectorAll(".parking")
+        .forEach(
+            parking => {
+
+                parking.classList.remove(
+                    "hover"
+                );
+
+            }
+        );
+
+
+    const target =
+        document.elementFromPoint(
+            event.clientX,
+            event.clientY
+        );
+
+
+    const parking =
+        target &&
+        target.closest(".parking");
+
+
+    if (!parking) {
+
+        return;
+
+    }
+
+
+    carPlaced(
+        drag.car,
+        parking.dataset.color
+    );
+
+}
+
+
+/* =====================================================
+   وضع السيارة
+===================================================== */
+
+function carPlaced(
+    car,
+    parkingColor
+) {
+
+    if (
+        stageFinished ||
+        car.done
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        car.colorName ===
+        parkingColor
+    ) {
+
+        car.done = true;
+
+        score++;
+
+        updateUI();
+
+        renderCars();
+
+
+        if (
+            score ===
+            cars.length
+        ) {
+
+            stageCompleted();
+
+        }
+
+    }
+
+    else {
+
+        mistakes++;
+
+        showMessage();
+
+    }
+
+}
+
+
+/* =====================================================
+   الخطأ
+===================================================== */
+
+let messageTimeout = null;
+
+
+function showMessage() {
+
+    message.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        messageTimeout
+    );
+
+
+    messageTimeout =
+        setTimeout(
+            () => {
+
+                message.classList.remove(
+                    "show"
+                );
+
+            },
+            700
+        );
+
+
+    speak(
+        "حاول وضع السيارة في الموقف المطابق للونها"
+    );
+
+}
+
+
+/* =====================================================
+   انتهاء الوقت
+===================================================== */
+
+function timeUp() {
+
+    if (stageFinished) {
+
+        return;
+
+    }
+
+
+    stageFinished = true;
+
+    clearInterval(timer);
+
+    easierNextAttempt = true;
+
+
+    setTimeout(
+        () => {
+
+            showDialog({
+
+                title:
+                    "⏰ انتهى الوقت",
+
+                stars:
+                    "",
+
+                text:
+                    "لا بأس! 💛\nسنحاول مرة أخرى بعدد أقل من السيارات 🚗",
+
+                mistakes:
+                    "",
+
+                speakText:
+                    "انتهى الوقت. لا بأس، سنحاول مرة أخرى بعدد أقل من السيارات."
+
+            });
+
+        },
+        300
+    );
+
+}
+
+
+/* =====================================================
+   إكمال المستوى
+===================================================== */
+
+function stageCompleted() {
+
+    if (stageFinished) {
+
+        return;
+
+    }
+
+
+    stageFinished = true;
+
+    clearInterval(timer);
+
+
+    const currentMistakes =
+        mistakes;
+
+
+    easierNextAttempt = false;
+
+
+    /* =========================================
+       المستوى الثالث
+       الانتقال مباشرة إلى الألوان
+    ========================================= */
+
+    if (level === 3) {
+
+        speak(
+            "رائع جدًا! أكملت المستوى الثالث. والآن هيا نتعلم الألوان."
+        );
+
+
+        setTimeout(
+            () => {
+
+                window.location.href =
+                    "colors.html";
+
+            },
+            1200
+        );
+
+
+        return;
+
+    }
+
+
+    /* =========================================
+       المستوى الأول أو الثاني
+    ========================================= */
+
+    level++;
+
+
+    setTimeout(
+        () => {
+
+            showDialog({
+
+                title:
+                    "🌟 أحسنت!",
+
+                stars:
+                    "⭐".repeat(
+                        Math.min(
+                            score,
+                            6
+                        )
+                    ),
+
+                text:
+                    `أكملت المرحلة! 🎉\nهيا نجرب المستوى ${level} 🚗`,
+
+                mistakes:
+                    `الأخطاء: ${currentMistakes}`,
+
+                speakText:
+                    `أحسنت! أكملت المرحلة. هيا نجرب المستوى ${level}.`
+
+            });
+
+        },
+        350
+    );
+
+}
+
+
+/* =====================================================
+   نافذة النتيجة
+===================================================== */
+
+function showDialog(data) {
+
+    dialogTitle.textContent =
+        data.title;
+
+    dialogStars.textContent =
+        data.stars;
+
+    dialogText.textContent =
+        data.text;
+
+    dialogMistakes.textContent =
+        data.mistakes;
+
+    overlay.classList.add(
+        "show"
+    );
+
+    speak(
+        data.speakText
+    );
+
+}
+
+
+/* =====================================================
+   زر النافذة
+===================================================== */
+
+dialogBtn.addEventListener(
+    "click",
+    function() {
+
+        overlay.classList.remove(
+            "show"
+        );
+
+
+        /*
+           إذا كانت النافذة بسبب انتهاء الوقت
+           نعيد نفس المستوى بمحاولة أسهل.
+        */
+
+        startStage();
+
+    }
+);
+
+
+/* =====================================================
+   إعادة اللعبة
+===================================================== */
+
+document
+    .getElementById("restartBtn")
+    .addEventListener(
+        "click",
+        function() {
+
+            clearInterval(timer);
+
+            level = 1;
+
+            score = 0;
+
+            mistakes = 0;
+
+            timeLeft = 20;
+
+            easierNextAttempt = false;
+
+            stageFinished = false;
+
+            overlay.classList.remove(
+                "show"
+            );
+
+            startStage();
+
+        }
+    );
+
+
+/* =====================================================
+   النطق العربي
+===================================================== */
+
+function speak(text) {
+
+    if (
+        !("speechSynthesis" in window) ||
+        !text
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        window.speechSynthesis.cancel();
+
+
+        const utterance =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+
+        utterance.lang =
+            "ar-SA";
+
+
+        utterance.rate =
+            0.85;
+
+
+        utterance.pitch =
+            1.05;
+
+
+        window.speechSynthesis.speak(
+            utterance
+        );
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Speech error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   تشغيل اللعبة
+===================================================== */
+
+startStage();
+
+</script>
+
+</body>
+
+</html>

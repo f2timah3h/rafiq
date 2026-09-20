@@ -1,0 +1,2281 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0,
+      maximum-scale=1.0, user-scalable=no">
+
+<title>لنبدأ - رفيق</title>
+
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<style>
+
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    font-family:
+        "Tahoma",
+        "Arial",
+        sans-serif;
+
+    direction: rtl;
+}
+
+body {
+
+    min-height: 100vh;
+
+    background-image:
+        url("images/background.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    color: #555;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.page {
+
+    width: 100%;
+    min-height: 100vh;
+
+    padding:
+        45px
+        30px
+        70px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+}
+
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.card {
+
+    width:
+        min(900px, 94vw);
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.78
+        );
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.8
+        );
+
+    border-radius:
+        35px;
+
+    padding:
+        42px
+        50px
+        50px;
+
+    box-shadow:
+        0 15px 45px
+        rgba(
+            70,
+            80,
+            100,
+            0.15
+        );
+
+    backdrop-filter:
+        blur(8px);
+
+    -webkit-backdrop-filter:
+        blur(8px);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.logo {
+
+    display: block;
+
+    width: 115px;
+
+    max-width: 30%;
+
+    margin:
+        0 auto
+        12px;
+}
+
+
+.title {
+
+    text-align: center;
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    color: #9b6872;
+
+    margin:
+        5px 0 10px;
+}
+
+
+.subtitle {
+
+    text-align: center;
+
+    font-size: 19px;
+
+    line-height: 1.8;
+
+    color: #777;
+
+    margin:
+        0 auto
+        35px;
+
+    max-width: 650px;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section {
+
+    margin-top: 32px;
+}
+
+
+.section-title {
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    color: #8f626c;
+
+    margin-bottom: 18px;
+
+    padding-bottom: 10px;
+
+    border-bottom:
+        2px solid
+        rgba(
+            155,
+            104,
+            114,
+            0.15
+        );
+}
+
+
+/* =========================
+   FORM GROUP
+========================= */
+
+.form-group {
+
+    margin-bottom: 22px;
+}
+
+
+.label {
+
+    display: block;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    color: #555;
+
+    margin-bottom: 9px;
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+input,
+select {
+
+    width: 100%;
+
+    height: 58px;
+
+    border:
+        1.5px solid
+        rgba(
+            155,
+            104,
+            114,
+            0.25
+        );
+
+    border-radius: 17px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.88
+        );
+
+    padding:
+        0 18px;
+
+    font-size: 18px;
+
+    color: #555;
+
+    outline: none;
+
+    font-family: inherit;
+
+    direction: rtl;
+}
+
+
+input::placeholder {
+
+    color: #aaa;
+}
+
+
+input:focus,
+select:focus {
+
+    border-color:
+        #b9828d;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            185,
+            130,
+            141,
+            0.12
+        );
+}
+
+
+select {
+
+    cursor: pointer;
+}
+
+
+/* =========================
+   MULTIPLE CHOICE
+========================= */
+
+.options {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
+.option {
+
+    position: relative;
+}
+
+
+.option input {
+
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.option label {
+
+    min-height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding:
+        10px
+        16px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.86
+        );
+
+    border:
+        1.5px solid
+        rgba(
+            155,
+            104,
+            114,
+            0.22
+        );
+
+    color: #666;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        0.2s ease;
+}
+
+
+.option label:hover {
+
+    transform:
+        translateY(-1px);
+}
+
+
+.option input:checked + label {
+
+    background:
+        rgba(
+            215,
+            178,
+            187,
+            0.45
+        );
+
+    border-color:
+        #a96f7a;
+
+    color:
+        #8d5964;
+
+    box-shadow:
+        0 4px 12px
+        rgba(
+            120,
+            80,
+            90,
+            0.10
+        );
+}
+
+
+/* =========================
+   NOTE
+========================= */
+
+.note {
+
+    font-size: 14px;
+
+    color: #888;
+
+    margin-top: 7px;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.create-button {
+
+    width: 100%;
+
+    height: 64px;
+
+    margin-top: 40px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background:
+        #a96f7a;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(
+            130,
+            80,
+            95,
+            0.20
+        );
+
+    transition:
+        0.2s ease;
+}
+
+
+.create-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        #9b626e;
+}
+
+
+.create-button:active {
+
+    transform:
+        scale(0.98);
+}
+
+
+.create-button:disabled {
+
+    opacity: 0.65;
+
+    cursor: wait;
+
+    transform: none;
+}
+
+
+/* =========================
+   SUCCESS
+========================= */
+
+.success {
+
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 18px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(
+            220,
+            245,
+            225,
+            0.90
+        );
+
+    border:
+        1px solid
+        rgba(
+            90,
+            150,
+            100,
+            0.25
+        );
+
+    color:
+        #4e7b57;
+
+    text-align: center;
+
+    font-size: 17px;
+
+    font-weight: 700;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error-message {
+
+    display: none;
+
+    margin-top: 20px;
+
+    padding: 16px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(
+            255,
+            230,
+            230,
+            0.92
+        );
+
+    border:
+        1px solid
+        rgba(
+            190,
+            90,
+            90,
+            0.25
+        );
+
+    color:
+        #9b4f4f;
+
+    text-align: center;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   TABLET / IPAD
+========================= */
+
+@media (min-width: 768px) {
+
+    .page {
+
+        padding-top: 55px;
+
+        padding-bottom: 80px;
+    }
+
+
+    .card {
+
+        width: 900px;
+    }
+
+
+    .form-group {
+
+        margin-bottom: 25px;
+    }
+
+}
+
+
+/* =========================
+   SMALL SCREENS
+========================= */
+
+@media (max-width: 600px) {
+
+    .page {
+
+        padding:
+            20px
+            14px
+            40px;
+    }
+
+
+    .card {
+
+        padding:
+            28px
+            20px
+            35px;
+
+        border-radius:
+            25px;
+    }
+
+
+    .title {
+
+        font-size: 30px;
+    }
+
+
+    .subtitle {
+
+        font-size: 16px;
+    }
+
+
+    .section-title {
+
+        font-size: 20px;
+    }
+
+
+    .options {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+<div class="card">
+
+
+    <!-- =================================================
+         LOGO
+    ================================================== -->
+
+    <img
+        class="logo"
+        src="images/team-logo.png"
+        alt="Rafiq">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <h1 class="title">
+        لنبدأ 👋
+    </h1>
+
+
+    <p class="subtitle">
+
+        أخبرنا ببعض المعلومات عن طفلك،
+        حتى نتمكن من تخصيص تجربة رفيق بما يناسب احتياجاته واهتماماته 🌈
+
+    </p>
+
+
+    <!-- =================================================
+         SECTION 1
+    ================================================== -->
+
+    <div class="section">
+
+        <div class="section-title">
+            👦 معلومات الطفل
+        </div>
+
+
+        <!-- 1 NAME -->
+
+        <div class="form-group">
+
+            <label class="label">
+                1. اسم الطفل
+            </label>
+
+            <input
+                type="text"
+                id="childName"
+                placeholder="اكتب اسم الطفل">
+
+        </div>
+
+
+        <!-- 2 AGE -->
+
+        <div class="form-group">
+
+            <label class="label">
+                2. عمر الطفل
+            </label>
+
+            <select id="childAge">
+
+                <option value="">
+                    اختر عمر الطفل
+                </option>
+
+                <option value="3">
+                    3 سنوات
+                </option>
+
+                <option value="4">
+                    4 سنوات
+                </option>
+
+                <option value="5">
+                    5 سنوات
+                </option>
+
+                <option value="6">
+                    6 سنوات
+                </option>
+
+                <option value="7">
+                    7 سنوات
+                </option>
+
+                <option value="8">
+                    8 سنوات
+                </option>
+
+                <option value="9">
+                    9 سنوات
+                </option>
+
+                <option value="10">
+                    10 سنوات
+                </option>
+
+                <option value="11">
+                    11 سنة
+                </option>
+
+                <option value="12">
+                    12 سنة
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- 3 GENDER -->
+
+        <div class="form-group">
+
+            <label class="label">
+                3. الجنس
+            </label>
+
+            <select id="gender">
+
+                <option value="">
+                    اختر الجنس
+                </option>
+
+                <option value="ذكر">
+                    ذكر
+                </option>
+
+                <option value="أنثى">
+                    أنثى
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- 4 FAVORITE COLOR -->
+
+        <div class="form-group">
+
+            <label class="label">
+                4. اللون المفضل
+            </label>
+
+            <select id="favoriteColor">
+
+                <option value="">
+                    اختر اللون المفضل
+                </option>
+
+                <option value="وردي">
+                    🩷 وردي
+                </option>
+
+                <option value="أزرق">
+                    💙 أزرق
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- 5 FAVORITE CHARACTER -->
+
+        <div class="form-group">
+
+            <label class="label">
+                5. الشخصية المفضلة
+            </label>
+
+            <select id="favoriteCharacter">
+
+                <option value="">
+                    اختر الشخصية المفضلة
+                </option>
+
+                <option value="ديناصور">
+                    🦖 ديناصور
+                </option>
+
+                <option value="كرومي">
+                    🐰 كرومي
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- 6 DIAGNOSIS -->
+
+        <div class="form-group">
+
+            <label class="label">
+                6. هل تم تشخيص الطفل باضطراب طيف التوحد؟
+            </label>
+
+            <select id="diagnosis">
+
+                <option value="">
+                    اختر الإجابة
+                </option>
+
+                <option value="نعم">
+                    نعم
+                </option>
+
+                <option value="لا">
+                    لا
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- 7 INTERESTS -->
+
+        <div class="form-group">
+
+            <label class="label">
+                7. اهتمامات الطفل
+            </label>
+
+            <select id="interests">
+
+                <option value="">
+                    اختر اهتمام الطفل
+                </option>
+
+                <option value="سيارات">
+                    🚗 سيارات
+                </option>
+
+                <option value="فضاء">
+                    🚀 الفضاء
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SECTION 2
+    ================================================== -->
+
+    <div class="section">
+
+        <div class="section-title">
+            📚 المهارات التعليمية
+        </div>
+
+
+        <!-- 8 READING -->
+
+        <div class="form-group">
+
+            <label class="label">
+                8. مستوى القراءة
+            </label>
+
+            <select id="readingLevel">
+
+                <option value="">
+                    اختر مستوى القراءة
+                </option>
+
+                <option value="لا يقرأ">
+                    لا يقرأ
+                </option>
+
+                <option value="يتعرف على الحروف">
+                    يتعرف على الحروف
+                </option>
+
+                <option value="يقرأ كلمات">
+                    يقرأ كلمات
+                </option>
+
+                <option value="يقرأ جمل">
+                    يقرأ جمل
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- 9 WRITING -->
+
+        <div class="form-group">
+
+            <label class="label">
+                9. مستوى الكتابة
+            </label>
+
+            <select id="writingLevel">
+
+                <option value="">
+                    اختر مستوى الكتابة
+                </option>
+
+                <option value="لا يكتب">
+                    لا يكتب
+                </option>
+
+                <option value="يكتب حروف">
+                    يكتب حروف
+                </option>
+
+                <option value="يكتب كلمات">
+                    يكتب كلمات
+                </option>
+
+                <option value="يكتب جمل">
+                    يكتب جمل
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- 10 NUMBERS -->
+
+        <div class="form-group">
+
+            <label class="label">
+                10. فهم الأرقام
+            </label>
+
+            <select id="numberLevel">
+
+                <option value="">
+                    اختر مستوى فهم الأرقام
+                </option>
+
+                <option value="لا يتعرف على الأرقام">
+                    لا يتعرف على الأرقام
+                </option>
+
+                <option value="يحتاج مساعدة">
+                    يحتاج مساعدة
+                </option>
+
+                <option value="ينقر الأرقام">
+                    ينقر الأرقام
+                </option>
+
+                <option value="يتعرف على الأرقام">
+                    يتعرف على الأرقام
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SECTION 3
+    ================================================== -->
+
+    <div class="section">
+
+        <div class="section-title">
+            ⭐ التفضيلات والحساسية الحسية
+        </div>
+
+
+        <!-- 11 MOTIVATORS -->
+
+        <div class="form-group">
+
+            <label class="label">
+                11. المحفزات المفضلة
+            </label>
+
+
+            <div class="options">
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="motivator1"
+                        name="motivators"
+                        value="البالونات">
+
+                    <label for="motivator1">
+                        🎈 البالونات
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="motivator2"
+                        name="motivators"
+                        value="النجوم">
+
+                    <label for="motivator2">
+                        ⭐ النجوم
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="motivator3"
+                        name="motivators"
+                        value="القلوب">
+
+                    <label for="motivator3">
+                        ❤️ القلوب
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="motivator4"
+                        name="motivators"
+                        value="الفقاعات">
+
+                    <label for="motivator4">
+                        🫧 الفقاعات
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="motivator5"
+                        name="motivators"
+                        value="الألوان">
+
+                    <label for="motivator5">
+                        🌈 الألوان
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="motivator6"
+                        name="motivators"
+                        value="الموسيقى">
+
+                    <label for="motivator6">
+                        🎵 الموسيقى
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="note">
+                يمكنك اختيار أكثر من محفز.
+            </div>
+
+        </div>
+
+
+        <!-- 12 SENSITIVITY -->
+
+        <div class="form-group">
+
+            <label class="label">
+                12. الحساسية الحسية
+            </label>
+
+
+            <div class="options">
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="sensitivity1"
+                        name="sensitivities"
+                        value="الأصوات العالية">
+
+                    <label for="sensitivity1">
+                        🔊 الأصوات العالية
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="sensitivity2"
+                        name="sensitivities"
+                        value="اللمس">
+
+                    <label for="sensitivity2">
+                        ✋ اللمس
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="sensitivity3"
+                        name="sensitivities"
+                        value="الأضواء الساطعة">
+
+                    <label for="sensitivity3">
+                        💡 الأضواء الساطعة
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="sensitivity4"
+                        name="sensitivities"
+                        value="الروائح القوية">
+
+                    <label for="sensitivity4">
+                        👃 الروائح القوية
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="sensitivity5"
+                        name="sensitivities"
+                        value="الزحام">
+
+                    <label for="sensitivity5">
+                        👥 الزحام
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="note">
+                يمكنك اختيار أكثر من نوع من الحساسية.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SECTION 4
+    ================================================== -->
+
+    <div class="section">
+
+        <div class="section-title">
+            🎯 التدريب
+        </div>
+
+
+        <!-- 13 GOALS -->
+
+        <div class="form-group">
+
+            <label class="label">
+                13. أهداف التدريب
+            </label>
+
+
+            <div class="options">
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="goal1"
+                        name="goals"
+                        value="تحسين التواصل">
+
+                    <label for="goal1">
+                        تحسين التواصل
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="goal2"
+                        name="goals"
+                        value="تعلم الحروف والأرقام">
+
+                    <label for="goal2">
+                        تعلم الحروف والأرقام
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="goal3"
+                        name="goals"
+                        value="اتباع التعليمات">
+
+                    <label for="goal3">
+                        اتباع التعليمات
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="goal4"
+                        name="goals"
+                        value="تنمية الذاكرة">
+
+                    <label for="goal4">
+                        تنمية الذاكرة
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="goal5"
+                        name="goals"
+                        value="تنمية الانتباه">
+
+                    <label for="goal5">
+                        تنمية الانتباه
+                    </label>
+
+                </div>
+
+
+                <div class="option">
+
+                    <input
+                        type="checkbox"
+                        id="goal6"
+                        name="goals"
+                        value="تطوير المهارات الاجتماعية">
+
+                    <label for="goal6">
+                        تطوير المهارات الاجتماعية
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="note">
+                يمكنك اختيار أكثر من هدف.
+            </div>
+
+        </div>
+
+
+        <!-- 14 SESSION -->
+
+        <div class="form-group">
+
+            <label class="label">
+                14. مدة الجلسة
+            </label>
+
+
+            <select id="sessionDuration">
+
+                <option value="">
+                    اختر مدة الجلسة
+                </option>
+
+                <option value="5 دقائق">
+                    5 دقائق
+                </option>
+
+                <option value="10 دقائق">
+                    10 دقائق
+                </option>
+
+                <option value="20 دقيقة">
+                    20 دقيقة
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         SECTION 5
+    ================================================== -->
+
+    <div class="section">
+
+        <div class="section-title">
+            💬 التواصل والفهم
+        </div>
+
+
+        <!-- 15 COMMUNICATION LEVEL -->
+
+        <div class="form-group">
+
+            <label class="label">
+                15. مستوى التواصل
+            </label>
+
+
+            <select id="communicationLevel">
+
+                <option value="">
+                    اختر مستوى التواصل
+                </option>
+
+                <option value="غير لفظي">
+                    غير لفظي
+                </option>
+
+                <option value="كلمات بسيطة">
+                    كلمات بسيطة
+                </option>
+
+                <option value="جمل قصيرة">
+                    جمل قصيرة
+                </option>
+
+                <option value="يتحدث بطلاقة">
+                    يتحدث بطلاقة
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- 16 COMMUNICATION METHOD -->
+
+        <div class="form-group">
+
+            <label class="label">
+                16. طريقة التواصل
+            </label>
+
+
+            <select id="communicationMethod">
+
+                <option value="">
+                    اختر طريقة التواصل
+                </option>
+
+                <option value="الكلام">
+                    الكلام
+                </option>
+
+                <option value="الإشارة">
+                    الإشارة
+                </option>
+
+                <option value="الصور">
+                    الصور
+                </option>
+
+                <option value="الإشارات">
+                    الإشارات
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         CREATE BUTTON
+    ================================================== -->
+
+    <button
+        class="create-button"
+        id="createButton"
+        onclick="saveChildData()">
+
+        إنشاء الحساب ✨
+
+    </button>
+
+
+    <!-- =================================================
+         SUCCESS
+    ================================================== -->
+
+    <div
+        class="success"
+        id="successMessage">
+
+        🎉 تم حفظ معلومات الطفل بنجاح!
+
+        <br>
+
+        أصبحت معلومات الطفل جاهزة لتخصيص تجربة رفيق 💗
+
+    </div>
+
+
+    <!-- =================================================
+         ERROR
+    ================================================== -->
+
+    <div
+        class="error-message"
+        id="errorMessage">
+
+        حدث خطأ أثناء حفظ البيانات.
+        حاول مرة أخرى 🌷
+
+    </div>
+
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE CONNECTION
+===================================================== */
+
+const SUPABASE_URL =
+    "https://ciwrwmutcrarwtounelg.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* =====================================================
+   GET MULTIPLE SELECTED VALUES
+===================================================== */
+
+function getSelectedValues(name) {
+
+    const selected = [];
+
+
+    const checkboxes =
+        document.querySelectorAll(
+            'input[name="' +
+            name +
+            '"]:checked'
+        );
+
+
+    checkboxes.forEach(function(checkbox) {
+
+        selected.push(
+            checkbox.value
+        );
+
+    });
+
+
+    return selected;
+
+}
+
+
+/* =====================================================
+   SHOW ERROR
+===================================================== */
+
+function showError(message) {
+
+    const errorMessage =
+        document.getElementById(
+            "errorMessage"
+        );
+
+
+    errorMessage.textContent =
+        message;
+
+
+    errorMessage.style.display =
+        "block";
+
+
+    errorMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+
+}
+
+
+/* =====================================================
+   SAVE CHILD DATA
+   ALWAYS CREATE NEW CHILD
+===================================================== */
+
+async function saveChildData() {
+
+    const button =
+        document.getElementById(
+            "createButton"
+        );
+
+
+    const successMessage =
+        document.getElementById(
+            "successMessage"
+        );
+
+
+    const errorMessage =
+        document.getElementById(
+            "errorMessage"
+        );
+
+
+    /* =========================================
+       HIDE OLD MESSAGES
+    ========================================= */
+
+    successMessage.style.display =
+        "none";
+
+
+    errorMessage.style.display =
+        "none";
+
+
+    /* =========================================
+       PREVENT DOUBLE CLICK
+    ========================================= */
+
+    button.disabled = true;
+
+    button.textContent =
+        "جاري إنشاء الحساب... ⏳";
+
+
+    /* =========================================
+       GET FORM DATA
+    ========================================= */
+
+    const childName =
+        document
+            .getElementById("childName")
+            .value
+            .trim();
+
+
+    const childAge =
+        document
+            .getElementById("childAge")
+            .value;
+
+
+    const gender =
+        document
+            .getElementById("gender")
+            .value;
+
+
+    const favoriteColor =
+        document
+            .getElementById("favoriteColor")
+            .value;
+
+
+    const favoriteCharacter =
+        document
+            .getElementById("favoriteCharacter")
+            .value;
+
+
+    const diagnosis =
+        document
+            .getElementById("diagnosis")
+            .value;
+
+
+    const interests =
+        document
+            .getElementById("interests")
+            .value;
+
+
+    const readingLevel =
+        document
+            .getElementById("readingLevel")
+            .value;
+
+
+    const writingLevel =
+        document
+            .getElementById("writingLevel")
+            .value;
+
+
+    const numberLevel =
+        document
+            .getElementById("numberLevel")
+            .value;
+
+
+    const motivators =
+        getSelectedValues(
+            "motivators"
+        );
+
+
+    const sensitivities =
+        getSelectedValues(
+            "sensitivities"
+        );
+
+
+    const goals =
+        getSelectedValues(
+            "goals"
+        );
+
+
+    const sessionDuration =
+        document
+            .getElementById("sessionDuration")
+            .value;
+
+
+    const communicationLevel =
+        document
+            .getElementById("communicationLevel")
+            .value;
+
+
+    const communicationMethod =
+        document
+            .getElementById("communicationMethod")
+            .value;
+
+
+    /* =========================================
+       VALIDATION
+    ========================================= */
+
+    if (
+
+        childName === "" ||
+
+        childAge === "" ||
+
+        gender === "" ||
+
+        favoriteColor === "" ||
+
+        favoriteCharacter === "" ||
+
+        diagnosis === "" ||
+
+        interests === "" ||
+
+        readingLevel === "" ||
+
+        writingLevel === "" ||
+
+        numberLevel === "" ||
+
+        sessionDuration === "" ||
+
+        communicationLevel === "" ||
+
+        communicationMethod === ""
+
+    ) {
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "إنشاء الحساب ✨";
+
+
+        alert(
+            "فضلاً أكمل جميع الأسئلة أولاً 🌷"
+        );
+
+
+        return;
+
+    }
+
+
+    /* =========================================
+       SUPABASE DATA
+    ========================================= */
+
+    const supabaseData = {
+
+        child_name:
+            childName,
+
+        child_age:
+            Number(childAge),
+
+        gender:
+            gender,
+
+        favorite_color:
+            favoriteColor,
+
+        favorite_character:
+            favoriteCharacter,
+
+        diagnosis:
+            diagnosis,
+
+        interests:
+            interests,
+
+        reading_level:
+            readingLevel,
+
+        writing_level:
+            writingLevel,
+
+        number_level:
+            numberLevel,
+
+        motivators:
+            motivators,
+
+        sensory_sensitivities:
+            sensitivities,
+
+        training_goals:
+            goals,
+
+        session_duration:
+            sessionDuration,
+
+        communication_level:
+            communicationLevel,
+
+        communication_method:
+            communicationMethod
+
+    };
+
+
+    /* =========================================
+       CREATE NEW CHILD
+       INSERT ONLY
+    ========================================= */
+
+    try {
+
+        /*
+         * مهم جدًا:
+         *
+         * نحذف الـ ID القديم من الجهاز
+         * قبل إنشاء الطفل الجديد.
+         *
+         * هذا لا يحذف الطفل من Supabase.
+         * فقط يمنع استخدام الـ ID القديم.
+         */
+
+        localStorage.removeItem(
+            "rafiqChildId"
+        );
+
+
+        /*
+         * نحذف النسخة المحلية القديمة
+         * حتى لا يتم استخدامها في أي صفحة
+         * لاحقًا.
+         */
+
+        localStorage.removeItem(
+            "rafiqChildData"
+        );
+
+
+        console.log(
+            "🧹 Old child ID removed."
+        );
+
+
+        console.log(
+            "🆕 Creating NEW child..."
+        );
+
+
+        console.log(
+            "👤 New child name:",
+            childName
+        );
+
+
+        console.log(
+            "⭐ New favorite character:",
+            favoriteCharacter
+        );
+
+
+        /* =====================================
+           INSERT NEW ROW
+        ====================================== */
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from("children")
+
+            .insert([
+                supabaseData
+            ])
+
+            .select(
+                "id, child_name, favorite_character"
+            )
+
+            .single();
+
+
+        /* =====================================
+           SUPABASE ERROR
+        ====================================== */
+
+        if (error) {
+
+            console.error(
+                "❌ Supabase INSERT Error:",
+                error
+            );
+
+
+            throw error;
+
+        }
+
+
+        /* =====================================
+           CHECK INSERT RESULT
+        ====================================== */
+
+        if (!data || !data.id) {
+
+            throw new Error(
+                "تم إنشاء البيانات ولكن لم يتم استلام ID الطفل."
+            );
+
+        }
+
+
+        const newChildId =
+            data.id;
+
+
+        /* =====================================
+           SAVE ONLY NEW ID
+        ====================================== */
+
+        localStorage.setItem(
+            "rafiqChildId",
+            newChildId
+        );
+
+
+        /* =====================================
+           VERIFY SAVED ID
+        ====================================== */
+
+        const savedChildId =
+            localStorage.getItem(
+                "rafiqChildId"
+            );
+
+
+        console.log(
+            "================================"
+        );
+
+
+        console.log(
+            "🎉 NEW CHILD CREATED"
+        );
+
+
+        console.log(
+            "👤 Name:",
+            data.child_name
+        );
+
+
+        console.log(
+            "⭐ Character:",
+            data.favorite_character
+        );
+
+
+        console.log(
+            "🆔 New Supabase ID:",
+            newChildId
+        );
+
+
+        console.log(
+            "💾 Saved localStorage ID:",
+            savedChildId
+        );
+
+
+        console.log(
+            "================================"
+        );
+
+
+        /* =====================================
+           VERIFY ID
+        ====================================== */
+
+        if (
+            savedChildId !==
+            newChildId
+        ) {
+
+            throw new Error(
+                "لم يتم حفظ ID الطفل الجديد بشكل صحيح."
+            );
+
+        }
+
+
+        /* =====================================
+           SUCCESS MESSAGE
+        ====================================== */
+
+        successMessage.innerHTML = `
+
+            🎉 تم إنشاء حساب الطفل بنجاح!
+
+            <br>
+
+            أهلًا بـ
+            <strong>
+                ${escapeHtml(childName)}
+            </strong>
+            💗
+
+        `;
+
+
+        successMessage.style.display =
+            "block";
+
+
+        button.textContent =
+            "تم إنشاء الحساب ✓";
+
+
+        successMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+
+        /* =====================================
+           GO TO HOME
+        ====================================== */
+
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    "home.html";
+
+            },
+            1000
+        );
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "❌ CREATE CHILD ERROR:",
+            error
+        );
+
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "إنشاء الحساب ✨";
+
+
+        let message =
+            "تعذر إنشاء حساب الطفل. حاولي مرة أخرى 🌷";
+
+
+        if (
+            error &&
+            error.message
+        ) {
+
+            message =
+                error.message;
+
+        }
+
+
+        showError(
+            message
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHtml(value) {
+
+    return String(value)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =====================================================
+   IMPORTANT:
+   DO NOT LOAD OLD DATA
+===================================================== */
+
+/*
+ * لا يوجد هنا:
+ *
+ * localStorage.getItem("rafiqChildData")
+ *
+ * ولا يوجد:
+ *
+ * UPDATE
+ *
+ * ولا يوجد:
+ *
+ * تعبئة تلقائية للنموذج.
+ *
+ * كل مرة تفتح الصفحة:
+ * النموذج يبدأ فارغًا.
+ */
+
+
+/* =====================================================
+   START PAGE
+===================================================== */
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        console.log(
+            "🌈 Rafiq Start Page Ready"
+        );
+
+
+        console.log(
+            "ℹ️ Form starts empty."
+        );
+
+
+        console.log(
+            "ℹ️ A NEW child will be INSERTED."
+        );
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>تكوين جمل بسيطة - رفيق</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:"Tajawal","Cairo","Tahoma","Arial",sans-serif;
+}
+
+body{
+    color:#173d68;
+    background:#e4f2ff;
+}
+
+.page{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+}
+
+
+/* =========================
+   أزرار الأعلى
+========================= */
+
+.previous-button,
+.menu-button{
+
+    position:absolute;
+
+    top:20px;
+
+    width:58px;
+    height:54px;
+
+    border:none;
+    border-radius:20px;
+
+    background:#e4f2ff;
+    color:#173d68;
+
+    font-size:29px;
+    font-weight:900;
+
+    box-shadow:
+        0 6px 15px rgba(55,104,140,.20);
+
+    cursor:pointer;
+
+    z-index:1000;
+}
+
+.previous-button{
+    left:20px;
+}
+
+.menu-button{
+    right:20px;
+}
+
+.previous-button:active,
+.menu-button:active{
+    transform:scale(.94);
+}
+
+
+/* =========================
+   القائمة
+========================= */
+
+.side-menu{
+
+    position:absolute;
+
+    top:82px;
+    right:20px;
+
+    width:220px;
+
+    padding:18px;
+
+    background:rgba(255,255,255,.97);
+
+    border-radius:25px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.18);
+
+    display:none;
+
+    z-index:1200;
+}
+
+.side-menu.show{
+    display:block;
+}
+
+.side-menu button{
+
+    width:100%;
+    height:50px;
+
+    margin-bottom:10px;
+
+    border:none;
+    border-radius:16px;
+
+    background:#e4f2ff;
+
+    color:#55718b;
+
+    font-size:18px;
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.side-menu button:last-child{
+    margin-bottom:0;
+}
+
+
+/* =========================
+   العنوان
+========================= */
+
+.header{
+
+    position:absolute;
+
+    top:18px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:500px;
+    max-width:60vw;
+
+    text-align:center;
+
+    z-index:50;
+}
+
+.stage-title{
+
+    display:inline-block;
+
+    margin:0;
+
+    padding:10px 30px;
+
+    background:rgba(255,255,255,.95);
+
+    border-radius:27px;
+
+    color:#173d68;
+
+    font-size:27px;
+    font-weight:900;
+}
+
+.stage-subtitle{
+
+    margin-top:7px;
+
+    color:white;
+
+    font-size:21px;
+    font-weight:900;
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.25);
+}
+
+.progress{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+    margin-top:7px;
+}
+
+.progress-dot{
+
+    width:14px;
+    height:14px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.75);
+}
+
+.progress-dot.active{
+
+    width:18px;
+    height:18px;
+
+    background:#3185e5;
+
+    border:3px solid white;
+}
+
+
+/* =========================
+   المحتوى
+========================= */
+
+.content{
+
+    position:absolute;
+
+    left:50%;
+    top:54%;
+
+    transform:translate(-50%,-50%);
+
+    width:760px;
+    max-width:88vw;
+
+    z-index:20;
+}
+
+
+/* =========================
+   السؤال
+========================= */
+
+.question-box{
+
+    width:400px;
+    max-width:85vw;
+
+    min-height:60px;
+
+    padding:8px 45px;
+
+    position:relative;
+
+    background:#e4f2ff;
+
+    border-radius:22px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-top:-150px;
+
+    margin-left:auto;
+    margin-right:auto;
+
+    margin-bottom:5px;
+}
+
+.question{
+
+    margin:0;
+
+    font-size:29px;
+
+    font-weight:900;
+
+    color:#173d68;
+
+    line-height:1.4;
+
+    text-align:center;
+}
+
+.sound-button{
+
+    position:absolute;
+
+    left:12px;
+
+    width:50px;
+    height:50px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:white;
+
+    font-size:23px;
+
+    box-shadow:
+        0 5px 12px rgba(55,104,140,.14);
+
+    cursor:pointer;
+}
+
+.sound-button:active{
+    transform:scale(.92);
+}
+
+
+/* =========================
+   صورة الطفل
+========================= */
+
+.child-area{
+
+    width:100%;
+
+    height:300px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.child-image{
+
+    width:300px;
+    height:300px;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 10px 9px rgba(0,0,0,.13)
+        );
+
+    transition:.3s;
+}
+
+.child-image.success{
+
+    animation:
+        happy .8s ease;
+}
+
+@keyframes happy{
+
+    0%{
+        transform:scale(1);
+    }
+
+    30%{
+        transform:
+            scale(1.1)
+            rotate(-4deg);
+    }
+
+    60%{
+        transform:
+            scale(1.08)
+            rotate(4deg);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+
+/* =========================
+   الكلمات
+========================= */
+
+.words{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:16px;
+
+    flex-wrap:wrap;
+
+    direction:rtl;
+
+    margin-bottom:15px;
+}
+
+.word{
+
+    min-width:150px;
+
+    height:64px;
+
+    padding:0 22px;
+
+    border:none;
+
+    border-radius:21px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:24px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 7px 15px rgba(55,104,140,.14);
+
+    cursor:pointer;
+
+    transition:.15s;
+}
+
+.word:active{
+    transform:scale(.94);
+}
+
+.word.used{
+
+    opacity:.35;
+
+    pointer-events:none;
+}
+
+
+/* =========================
+   مربعات الجملة
+========================= */
+
+.answer-area{
+
+    width:100%;
+
+    min-height:70px;
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:12px;
+
+    direction:rtl;
+
+    margin-bottom:10px;
+}
+
+.answer-slot{
+
+    width:185px;
+
+    height:62px;
+
+    border:
+        3px dashed #b9ccda;
+
+    border-radius:20px;
+
+    background:rgba(255,255,255,.8);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#173d68;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    transition:.2s;
+}
+
+.answer-slot.filled{
+
+    border:3px solid #b8d9ef;
+
+    background:#e4f2ff;
+}
+
+.answer-slot.correct{
+
+    border-color:#71c593;
+
+    background:#dcf8e7;
+
+    color:#277849;
+}
+
+.answer-slot.wrong{
+
+    border-color:#e09b9b;
+
+    background:#fff0f0;
+
+    animation:
+        shake .4s ease;
+}
+
+@keyframes shake{
+
+    0%,100%{
+        transform:translateX(0);
+    }
+
+    25%{
+        transform:translateX(-8px);
+    }
+
+    75%{
+        transform:translateX(8px);
+    }
+}
+
+
+/* =========================
+   التلميح
+========================= */
+
+.hint-box{
+
+    width:100%;
+
+    min-height:48px;
+
+    padding:9px 18px;
+
+    border-radius:18px;
+
+    background:#fff8dc;
+
+    border:2px solid #efd77c;
+
+    color:#80691f;
+
+    font-size:18px;
+
+    font-weight:900;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-bottom:10px;
+}
+
+.hint-box.show{
+
+    display:flex;
+
+    animation:
+        hintIn .3s ease;
+}
+
+@keyframes hintIn{
+
+    from{
+        opacity:0;
+        transform:translateY(7px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* =========================
+   زر تحقق
+========================= */
+
+.check-button{
+
+    display:block;
+
+    width:280px;
+
+    height:58px;
+
+    margin:10px auto 0;
+
+    border:none;
+
+    border-radius:21px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 7px 16px rgba(55,104,140,.14);
+
+    cursor:pointer;
+}
+
+.check-button:active{
+
+    transform:scale(.96);
+}
+
+
+/* =========================
+   زر التالي
+========================= */
+
+.next-button{
+
+    width:280px;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:21px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 7px 16px rgba(55,104,140,.14);
+
+    cursor:pointer;
+
+    display:none;
+
+    margin:12px auto 0;
+}
+
+.next-button:active{
+
+    transform:scale(.96);
+}
+
+.next-button.show{
+
+    display:block;
+
+    animation:
+        nextIn .4s ease;
+}
+
+@keyframes nextIn{
+
+    from{
+        opacity:0;
+        transform:translateY(12px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+
+/* =========================
+   الاحتفال
+========================= */
+
+.success-layer{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    display:none;
+
+    z-index:800;
+}
+
+.success-layer.show{
+    display:block;
+}
+
+.confetti{
+
+    position:absolute;
+
+    top:-50px;
+
+    font-size:30px;
+
+    animation:
+        fall var(--duration)
+        ease-out forwards;
+
+    animation-delay:
+        var(--delay);
+}
+
+@keyframes fall{
+
+    from{
+
+        transform:
+            translateY(-50px)
+            rotate(0);
+
+        opacity:1;
+    }
+
+    to{
+
+        transform:
+            translateY(115vh)
+            rotate(720deg);
+
+        opacity:0;
+    }
+}
+
+.balloon{
+
+    position:absolute;
+
+    bottom:-150px;
+
+    font-size:60px;
+
+    animation:
+        rise 4.5s ease-out forwards;
+
+    animation-delay:
+        var(--delay);
+}
+
+@keyframes rise{
+
+    0%{
+
+        transform:
+            translateY(0)
+            rotate(-8deg);
+
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+            translateY(-120vh)
+            rotate(12deg);
+
+        opacity:0;
+    }
+}
+
+
+/* =========================
+   رسالة النجاح
+========================= */
+
+.success-message{
+
+    position:fixed;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(.7);
+
+    width:420px;
+
+    max-width:80vw;
+
+    padding:25px;
+
+    background:rgba(255,255,255,.98);
+
+    border-radius:35px;
+
+    text-align:center;
+
+    box-shadow:
+        0 18px 50px rgba(20,60,90,.28);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.35s;
+
+    z-index:900;
+}
+
+.success-message.show{
+
+    opacity:1;
+
+    transform:
+        translate(-50%,-50%)
+        scale(1);
+}
+
+.success-message .emoji{
+
+    font-size:60px;
+}
+
+.success-message h2{
+
+    margin:0;
+
+    font-size:31px;
+
+    color:#173d68;
+}
+
+.success-message p{
+
+    margin:8px 0 0;
+
+    font-size:20px;
+
+    font-weight:900;
+
+    color:#52718d;
+}
+
+
+/* =========================
+   أسفل الصفحة
+========================= */
+
+.footer{
+
+    position:absolute;
+
+    bottom:10px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:900;
+
+    text-shadow:
+        0 2px 5px rgba(0,0,0,.25);
+
+    z-index:30;
+}
+
+
+/* =========================
+   iPad Portrait
+========================= */
+
+@media (orientation:portrait){
+
+    .previous-button,
+    .menu-button{
+
+        top:14px;
+
+        width:54px;
+        height:50px;
+    }
+
+    .previous-button{
+        left:14px;
+    }
+
+    .menu-button{
+        right:14px;
+    }
+
+    .side-menu{
+
+        top:72px;
+
+        right:14px;
+    }
+
+    .header{
+
+        top:12px;
+
+        max-width:65vw;
+    }
+
+    .stage-title{
+
+        font-size:22px;
+
+        padding:8px 24px;
+    }
+
+    .stage-subtitle{
+
+        font-size:18px;
+    }
+
+    .content{
+
+        width:90vw;
+
+        top:54%;
+    }
+
+    .question-box{
+
+        width:400px;
+
+        max-width:85vw;
+
+        min-height:55px;
+
+        padding:8px 45px;
+
+        margin-top:-150px;
+
+        margin-left:auto;
+        margin-right:auto;
+
+        margin-bottom:5px;
+    }
+
+    .question{
+
+        font-size:24px;
+    }
+
+    .sound-button{
+
+        width:45px;
+        height:45px;
+
+        font-size:20px;
+    }
+
+    .child-area{
+
+        height:300px;
+    }
+
+    .child-image{
+
+        width:300px;
+        height:300px;
+    }
+
+    .word{
+
+        min-width:130px;
+
+        height:58px;
+
+        font-size:21px;
+    }
+
+    .answer-slot{
+
+        width:145px;
+
+        height:57px;
+
+        font-size:20px;
+    }
+}
+
+
+/* =========================
+   الشاشات القصيرة
+========================= */
+
+@media (max-height:750px){
+
+    .header{
+        top:7px;
+    }
+
+    .stage-title{
+
+        font-size:19px;
+
+        padding:6px 20px;
+    }
+
+    .stage-subtitle{
+
+        font-size:15px;
+    }
+
+    .progress{
+        display:none;
+    }
+
+    .content{
+        top:53%;
+    }
+
+    .question-box{
+
+        width:380px;
+
+        max-width:82vw;
+
+        min-height:52px;
+
+        padding:7px 42px;
+
+        margin-top:-120px;
+
+        margin-left:auto;
+        margin-right:auto;
+
+        margin-bottom:5px;
+    }
+
+    .question{
+        font-size:18px;
+    }
+
+    .sound-button{
+
+        width:40px;
+        height:40px;
+
+        font-size:18px;
+    }
+
+    .child-area{
+
+        height:230px;
+    }
+
+    .child-image{
+
+        width:230px;
+        height:230px;
+    }
+
+    .words{
+
+        gap:7px;
+
+        margin-bottom:7px;
+    }
+
+    .word{
+
+        min-width:105px;
+
+        height:45px;
+
+        font-size:17px;
+    }
+
+    .answer-area{
+
+        min-height:47px;
+
+        margin-bottom:6px;
+    }
+
+    .answer-slot{
+
+        width:110px;
+
+        height:45px;
+
+        font-size:16px;
+    }
+
+    .hint-box{
+
+        min-height:34px;
+
+        font-size:14px;
+
+        margin-bottom:5px;
+    }
+
+    .check-button,
+    .next-button{
+
+        width:205px;
+
+        height:43px;
+
+        font-size:16px;
+    }
+
+    .next-button{
+        margin-top:6px;
+    }
+
+    .footer{
+        display:none;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+<!-- =========================
+     السابق
+========================= -->
+
+<button
+    class="previous-button"
+    id="previousButton">
+
+    ←
+
+</button>
+
+
+<!-- =========================
+     القائمة
+========================= -->
+
+<button
+    class="menu-button"
+    id="menuButton">
+
+    ☰
+
+</button>
+
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+    <button onclick="location.href='home.html'">
+        🏠 الرئيسية
+    </button>
+
+    <button onclick="location.href='reports.html'">
+        📊 تقاريري
+    </button>
+
+    <button onclick="location.href='profile.html'">
+        👤 ملفي
+    </button>
+
+</div>
+
+
+<!-- =========================
+     العنوان
+========================= -->
+
+<div class="header">
+
+    <div class="stage-title">
+        المرحلة الرابعة
+    </div>
+
+    <div class="stage-subtitle">
+        تكوين جمل بسيطة
+    </div>
+
+    <div class="progress">
+
+        <span class="progress-dot active"></span>
+
+        <span class="progress-dot"></span>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     المحتوى
+========================= -->
+
+<div class="content">
+
+<div class="main-card">
+
+
+    <!-- السؤال -->
+
+    <div class="question-box">
+
+        <h1 class="question">
+
+            رتّب الكلمات لتكوين جملة صحيحة.
+
+        </h1>
+
+
+        <button
+            class="sound-button"
+            id="soundButton">
+
+            🔊
+
+        </button>
+
+    </div>
+
+
+    <!-- الطفل -->
+
+    <div class="child-area">
+
+        <img
+            class="child-image"
+            id="childImage"
+            src=""
+            alt="الطفل">
+
+    </div>
+
+
+    <!-- الكلمات -->
+
+    <div class="words">
+
+        <button
+            class="word"
+            data-word="تفاحة">
+
+            تفاحة
+
+        </button>
+
+
+        <button
+            class="word"
+            data-word="أريد">
+
+            أريد
+
+        </button>
+
+
+        <button
+            class="word"
+            data-word="أنا">
+
+            أنا
+
+        </button>
+
+    </div>
+
+
+    <!-- مربعات الجملة -->
+
+    <div class="answer-area">
+
+        <div class="answer-slot"></div>
+
+        <div class="answer-slot"></div>
+
+        <div class="answer-slot"></div>
+
+    </div>
+
+
+    <!-- التلميح -->
+
+    <div
+        class="hint-box"
+        id="hintBox">
+
+        💡
+
+        <span id="hintText"></span>
+
+    </div>
+
+
+    <!-- تحقق -->
+
+    <button
+        class="check-button"
+        id="checkButton">
+
+        تحقق ✓
+
+    </button>
+
+
+    <!-- التالي -->
+
+    <button
+        class="next-button"
+        id="nextButton">
+
+        التالي ←
+
+    </button>
+
+
+</div>
+
+</div>
+
+
+<!-- =========================
+     الاحتفال
+========================= -->
+
+<div
+    class="success-layer"
+    id="successLayer">
+</div>
+
+
+<!-- =========================
+     رسالة النجاح
+========================= -->
+
+<div
+    class="success-message"
+    id="successMessage">
+
+    <div class="emoji">
+
+        🎉🎈⭐🍎✨
+
+    </div>
+
+    <h2>
+
+        أحسنت! 🌟
+
+    </h2>
+
+    <p>
+
+        أنا أريد تفاحة.
+
+    </p>
+
+</div>
+
+
+<div class="footer">
+
+    رفيق — معًا نحو مستقبل أفضل
+
+</div>
+
+
+</div>
+
+
+<script>
+
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+"https://ciwrwmutcrarwtounelg.supabase.co";
+
+
+const SUPABASE_ANON_KEY =
+"sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
+
+
+/* =====================================================
+   CHILD ID
+   المصدر الوحيد للتخصيص
+===================================================== */
+
+const childId =
+localStorage.getItem(
+    "rafiqChildId"
+);
+
+
+const childImage =
+document.getElementById(
+    "childImage"
+);
+
+
+/* =====================================================
+   التخصيص
+===================================================== */
+
+function applyPersonalization(interest){
+
+    /*
+       تنظيف القيمة القادمة من Supabase
+    */
+
+    const normalizedInterest =
+        String(interest || "")
+            .trim()
+            .toLowerCase();
+
+
+    /* =========================
+       الفضاء
+    ========================= */
+
+    if(
+        normalizedInterest === "فضاء" ||
+        normalizedInterest === "space"
+    ){
+
+        document.body.style.background =
+            'url("images/spao.jpeg") center/cover no-repeat';
+
+
+        childImage.src =
+            "images/s3s.png";
+
+
+        childImage.style.visibility =
+            "visible";
+
+
+        console.log(
+            "Rafiq theme: SPACE"
+        );
+
+
+        return true;
+
+    }
+
+
+    /* =========================
+       السيارات
+    ========================= */
+
+    if(
+        normalizedInterest === "سيارات" ||
+        normalizedInterest === "سيارة" ||
+        normalizedInterest === "cars" ||
+        normalizedInterest === "car"
+    ){
+
+        document.body.style.background =
+            'url("images/car.jpeg") center/cover no-repeat';
+
+
+        childImage.src =
+            "images/s3c.png";
+
+
+        childImage.style.visibility =
+            "visible";
+
+
+        console.log(
+            "Rafiq theme: CARS"
+        );
+
+
+        return true;
+
+    }
+
+
+    /*
+       إذا كانت القيمة غير معروفة
+       لا نختار سيارات تلقائيًا.
+    */
+
+    console.log(
+        "اهتمام الطفل غير معروف:",
+        interest
+    );
+
+
+    document.body.style.background =
+        "#e4f2ff";
+
+
+    childImage.removeAttribute(
+        "src"
+    );
+
+
+    childImage.style.visibility =
+        "hidden";
+
+
+    return false;
+
+}
+
+
+/* =====================================================
+   قراءة interests من Supabase
+===================================================== */
+
+async function loadPersonalization(){
+
+    /*
+       لا يوجد ID
+       لا نختار أي ثيم افتراضي.
+    */
+
+    if(!childId){
+
+        console.warn(
+            "لا يوجد rafiqChildId في localStorage."
+        );
+
+
+        document.body.style.background =
+            "#e4f2ff";
+
+
+        childImage.removeAttribute(
+            "src"
+        );
+
+
+        childImage.style.visibility =
+            "hidden";
+
+
+        return;
+
+    }
+
+
+    console.log(
+        "Child ID:",
+        childId
+    );
+
+
+    try{
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from("children")
+
+            .select("interests")
+
+            .eq(
+                "id",
+                childId
+            )
+
+            .maybeSingle();
+
+
+        /* =========================
+           خطأ Supabase
+        ========================= */
+
+        if(error){
+
+            console.error(
+                "Supabase error:",
+                error
+            );
+
+
+            /*
+               الصفحة تبقى ظاهرة.
+               لا نستخدم سيارات كافتراضي.
+            */
+
+            document.body.style.background =
+                "#e4f2ff";
+
+
+            childImage.removeAttribute(
+                "src"
+            );
+
+
+            childImage.style.visibility =
+                "hidden";
+
+
+            return;
+
+        }
+
+
+        /* =========================
+           لا توجد بيانات للطفل
+        ========================= */
+
+        if(
+            !data ||
+            data.interests === null ||
+            data.interests === undefined ||
+            String(data.interests).trim() === ""
+        ){
+
+            console.warn(
+                "لا توجد قيمة interests لهذا الطفل."
+            );
+
+
+            document.body.style.background =
+                "#e4f2ff";
+
+
+            childImage.removeAttribute(
+                "src"
+            );
+
+
+            childImage.style.visibility =
+                "hidden";
+
+
+            return;
+
+        }
+
+
+        /* =========================
+           تطبيق التخصيص
+        ========================= */
+
+        const success =
+            applyPersonalization(
+                data.interests
+            );
+
+
+        console.log(
+            "Supabase interests:",
+            data.interests
+        );
+
+
+        if(!success){
+
+            console.warn(
+                "قيمة interests غير مدعومة:",
+                data.interests
+            );
+
+        }
+
+    }
+
+    catch(error){
+
+        console.error(
+            "حدث خطأ أثناء قراءة Supabase:",
+            error
+        );
+
+
+        /*
+           مهم:
+           الصفحة لا تختفي.
+           ولا نستخدم سيارات كافتراضي.
+        */
+
+        document.body.style.background =
+            "#e4f2ff";
+
+
+        childImage.removeAttribute(
+            "src"
+        );
+
+
+        childImage.style.visibility =
+            "hidden";
+
+    }
+
+}
+
+
+/* =====================================================
+   START PERSONALIZATION
+===================================================== */
+
+loadPersonalization();
+
+
+/* =====================================================
+   القائمة
+===================================================== */
+
+const menuButton =
+document.getElementById(
+    "menuButton"
+);
+
+
+const sideMenu =
+document.getElementById(
+    "sideMenu"
+);
+
+
+menuButton.addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        sideMenu.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+
+            !sideMenu.contains(
+                event.target
+            )
+
+            &&
+
+            event.target !==
+            menuButton
+
+        ){
+
+            sideMenu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   السابق
+===================================================== */
+
+document
+.getElementById("previousButton")
+.addEventListener(
+    "click",
+    function(){
+
+        location.href =
+            "food-game.html";
+
+    }
+);
+
+
+/* =====================================================
+   عناصر اللعبة
+===================================================== */
+
+const soundButton =
+document.getElementById(
+    "soundButton"
+);
+
+
+const wordButtons =
+document.querySelectorAll(
+    ".word"
+);
+
+
+const answerSlots =
+document.querySelectorAll(
+    ".answer-slot"
+);
+
+
+const checkButton =
+document.getElementById(
+    "checkButton"
+);
+
+
+const nextButton =
+document.getElementById(
+    "nextButton"
+);
+
+
+const hintBox =
+document.getElementById(
+    "hintBox"
+);
+
+
+const hintText =
+document.getElementById(
+    "hintText"
+);
+
+
+const successLayer =
+document.getElementById(
+    "successLayer"
+);
+
+
+const successMessage =
+document.getElementById(
+    "successMessage"
+);
+
+
+/* =====================================================
+   الجملة الصحيحة
+===================================================== */
+
+const correctSentence = [
+
+    "أنا",
+    "أريد",
+    "تفاحة"
+
+];
+
+
+let selectedWords = [];
+
+let mistakes = 0;
+
+let completed = false;
+
+
+/* =====================================================
+   الصوت العربي
+===================================================== */
+
+function speak(text){
+
+    if(
+        "speechSynthesis"
+        in window
+    ){
+
+        window.speechSynthesis.cancel();
+
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+
+        speech.lang =
+            "ar-SA";
+
+
+        speech.rate =
+            0.78;
+
+
+        speech.pitch =
+            1;
+
+
+        speech.volume =
+            1;
+
+
+        window.speechSynthesis.speak(
+            speech
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   قراءة السؤال فقط
+===================================================== */
+
+function readQuestion(){
+
+    speak(
+        "رتّب الكلمات لتكوين جملة صحيحة."
+    );
+
+}
+
+
+/* =====================================================
+   اختيار الكلمات
+===================================================== */
+
+wordButtons.forEach(
+    function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                if(completed)
+                    return;
+
+
+                if(
+                    selectedWords.length >=
+                    correctSentence.length
+                ){
+
+                    return;
+
+                }
+
+
+                const word =
+                    button.dataset.word;
+
+
+                selectedWords.push(
+                    word
+                );
+
+
+                button.classList.add(
+                    "used"
+                );
+
+
+                const slot =
+                    answerSlots[
+                        selectedWords.length - 1
+                    ];
+
+
+                slot.textContent =
+                    word;
+
+
+                slot.classList.add(
+                    "filled"
+                );
+
+
+                speak(word);
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   إعادة الكلمات
+===================================================== */
+
+function resetAnswer(){
+
+    selectedWords = [];
+
+
+    wordButtons.forEach(
+        function(button){
+
+            button.classList.remove(
+                "used"
+            );
+
+        }
+    );
+
+
+    answerSlots.forEach(
+        function(slot){
+
+            slot.textContent = "";
+
+            slot.classList.remove(
+                "filled"
+            );
+
+            slot.classList.remove(
+                "wrong"
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   التلميح
+===================================================== */
+
+function showHint(message){
+
+    hintText.textContent =
+        message;
+
+    hintBox.classList.add(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   التحقق
+===================================================== */
+
+checkButton.addEventListener(
+    "click",
+    function(){
+
+        if(completed)
+            return;
+
+
+        if(
+            selectedWords.length <
+            correctSentence.length
+        ){
+
+            showHint(
+                "اضغط على الكلمات الثلاث بالترتيب 💡"
+            );
+
+            return;
+
+        }
+
+
+        const isCorrect =
+            selectedWords.every(
+                function(word,index){
+
+                    return (
+                        word ===
+                        correctSentence[index]
+                    );
+
+                }
+            );
+
+
+        if(isCorrect){
+
+            correctAnswer();
+
+        }
+
+        else{
+
+            wrongAnswer();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   الإجابة الخاطئة
+===================================================== */
+
+function wrongAnswer(){
+
+    mistakes++;
+
+
+    answerSlots.forEach(
+        function(slot){
+
+            slot.classList.add(
+                "wrong"
+            );
+
+        }
+    );
+
+
+    if(mistakes === 1){
+
+        showHint(
+            "تلميح: ابدأ الجملة بكلمة «أنا» 💡"
+        );
+
+    }
+
+    else{
+
+        showHint(
+            "تذكّر: أنا ← أريد ← تفاحة 🍎"
+        );
+
+    }
+
+
+    speak(
+        "حاول مرة أخرى."
+    );
+
+
+    setTimeout(
+        function(){
+
+            resetAnswer();
+
+        },
+        700
+    );
+
+}
+
+
+/* =====================================================
+   الإجابة الصحيحة
+===================================================== */
+
+function correctAnswer(){
+
+    completed = true;
+
+
+    answerSlots.forEach(
+        function(slot){
+
+            slot.classList.remove(
+                "filled"
+            );
+
+            slot.classList.add(
+                "correct"
+            );
+
+        }
+    );
+
+
+    checkButton.style.display =
+        "none";
+
+
+    wordButtons.forEach(
+        function(button){
+
+            button.style.pointerEvents =
+                "none";
+
+        }
+    );
+
+
+    childImage.classList.add(
+        "success"
+    );
+
+
+    createCelebration();
+
+
+    successMessage.classList.add(
+        "show"
+    );
+
+
+    speak(
+        "أحسنت! أنا أريد تفاحة."
+    );
+
+
+    setTimeout(
+        function(){
+
+            successMessage.classList.remove(
+                "show"
+            );
+
+
+            nextButton.classList.add(
+                "show"
+            );
+
+        },
+        2200
+    );
+
+}
+
+
+/* =====================================================
+   الاحتفال
+===================================================== */
+
+function createCelebration(){
+
+    successLayer.innerHTML = "";
+
+    successLayer.classList.add(
+        "show"
+    );
+
+
+    const emojis = [
+
+        "🎉",
+        "⭐",
+        "✨",
+        "🎈",
+        "🍎",
+        "🌟",
+        "💫",
+        "🎊",
+        "🥳"
+
+    ];
+
+
+    /* كونفيتي */
+
+    for(
+        let i = 0;
+        i < 40;
+        i++
+    ){
+
+        const item =
+            document.createElement(
+                "div"
+            );
+
+
+        item.className =
+            "confetti";
+
+
+        item.textContent =
+            emojis[
+                Math.floor(
+                    Math.random() *
+                    emojis.length
+                )
+            ];
+
+
+        item.style.left =
+            Math.random() *
+            100 +
+            "%";
+
+
+        item.style.setProperty(
+            "--duration",
+            (
+                2.2 +
+                Math.random() * 2
+            ) +
+            "s"
+        );
+
+
+        item.style.setProperty(
+            "--delay",
+            Math.random() * .8 +
+            "s"
+        );
+
+
+        successLayer.appendChild(
+            item
+        );
+
+    }
+
+
+    /* بالونات */
+
+    for(
+        let i = 0;
+        i < 10;
+        i++
+    ){
+
+        const balloon =
+            document.createElement(
+                "div"
+            );
+
+
+        balloon.className =
+            "balloon";
+
+
+        balloon.textContent =
+            "🎈";
+
+
+        balloon.style.left =
+            (3 + i * 10) +
+            "%";
+
+
+        balloon.style.setProperty(
+            "--delay",
+            i * .12 +
+            "s"
+        );
+
+
+        successLayer.appendChild(
+            balloon
+        );
+
+    }
+
+
+    setTimeout(
+        function(){
+
+            successLayer.classList.remove(
+                "show"
+            );
+
+        },
+        6000
+    );
+
+}
+
+
+/* =====================================================
+   التالي
+===================================================== */
+
+nextButton.addEventListener(
+    "click",
+    function(){
+
+        if(
+            "speechSynthesis"
+            in window
+        ){
+
+            window.speechSynthesis.cancel();
+
+        }
+
+
+        location.href =
+            "food-stage4-2.html";
+
+    }
+);
+
+
+/* =====================================================
+   زر الصوت
+===================================================== */
+
+soundButton.addEventListener(
+    "click",
+    function(){
+
+        readQuestion();
+
+    }
+);
+
+
+/* =====================================================
+   تشغيل السؤال تلقائيًا
+   السؤال فقط بدون تغشيش
+===================================================== */
+
+setTimeout(
+    function(){
+
+        readQuestion();
+
+    },
+    800
+);
+
+</script>
+
+</body>
+</html>

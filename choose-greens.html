@@ -1,0 +1,2648 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+               initial-scale=1.0,
+               maximum-scale=1.0,
+               user-scalable=no">
+
+<title>ما لون هذه السمكة؟</title>
+
+
+<style>
+
+/* =========================================================
+   إعدادات الصفحة الأساسية
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+body {
+
+    font-family:
+        "Tajawal",
+        "Cairo",
+        Arial,
+        sans-serif;
+
+    background-image:
+        url("images/1118.jpeg");
+
+    background-size:
+        100% 100%;
+
+    background-position:
+        center;
+
+    background-repeat:
+        no-repeat;
+
+    color:
+        #55718b;
+}
+
+
+/* =========================================================
+   زر السابق
+========================================================= */
+
+.previous-btn {
+
+    position: fixed;
+
+    top: 35px;
+    left: 35px;
+
+    width: 155px;
+    height: 60px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background:
+        #e4f2ff;
+
+    color:
+        #55718b;
+
+    font-family:
+        inherit;
+
+    font-size:
+        24px;
+
+    font-weight:
+        700;
+
+    cursor:
+        pointer;
+
+    z-index:
+        1000;
+
+    transition:
+        0.2s ease;
+}
+
+
+.previous-btn:hover {
+
+    background:
+        #d8edfc;
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================================================
+   زر القائمة
+========================================================= */
+
+.menu-btn {
+
+    position: fixed;
+
+    top: 32px;
+    right: 35px;
+
+    width: 65px;
+    height: 65px;
+
+    border: none;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,0.82);
+
+    font-size:
+        31px;
+
+    cursor:
+        pointer;
+
+    z-index:
+        1100;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.06);
+}
+
+
+/* =========================================================
+   القائمة الجانبية
+========================================================= */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 108px;
+    right: 35px;
+
+    width: 245px;
+
+    background:
+        rgba(255,255,255,0.94);
+
+    border-radius:
+        28px;
+
+    padding:
+        15px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.10);
+
+    backdrop-filter:
+        blur(10px);
+
+    z-index:
+        1050;
+
+    display:
+        none;
+}
+
+
+.side-menu.show {
+
+    display:
+        block;
+}
+
+
+.side-menu button {
+
+    width:
+        100%;
+
+    border:
+        none;
+
+    background:
+        transparent;
+
+    padding:
+        15px;
+
+    border-radius:
+        18px;
+
+    font-family:
+        inherit;
+
+    font-size:
+        20px;
+
+    font-weight:
+        700;
+
+    color:
+        #55718b;
+
+    cursor:
+        pointer;
+}
+
+
+.side-menu button:hover {
+
+    background:
+        #eaf5ff;
+}
+
+
+/* =========================================================
+   الفقاعات
+========================================================= */
+
+.bubbles {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    overflow:
+        hidden;
+
+    z-index:
+        1;
+
+    transition:
+        opacity 0.4s ease;
+}
+
+
+.bubble {
+
+    position:
+        absolute;
+
+    bottom:
+        -60px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,0.45);
+
+    border:
+        2px solid
+        rgba(255,255,255,0.55);
+
+    box-shadow:
+        inset 3px 3px 5px
+        rgba(255,255,255,0.45);
+
+    animation:
+        bubbleUp
+        linear
+        infinite;
+}
+
+
+.bubble:nth-child(1) {
+
+    width:
+        18px;
+
+    height:
+        18px;
+
+    left:
+        15%;
+
+    animation-duration:
+        7s;
+
+    animation-delay:
+        0s;
+}
+
+
+.bubble:nth-child(2) {
+
+    width:
+        28px;
+
+    height:
+        28px;
+
+    left:
+        27%;
+
+    animation-duration:
+        9s;
+
+    animation-delay:
+        2s;
+}
+
+
+.bubble:nth-child(3) {
+
+    width:
+        13px;
+
+    height:
+        13px;
+
+    left:
+        42%;
+
+    animation-duration:
+        6.5s;
+
+    animation-delay:
+        1s;
+}
+
+
+.bubble:nth-child(4) {
+
+    width:
+        22px;
+
+    height:
+        22px;
+
+    left:
+        58%;
+
+    animation-duration:
+        8s;
+
+    animation-delay:
+        3s;
+}
+
+
+.bubble:nth-child(5) {
+
+    width:
+        16px;
+
+    height:
+        16px;
+
+    left:
+        72%;
+
+    animation-duration:
+        7.5s;
+
+    animation-delay:
+        1.5s;
+}
+
+
+.bubble:nth-child(6) {
+
+    width:
+        31px;
+
+    height:
+        31px;
+
+    left:
+        86%;
+
+    animation-duration:
+        10s;
+
+    animation-delay:
+        0.5s;
+}
+
+
+@keyframes bubbleUp {
+
+    0% {
+
+        transform:
+            translateY(0)
+            translateX(0)
+            scale(0.8);
+
+        opacity:
+            0;
+    }
+
+    10% {
+
+        opacity:
+            0.8;
+    }
+
+    50% {
+
+        transform:
+            translateY(-45vh)
+            translateX(15px)
+            scale(1);
+    }
+
+    100% {
+
+        transform:
+            translateY(-115vh)
+            translateX(-12px)
+            scale(1.1);
+
+        opacity:
+            0;
+    }
+}
+
+
+/* =========================================================
+   المحتوى الرئيسي
+========================================================= */
+
+.content {
+
+    position:
+        absolute;
+
+    left:
+        50%;
+
+    top:
+        50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    width:
+        900px;
+
+    max-width:
+        90vw;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    text-align:
+        center;
+
+    z-index:
+        10;
+}
+
+
+/* =========================================================
+   السؤال
+========================================================= */
+
+.question {
+
+    margin:
+        0;
+
+    font-size:
+        48px;
+
+    font-weight:
+        800;
+
+    color:
+        #55718b;
+
+    text-shadow:
+        0 2px 0
+        rgba(255,255,255,0.8);
+}
+
+
+/* =========================================================
+   التوجيه
+========================================================= */
+
+.hint {
+
+    margin-top:
+        12px;
+
+    margin-bottom:
+        20px;
+
+    font-size:
+        24px;
+
+    font-weight:
+        600;
+
+    color:
+        #7892a6;
+}
+
+
+/* =========================================================
+   منطقة السمكة
+========================================================= */
+
+.fish-wrapper {
+
+    width:
+        380px;
+
+    height:
+        260px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    margin-bottom:
+        18px;
+
+    position:
+        relative;
+}
+
+
+/* =========================================================
+   السمكة
+========================================================= */
+
+.fish {
+
+    width:
+        330px;
+
+    max-height:
+        245px;
+
+    object-fit:
+        contain;
+
+    transform-origin:
+        center center;
+
+    animation:
+        fishSwim
+        4s
+        ease-in-out
+        infinite;
+
+    will-change:
+        transform;
+}
+
+
+@keyframes fishSwim {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(-7px)
+            translateY(0)
+            rotate(-1deg);
+    }
+
+    25% {
+
+        transform:
+            translateX(5px)
+            translateY(-7px)
+            rotate(1deg);
+    }
+
+    50% {
+
+        transform:
+            translateX(10px)
+            translateY(0)
+            rotate(2deg);
+    }
+
+    75% {
+
+        transform:
+            translateX(-4px)
+            translateY(-6px)
+            rotate(-1deg);
+    }
+}
+
+
+.fish.stop {
+
+    animation-play-state:
+        paused;
+}
+
+
+/* =========================================================
+   خيارات الإجابة
+========================================================= */
+
+.answers {
+
+    display:
+        flex;
+
+    flex-direction:
+        row;
+
+    direction:
+        rtl;
+
+    justify-content:
+        center;
+
+    align-items:
+        center;
+
+    gap:
+        28px;
+
+    margin-top:
+        3px;
+}
+
+
+.answer-btn {
+
+    width:
+        210px;
+
+    height:
+        82px;
+
+    border:
+        4px solid transparent;
+
+    border-radius:
+        26px;
+
+    background:
+        #e4f2ff;
+
+    color:
+        #222222;
+
+    font-family:
+        inherit;
+
+    font-size:
+        29px;
+
+    font-weight:
+        800;
+
+    cursor:
+        pointer;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+
+    box-shadow:
+        0 8px 18px
+        rgba(0,0,0,0.08);
+}
+
+
+.answer-btn:hover {
+
+    transform:
+        translateY(-5px);
+
+    background:
+        #d8edfc;
+
+    box-shadow:
+        0 12px 22px
+        rgba(85,113,139,0.15);
+}
+
+
+.answer-btn.correct {
+
+    border-color:
+        #72ad7d;
+
+    background:
+        #e4f2ff;
+
+    color:
+        #222222;
+
+    transform:
+        scale(1.06);
+
+    box-shadow:
+
+        0 0 0 6px
+        rgba(114,173,125,0.15),
+
+        0 12px 25px
+        rgba(0,0,0,0.10);
+}
+
+
+.answer-btn.wrong {
+
+    animation:
+        wrongShake
+        0.35s
+        ease;
+}
+
+
+@keyframes wrongShake {
+
+    0%,
+    100% {
+
+        transform:
+            translateX(0);
+    }
+
+    25% {
+
+        transform:
+            translateX(-8px);
+    }
+
+    75% {
+
+        transform:
+            translateX(8px);
+    }
+}
+
+
+/* =========================================================
+   رسالة النتيجة
+========================================================= */
+
+.feedback {
+
+    min-height:
+        42px;
+
+    margin-top:
+        12px;
+
+    font-size:
+        24px;
+
+    font-weight:
+        800;
+
+    opacity:
+        0;
+
+    transition:
+        opacity 0.2s ease;
+}
+
+
+.feedback.show {
+
+    opacity:
+        1;
+}
+
+
+.feedback.correct-message {
+
+    color:
+        #4f9b63;
+}
+
+
+.feedback.wrong-message {
+
+    color:
+        #c47c7c;
+}
+
+
+/* =========================================================
+   زينة الفضاء عند النجاح
+========================================================= */
+
+.celebration {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    z-index:
+        1500;
+
+    overflow:
+        hidden;
+
+    display:
+        none;
+}
+
+
+.celebration.show {
+
+    display:
+        block;
+}
+
+
+/* =========================================================
+   نجوم الاحتفال
+========================================================= */
+
+.space-star {
+
+    position:
+        absolute;
+
+    font-size:
+        45px;
+
+    opacity:
+        0;
+
+    animation:
+        starAppear
+        2.4s
+        ease-out
+        forwards;
+}
+
+
+.star1 {
+
+    top:
+        4%;
+
+    left:
+        8%;
+
+    animation-delay:
+        0s;
+}
+
+
+.star2 {
+
+    top:
+        13%;
+
+    left:
+        25%;
+
+    font-size:
+        32px;
+
+    animation-delay:
+        0.15s;
+}
+
+
+.star3 {
+
+    top:
+        5%;
+
+    right:
+        25%;
+
+    font-size:
+        52px;
+
+    animation-delay:
+        0.25s;
+}
+
+
+.star4 {
+
+    top:
+        17%;
+
+    right:
+        8%;
+
+    font-size:
+        38px;
+
+    animation-delay:
+        0.35s;
+}
+
+
+.star5 {
+
+    top:
+        35%;
+
+    left:
+        5%;
+
+    font-size:
+        36px;
+
+    animation-delay:
+        0.45s;
+}
+
+
+.star6 {
+
+    top:
+        42%;
+
+    right:
+        6%;
+
+    font-size:
+        48px;
+
+    animation-delay:
+        0.55s;
+}
+
+
+.star7 {
+
+    bottom:
+        24%;
+
+    left:
+        15%;
+
+    font-size:
+        34px;
+
+    animation-delay:
+        0.65s;
+}
+
+
+.star8 {
+
+    bottom:
+        10%;
+
+    right:
+        13%;
+
+    font-size:
+        52px;
+
+    animation-delay:
+        0.75s;
+}
+
+
+@keyframes starAppear {
+
+    0% {
+
+        transform:
+            scale(0)
+            rotate(-90deg);
+
+        opacity:
+            0;
+    }
+
+    45% {
+
+        transform:
+            scale(1.35)
+            rotate(15deg);
+
+        opacity:
+            1;
+    }
+
+    100% {
+
+        transform:
+            scale(1)
+            rotate(0deg);
+
+        opacity:
+            0.9;
+    }
+}
+
+
+/* =========================================================
+   كواكب الفضاء
+========================================================= */
+
+.space-planet {
+
+    position:
+        absolute;
+
+    opacity:
+        0;
+
+    animation:
+        planetAppear
+        2.8s
+        ease-out
+        forwards;
+}
+
+
+.planet1 {
+
+    top:
+        7%;
+
+    left:
+        42%;
+
+    font-size:
+        72px;
+
+    animation-delay:
+        0.2s;
+}
+
+
+.planet2 {
+
+    top:
+        29%;
+
+    right:
+        18%;
+
+    font-size:
+        58px;
+
+    animation-delay:
+        0.4s;
+}
+
+
+.planet3 {
+
+    bottom:
+        13%;
+
+    left:
+        7%;
+
+    font-size:
+        65px;
+
+    animation-delay:
+        0.6s;
+}
+
+
+@keyframes planetAppear {
+
+    0% {
+
+        transform:
+            scale(0)
+            rotate(-45deg);
+
+        opacity:
+            0;
+    }
+
+    55% {
+
+        transform:
+            scale(1.15)
+            rotate(15deg);
+
+        opacity:
+            1;
+    }
+
+    100% {
+
+        transform:
+            scale(1)
+            rotate(0deg);
+
+        opacity:
+            1;
+    }
+}
+
+
+/* =========================================================
+   الصواريخ
+========================================================= */
+
+.space-rocket {
+
+    position:
+        absolute;
+
+    font-size:
+        70px;
+
+    opacity:
+        0;
+
+    animation:
+        rocketFly
+        3s
+        ease-out
+        forwards;
+}
+
+
+.rocket1 {
+
+    left:
+        12%;
+
+    bottom:
+        -100px;
+
+    animation-delay:
+        0.15s;
+}
+
+
+.rocket2 {
+
+    right:
+        14%;
+
+    bottom:
+        -110px;
+
+    animation-delay:
+        0.5s;
+}
+
+
+@keyframes rocketFly {
+
+    0% {
+
+        transform:
+            translateY(0)
+            rotate(-8deg)
+            scale(0.7);
+
+        opacity:
+            0;
+    }
+
+    20% {
+
+        opacity:
+            1;
+    }
+
+    100% {
+
+        transform:
+            translateY(-115vh)
+            rotate(8deg)
+            scale(1.1);
+
+        opacity:
+            0.95;
+    }
+}
+
+
+/* =========================================================
+   أقمار صغيرة
+========================================================= */
+
+.space-moon {
+
+    position:
+        absolute;
+
+    font-size:
+        50px;
+
+    opacity:
+        0;
+
+    animation:
+        moonFloat
+        2.7s
+        ease-out
+        forwards;
+}
+
+
+.moon1 {
+
+    top:
+        24%;
+
+    left:
+        14%;
+
+    animation-delay:
+        0.4s;
+}
+
+
+.moon2 {
+
+    bottom:
+        31%;
+
+    right:
+        12%;
+
+    font-size:
+        42px;
+
+    animation-delay:
+        0.7s;
+}
+
+
+@keyframes moonFloat {
+
+    0% {
+
+        transform:
+            scale(0)
+            translateY(20px);
+
+        opacity:
+            0;
+    }
+
+    50% {
+
+        transform:
+            scale(1.2)
+            translateY(-10px);
+
+        opacity:
+            1;
+    }
+
+    100% {
+
+        transform:
+            scale(1)
+            translateY(0);
+
+        opacity:
+            0.95;
+    }
+}
+
+
+/* =========================================================
+   POP-UP النجاح
+========================================================= */
+
+.success-popup {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    background:
+        rgba(70,95,110,0.28);
+
+    backdrop-filter:
+        blur(4px);
+
+    -webkit-backdrop-filter:
+        blur(4px);
+
+    display:
+        none;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    z-index:
+        2000;
+
+    padding:
+        30px;
+}
+
+
+.success-popup.show {
+
+    display:
+        flex;
+
+    animation:
+        popupFade
+        0.3s
+        ease;
+}
+
+
+@keyframes popupFade {
+
+    from {
+
+        opacity:
+            0;
+    }
+
+    to {
+
+        opacity:
+            1;
+    }
+}
+
+
+/* =========================================================
+   صندوق النجاح
+========================================================= */
+
+.success-box {
+
+    width:
+        560px;
+
+    max-width:
+        92vw;
+
+    padding:
+        42px 35px 35px;
+
+    background:
+        rgba(255,255,255,0.97);
+
+    border-radius:
+        35px;
+
+    text-align:
+        center;
+
+    box-shadow:
+        0 20px 60px
+        rgba(50,80,100,0.22);
+
+    animation:
+        popupScale
+        0.4s
+        ease;
+}
+
+
+@keyframes popupScale {
+
+    0% {
+
+        transform:
+            scale(0.7);
+
+        opacity:
+            0;
+    }
+
+    70% {
+
+        transform:
+            scale(1.05);
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
+        opacity:
+            1;
+    }
+}
+
+
+/* =========================================================
+   أيقونة النجاح
+========================================================= */
+
+.success-icon {
+
+    font-size:
+        75px;
+
+    margin-bottom:
+        10px;
+
+    animation:
+        successBounce
+        1s
+        ease;
+}
+
+
+@keyframes successBounce {
+
+    0% {
+
+        transform:
+            scale(0);
+    }
+
+    60% {
+
+        transform:
+            scale(1.2);
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+    }
+}
+
+
+/* =========================================================
+   عنوان النجاح
+========================================================= */
+
+.success-title {
+
+    margin:
+        0 0 12px;
+
+    font-size:
+        38px;
+
+    font-weight:
+        900;
+
+    color:
+        #a96f7a;
+}
+
+
+/* =========================================================
+   رسالة النجاح
+========================================================= */
+
+.success-text {
+
+    margin:
+        0 0 28px;
+
+    font-size:
+        24px;
+
+    line-height:
+        1.8;
+
+    font-weight:
+        700;
+
+    color:
+        #55718b;
+}
+
+
+/* =========================================================
+   زر التالي داخل POP-UP
+========================================================= */
+
+.success-next {
+
+    width:
+        260px;
+
+    height:
+        68px;
+
+    border:
+        none;
+
+    border-radius:
+        22px;
+
+    background:
+        #e4f2ff;
+
+    color:
+        #55718b;
+
+    font-family:
+        inherit;
+
+    font-size:
+        25px;
+
+    font-weight:
+        900;
+
+    cursor:
+        pointer;
+
+    box-shadow:
+        0 8px 20px
+        rgba(85,113,139,0.14);
+
+    transition:
+        0.2s ease;
+}
+
+
+.success-next:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        #d8edfc;
+}
+
+
+.success-next:active {
+
+    transform:
+        scale(0.97);
+}
+
+
+/* =========================================================
+   iPad Portrait
+========================================================= */
+
+@media (min-width: 768px)
+       and (max-width: 1100px) {
+
+    .question {
+
+        font-size:
+            46px;
+    }
+
+
+    .fish-wrapper {
+
+        width:
+            350px;
+
+        height:
+            245px;
+    }
+
+
+    .fish {
+
+        width:
+            310px;
+    }
+
+
+    .answer-btn {
+
+        width:
+            195px;
+
+        height:
+            78px;
+
+        font-size:
+            27px;
+    }
+
+
+    .answers {
+
+        gap:
+            25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     الفقاعات
+======================================================= -->
+
+<div
+    class="bubbles"
+    id="bubbles">
+
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+</div>
+
+
+<!-- =======================================================
+     زر السابق
+======================================================= -->
+
+<button
+    class="previous-btn"
+    onclick="goPrevious()">
+
+    السابق
+
+</button>
+
+
+<!-- =======================================================
+     زر القائمة
+======================================================= -->
+
+<button
+    class="menu-btn"
+    onclick="toggleMenu()">
+
+    ☰
+
+</button>
+
+
+<!-- =======================================================
+     القائمة
+======================================================= -->
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+
+    <button onclick="goHome()">
+
+        🏠 الرئيسية
+
+    </button>
+
+
+    <button onclick="goProfile()">
+
+        👤 الملف الشخصي
+
+    </button>
+
+
+    <button onclick="goProgress()">
+
+        ⭐ تقدمي
+
+    </button>
+
+
+</div>
+
+
+<!-- =======================================================
+     زينة الفضاء
+======================================================= -->
+
+<div
+    class="celebration"
+    id="celebration">
+
+
+    <!-- نجوم من أعلى لأسفل -->
+
+    <div class="space-star star1">
+        ★
+    </div>
+
+    <div class="space-star star2">
+        ✦
+    </div>
+
+    <div class="space-star star3">
+        ★
+    </div>
+
+    <div class="space-star star4">
+        ✦
+    </div>
+
+    <div class="space-star star5">
+        ★
+    </div>
+
+    <div class="space-star star6">
+        ✦
+    </div>
+
+    <div class="space-star star7">
+        ★
+    </div>
+
+    <div class="space-star star8">
+        ✦
+    </div>
+
+
+    <!-- كواكب -->
+
+    <div class="space-planet planet1">
+        🪐
+    </div>
+
+    <div class="space-planet planet2">
+        🌍
+    </div>
+
+    <div class="space-planet planet3">
+        🪐
+    </div>
+
+
+    <!-- صواريخ -->
+
+    <div class="space-rocket rocket1">
+        🚀
+    </div>
+
+    <div class="space-rocket rocket2">
+        🚀
+    </div>
+
+
+    <!-- أقمار -->
+
+    <div class="space-moon moon1">
+        🌙
+    </div>
+
+    <div class="space-moon moon2">
+        🌙
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     المحتوى
+======================================================= -->
+
+<main class="content">
+
+
+    <h1 class="question">
+
+        ما لون هذه السمكة؟
+
+    </h1>
+
+
+    <p class="hint">
+
+        اختر اللون الصحيح
+
+    </p>
+
+
+    <div class="fish-wrapper">
+
+        <img
+            src="images/f.png"
+            class="fish"
+            id="fish"
+            alt="سمكة">
+
+    </div>
+
+
+    <!-- ===================================================
+         خيارات الإجابة
+    ==================================================== -->
+
+    <div class="answers">
+
+
+        <button
+            class="answer-btn"
+            data-color="green"
+            onclick="checkAnswer('green', this)">
+
+            أخضر
+
+        </button>
+
+
+        <button
+            class="answer-btn"
+            data-color="red"
+            onclick="checkAnswer('red', this)">
+
+            أحمر
+
+        </button>
+
+
+        <button
+            class="answer-btn"
+            data-color="blue"
+            onclick="checkAnswer('blue', this)">
+
+            أزرق
+
+        </button>
+
+
+    </div>
+
+
+    <div
+        id="feedback"
+        class="feedback">
+
+    </div>
+
+
+</main>
+
+
+<!-- =======================================================
+     POP-UP النجاح
+======================================================= -->
+
+<div
+    class="success-popup"
+    id="successPopup">
+
+
+    <div class="success-box">
+
+
+        <div class="success-icon">
+
+            🎉
+
+        </div>
+
+
+        <h2 class="success-title">
+
+            مبارك لك! 🌟
+
+        </h2>
+
+
+        <p class="success-text">
+
+            أنهيت هذه المرحلة بنجاح! 💚
+
+            <br>
+
+            أحسنت يا بطل!
+
+        </p>
+
+
+        <button
+            class="success-next"
+            onclick="goNext()">
+
+            التالي →
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   إعداد السؤال
+========================================================= */
+
+const correctAnswer =
+    "green";
+
+
+/*
+   عدد المحاولات الخاطئة
+*/
+
+let wrongAttempts = 0;
+
+
+/*
+   هل تمت الإجابة الصحيحة؟
+*/
+
+let answered = false;
+
+
+/* =========================================================
+   نطق عربي
+========================================================= */
+
+function speakArabic(text) {
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+
+    speech.lang =
+        "ar-SA";
+
+
+    speech.rate =
+        0.78;
+
+
+    speech.pitch =
+        1.05;
+
+
+    speech.volume =
+        1;
+
+
+    window.speechSynthesis.speak(
+        speech
+    );
+
+}
+
+
+/* =========================================================
+   نطق السؤال
+========================================================= */
+
+window.addEventListener(
+    "load",
+    function() {
+
+        setTimeout(
+            function() {
+
+                speakArabic(
+                    "ما لون هذه السمكة؟"
+                );
+
+            },
+            700
+        );
+
+    }
+);
+
+
+/* =========================================================
+   قراءة الأخطاء السابقة
+========================================================= */
+
+function getErrors() {
+
+    const saved =
+        localStorage.getItem(
+            "colorLearningErrors"
+        );
+
+
+    if (!saved) {
+
+        return {
+
+            green: 0,
+            red: 0,
+            blue: 0
+
+        };
+
+    }
+
+
+    try {
+
+        return JSON.parse(
+            saved
+        );
+
+    }
+
+    catch (error) {
+
+        return {
+
+            green: 0,
+            red: 0,
+            blue: 0
+
+        };
+
+    }
+
+}
+
+
+/* =========================================================
+   حفظ خطأ
+========================================================= */
+
+function saveError(color) {
+
+    const errors =
+        getErrors();
+
+
+    if (!errors[color]) {
+
+        errors[color] =
+            0;
+
+    }
+
+
+    errors[color]++;
+
+
+    localStorage.setItem(
+
+        "colorLearningErrors",
+
+        JSON.stringify(
+            errors
+        )
+
+    );
+
+}
+
+
+/* =========================================================
+   حفظ اللون الذي يحتاج تعزيز
+========================================================= */
+
+function saveReinforcementColor(
+    color
+) {
+
+    localStorage.setItem(
+
+        "colorNeedsReinforcement",
+
+        color
+
+    );
+
+}
+
+
+/* =========================================================
+   فحص الإجابة
+========================================================= */
+
+function checkAnswer(
+    selectedColor,
+    button
+) {
+
+
+    /*
+       إذا أجاب الطفل صحيحًا وانتهى
+       السؤال، لا نسمح بإجابة أخرى.
+    */
+
+    if (answered) {
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       نطق الإجابة
+    ===================================================== */
+
+    const optionNames = {
+
+        green:
+            "أخضر",
+
+        red:
+            "أحمر",
+
+        blue:
+            "أزرق"
+
+    };
+
+
+    speakArabic(
+        optionNames[selectedColor]
+    );
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    /* =====================================================
+       ❌ الإجابة الخاطئة
+    ===================================================== */
+
+    if (
+        selectedColor !==
+        correctAnswer
+    ) {
+
+
+        /*
+           زيادة عدد الأخطاء
+        */
+
+        wrongAttempts++;
+
+
+        /*
+           حفظ الخطأ
+        */
+
+        saveError(
+            correctAnswer
+        );
+
+
+        /*
+           حفظ اللون الذي يحتاج تعزيز
+        */
+
+        saveReinforcementColor(
+            correctAnswer
+        );
+
+
+        /*
+           اهتزاز الزر
+        */
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        /*
+           رسالة تشجيعية
+        */
+
+        feedback.textContent =
+            "حاول مرة أخرى 🌱";
+
+
+        feedback.className =
+            "feedback show wrong-message";
+
+
+        /*
+           إزالة الاهتزاز
+        */
+
+        setTimeout(
+            function() {
+
+                button.classList.remove(
+                    "wrong"
+                );
+
+            },
+            400
+        );
+
+
+        /*
+           إخفاء الرسالة بعد فترة
+        */
+
+        setTimeout(
+            function() {
+
+                feedback.classList.remove(
+                    "show"
+                );
+
+            },
+            1200
+        );
+
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       ✅ الإجابة الصحيحة
+    ===================================================== */
+
+    answered =
+        true;
+
+
+    /*
+       تمييز الزر الصحيح
+    */
+
+    button.classList.add(
+        "correct"
+    );
+
+
+    /*
+       إيقاف حركة السمكة
+    */
+
+    document
+        .getElementById("fish")
+        .classList.add("stop");
+
+
+    /*
+       إيقاف الفقاعات
+    */
+
+    document
+        .getElementById("bubbles")
+        .style.opacity =
+        "0";
+
+
+    /*
+       رسالة النجاح
+    */
+
+    feedback.textContent =
+        "أحسنت! 🌟 هذا اللون أخضر 💚";
+
+
+    feedback.className =
+        "feedback show correct-message";
+
+
+    /*
+       حفظ إكمال السؤال
+    */
+
+    localStorage.setItem(
+
+        "greenQuestionCompleted",
+
+        "true"
+
+    );
+
+
+    /* =====================================================
+       إذا كان الطفل قد أخطأ سابقًا
+    ===================================================== */
+
+    if (
+        wrongAttempts > 0
+    ) {
+
+
+        localStorage.setItem(
+
+            "greenQuestionWrongAttempts",
+
+            wrongAttempts
+
+        );
+
+
+        setTimeout(
+            function() {
+
+                window.location.href =
+                    "green-reinforcement.html";
+
+            },
+            900
+        );
+
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       صحيح من أول محاولة
+    ===================================================== */
+
+    localStorage.setItem(
+
+        "greenQuestionFirstTry",
+
+        "true"
+
+    );
+
+
+    /*
+       إظهار زينة الفضاء
+    */
+
+    document
+        .getElementById(
+            "celebration"
+        )
+        .classList.add(
+            "show"
+        );
+
+
+    /*
+       تشغيل التصفيق
+    */
+
+    playApplause();
+
+
+    /*
+       إظهار POP-UP
+    */
+
+    setTimeout(
+        function() {
+
+            document
+                .getElementById(
+                    "successPopup"
+                )
+                .classList.add(
+                    "show"
+                );
+
+        },
+        900
+    );
+
+}
+
+
+/* =========================================================
+   صوت التصفيق
+========================================================= */
+
+function playApplause() {
+
+    try {
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+
+        const audioContext =
+            new AudioContext();
+
+
+        const startTime =
+            audioContext.currentTime;
+
+
+        for (
+            let i = 0;
+            i < 24;
+            i++
+        ) {
+
+
+            const oscillator =
+                audioContext
+                .createOscillator();
+
+
+            const gain =
+                audioContext
+                .createGain();
+
+
+            oscillator.type =
+                "square";
+
+
+            oscillator.frequency.value =
+                700 +
+                Math.random() * 500;
+
+
+            const time =
+                startTime +
+                i * 0.055;
+
+
+            gain.gain.setValueAtTime(
+                0,
+                time
+            );
+
+
+            gain.gain.linearRampToValueAtTime(
+                0.07,
+                time + 0.01
+            );
+
+
+            gain.gain.exponentialRampToValueAtTime(
+                0.001,
+                time + 0.045
+            );
+
+
+            oscillator.connect(
+                gain
+            );
+
+
+            gain.connect(
+                audioContext.destination
+            );
+
+
+            oscillator.start(
+                time
+            );
+
+
+            oscillator.stop(
+                time + 0.05
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Audio غير متاح:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   التالي من POP-UP
+========================================================= */
+
+function goNext() {
+
+    window.location.href =
+        "colors.html";
+
+}
+
+
+/* =========================================================
+   السابق
+========================================================= */
+
+function goPrevious() {
+
+    window.location.href =
+        "colors.html";
+
+}
+
+
+/* =========================================================
+   القائمة
+========================================================= */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById(
+            "sideMenu"
+        );
+
+
+    menu.classList.toggle(
+        "show"
+    );
+
+}
+
+
+/* =========================================================
+   صفحات القائمة
+========================================================= */
+
+function goHome() {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+function goProfile() {
+
+    window.location.href =
+        "profile.html";
+
+}
+
+
+function goProgress() {
+
+    window.location.href =
+        "progress.html";
+
+}
+
+
+/* =========================================================
+   إغلاق القائمة عند الضغط خارجها
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+
+        const menu =
+            document.getElementById(
+                "sideMenu"
+            );
+
+
+        const menuButton =
+            document.querySelector(
+                ".menu-btn"
+            );
+
+
+        if (
+            !menu.contains(
+                event.target
+            ) &&
+            !menuButton.contains(
+                event.target
+            )
+        ) {
+
+            menu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

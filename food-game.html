@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>رفيق - الطعام والشراب</title>
+
+<style>
+
+/* =====================================================
+   BASIC
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+
+    margin:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    font-family:"Tahoma","Arial",sans-serif;
+}
+
+body{
+
+    color:#173d68;
+
+    /* الخلفية من مجلد images */
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.12),
+            rgba(255,255,255,.12)
+        ),
+        url("images/fruut.jpeg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+}
+
+
+/* =====================================================
+   PREVIOUS BUTTON
+===================================================== */
+
+.previous-button{
+
+    position:absolute;
+
+    top:25px;
+    left:25px;
+
+    width:60px;
+    height:55px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:30px;
+
+    font-weight:900;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 6px 15px rgba(55,104,140,.18);
+
+    cursor:pointer;
+
+    z-index:100;
+
+    transition:.2s ease;
+}
+
+.previous-button:active{
+
+    transform:scale(.94);
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-button{
+
+    position:absolute;
+
+    top:25px;
+    right:25px;
+
+    width:60px;
+    height:55px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:28px;
+
+    box-shadow:
+        0 6px 15px rgba(55,104,140,.18);
+
+    cursor:pointer;
+
+    z-index:100;
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu{
+
+    position:absolute;
+
+    top:90px;
+    right:25px;
+
+    width:220px;
+
+    padding:18px;
+
+    background:rgba(255,255,255,.97);
+
+    border-radius:25px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.18);
+
+    display:none;
+
+    z-index:200;
+}
+
+.side-menu.show{
+
+    display:block;
+}
+
+.side-menu button{
+
+    width:100%;
+
+    height:50px;
+
+    margin-bottom:10px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.side-menu button:last-child{
+
+    margin-bottom:0;
+}
+
+
+/* =====================================================
+   STAGES
+===================================================== */
+
+.stages{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:
+        translate(-50%,-47%);
+
+    /*
+       أصغر من عرض الشاشة
+    */
+
+    width:700px;
+
+    max-width:72vw;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:13px;
+
+    z-index:10;
+}
+
+
+/* =====================================================
+   STAGE CARD
+===================================================== */
+
+.stage{
+
+    position:relative;
+
+    width:100%;
+
+    min-height:108px;
+
+    border-radius:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:11px 18px;
+
+    border:2px solid rgba(255,255,255,.90);
+
+    background:#e4f2ff;
+
+    box-shadow:
+        0 8px 20px rgba(66,112,143,.15);
+
+    cursor:pointer;
+
+    transition:.2s ease;
+}
+
+.stage:active{
+
+    transform:scale(.985);
+}
+
+
+/* =====================================================
+   NUMBER
+===================================================== */
+
+.number{
+
+    flex:0 0 60px;
+
+    width:60px;
+    height:60px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#72b9e8;
+
+    color:white;
+
+    font-size:28px;
+
+    font-weight:900;
+
+    margin-left:16px;
+
+    box-shadow:
+        0 4px 9px rgba(55,104,140,.14);
+}
+
+
+/* =====================================================
+   TEXT
+===================================================== */
+
+.stage-content{
+
+    flex:1;
+
+    text-align:right;
+
+    min-width:0;
+}
+
+.stage-title{
+
+    font-size:22px;
+
+    font-weight:900;
+
+    margin-bottom:5px;
+
+    color:#173d68;
+}
+
+.stage-description{
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#52708c;
+
+    line-height:1.4;
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.stage-image{
+
+    width:120px;
+
+    flex-shrink:0;
+
+    text-align:center;
+
+    font-size:40px;
+
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   ARROW
+===================================================== */
+
+.arrow{
+
+    flex:0 0 50px;
+
+    width:50px;
+    height:50px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#72b9e8;
+
+    color:white;
+
+    font-size:29px;
+
+    font-weight:900;
+
+    margin-right:8px;
+}
+
+
+/* =====================================================
+   LOCKED
+===================================================== */
+
+.stage.locked{
+
+    opacity:.52;
+
+    filter:saturate(.65);
+
+    cursor:not-allowed;
+}
+
+.stage.locked .arrow{
+
+    font-size:0;
+}
+
+.stage.locked .arrow::after{
+
+    content:"🔒";
+
+    font-size:21px;
+}
+
+
+/* =====================================================
+   COMPLETED
+===================================================== */
+
+.stage.completed{
+
+    opacity:1;
+
+    filter:none;
+
+    border:3px solid #72b9e8;
+
+}
+
+
+/* =====================================================
+   COMPLETED CHECK
+===================================================== */
+
+.completed-badge{
+
+    position:absolute;
+
+    top:-12px;
+
+    left:-12px;
+
+    width:43px;
+    height:43px;
+
+    border-radius:50%;
+
+    background:#72b9e8;
+
+    color:white;
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:25px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 5px 12px rgba(55,104,140,.25);
+
+    z-index:20;
+}
+
+
+/* =====================================================
+   COMPLETED LABEL
+===================================================== */
+
+.completed-text{
+
+    position:absolute;
+
+    top:-10px;
+
+    left:38px;
+
+    background:white;
+
+    color:#4d91c7;
+
+    border-radius:15px;
+
+    padding:5px 12px;
+
+    font-size:12px;
+
+    font-weight:900;
+
+    display:none;
+
+    box-shadow:
+        0 4px 10px rgba(55,104,140,.15);
+
+    z-index:19;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+
+    position:absolute;
+
+    bottom:18px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    background:rgba(255,255,255,.94);
+
+    border-radius:30px;
+
+    padding:10px 25px;
+
+    min-width:350px;
+
+    text-align:center;
+
+    font-size:17px;
+
+    font-weight:900;
+
+    color:#244d74;
+
+    box-shadow:
+        0 7px 18px rgba(55,104,140,.12);
+
+    z-index:15;
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(23,61,104,.35);
+
+    display:none;
+
+    align-items:center;
+    justify-content:center;
+
+    z-index:500;
+}
+
+.popup{
+
+    width:450px;
+
+    max-width:85vw;
+
+    background:white;
+
+    border-radius:30px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:
+        0 18px 50px rgba(20,60,90,.25);
+}
+
+.popup h2{
+
+    margin:0 0 12px;
+
+    font-size:27px;
+
+    color:#173d68;
+}
+
+.popup p{
+
+    font-size:18px;
+
+    line-height:1.6;
+
+    color:#52718d;
+}
+
+.start-btn{
+
+    border:none;
+
+    border-radius:18px;
+
+    padding:13px 30px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:19px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 5px 12px rgba(55,104,140,.12);
+}
+
+
+/* =====================================================
+   IPAD PORTRAIT
+===================================================== */
+
+@media (orientation:portrait){
+
+    .previous-button{
+
+        top:16px;
+        left:16px;
+
+        width:52px;
+        height:48px;
+
+        font-size:27px;
+    }
+
+
+    .menu-button{
+
+        top:16px;
+        right:16px;
+
+        width:52px;
+        height:48px;
+    }
+
+
+    .stages{
+
+        width:78vw;
+
+        max-width:none;
+
+        gap:10px;
+
+        transform:
+            translate(-50%,-47%);
+    }
+
+
+    .stage{
+
+        min-height:105px;
+
+        padding:8px 13px;
+    }
+
+
+    .number{
+
+        flex-basis:52px;
+
+        width:52px;
+        height:52px;
+
+        font-size:24px;
+
+        margin-left:10px;
+    }
+
+
+    .stage-title{
+
+        font-size:19px;
+    }
+
+
+    .stage-description{
+
+        font-size:13px;
+    }
+
+
+    .stage-image{
+
+        width:88px;
+
+        font-size:31px;
+    }
+
+
+    .arrow{
+
+        flex-basis:44px;
+
+        width:44px;
+        height:44px;
+
+        font-size:25px;
+    }
+
+
+    .completed-badge{
+
+        width:38px;
+        height:38px;
+
+        font-size:22px;
+
+        top:-10px;
+        left:-10px;
+    }
+
+
+    .completed-text{
+
+        top:-8px;
+
+        left:30px;
+
+        font-size:11px;
+
+        padding:4px 9px;
+    }
+
+
+    .footer{
+
+        bottom:8px;
+
+        min-width:300px;
+
+        font-size:14px;
+
+        padding:8px 15px;
+    }
+
+
+    .side-menu{
+
+        top:72px;
+
+        right:16px;
+
+        width:210px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL HEIGHT
+===================================================== */
+
+@media (max-height:750px){
+
+    .stages{
+
+        gap:7px;
+
+        transform:
+            translate(-50%,-45%);
+    }
+
+
+    .stage{
+
+        min-height:85px;
+    }
+
+
+    .number{
+
+        width:45px;
+        height:45px;
+
+        flex-basis:45px;
+
+        font-size:22px;
+    }
+
+
+    .stage-image{
+
+        font-size:27px;
+    }
+
+
+    .arrow{
+
+        width:40px;
+        height:40px;
+
+        flex-basis:40px;
+    }
+
+
+    .footer{
+
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+<!-- =====================================================
+     PREVIOUS BUTTON
+===================================================== -->
+
+<button
+    class="previous-button"
+    onclick="location.href='communication.html'">
+
+    ←
+
+</button>
+
+
+<!-- =====================================================
+     MENU BUTTON
+===================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton">
+
+    ☰
+
+</button>
+
+
+<!-- =====================================================
+     SIDE MENU
+===================================================== -->
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+
+    <button
+        onclick="location.href='home.html'">
+
+        🏠 الرئيسية
+
+    </button>
+
+
+    <button
+        onclick="location.href='reports.html'">
+
+        📊 تقاريري
+
+    </button>
+
+
+    <button
+        onclick="location.href='profile.html'">
+
+        👤 ملفي
+
+    </button>
+
+
+</div>
+
+
+<!-- =====================================================
+     STAGES
+===================================================== -->
+
+<div class="stages">
+
+
+    <!-- =================================================
+         المرحلة الأولى
+    ================================================== -->
+
+    <div
+        class="stage stage1"
+        id="stage1"
+        onclick="openStage(1)">
+
+
+        <div
+            class="completed-badge"
+            id="complete1">
+
+            ✓
+
+        </div>
+
+
+        <div
+            class="completed-text"
+            id="completeText1">
+
+            مكتملة
+
+        </div>
+
+
+        <div class="number">
+
+            1
+
+        </div>
+
+
+        <div class="stage-content">
+
+
+            <div class="stage-title">
+
+                التعرّف على الطعام والشراب
+
+            </div>
+
+
+            <div class="stage-description">
+
+                أتعلّم أسماء الأطعمة والمشروبات
+                وأعرف الفرق بينهما.
+
+            </div>
+
+
+        </div>
+
+
+        <div class="stage-image">
+💡
+
+        </div>
+
+
+        <div class="arrow">
+
+            ←
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         المرحلة الثانية
+    ================================================== -->
+
+    <div
+        class="stage stage2 locked"
+        id="stage2"
+        onclick="openStage(2)">
+
+
+        <div
+            class="completed-badge"
+            id="complete2">
+
+            ✓
+
+        </div>
+
+
+        <div
+            class="completed-text"
+            id="completeText2">
+
+            مكتملة
+
+        </div>
+
+
+        <div class="number">
+
+            2
+
+        </div>
+
+
+        <div class="stage-content">
+
+
+            <div class="stage-title">
+
+           طعام ام شراب؟
+
+            </div>
+
+
+            <div class="stage-description">
+اختر الطعام أو الشراب
+                من بين مجموعة من الصور.
+
+            </div>
+
+
+        </div>
+
+
+        <div class="stage-image">
+
+            🍎 🥛
+
+        </div>
+
+
+        <div class="arrow">
+
+            ←
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         المرحلة الثالثة
+    ================================================== -->
+
+    <div
+        class="stage stage3 locked"
+        id="stage3"
+        onclick="openStage(3)">
+
+
+        <div
+            class="completed-badge"
+            id="complete3">
+
+            ✓
+
+        </div>
+
+
+        <div
+            class="completed-text"
+            id="completeText3">
+
+            مكتملة
+
+        </div>
+
+
+        <div class="number">
+
+            3
+
+        </div>
+
+
+        <div class="stage-content">
+
+
+            <div class="stage-title">
+
+                الطلب
+
+            </div>
+
+
+            <div class="stage-description">
+
+               هيا بنا نتعلم كيف نطلب ما نريده
+
+            </div>
+
+
+        </div>
+
+
+        <div class="stage-image">
+
+              ❤️ 
+
+        </div>
+
+
+        <div class="arrow">
+
+            ←
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         المرحلة الرابعة
+    ================================================== -->
+
+    <div
+        class="stage stage4 locked"
+        id="stage4"
+        onclick="openStage(4)">
+
+
+        <div
+            class="completed-badge"
+            id="complete4">
+
+            ✓
+
+        </div>
+
+
+        <div
+            class="completed-text"
+            id="completeText4">
+
+            مكتملة
+
+        </div>
+
+
+        <div class="number">
+
+            4
+
+        </div>
+
+
+        <div class="stage-content">
+
+
+            <div class="stage-title">
+
+                تكوين جملة بسيطة
+
+            </div>
+
+
+            <div class="stage-description">
+
+                أرتب الصور لتكوين جملة،
+                مثل: أنا أريد ماء.
+
+            </div>
+
+
+        </div>
+
+
+        <div class="stage-image">
+💬 
+           
+
+        </div>
+
+
+        <div class="arrow">
+
+            ←
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<div class="footer">
+
+    ⭐ أنت رائع! مع كل مرحلة تصبح أكثر تواصلًا!
+
+</div>
+
+
+<!-- =====================================================
+     POPUP
+===================================================== -->
+
+<div
+    class="overlay"
+    id="overlay">
+
+
+    <div class="popup">
+
+
+        <h2 id="popupTitle">
+
+            المرحلة الأولى 🌟
+
+        </h2>
+
+
+        <p id="popupText">
+
+            تعرّف على أسماء الطعام والشراب
+            من خلال الصور والأصوات.
+
+        </p>
+
+
+        <button
+            class="start-btn"
+            id="startBtn"
+            onclick="startStage()">
+
+            ابدأ المرحلة
+
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   MENU
+===================================================== */
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const sideMenu =
+    document.getElementById("sideMenu");
+
+
+menuButton.addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        sideMenu.classList.toggle("show");
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            !sideMenu.contains(event.target) &&
+            event.target !== menuButton
+        ){
+
+            sideMenu.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   STAGE SETTINGS
+===================================================== */
+
+const totalStages = 4;
+
+let selectedStage = 1;
+
+
+/* =====================================================
+   UPDATE STAGES
+===================================================== */
+
+function updateStages(){
+
+    for(
+        let i = 1;
+        i <= totalStages;
+        i++
+    ){
+
+        const stage =
+            document.getElementById(
+                "stage" + i
+            );
+
+        const badge =
+            document.getElementById(
+                "complete" + i
+            );
+
+        const badgeText =
+            document.getElementById(
+                "completeText" + i
+            );
+
+
+        if(!stage)
+            continue;
+
+
+        const completed =
+            localStorage.getItem(
+                "rafiqFoodStage" + i
+            ) === "completed";
+
+
+        /* =============================================
+           COMPLETED
+        ============================================= */
+
+        if(completed){
+
+            stage.classList.add(
+                "completed"
+            );
+
+            stage.classList.remove(
+                "locked"
+            );
+
+
+            if(badge){
+
+                badge.style.display =
+                    "flex";
+
+            }
+
+
+            if(badgeText){
+
+                badgeText.style.display =
+                    "block";
+
+            }
+
+        }
+
+
+        /* =============================================
+           NOT COMPLETED
+        ============================================= */
+
+        else{
+
+            stage.classList.remove(
+                "completed"
+            );
+
+
+            if(badge){
+
+                badge.style.display =
+                    "none";
+
+            }
+
+
+            if(badgeText){
+
+                badgeText.style.display =
+                    "none";
+
+            }
+
+
+            /*
+              المرحلة الأولى مفتوحة دائمًا.
+
+              المرحلة التالية تفتح عندما
+              تكون المرحلة السابقة مكتملة.
+            */
+
+            if(
+                i === 1 ||
+                localStorage.getItem(
+                    "rafiqFoodStage" +
+                    (i - 1)
+                ) === "completed"
+            ){
+
+                stage.classList.remove(
+                    "locked"
+                );
+
+            }
+
+            else{
+
+                stage.classList.add(
+                    "locked"
+                );
+
+            }
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   OPEN STAGE
+===================================================== */
+
+function openStage(stage){
+
+    /*
+       التحقق من أن المرحلة السابقة مكتملة
+    */
+
+    if(
+        stage > 1 &&
+        localStorage.getItem(
+            "rafiqFoodStage" +
+            (stage - 1)
+        ) !== "completed"
+    ){
+
+        document.getElementById(
+            "popupTitle"
+        ).textContent =
+            "🔒 المرحلة غير متاحة";
+
+
+        document.getElementById(
+            "popupText"
+        ).textContent =
+            "أكمل المرحلة السابقة أولًا حتى تفتح هذه المرحلة.";
+
+
+        document.getElementById(
+            "startBtn"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "overlay"
+        ).style.display =
+            "flex";
+
+
+        return;
+
+    }
+
+
+    selectedStage = stage;
+
+
+    const titles = [
+
+        "المرحلة الأولى 🌟",
+
+        "المرحلة الثانية 🔍",
+
+        "المرحلة الثالثة 💬",
+
+        "المرحلة الرابعة 🧩"
+
+    ];
+
+
+    const descriptions = [
+
+        "تعرّف على أسماء الطعام والشراب من خلال الصور والأصوات.",
+
+        "أين الطعام؟ وأين الشراب؟ اختر الإجابة الصحيحة.",
+
+        "تعلّم كيف تستخدم الصور للتعبير عن الشيء الذي تريده.",
+
+        "رتّب الصور لتكوين جملة بسيطة مثل: أنا أريد ماء."
+
+    ];
+
+
+    document.getElementById(
+        "popupTitle"
+    ).textContent =
+        titles[stage - 1];
+
+
+    document.getElementById(
+        "popupText"
+    ).textContent =
+        descriptions[stage - 1];
+
+
+    document.getElementById(
+        "startBtn"
+    ).style.display =
+        "inline-block";
+
+
+    document.getElementById(
+        "overlay"
+    ).style.display =
+        "flex";
+
+}
+
+
+/* =====================================================
+   START STAGE
+===================================================== */
+
+function startStage(){
+
+    const pages = {
+
+        1:"food-stage1.html",
+
+        2:"food-stage2.html",
+
+        3:"food-stage3.html",
+
+        4:"food-stage4.html"
+
+    };
+
+
+    location.href =
+        pages[selectedStage];
+
+}
+
+
+/* =====================================================
+   COMPLETE STAGE
+===================================================== */
+
+/*
+   تستدعى من داخل صفحة النشاط بعد نجاح الطفل.
+
+   مثال:
+
+   finishStage(1);
+*/
+
+function finishStage(stage){
+
+    /*
+       حفظ المرحلة كمكتملة
+    */
+
+    localStorage.setItem(
+        "rafiqFoodStage" + stage,
+        "completed"
+    );
+
+
+    /*
+       فتح المرحلة التالية
+    */
+
+    if(stage < totalStages){
+
+        localStorage.setItem(
+            "rafiqFoodStage" +
+            (stage + 1),
+            "unlocked"
+        );
+
+    }
+
+
+    /*
+       الرجوع إلى صفحة المراحل
+    */
+
+    location.href =
+        "food.html";
+
+}
+
+
+/* =====================================================
+   CLOSE POPUP
+===================================================== */
+
+document.getElementById(
+    "overlay"
+).addEventListener(
+    "click",
+    function(event){
+
+        if(event.target === this){
+
+            this.style.display =
+                "none";
+
+
+            document.getElementById(
+                "startBtn"
+            ).style.display =
+                "inline-block";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   INITIALIZE
+===================================================== */
+
+updateStages();
+
+</script>
+
+
+</div>
+
+</body>
+
+</html>

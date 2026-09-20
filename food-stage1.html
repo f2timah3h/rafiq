@@ -1,0 +1,1660 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>التعرّف على الطعام والشراب - رفيق</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+
+    margin:0;
+    padding:0;
+
+    width:100%;
+    height:100%;
+
+    overflow:hidden;
+
+    font-family:"Tahoma","Arial",sans-serif;
+}
+
+body{
+
+    color:#173d68;
+
+    background-color:#ffffff;
+
+    background-repeat:no-repeat;
+
+    background-size:cover;
+
+    background-position:center;
+
+    /*
+       نخفي الصفحة إلى أن يتم تحديد اهتمام الطفل
+    */
+
+    visibility:hidden;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    position:relative;
+
+    width:100vw;
+    height:100vh;
+
+    overflow:hidden;
+}
+
+
+/* =====================================================
+   PREVIOUS BUTTON
+===================================================== */
+
+.previous-button{
+
+    position:absolute;
+
+    top:25px;
+    left:25px;
+
+    width:60px;
+    height:55px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:31px;
+
+    font-weight:900;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    box-shadow:
+        0 6px 15px rgba(55,104,140,.18);
+
+    cursor:pointer;
+
+    z-index:100;
+
+    transition:.2s ease;
+}
+
+.previous-button:active{
+
+    transform:scale(.94);
+}
+
+
+/* =====================================================
+   MENU BUTTON
+===================================================== */
+
+.menu-button{
+
+    position:absolute;
+
+    top:25px;
+    right:25px;
+
+    width:60px;
+    height:55px;
+
+    border:none;
+
+    border-radius:20px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:28px;
+
+    box-shadow:
+        0 6px 15px rgba(55,104,140,.18);
+
+    cursor:pointer;
+
+    z-index:100;
+}
+
+.menu-button:active{
+
+    transform:scale(.95);
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu{
+
+    position:absolute;
+
+    top:90px;
+    right:25px;
+
+    width:220px;
+
+    padding:18px;
+
+    background:rgba(255,255,255,.97);
+
+    border-radius:25px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.18);
+
+    display:none;
+
+    z-index:300;
+}
+
+.side-menu.show{
+
+    display:block;
+}
+
+.side-menu button{
+
+    width:100%;
+
+    height:50px;
+
+    margin-bottom:10px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#e4f2ff;
+
+    color:#55718b;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.side-menu button:last-child{
+
+    margin-bottom:0;
+}
+
+.side-menu button:active{
+
+    transform:scale(.97);
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.content{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    width:650px;
+
+    max-width:78vw;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    z-index:20;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.title{
+
+    margin:0 0 18px;
+
+    padding:
+        12px 45px;
+
+    background:rgba(255,255,255,.94);
+
+    border-radius:28px;
+
+    font-size:42px;
+
+    font-weight:900;
+
+    color:#173d68;
+
+    box-shadow:
+        0 8px 20px
+        rgba(55,104,140,.13);
+
+}
+
+
+/* =====================================================
+   MAIN CARD
+===================================================== */
+
+.food-card{
+
+    width:440px;
+
+    max-width:90vw;
+
+    min-height:390px;
+
+    padding:
+        35px 30px 30px;
+
+    background:
+        rgba(255,255,255,.95);
+
+    border-radius:42px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-shadow:
+        0 14px 35px
+        rgba(55,104,140,.18);
+
+    animation:
+        cardAppear .5s ease;
+}
+
+
+/* =====================================================
+   CARD ANIMATION
+===================================================== */
+
+@keyframes cardAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            scale(.88)
+            translateY(15px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+}
+
+
+/* =====================================================
+   FOOD IMAGE
+===================================================== */
+
+.food-image{
+
+    font-size:165px;
+
+    line-height:1;
+
+    margin-bottom:22px;
+
+    filter:
+        drop-shadow(
+            0 10px 8px
+            rgba(0,0,0,.12)
+        );
+
+    transition:.3s ease;
+}
+
+
+/* =====================================================
+   INFORMATION
+===================================================== */
+
+.info{
+
+    font-size:27px;
+
+    font-weight:900;
+
+    color:#52708c;
+
+    line-height:1.5;
+
+    margin-bottom:25px;
+}
+
+
+/* =====================================================
+   LISTEN BUTTON
+===================================================== */
+
+.listen-button{
+
+    min-width:190px;
+
+    height:58px;
+
+    padding:
+        0 25px;
+
+    border:none;
+
+    border-radius:22px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:21px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 7px 15px
+        rgba(55,104,140,.14);
+
+    cursor:pointer;
+
+    transition:.2s ease;
+}
+
+.listen-button:active{
+
+    transform:scale(.95);
+}
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+.next-button{
+
+    margin-top:22px;
+
+    min-width:230px;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:22px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:23px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 7px 16px
+        rgba(55,104,140,.14);
+
+    cursor:pointer;
+
+    transition:.2s ease;
+}
+
+.next-button:active{
+
+    transform:scale(.96);
+}
+
+
+/* =====================================================
+   POPUP OVERLAY
+===================================================== */
+
+.overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(23,61,104,.38);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:500;
+}
+
+
+/* =====================================================
+   POPUP
+===================================================== */
+
+.popup{
+
+    width:500px;
+
+    max-width:85vw;
+
+    padding:
+        35px 30px;
+
+    background:white;
+
+    border-radius:35px;
+
+    text-align:center;
+
+    box-shadow:
+        0 18px 50px
+        rgba(20,60,90,.28);
+
+    animation:
+        popupIn .3s ease;
+}
+
+
+@keyframes popupIn{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.85);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+    }
+}
+
+
+.popup-emoji{
+
+    font-size:65px;
+
+    margin-bottom:8px;
+}
+
+
+.popup h2{
+
+    margin:0 0 14px;
+
+    font-size:31px;
+
+    color:#173d68;
+}
+
+
+.popup p{
+
+    margin:
+        0 0 25px;
+
+    font-size:21px;
+
+    line-height:1.6;
+
+    font-weight:700;
+
+    color:#52718d;
+}
+
+
+.popup-next{
+
+    min-width:210px;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:21px;
+
+    background:#e4f2ff;
+
+    color:#173d68;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 6px 14px
+        rgba(55,104,140,.14);
+}
+
+.popup-next:active{
+
+    transform:scale(.96);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer{
+
+    position:absolute;
+
+    bottom:18px;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        rgba(255,255,255,.93);
+
+    border-radius:30px;
+
+    padding:
+        10px 28px;
+
+    font-size:17px;
+
+    font-weight:900;
+
+    color:#244d74;
+
+    box-shadow:
+        0 7px 18px
+        rgba(55,104,140,.12);
+}
+
+
+/* =====================================================
+   IPAD PORTRAIT
+===================================================== */
+
+@media (orientation:portrait){
+
+    .previous-button{
+
+        top:16px;
+        left:16px;
+
+        width:54px;
+        height:50px;
+
+        font-size:28px;
+    }
+
+
+    .menu-button{
+
+        top:16px;
+        right:16px;
+
+        width:54px;
+        height:50px;
+    }
+
+
+    .side-menu{
+
+        top:75px;
+        right:16px;
+
+        width:210px;
+    }
+
+
+    .content{
+
+        width:85vw;
+
+        max-width:none;
+
+        top:51%;
+    }
+
+
+    .title{
+
+        font-size:34px;
+
+        padding:
+            10px 35px;
+
+        margin-bottom:15px;
+    }
+
+
+    .food-card{
+
+        width:420px;
+
+        max-width:78vw;
+
+        min-height:390px;
+
+        border-radius:38px;
+
+        padding:
+            30px 25px;
+    }
+
+
+    .food-image{
+
+        font-size:145px;
+
+        margin-bottom:18px;
+    }
+
+
+    .info{
+
+        font-size:22px;
+
+        margin-bottom:20px;
+    }
+
+
+    .listen-button{
+
+        min-width:175px;
+
+        height:54px;
+
+        font-size:19px;
+    }
+
+
+    .next-button{
+
+        min-width:210px;
+
+        height:57px;
+
+        font-size:22px;
+
+        margin-top:18px;
+    }
+
+
+    .popup{
+
+        width:82vw;
+
+        padding:
+            30px 25px;
+    }
+
+
+    .popup-emoji{
+
+        font-size:58px;
+    }
+
+
+    .popup h2{
+
+        font-size:28px;
+    }
+
+
+    .popup p{
+
+        font-size:18px;
+    }
+
+
+    .footer{
+
+        bottom:8px;
+
+        font-size:15px;
+
+        padding:
+            8px 20px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL HEIGHT
+===================================================== */
+
+@media (max-height:750px){
+
+    .content{
+
+        top:50%;
+    }
+
+
+    .title{
+
+        font-size:30px;
+
+        margin-bottom:10px;
+    }
+
+
+    .food-card{
+
+        min-height:320px;
+
+        padding:20px;
+    }
+
+
+    .food-image{
+
+        font-size:110px;
+
+        margin-bottom:10px;
+    }
+
+
+    .info{
+
+        font-size:18px;
+
+        margin-bottom:12px;
+    }
+
+
+    .listen-button{
+
+        height:48px;
+
+        font-size:17px;
+    }
+
+
+    .next-button{
+
+        height:50px;
+
+        font-size:18px;
+
+        margin-top:12px;
+    }
+
+
+    .footer{
+
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+<!-- =====================================================
+     PREVIOUS
+===================================================== -->
+
+<button
+    class="previous-button"
+    onclick="location.href='food-game.html'">
+
+    ←
+
+</button>
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton">
+
+    ☰
+
+</button>
+
+
+<!-- =====================================================
+     SIDE MENU
+===================================================== -->
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+
+    <button
+        onclick="location.href='home.html'">
+
+        🏠 الرئيسية
+
+    </button>
+
+
+    <button
+        onclick="location.href='reports.html'">
+
+        📊 تقاريري
+
+    </button>
+
+
+    <button
+        onclick="location.href='profile.html'">
+
+        👤 ملفي
+
+    </button>
+
+
+</div>
+
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<div class="content">
+
+
+    <!-- =================================================
+         TITLE
+    ================================================== -->
+
+    <h1
+        class="title"
+        id="title">
+
+        تفاحة
+
+    </h1>
+
+
+    <!-- =================================================
+         FOOD CARD
+    ================================================== -->
+
+    <div
+        class="food-card"
+        id="foodCard">
+
+
+        <!-- الصورة -->
+
+        <div
+            class="food-image"
+            id="foodImage">
+
+            🍎
+
+        </div>
+
+
+        <!-- المعلومة -->
+
+        <div
+            class="info"
+            id="info">
+
+            التفاحة من الأطعمة 🍎
+
+        </div>
+
+
+        <!-- الصوت -->
+
+        <button
+            class="listen-button"
+            id="listenButton">
+
+            🔊 اسمع
+
+        </button>
+
+
+    </div>
+
+
+    <!-- =================================================
+         NEXT
+    ================================================== -->
+
+    <button
+        class="next-button"
+        id="nextButton">
+
+        التالي ←
+
+    </button>
+
+
+</div>
+
+
+<!-- =====================================================
+     SUCCESS POPUP
+===================================================== -->
+
+<div
+    class="overlay"
+    id="successOverlay">
+
+
+    <div class="popup">
+
+
+        <div class="popup-emoji">
+
+            🎉🍎🥤⭐
+
+        </div>
+
+
+        <h2>
+
+            أحسنت! 🌟
+
+        </h2>
+
+
+        <p>
+
+            تعلمنا أسماء الأطعمة والشراب
+
+        </p>
+
+
+        <button
+            class="popup-next"
+            id="popupNext">
+
+            التالي ←
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+    "https://ciwrwmutcrarwtounelg.supabase.co";
+
+const SUPABASE_ANON_KEY =
+    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    );
+
+
+/* =====================================================
+   CHILD ID
+===================================================== */
+
+const childId =
+    localStorage.getItem(
+        "rafiqChildId"
+    );
+
+
+/* =====================================================
+   PERSONALIZATION
+===================================================== */
+
+let interest = null;
+
+
+/* =====================================================
+   APPLY PERSONALIZATION
+===================================================== */
+
+function applyPersonalization(){
+
+    /*
+       لا يوجد أي افتراضي.
+
+       سيارات:
+       images/ak.jpeg
+
+       فضاء:
+       images/fdd.jpeg
+    */
+
+    if(
+        interest === "سيارات" ||
+        interest === "سيارة" ||
+        interest === "cars" ||
+        interest === "car"
+    ){
+
+        document.body.style.backgroundImage =
+            'linear-gradient(rgba(255,255,255,.10), rgba(255,255,255,.10)), url("images/car.jpeg")';
+
+        return true;
+
+    }
+
+
+    if(
+        interest === "فضاء" ||
+        interest === "space"
+    ){
+
+        document.body.style.backgroundImage =
+            'linear-gradient(rgba(255,255,255,.10), rgba(255,255,255,.10)), url("images/sppp.jpeg")';
+
+        return true;
+
+    }
+
+
+    return false;
+
+}
+
+
+/* =====================================================
+   LOAD CHILD INTEREST FROM SUPABASE
+===================================================== */
+
+async function loadChildInterest(){
+
+    /*
+       لا يوجد Child ID
+    */
+
+    if(!childId){
+
+        console.error(
+            "لا يوجد rafiqChildId."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const {
+            data,
+            error
+        } = await supabaseClient
+
+            .from("children")
+
+            .select("interests")
+
+            .eq("id", childId)
+
+            .maybeSingle();
+
+
+        if(error){
+
+            console.error(
+                "تعذر قراءة اهتمام الطفل:",
+                error
+            );
+
+            return;
+
+        }
+
+
+        /*
+           لا يوجد سجل للطفل
+        */
+
+        if(!data){
+
+            console.error(
+                "لم يتم العثور على الطفل في جدول children."
+            );
+
+            return;
+
+        }
+
+
+        /*
+           لا يوجد اهتمام
+        */
+
+        if(
+            data.interests === null ||
+            data.interests === undefined ||
+            String(data.interests).trim() === ""
+        ){
+
+            console.error(
+                "لا يوجد اهتمام محفوظ للطفل."
+            );
+
+            return;
+
+        }
+
+
+        /*
+           قراءة الاهتمام
+        */
+
+        interest =
+            String(
+                data.interests
+            )
+            .trim()
+            .toLowerCase();
+
+
+        /*
+           تطبيق التخصيص
+        */
+
+        const applied =
+            applyPersonalization();
+
+
+        /*
+           إذا كانت القيمة غير معروفة
+        */
+
+        if(!applied){
+
+            console.error(
+                "قيمة interests غير مدعومة:",
+                interest
+            );
+
+            return;
+
+        }
+
+
+        /*
+           بعد نجاح التخصيص
+           نظهر الصفحة
+        */
+
+        document.body.style.visibility =
+            "visible";
+
+
+        console.log(
+            "تم ربط صفحة الطعام والشراب باهتمام الطفل:",
+            interest
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "حدث خطأ أثناء تحميل اهتمام الطفل:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   START PERSONALIZATION
+===================================================== */
+
+loadChildInterest();
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+const menuButton =
+    document.getElementById(
+        "menuButton"
+    );
+
+const sideMenu =
+    document.getElementById(
+        "sideMenu"
+    );
+
+
+menuButton.addEventListener(
+    "click",
+    function(event){
+
+        event.stopPropagation();
+
+        sideMenu.classList.toggle(
+            "show"
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            !sideMenu.contains(
+                event.target
+            ) &&
+            event.target !== menuButton
+        ){
+
+            sideMenu.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const title =
+    document.getElementById(
+        "title"
+    );
+
+const foodImage =
+    document.getElementById(
+        "foodImage"
+    );
+
+const info =
+    document.getElementById(
+        "info"
+    );
+
+const listenButton =
+    document.getElementById(
+        "listenButton"
+    );
+
+const nextButton =
+    document.getElementById(
+        "nextButton"
+    );
+
+const foodCard =
+    document.getElementById(
+        "foodCard"
+    );
+
+const successOverlay =
+    document.getElementById(
+        "successOverlay"
+    );
+
+const popupNext =
+    document.getElementById(
+        "popupNext"
+    );
+
+
+/* =====================================================
+   CURRENT ITEM
+===================================================== */
+
+let currentItem = 0;
+
+
+/*
+   0 = تفاحة
+   1 = عصير
+*/
+
+
+const items = [
+
+    {
+
+        title:"تفاحة",
+
+        image:"🍎",
+
+        info:"التفاحة من الأطعمة 🍎",
+
+        speech:
+            "تفاحة. التفاحة من الأطعمة."
+
+    },
+
+    {
+
+        title:"عصير",
+
+        image:"🧃",
+
+        info:"عصير من المشروبات 🧃",
+
+        speech:
+            "عصير. العصير من المشروبات."
+
+    }
+
+];
+
+
+/* =====================================================
+   SPEECH
+===================================================== */
+
+function speak(text){
+
+    if(
+        "speechSynthesis"
+        in window
+    ){
+
+        window.speechSynthesis.cancel();
+
+
+        const speech =
+            new SpeechSynthesisUtterance(
+                text
+            );
+
+
+        speech.lang =
+            "ar-SA";
+
+
+        speech.rate =
+            0.78;
+
+
+        speech.pitch =
+            1;
+
+
+        speech.volume =
+            1;
+
+
+        window.speechSynthesis.speak(
+            speech
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SHOW ITEM
+===================================================== */
+
+function showItem(){
+
+    const item =
+        items[currentItem];
+
+
+    title.textContent =
+        item.title;
+
+
+    foodImage.textContent =
+        item.image;
+
+
+    info.textContent =
+        item.info;
+
+
+    /*
+       إعادة حركة البطاقة
+    */
+
+    foodCard.style.animation =
+        "none";
+
+    void foodCard.offsetWidth;
+
+    foodCard.style.animation =
+        "cardAppear .5s ease";
+
+
+    /*
+       الصوت تلقائيًا
+    */
+
+    setTimeout(
+        function(){
+
+            speak(
+                item.speech
+            );
+
+        },
+        600
+    );
+
+}
+
+
+/* =====================================================
+   LISTEN BUTTON
+===================================================== */
+
+listenButton.addEventListener(
+    "click",
+    function(){
+
+        speak(
+            items[currentItem].speech
+        );
+
+    }
+);
+
+
+/* =====================================================
+   NEXT BUTTON
+===================================================== */
+
+nextButton.addEventListener(
+    "click",
+    function(){
+
+        /*
+           من التفاحة إلى العصير
+        */
+
+        if(currentItem === 0){
+
+            currentItem = 1;
+
+            showItem();
+
+            return;
+
+        }
+
+
+        /*
+           بعد العصير
+           إظهار رسالة الإنجاز
+        */
+
+        if(currentItem === 1){
+
+            successOverlay.style.display =
+                "flex";
+
+
+            speak(
+                "أحسنت! تعلمنا أسماء الأطعمة والشراب."
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   FINISH STAGE
+===================================================== */
+
+popupNext.addEventListener(
+    "click",
+    function(){
+
+        /*
+           إيقاف الصوت
+        */
+
+        if(
+            "speechSynthesis"
+            in window
+        ){
+
+            window.speechSynthesis.cancel();
+
+        }
+
+
+        /*
+           حفظ المرحلة الأولى كمكتملة
+        */
+
+        localStorage.setItem(
+            "rafiqFoodStage1",
+            "completed"
+        );
+
+
+        /*
+           فتح المرحلة الثانية
+        */
+
+        localStorage.setItem(
+            "rafiqFoodStage2",
+            "unlocked"
+        );
+
+
+        /*
+           الانتقال للصفحة الرئيسية للمراحل
+        */
+
+        location.href =
+            "food-game.html";
+
+    }
+);
+
+
+/* =====================================================
+   INITIAL
+===================================================== */
+
+showItem();
+
+</script>
+
+</body>
+
+</html>

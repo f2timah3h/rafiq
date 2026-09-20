@@ -1,0 +1,2350 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>ربط الحدث بالشعور</title>
+
+<style>
+
+/* ==============================
+   BASIC
+============================== */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:
+    "Tajawal",
+    "Tahoma",
+    "Arial",
+    sans-serif;
+
+    background-image:url("images/car.jpeg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    color:#555;
+
+    overflow:hidden;
+}
+
+
+/* ==============================
+   STARS
+============================== */
+
+.stars{
+    position:fixed;
+
+    top:20px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    background:rgba(255,255,255,0.82);
+
+    padding:7px 18px;
+
+    border-radius:30px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,0.08);
+
+    z-index:30;
+}
+
+.star-icons{
+    font-size:32px;
+
+    letter-spacing:5px;
+
+    direction:ltr;
+
+    white-space:nowrap;
+}
+
+
+/* ==============================
+   BACK BUTTON
+============================== */
+
+.back-btn{
+    position:fixed;
+
+    top:25px;
+    left:25px;
+
+    border:none;
+
+    background:rgba(255,255,255,0.90);
+
+    padding:11px 22px;
+
+    border-radius:30px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.08);
+
+    z-index:30;
+}
+
+
+/* ==============================
+   MENU BUTTON
+============================== */
+
+.menu-btn{
+    position:fixed;
+
+    top:25px;
+    right:25px;
+
+    width:52px;
+    height:52px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.90);
+
+    font-size:25px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.08);
+
+    z-index:40;
+}
+
+
+/* ==============================
+   MENU
+============================== */
+
+.menu{
+    position:fixed;
+
+    top:88px;
+    right:25px;
+
+    width:185px;
+
+    padding:10px;
+
+    background:rgba(255,255,255,0.97);
+
+    border-radius:20px;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,0.15);
+
+    display:none;
+
+    z-index:50;
+}
+
+.menu.show{
+    display:block;
+}
+
+.menu button{
+    width:100%;
+
+    border:none;
+
+    background:transparent;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    font-size:17px;
+
+    color:#555;
+
+    cursor:pointer;
+}
+
+.menu button:hover{
+    background:#eaf6ff;
+}
+
+
+/* ==============================
+   HINT BUTTON
+============================== */
+
+.hint-btn{
+    position:fixed;
+
+    top:94px;
+    right:25px;
+
+    border:none;
+
+    background:#fff2a8;
+
+    color:#665b25;
+
+    padding:10px 18px;
+
+    border-radius:25px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.08);
+
+    z-index:35;
+}
+
+
+/* ==============================
+   HINT BOX
+============================== */
+
+.hint-box{
+    position:fixed;
+
+    top:145px;
+    right:25px;
+
+    width:270px;
+
+    padding:14px 18px;
+
+    background:rgba(255,255,255,0.97);
+
+    border-radius:18px;
+
+    font-size:16px;
+
+    line-height:1.7;
+
+    text-align:center;
+
+    box-shadow:
+    0 6px 20px rgba(0,0,0,0.12);
+
+    display:none;
+
+    z-index:35;
+}
+
+.hint-box.show{
+    display:block;
+}
+
+
+/* =========================================================
+   PAGE
+   العنوان في الأعلى
+========================================================= */
+
+.page{
+
+    width:100%;
+
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:125px 30px 110px;
+
+    overflow:hidden;
+}
+
+
+/* ==============================
+   TITLE
+============================== */
+
+.title{
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    text-align:center;
+
+    line-height:1.4;
+
+    margin:0 0 5px;
+}
+
+
+/* ==============================
+   SUBTITLE
+============================== */
+
+.subtitle{
+
+    font-size:19px;
+
+    color:#555;
+
+    text-align:center;
+
+    line-height:1.6;
+
+    margin:0;
+}
+
+
+/* =========================================================
+   ACTIVITY CONTENT
+   الفيديوهات والمحتوى ينزلون أكثر عن العنوان
+========================================================= */
+
+.activity-content{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    margin-top:85px;
+}
+
+
+/* ==============================
+   EVENTS
+============================== */
+
+.events{
+
+    width:800px;
+
+    max-width:82vw;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+    margin:0;
+}
+
+
+/* ==============================
+   EVENT ROW
+============================== */
+
+.event-row{
+
+    width:100%;
+
+    min-height:145px;
+
+    display:flex;
+
+    flex-direction:row;
+
+    align-items:center;
+
+    gap:25px;
+
+    background:rgba(255,255,255,0.34);
+
+    border-radius:22px;
+
+    padding:8px 14px;
+}
+
+
+/* ==============================
+   VIDEO
+============================== */
+
+.event-video{
+
+    width:320px;
+
+    height:145px;
+
+    object-fit:cover;
+
+    border-radius:17px;
+
+    background:#fff;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.10);
+
+    flex-shrink:0;
+}
+
+
+/* ==============================
+   DESCRIPTION
+============================== */
+
+.event-description{
+
+    flex:1;
+
+    font-size:19px;
+
+    line-height:1.8;
+
+    color:#555;
+
+    text-align:right;
+
+    padding:0 10px;
+
+    font-weight:500;
+}
+
+
+/* ==============================
+   EVENT NUMBER
+============================== */
+
+.event-number{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.85);
+
+    margin-left:7px;
+
+    font-size:17px;
+
+    font-weight:bold;
+}
+
+
+/* ==============================
+   QUESTION
+============================== */
+
+.question{
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    text-align:center;
+
+    line-height:1.6;
+
+    margin-top:30px;
+
+    margin-bottom:16px;
+}
+
+
+/* ==============================
+   ANSWERS
+============================== */
+
+.answers{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    direction:rtl;
+}
+
+
+/* ==============================
+   ANSWER BUTTON
+   السماوي المعتمد
+============================== */
+
+.answer{
+
+    min-width:150px;
+
+    border:none;
+
+    border-radius:22px;
+
+    padding:13px 25px;
+
+    background:#d9f1ff;
+
+    color:#55718b;
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.08);
+
+    transition:0.2s ease;
+}
+
+.answer:hover{
+
+    transform:translateY(-3px);
+
+    background:#ccecff;
+}
+
+
+/* ==============================
+   CORRECT ANSWER
+============================== */
+
+.answer.correct{
+
+    background:#d9f5d9;
+}
+
+
+/* ==============================
+   WRONG ANSWER
+============================== */
+
+.answer.wrong{
+
+    background:#ffe0e0;
+}
+
+
+/* ==============================
+   RESULT
+============================== */
+
+.result{
+
+    min-height:30px;
+
+    margin-top:7px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    text-align:center;
+}
+
+
+/* ==============================
+   SOUND
+============================== */
+
+.sound-btn{
+
+    position:fixed;
+
+    bottom:28px;
+    left:25px;
+
+    width:58px;
+    height:58px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.90);
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.10);
+
+    z-index:30;
+}
+
+
+/* ==============================
+   NEXT
+============================== */
+
+.next-btn{
+
+    position:fixed;
+
+    bottom:30px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    border:none;
+
+    padding:12px 30px;
+
+    border-radius:25px;
+
+    background:#d9f1ff;
+
+    color:#55718b;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    opacity:0.5;
+
+    pointer-events:none;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.08);
+
+    z-index:30;
+}
+
+.next-btn.enabled{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+
+/* ==============================
+   SUCCESS MESSAGE
+============================== */
+
+.success-message{
+
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    transform:
+    translate(-50%,-50%)
+    scale(0.8);
+
+    background:rgba(255,255,255,0.97);
+
+    padding:25px 40px;
+
+    border-radius:28px;
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    box-shadow:
+    0 10px 35px rgba(0,0,0,0.18);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:0.35s;
+
+    z-index:150;
+
+    text-align:center;
+}
+
+.success-message.show{
+
+    opacity:1;
+
+    transform:
+    translate(-50%,-50%)
+    scale(1);
+}
+
+
+/* ==============================
+   CAR CELEBRATION CANVAS
+============================== */
+
+#carBalloonCanvas{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+
+    z-index:140;
+
+    display:none;
+}
+
+
+/* =========================================================
+   iPad Portrait
+========================================================= */
+
+@media
+(min-width:700px)
+and
+(max-width:1100px){
+
+    .page{
+
+        padding:125px 25px 110px;
+    }
+
+
+    .title{
+
+        font-size:34px;
+    }
+
+
+    .subtitle{
+
+        font-size:19px;
+    }
+
+
+    .activity-content{
+
+        margin-top:85px;
+    }
+
+
+    .events{
+
+        width:800px;
+
+        max-width:82vw;
+
+        gap:14px;
+    }
+
+
+    .event-row{
+
+        min-height:145px;
+    }
+
+
+    .event-video{
+
+        width:320px;
+
+        height:145px;
+    }
+
+
+    .event-description{
+
+        font-size:19px;
+    }
+
+
+    .question{
+
+        font-size:24px;
+
+        margin-top:30px;
+
+        margin-bottom:16px;
+    }
+
+
+    .answer{
+
+        min-width:150px;
+
+        font-size:19px;
+
+        background:#d9f1ff;
+    }
+
+}
+
+
+/* =========================================================
+   الشاشات الأقصر
+========================================================= */
+
+@media(max-height:900px){
+
+    .page{
+
+        padding-top:100px;
+
+        padding-bottom:90px;
+    }
+
+
+    .title{
+
+        font-size:30px;
+    }
+
+
+    .subtitle{
+
+        font-size:17px;
+    }
+
+
+    .activity-content{
+
+        margin-top:55px;
+    }
+
+
+    .event-row{
+
+        min-height:120px;
+    }
+
+
+    .event-video{
+
+        width:270px;
+
+        height:120px;
+    }
+
+
+    .event-description{
+
+        font-size:17px;
+    }
+
+
+    .question{
+
+        font-size:21px;
+
+        margin-top:20px;
+    }
+
+
+    .answer{
+
+        font-size:17px;
+
+        min-width:135px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL SCREENS
+========================================================= */
+
+@media(max-width:699px){
+
+    body{
+
+        overflow:auto;
+    }
+
+
+    .page{
+
+        height:auto;
+
+        min-height:100vh;
+
+        padding-top:100px;
+
+        padding-bottom:110px;
+    }
+
+
+    .title{
+
+        font-size:25px;
+    }
+
+
+    .subtitle{
+
+        font-size:16px;
+    }
+
+
+    .activity-content{
+
+        margin-top:40px;
+    }
+
+
+    .events{
+
+        width:92vw;
+
+        max-width:none;
+    }
+
+
+    .event-row{
+
+        flex-direction:column;
+
+        gap:8px;
+
+        padding:10px;
+    }
+
+
+    .event-video{
+
+        width:100%;
+
+        height:170px;
+    }
+
+
+    .event-description{
+
+        text-align:center;
+
+        font-size:16px;
+    }
+
+
+    .question{
+
+        font-size:20px;
+
+        margin-top:30px;
+    }
+
+
+    .answers{
+
+        gap:8px;
+    }
+
+
+    .answer{
+
+        min-width:100px;
+
+        padding:10px 12px;
+
+        font-size:16px;
+
+        background:#d9f1ff;
+    }
+
+
+    .back-btn{
+
+        left:12px;
+
+        top:15px;
+    }
+
+
+    .menu-btn{
+
+        right:12px;
+
+        top:15px;
+    }
+
+
+    .hint-btn{
+
+        right:12px;
+
+        top:75px;
+    }
+
+
+    .hint-box{
+
+        right:12px;
+
+        top:125px;
+
+        width:220px;
+    }
+
+
+    .stars{
+
+        top:15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     STARS
+================================================== -->
+
+<div class="stars">
+
+    <div
+    class="star-icons"
+    id="stars">
+
+        ☆ ☆ ☆
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     BACK
+================================================== -->
+
+<button
+class="back-btn"
+onclick="goBack()">
+
+    السابق ←
+
+</button>
+
+
+<!-- ==================================================
+     MENU
+================================================== -->
+
+<button
+class="menu-btn"
+onclick="toggleMenu()">
+
+    ☰
+
+</button>
+
+
+<div
+class="menu"
+id="menu">
+
+    <button
+    onclick="location.href='home.html'">
+
+        🏠 الرئيسية
+
+    </button>
+
+
+    <button
+    onclick="location.href='profile.html'">
+
+        👤 ملفي
+
+    </button>
+
+
+    <button
+    onclick="location.href='reports.html'">
+
+        📊 تقاريري
+
+    </button>
+
+</div>
+
+
+<!-- ==================================================
+     HINT
+================================================== -->
+
+<button
+class="hint-btn"
+onclick="showHint()">
+
+    💡 تلميح
+
+</button>
+
+
+<div
+class="hint-box"
+id="hintBox">
+
+    اضغط على التلميح إذا احتجت إلى مساعدة.
+
+</div>
+
+
+<!-- ==================================================
+     PAGE
+================================================== -->
+
+<div class="page">
+
+
+    <!-- ==========================
+         TITLE
+    =========================== -->
+
+    <div class="title">
+
+         اربط الحدث بالشعور
+
+    </div>
+
+
+    <div class="subtitle">
+
+        شاهد ما حدث جيدًا، ثم اختر الشعور المناسب.
+
+    </div>
+
+
+    <!-- ==========================
+         ACTIVITY CONTENT
+    =========================== -->
+
+    <div class="activity-content">
+
+
+        <!-- ==========================
+             EVENTS
+        =========================== -->
+
+        <div class="events">
+
+
+            <!-- الحدث الأول -->
+
+            <div class="event-row">
+
+
+                <video
+                class="event-video"
+                id="video1"
+                src="videos/b1.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto">
+
+                </video>
+
+
+                <div class="event-description">
+
+                    <span class="event-number">
+
+                        ١
+
+                    </span>
+
+                    كان الطفل يرسم لوحة جميلة.
+
+                </div>
+
+
+            </div>
+
+
+            <!-- الحدث الثاني -->
+
+            <div class="event-row">
+
+
+                <video
+                class="event-video"
+                id="video2"
+                src="videos/b2.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto">
+
+                </video>
+
+
+                <div class="event-description">
+
+                    <span class="event-number">
+
+                        ٢
+
+                    </span>
+
+                    وبينما كان يرسم، سقط الماء وانسكب على اللوحة.
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ==========================
+             QUESTION
+        =========================== -->
+
+        <div class="question">
+
+            برأيك، بماذا يشعر هذا الطفل بعد ما حدث؟
+
+        </div>
+
+
+        <!-- ==========================
+             ANSWERS
+        =========================== -->
+
+        <div class="answers">
+
+
+            <button
+            class="answer"
+            onclick="checkAnswer('السعادة', this)">
+
+                السعادة
+
+            </button>
+
+
+            <button
+            class="answer"
+            onclick="checkAnswer('الحزن', this)">
+
+                الحزن
+
+            </button>
+
+
+            <button
+            class="answer"
+            onclick="checkAnswer('القلق', this)">
+
+                القلق
+
+            </button>
+
+
+        </div>
+
+
+        <div
+        class="result"
+        id="result">
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     SOUND
+================================================== -->
+
+<button
+class="sound-btn"
+onclick="speakQuestion()">
+
+    🔊
+
+</button>
+
+
+<!-- ==================================================
+     NEXT
+================================================== -->
+
+<button
+class="next-btn"
+id="nextBtn"
+onclick="goNext()">
+
+    التالي →
+
+</button>
+
+
+<!-- ==================================================
+     SUCCESS
+================================================== -->
+
+<div
+class="success-message"
+id="successMessage">
+
+    ⭐ أحسنت! ⭐
+
+    <br>
+
+    لقد عرفت الشعور الصحيح.
+
+</div>
+
+
+<!-- ==================================================
+     CELEBRATION CANVAS
+================================================== -->
+
+<canvas
+id="carBalloonCanvas">
+</canvas>
+
+
+<script>
+
+/* ==================================================
+   VARIABLES
+================================================== */
+
+const video1 =
+document.getElementById("video1");
+
+const video2 =
+document.getElementById("video2");
+
+let answered = false;
+
+let attempts = 0;
+
+let hintsUsed = 0;
+
+let currentHint = 0;
+
+
+/* ==================================================
+   PLAY VIDEOS
+================================================== */
+
+function playVideos(){
+
+    video1.play().catch(() => {});
+
+    video2.play().catch(() => {});
+
+}
+
+window.addEventListener(
+    "load",
+    playVideos
+);
+
+
+/* ==================================================
+   MENU
+================================================== */
+
+function toggleMenu(){
+
+    document
+    .getElementById("menu")
+    .classList
+    .toggle("show");
+
+}
+
+
+/* ==================================================
+   BACK
+================================================== */
+
+function goBack(){
+
+    window.location.href =
+    "emotions.html";
+
+}
+
+
+/* ==================================================
+   HINTS
+================================================== */
+
+function showHint(){
+
+    if(answered){
+
+        return;
+
+    }
+
+
+    currentHint++;
+
+    hintsUsed++;
+
+
+    const hintBox =
+    document.getElementById(
+        "hintBox"
+    );
+
+
+    if(currentHint === 1){
+
+        hintBox.innerHTML =
+        "💡 انظر جيدًا إلى ما حدث للوحة.";
+
+    }
+
+    else if(currentHint === 2){
+
+        hintBox.innerHTML =
+        "💡 الطفل كان سعيدًا بالرسم، لكن شيئًا أفسد لوحته.";
+
+    }
+
+    else{
+
+        hintBox.innerHTML =
+        "💡 عندما يحدث شيء يزعجنا ويفسد شيئًا نحبه، قد نشعر بالحزن.";
+
+    }
+
+
+    hintBox.classList.add(
+        "show"
+    );
+
+}
+
+
+/* ==================================================
+   CHECK ANSWER
+================================================== */
+
+function checkAnswer(
+    answer,
+    button
+){
+
+    if(answered){
+
+        return;
+
+    }
+
+
+    attempts++;
+
+
+    const result =
+    document.getElementById(
+        "result"
+    );
+
+
+    /* ==========================
+       CORRECT
+    =========================== */
+
+    if(answer === "الحزن"){
+
+        answered = true;
+
+
+        video1.pause();
+
+        video2.pause();
+
+
+        document
+        .querySelectorAll(".answer")
+        .forEach(btn => {
+
+            btn.disabled = true;
+
+        });
+
+
+        button.classList.add(
+            "correct"
+        );
+
+
+        document
+        .getElementById("stars")
+        .innerHTML =
+        "⭐ ⭐ ⭐";
+
+
+        result.innerHTML =
+        "أحسنت! إجابتك صحيحة 🌟";
+
+
+        saveGameData(true);
+
+
+        document
+        .getElementById("nextBtn")
+        .classList
+        .add("enabled");
+
+
+        showSuccess();
+
+
+        createCarCelebration();
+
+    }
+
+    else{
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        result.innerHTML =
+        "حاول مرة أخرى 💛";
+
+
+        setTimeout(() => {
+
+            button.classList.remove(
+                "wrong"
+            );
+
+        },700);
+
+
+        saveGameData(false);
+
+    }
+
+}
+
+
+/* ==================================================
+   SUCCESS
+================================================== */
+
+function showSuccess(){
+
+    const box =
+    document.getElementById(
+        "successMessage"
+    );
+
+
+    box.classList.add(
+        "show"
+    );
+
+
+    setTimeout(() => {
+
+        box.classList.remove(
+            "show"
+        );
+
+    },2500);
+
+}
+
+
+/* ==================================================
+   SAVE DATA
+================================================== */
+
+function saveGameData(correct){
+
+    const oldData =
+    JSON.parse(
+        localStorage.getItem(
+            "rafiqGameData"
+        ) || "{}"
+    );
+
+
+    oldData.eventSadEmotion = {
+
+        attempts:
+        attempts,
+
+        hintsUsed:
+        hintsUsed,
+
+        correct:
+        correct,
+
+        stars:
+        correct ? 3 : 0,
+
+        completed:
+        correct,
+
+        date:
+        new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+        "rafiqGameData",
+        JSON.stringify(oldData)
+    );
+
+}
+
+
+/* ==================================================
+   SPEECH
+================================================== */
+
+function speakQuestion(){
+
+    if(
+        !("speechSynthesis" in window)
+    ){
+
+        return;
+
+    }
+
+
+    speechSynthesis.cancel();
+
+
+    const text =
+    "برأيك، بماذا يشعر هذا الطفل بعد ما حدث؟ السعادة، الحزن، أم القلق؟";
+
+
+    const speech =
+    new SpeechSynthesisUtterance(
+        text
+    );
+
+
+    speech.lang =
+    "ar-SA";
+
+
+    speech.rate =
+    0.85;
+
+
+    speech.pitch =
+    1.1;
+
+
+    speechSynthesis.speak(
+        speech
+    );
+
+}
+
+
+/* ==================================================
+   NEXT
+================================================== */
+
+function goNext(){
+
+    if(!answered){
+
+        return;
+
+    }
+
+
+    window.location.href =
+    "next-game.html";
+
+}
+
+
+/* ==================================================
+   CANVAS
+================================================== */
+
+const canvas =
+document.getElementById(
+    "carBalloonCanvas"
+);
+
+const ctx =
+canvas.getContext("2d");
+
+
+function resizeCanvas(){
+
+    canvas.width =
+    window.innerWidth;
+
+    canvas.height =
+    window.innerHeight;
+
+}
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+resizeCanvas();
+
+
+/* ==================================================
+   DRAW CAR
+================================================== */
+
+function drawCar(
+    ctx,
+    x,
+    y,
+    size,
+    rotation,
+    color
+){
+
+    ctx.save();
+
+
+    ctx.translate(
+        x,
+        y
+    );
+
+
+    ctx.rotate(
+        rotation
+    );
+
+
+    const s =
+    size / 100;
+
+
+    ctx.scale(
+        s,
+        s
+    );
+
+
+    /* BODY */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -48,
+        15
+    );
+
+    ctx.lineTo(
+        -40,
+        -8
+    );
+
+    ctx.quadraticCurveTo(
+        -35,
+        -28,
+        -15,
+        -30
+    );
+
+    ctx.lineTo(
+        18,
+        -30
+    );
+
+    ctx.quadraticCurveTo(
+        35,
+        -28,
+        43,
+        -5
+    );
+
+    ctx.lineTo(
+        50,
+        15
+    );
+
+    ctx.quadraticCurveTo(
+        50,
+        25,
+        40,
+        27
+    );
+
+    ctx.lineTo(
+        -40,
+        27
+    );
+
+    ctx.quadraticCurveTo(
+        -50,
+        25,
+        -48,
+        15
+    );
+
+    ctx.closePath();
+
+    ctx.fillStyle =
+    color;
+
+    ctx.fill();
+
+
+    /* WINDOWS */
+
+    ctx.fillStyle =
+    "#dff5ff";
+
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        -25,
+        -24,
+        20,
+        17,
+        5
+    );
+
+    ctx.fill();
+
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+        2,
+        -24,
+        21,
+        17,
+        5
+    );
+
+    ctx.fill();
+
+
+    /* WHEELS */
+
+    ctx.fillStyle =
+    "#333";
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        -30,
+        26,
+        10,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        30,
+        26,
+        10,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    /* WHEEL CENTERS */
+
+    ctx.fillStyle =
+    "#eee";
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        -30,
+        26,
+        4,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        30,
+        26,
+        4,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fill();
+
+
+    /* EYES */
+
+    ctx.strokeStyle =
+    "#333";
+
+    ctx.lineWidth =
+    3;
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        -8,
+        -7,
+        2,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.stroke();
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        10,
+        -7,
+        2,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.stroke();
+
+
+    /* SMILE */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        1,
+        0,
+        9,
+        0,
+        Math.PI
+    );
+
+    ctx.stroke();
+
+
+    /* BALLOON STRING */
+
+    ctx.strokeStyle =
+    "rgba(100,100,100,0.5)";
+
+    ctx.lineWidth =
+    1.5;
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        0,
+        38
+    );
+
+    ctx.lineTo(
+        0,
+        85
+    );
+
+    ctx.stroke();
+
+
+    ctx.restore();
+
+}
+
+
+/* ==================================================
+   CAR CELEBRATION
+================================================== */
+
+function createCarCelebration(){
+
+    canvas.style.display =
+    "block";
+
+
+    const start =
+    performance.now();
+
+
+    const duration =
+    5000;
+
+
+    const cars = [
+
+        {
+            x:0.08,
+            delay:0,
+            size:110,
+            color:"#E53935",
+            rotation:-0.08
+        },
+
+        {
+            x:0.22,
+            delay:0.12,
+            size:95,
+            color:"#FFC107",
+            rotation:0.06
+        },
+
+        {
+            x:0.38,
+            delay:0.04,
+            size:120,
+            color:"#1E88E5",
+            rotation:-0.05
+        },
+
+        {
+            x:0.54,
+            delay:0.18,
+            size:100,
+            color:"#EC407A",
+            rotation:0.08
+        },
+
+        {
+            x:0.69,
+            delay:0.06,
+            size:115,
+            color:"#9C4DCC",
+            rotation:-0.07
+        },
+
+        {
+            x:0.83,
+            delay:0.16,
+            size:95,
+            color:"#26A69A",
+            rotation:0.05
+        }
+
+    ];
+
+
+    function animate(now){
+
+        const elapsed =
+        now - start;
+
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        cars.forEach(car => {
+
+            let progress =
+            elapsed / duration;
+
+
+            progress =
+            progress -
+            car.delay;
+
+
+            if(progress < 0){
+
+                return;
+
+            }
+
+
+            if(progress > 1){
+
+                return;
+
+            }
+
+
+            const startY =
+            canvas.height + 120;
+
+
+            const endY =
+            -180;
+
+
+            const y =
+            startY +
+            (endY - startY) *
+            progress;
+
+
+            const wave =
+            Math.sin(
+                progress *
+                Math.PI *
+                4
+            ) * 35;
+
+
+            const x =
+            canvas.width *
+            car.x +
+            wave;
+
+
+            const rotation =
+            car.rotation +
+            Math.sin(
+                progress *
+                Math.PI *
+                4
+            ) * 0.08;
+
+
+            let alpha = 1;
+
+
+            if(progress < 0.1){
+
+                alpha =
+                progress / 0.1;
+
+            }
+
+
+            if(progress > 0.88){
+
+                alpha =
+                (1 - progress) /
+                0.12;
+
+            }
+
+
+            ctx.globalAlpha =
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    alpha
+                )
+            );
+
+
+            const scale =
+            1 +
+            Math.sin(
+                progress *
+                Math.PI *
+                8
+            ) * 0.035;
+
+
+            ctx.save();
+
+
+            ctx.translate(
+                x,
+                y
+            );
+
+
+            ctx.scale(
+                scale,
+                scale
+            );
+
+
+            ctx.rotate(
+                rotation
+            );
+
+
+            drawCar(
+                ctx,
+                0,
+                0,
+                car.size,
+                0,
+                car.color
+            );
+
+
+            ctx.restore();
+
+
+            /* SPARKLES */
+
+            ctx.save();
+
+
+            ctx.globalAlpha =
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    alpha
+                )
+            );
+
+
+            ctx.fillStyle =
+            "#FFD54F";
+
+
+            for(
+                let i = 0;
+                i < 3;
+                i++
+            ){
+
+                const sx =
+                x +
+                Math.sin(
+                    elapsed * 0.004 + i
+                ) * 35;
+
+
+                const sy =
+                y -
+                45 -
+                i * 12;
+
+
+                ctx.beginPath();
+
+
+                ctx.arc(
+                    sx,
+                    sy,
+                    3,
+                    0,
+                    Math.PI * 2
+                );
+
+
+                ctx.fill();
+
+            }
+
+
+            ctx.restore();
+
+        });
+
+
+        ctx.globalAlpha =
+        1;
+
+
+        if(elapsed < duration){
+
+            requestAnimationFrame(
+                animate
+            );
+
+        }
+
+        else{
+
+            canvas.style.display =
+            "none";
+
+        }
+
+    }
+
+
+    requestAnimationFrame(
+        animate
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>

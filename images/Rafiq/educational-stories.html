@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>رفيق - القصص التعليمية</title>
+
+
+<style>
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    font-family:
+        Tahoma,
+        Arial,
+        sans-serif;
+
+    direction: rtl;
+
+    min-height: 100vh;
+
+    background-image:
+        url("images/edu.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-attachment: fixed;
+
+    color: #555;
+
+    overflow-x: hidden;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    padding:
+        35px 35px 80px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   TOP MENU BUTTON
+===================================================== */
+
+.menu-button {
+
+    position: fixed;
+
+    top: 30px;
+
+    right: 35px;
+
+    width: 65px;
+
+    height: 65px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.82);
+
+    box-shadow:
+        0 6px 18px
+        rgba(70,80,90,0.15);
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    z-index: 1000;
+
+    transition: 0.2s ease;
+}
+
+.menu-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(255,255,255,0.95);
+}
+
+.menu-button:active {
+
+    transform:
+        scale(0.95);
+}
+
+
+/* =====================================================
+   SIDE MENU
+===================================================== */
+
+.side-menu {
+
+    position: fixed;
+
+    top: 105px;
+
+    right: 35px;
+
+    width: 245px;
+
+    padding: 12px;
+
+    background:
+        rgba(255,255,255,0.95);
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 12px 30px
+        rgba(60,70,80,0.18);
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+
+    z-index: 999;
+
+    display: none;
+}
+
+.side-menu.show {
+
+    display: block;
+
+    animation:
+        menuAppear 0.2s ease;
+}
+
+@keyframes menuAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-8px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* =====================================================
+   SIDE MENU ITEMS
+===================================================== */
+
+.side-item {
+
+    width: 100%;
+
+    height: 60px;
+
+    border: none;
+
+    border-radius: 17px;
+
+    background:
+        transparent;
+
+    font-family: inherit;
+
+    font-size: 19px;
+
+    font-weight: 700;
+
+    color: #555;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 12px;
+
+    padding:
+        0 18px;
+
+    transition: 0.2s ease;
+}
+
+.side-item:hover {
+
+    background:
+        #e4f2ff;
+}
+
+.side-icon {
+
+    font-size: 25px;
+}
+
+
+/* =====================================================
+   MAIN CONTENT
+===================================================== */
+
+.content {
+
+    width:
+        min(900px, 94vw);
+
+    margin:
+        0 auto;
+
+    position: relative;
+
+    z-index: 5;
+}
+
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.page-title {
+
+    text-align: center;
+
+    margin-top: 85px;
+
+    margin-bottom: 35px;
+
+    color: #555;
+
+    font-size: 36px;
+
+    font-weight: 800;
+
+    text-shadow:
+        0 2px 4px
+        rgba(255,255,255,0.60);
+}
+
+
+/* =====================================================
+   CATEGORY FILTERS
+===================================================== */
+
+.categories {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 42px;
+}
+
+.category {
+
+    border: none;
+
+    background:
+        rgba(255,255,255,0.72);
+
+    color: #666;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    padding:
+        12px 20px;
+
+    border-radius: 18px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 14px
+        rgba(80,90,100,0.10);
+
+    transition: 0.2s ease;
+}
+
+.category:hover {
+
+    background:
+        #e4f2ff;
+}
+
+.category.active {
+
+    background:
+        #e4f2ff;
+
+    color: #7d6870;
+}
+
+
+/* =====================================================
+   SECTION TITLE
+===================================================== */
+
+.section-title {
+
+    text-align: right;
+
+    margin:
+        0 0 20px;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    color: #555;
+
+    text-shadow:
+        0 2px 3px
+        rgba(255,255,255,0.6);
+}
+
+
+/* =====================================================
+   FEATURED STORY
+===================================================== */
+
+.featured {
+
+    width: 100%;
+
+    min-height: 235px;
+
+    border-radius: 30px;
+
+    background:
+        rgba(255,255,255,0.72);
+
+    box-shadow:
+        0 9px 25px
+        rgba(70,80,90,0.13);
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    margin-bottom: 45px;
+
+    overflow: hidden;
+}
+
+.featured-image {
+
+    width: 270px;
+
+    height: 195px;
+
+    object-fit: cover;
+
+    border-radius: 23px;
+
+    flex-shrink: 0;
+}
+
+.featured-info {
+
+    flex: 1;
+
+    text-align: right;
+
+    padding:
+        10px 10px 10px 20px;
+}
+
+.featured-label {
+
+    display: inline-block;
+
+    background:
+        #e4f2ff;
+
+    color: #65717b;
+
+    padding:
+        7px 15px;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 12px;
+}
+
+.featured-title {
+
+    margin: 0 0 10px;
+
+    font-size: 27px;
+
+    color: #555;
+
+    font-weight: 800;
+}
+
+.featured-text {
+
+    margin: 0 0 18px;
+
+    color: #777;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   READ BUTTON
+===================================================== */
+
+.read-button {
+
+    border: none;
+
+    background:
+        #e4f2ff;
+
+    color: #555;
+
+    font-family: inherit;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    padding:
+        12px 28px;
+
+    border-radius: 17px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 13px
+        rgba(70,100,120,0.12);
+
+    transition: 0.2s ease;
+}
+
+.read-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 17px
+        rgba(70,100,120,0.17);
+}
+
+
+/* =====================================================
+   ALL STORIES
+===================================================== */
+
+.stories-title {
+
+    text-align: right;
+
+    font-size: 25px;
+
+    font-weight: 800;
+
+    color: #555;
+
+    margin-bottom: 20px;
+}
+
+
+.stories-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 24px;
+
+    padding-bottom: 40px;
+}
+
+
+/* =====================================================
+   STORY CARD
+===================================================== */
+
+.story-card {
+
+    background:
+        rgba(255,255,255,0.76);
+
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 8px 20px
+        rgba(70,80,90,0.12);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.story-card:hover {
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(70,80,90,0.17);
+}
+
+
+.story-image {
+
+    width: 100%;
+
+    height: 185px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+.story-info {
+
+    padding:
+        16px 18px 20px;
+
+    text-align: right;
+}
+
+.story-name {
+
+    margin: 0;
+
+    font-size: 20px;
+
+    font-weight: 800;
+
+    color: #555;
+
+    line-height: 1.5;
+}
+
+.story-description {
+
+    margin:
+        7px 0 0;
+
+    font-size: 14px;
+
+    color: #888;
+
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   BOTTOM SPACE
+===================================================== */
+
+.bottom-space {
+
+    height: 80px;
+}
+
+
+/* =====================================================
+   IPAD PORTRAIT
+===================================================== */
+
+@media (min-width: 768px) {
+
+    .page {
+
+        min-height: 1366px;
+
+        padding-top: 40px;
+    }
+
+    .content {
+
+        width: 900px;
+    }
+
+    .page-title {
+
+        margin-top: 95px;
+
+        font-size: 38px;
+    }
+
+    .featured {
+
+        min-height: 245px;
+    }
+
+    .featured-image {
+
+        width: 290px;
+
+        height: 205px;
+    }
+
+    .story-image {
+
+        height: 190px;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL SCREEN
+===================================================== */
+
+@media (max-width: 700px) {
+
+    .page {
+
+        padding:
+            25px 15px 60px;
+    }
+
+    .menu-button {
+
+        top: 20px;
+
+        right: 20px;
+
+        width: 55px;
+
+        height: 55px;
+
+        font-size: 26px;
+    }
+
+    .side-menu {
+
+        top: 85px;
+
+        right: 20px;
+
+        width: 220px;
+    }
+
+    .page-title {
+
+        margin-top: 75px;
+
+        font-size: 28px;
+
+        margin-bottom: 30px;
+    }
+
+    .categories {
+
+        gap: 8px;
+
+        margin-bottom: 30px;
+    }
+
+    .category {
+
+        font-size: 13px;
+
+        padding:
+            9px 13px;
+    }
+
+    .featured {
+
+        flex-direction: column;
+
+        padding: 15px;
+
+        gap: 15px;
+    }
+
+    .featured-image {
+
+        width: 100%;
+
+        height: 200px;
+    }
+
+    .featured-info {
+
+        width: 100%;
+
+        padding: 5px 5px 10px;
+
+        text-align: center;
+    }
+
+    .featured-title {
+
+        font-size: 23px;
+    }
+
+    .stories-grid {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 18px;
+    }
+
+    .story-image {
+
+        height: 210px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     MENU BUTTON
+===================================================== -->
+
+<button
+    class="menu-button"
+    id="menuButton"
+    onclick="toggleMenu()">
+
+    ☰
+
+</button>
+
+
+
+<!-- =====================================================
+     SIDE MENU
+===================================================== -->
+
+<div
+    class="side-menu"
+    id="sideMenu">
+
+
+    <button
+        class="side-item"
+        onclick="goHome()">
+
+        <span class="side-icon">
+            🏠
+        </span>
+
+        <span>
+            الرئيسية
+        </span>
+
+    </button>
+
+
+    <button
+        class="side-item"
+        onclick="goProfile()">
+
+        <span class="side-icon">
+            👤
+        </span>
+
+        <span>
+            ملفي
+        </span>
+
+    </button>
+
+
+    <button
+        class="side-item"
+        onclick="goProgress()">
+
+        <span class="side-icon">
+            ⭐
+        </span>
+
+        <span>
+            تقدمي
+        </span>
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     PAGE
+===================================================== -->
+
+<div class="page">
+
+
+    <main class="content">
+
+
+        <!-- =================================================
+             TITLE
+        ================================================== -->
+
+        <h1 class="page-title">
+
+            استكشف وتعلم بطريقة ممتعة ✨
+
+        </h1>
+
+
+
+        <!-- =================================================
+             CATEGORIES
+        ================================================== -->
+
+        <div class="categories">
+
+
+            <button
+                class="category active"
+                onclick="filterStories('all', this)">
+
+                الكل
+
+            </button>
+
+
+            <button
+                class="category"
+                onclick="filterStories('school', this)">
+
+                المدرسة
+
+            </button>
+
+
+            <button
+                class="category"
+                onclick="filterStories('numbers', this)">
+
+                الأرقام
+
+            </button>
+
+
+            <button
+                class="category"
+                onclick="filterStories('future', this)">
+
+                المستقبل
+
+            </button>
+
+
+            <button
+                class="category"
+                onclick="filterStories('life', this)">
+
+                المهارات الحياتية
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             FEATURED
+        ================================================== -->
+
+        <h2 class="section-title">
+
+            القصص المقترحة ⭐
+
+        </h2>
+
+
+        <div
+            class="featured"
+            data-category="life">
+
+
+            <img
+                src="images/doctor.png"
+                class="featured-image"
+                alt="موعد مع طبيب الأسنان">
+
+
+            <div class="featured-info">
+
+
+                <div class="featured-label">
+
+                    قصة مقترحة لك
+
+                </div>
+
+
+                <h2 class="featured-title">
+
+                    موعد مع طبيب الأسنان 🦷
+
+                </h2>
+
+
+                <p class="featured-text">
+
+                    قصة تساعد الطفل على التعرف
+                    على زيارة طبيب الأسنان
+                    والاستعداد لها بطريقة بسيطة وممتعة.
+
+                </p>
+
+
+                <button
+                    class="read-button"
+                    onclick="openDoctorStory()">
+
+                    اقرأ الآن 📖
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             ALL STORIES
+        ================================================== -->
+
+        <h2 class="stories-title">
+
+            جميع القصص 📚
+
+        </h2>
+
+
+
+        <div
+            class="stories-grid"
+            id="storiesGrid">
+
+
+            <!-- ENVIRONMENT -->
+
+            <div
+                class="story-card"
+                data-category="life"
+                onclick="openEnvironmentStory()">
+
+
+                <img
+                    src="images/environment.png"
+                    class="story-image"
+                    alt="لنحافظ على البيئة">
+
+
+                <div class="story-info">
+
+                    <h3 class="story-name">
+
+                        لنحافظ على البيئة 🌱
+
+                    </h3>
+
+                    <p class="story-description">
+
+                        نتعلم معًا كيف نحافظ على بيئتنا.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MARKET -->
+
+            <div
+                class="story-card"
+                data-category="life"
+                onclick="openMarketStory()">
+
+
+                <img
+                    src="images/market.png"
+                    class="story-image"
+                    alt="رحلة السوق مع جدي">
+
+
+                <div class="story-info">
+
+                    <h3 class="story-name">
+
+                        رحلة السوق مع جدي 🛒
+
+                    </h3>
+
+                    <p class="story-description">
+
+                        مغامرة ممتعة في السوق مع الجد.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ADVENTURE -->
+
+            <div
+                class="story-card"
+                data-category="life"
+                onclick="openAdventureStory()">
+
+
+                <img
+                    src="images/adventure.png"
+                    class="story-image"
+                    alt="مغامرة في الحديقة">
+
+
+                <div class="story-info">
+
+                    <h3 class="story-name">
+
+                        مغامرة في الحديقة 🌳
+
+                    </h3>
+
+                    <p class="story-description">
+
+                        نستكشف الحديقة ونعيش مغامرة جميلة.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- LESSON -->
+
+            <div
+                class="story-card"
+                data-category="school"
+                onclick="openLessonStory()">
+
+
+                <img
+                    src="images/lesson.png"
+                    class="story-image"
+                    alt="درس اليوم مع الأصدقاء">
+
+
+                <div class="story-info">
+
+                    <h3 class="story-name">
+
+                        درس اليوم مع الأصدقاء 🏫
+
+                    </h3>
+
+                    <p class="story-description">
+
+                        نتعلم ونستمتع مع أصدقائنا.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="bottom-space"></div>
+
+
+    </main>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   MENU
+===================================================== */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById("sideMenu");
+
+    menu.classList.toggle("show");
+
+}
+
+
+/* =====================================================
+   CLOSE MENU
+===================================================== */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const menu =
+            document.getElementById("sideMenu");
+
+        const button =
+            document.getElementById("menuButton");
+
+
+        if (
+            !menu.contains(event.target) &&
+            !button.contains(event.target)
+        ) {
+
+            menu.classList.remove("show");
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function goHome() {
+
+    window.location.href =
+        "home.html";
+
+}
+
+
+function goProfile() {
+
+    alert(
+        "👤 صفحة ملفي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+function goProgress() {
+
+    alert(
+        "⭐ صفحة تقدمي\n\nسنصممها لاحقًا."
+    );
+
+}
+
+
+/* =====================================================
+   STORY FILTER
+===================================================== */
+
+function filterStories(category, button) {
+
+    const buttons =
+        document.querySelectorAll(
+            ".category"
+        );
+
+    buttons.forEach(function(item) {
+
+        item.classList.remove("active");
+
+    });
+
+    button.classList.add("active");
+
+
+    const cards =
+        document.querySelectorAll(
+            ".story-card"
+        );
+
+
+    cards.forEach(function(card) {
+
+        const cardCategory =
+            card.getAttribute(
+                "data-category"
+            );
+
+
+        if (
+            category === "all" ||
+            cardCategory === category
+        ) {
+
+            card.style.display = "";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   STORY PAGES
+===================================================== */
+
+function openDoctorStory() {
+
+    window.location.href =
+        "doctor-story.html";
+
+}
+
+
+function openEnvironmentStory() {
+
+    window.location.href =
+        "environment-story.html";
+
+}
+
+
+function openMarketStory() {
+
+    window.location.href =
+        "market-story.html";
+
+}
+
+
+function openAdventureStory() {
+
+    window.location.href =
+        "adventure-story.html";
+
+}
+
+
+function openLessonStory() {
+
+    window.location.href =
+        "lesson-story.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

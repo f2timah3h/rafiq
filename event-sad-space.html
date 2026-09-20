@@ -1,0 +1,2837 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>ربط الحدث بالشعور</title>
+
+<style>
+
+/* ==============================
+   BASIC
+============================== */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:
+    "Tajawal",
+    "Tahoma",
+    "Arial",
+    sans-serif;
+
+    background-image:url("images/sppp.jpeg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
+    color:#555;
+
+    overflow:hidden;
+}
+
+
+/* ==============================
+   STARS
+============================== */
+
+.stars{
+    position:fixed;
+
+    top:20px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    background:rgba(255,255,255,0.82);
+
+    padding:7px 18px;
+
+    border-radius:30px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,0.08);
+
+    z-index:30;
+}
+
+.star-icons{
+    font-size:32px;
+
+    letter-spacing:5px;
+
+    direction:ltr;
+
+    white-space:nowrap;
+}
+
+
+/* ==============================
+   BACK BUTTON
+============================== */
+
+.back-btn{
+    position:fixed;
+
+    top:25px;
+    left:25px;
+
+    border:none;
+
+    background:rgba(255,255,255,0.90);
+
+    padding:11px 22px;
+
+    border-radius:30px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.08);
+
+    z-index:30;
+}
+
+
+/* ==============================
+   MENU BUTTON
+============================== */
+
+.menu-btn{
+    position:fixed;
+
+    top:25px;
+    right:25px;
+
+    width:52px;
+    height:52px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.90);
+
+    font-size:25px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.08);
+
+    z-index:40;
+}
+
+
+/* ==============================
+   MENU
+============================== */
+
+.menu{
+    position:fixed;
+
+    top:88px;
+    right:25px;
+
+    width:185px;
+
+    padding:10px;
+
+    background:rgba(255,255,255,0.97);
+
+    border-radius:20px;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,0.15);
+
+    display:none;
+
+    z-index:50;
+}
+
+.menu.show{
+    display:block;
+}
+
+.menu button{
+    width:100%;
+
+    border:none;
+
+    background:transparent;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    font-size:17px;
+
+    color:#555;
+
+    cursor:pointer;
+}
+
+.menu button:hover{
+    background:#eaf6ff;
+}
+
+
+/* ==============================
+   HINT BUTTON
+============================== */
+
+.hint-btn{
+    position:fixed;
+
+    top:94px;
+    right:25px;
+
+    border:none;
+
+    background:#fff2a8;
+
+    color:#665b25;
+
+    padding:10px 18px;
+
+    border-radius:25px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.08);
+
+    z-index:35;
+}
+
+
+/* ==============================
+   HINT BOX
+============================== */
+
+.hint-box{
+    position:fixed;
+
+    top:145px;
+    right:25px;
+
+    width:270px;
+
+    padding:14px 18px;
+
+    background:rgba(255,255,255,0.97);
+
+    border-radius:18px;
+
+    font-size:16px;
+
+    line-height:1.7;
+
+    text-align:center;
+
+    box-shadow:
+    0 6px 20px rgba(0,0,0,0.12);
+
+    display:none;
+
+    z-index:35;
+}
+
+.hint-box.show{
+    display:block;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page{
+
+    width:100%;
+
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:125px 30px 110px;
+
+    overflow:hidden;
+}
+
+
+/* ==============================
+   TITLE
+============================== */
+
+.title{
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    text-align:center;
+
+    line-height:1.4;
+
+    margin:0 0 5px;
+}
+
+
+/* ==============================
+   SUBTITLE
+============================== */
+
+.subtitle{
+
+    font-size:19px;
+
+    color:#555;
+
+    text-align:center;
+
+    line-height:1.6;
+
+    margin:0;
+}
+
+
+/* =========================================================
+   ACTIVITY CONTENT
+========================================================= */
+
+.activity-content{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    margin-top:85px;
+}
+
+
+/* ==============================
+   EVENTS
+============================== */
+
+.events{
+
+    width:800px;
+
+    max-width:82vw;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+    margin:0;
+}
+
+
+/* ==============================
+   EVENT ROW
+============================== */
+
+.event-row{
+
+    width:100%;
+
+    min-height:145px;
+
+    display:flex;
+
+    flex-direction:row;
+
+    align-items:center;
+
+    gap:25px;
+
+    background:rgba(255,255,255,0.34);
+
+    border-radius:22px;
+
+    padding:8px 14px;
+}
+
+
+/* ==============================
+   VIDEO
+============================== */
+
+.event-video{
+
+    width:320px;
+
+    height:145px;
+
+    object-fit:cover;
+
+    border-radius:17px;
+
+    background:#fff;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.10);
+
+    flex-shrink:0;
+}
+
+
+/* ==============================
+   DESCRIPTION
+============================== */
+
+.event-description{
+
+    flex:1;
+
+    font-size:19px;
+
+    line-height:1.8;
+
+    color:#555;
+
+    text-align:right;
+
+    padding:0 10px;
+
+    font-weight:500;
+}
+
+
+/* ==============================
+   EVENT NUMBER
+============================== */
+
+.event-number{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.85);
+
+    margin-left:7px;
+
+    font-size:17px;
+
+    font-weight:bold;
+}
+
+
+/* ==============================
+   QUESTION
+============================== */
+
+.question{
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    text-align:center;
+
+    line-height:1.6;
+
+    margin-top:50px;
+
+    margin-bottom:16px;
+}
+
+
+/* ==============================
+   ANSWERS
+============================== */
+
+.answers{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    direction:rtl;
+}
+
+
+/* ==============================
+   ANSWER BUTTON
+============================== */
+
+.answer{
+
+    min-width:150px;
+
+    border:none;
+
+    border-radius:22px;
+
+    padding:13px 25px;
+
+    background:#d9f1ff;
+
+    color:#55718b;
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.08);
+
+    transition:0.2s ease;
+}
+
+.answer:hover{
+
+    transform:translateY(-3px);
+
+    background:#ccecff;
+}
+
+
+/* ==============================
+   CORRECT ANSWER
+============================== */
+
+.answer.correct{
+
+    background:#d9f5d9;
+}
+
+
+/* ==============================
+   WRONG ANSWER
+============================== */
+
+.answer.wrong{
+
+    background:#ffe0e0;
+}
+
+
+/* ==============================
+   RESULT
+============================== */
+
+.result{
+
+    min-height:30px;
+
+    margin-top:7px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    text-align:center;
+}
+
+
+/* ==============================
+   SOUND
+============================== */
+
+.sound-btn{
+
+    position:fixed;
+
+    bottom:28px;
+    left:25px;
+
+    width:58px;
+    height:58px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.90);
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.10);
+
+    z-index:30;
+}
+
+
+/* ==============================
+   NEXT
+============================== */
+
+.next-btn{
+
+    position:fixed;
+
+    bottom:180px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    border:none;
+
+    padding:20px 50px;
+
+    border-radius:25px;
+
+    background:#d9f1ff;
+
+    color:#55718b;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    opacity:0.5;
+
+    pointer-events:none;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.08);
+
+    z-index:30;
+}
+
+.next-btn.enabled{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+
+/* ==============================
+   SUCCESS MESSAGE
+============================== */
+
+.success-message{
+
+    position:fixed;
+
+    top:50%;
+    left:50%;
+
+    transform:
+    translate(-50%,-50%)
+    scale(0.8);
+
+    background:rgba(255,255,255,0.97);
+
+    padding:25px 40px;
+
+    border-radius:28px;
+
+    font-size:26px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    box-shadow:
+    0 10px 35px rgba(0,0,0,0.18);
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:0.35s;
+
+    z-index:150;
+
+    text-align:center;
+}
+
+.success-message.show{
+
+    opacity:1;
+
+    transform:
+    translate(-50%,-50%)
+    scale(1);
+}
+
+
+/* ==============================
+   SPACE CELEBRATION CANVAS
+============================== */
+
+#spaceCelebrationCanvas{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+
+    z-index:140;
+
+    display:none;
+}
+
+
+/* =========================================================
+   COMPLETION POPUP
+========================================================= */
+
+.completion-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.28);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:300;
+
+}
+
+.completion-overlay.show{
+
+    display:flex;
+
+}
+
+
+.completion-popup{
+
+    width:460px;
+
+    max-width:80vw;
+
+    background:rgba(255,255,255,0.98);
+
+    border-radius:32px;
+
+    padding:32px 35px 30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 12px 35px rgba(0,0,0,0.18);
+
+    animation:popupIn 0.35s ease;
+
+}
+
+
+@keyframes popupIn{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(0.75);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+.completion-icon{
+
+    font-size:55px;
+
+    margin-bottom:8px;
+
+}
+
+
+.completion-title{
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    color:#55718b;
+
+    margin-bottom:10px;
+
+}
+
+
+.completion-text{
+
+    font-size:20px;
+
+    line-height:1.7;
+
+    color:#555;
+
+    margin-bottom:25px;
+
+}
+
+
+.completion-next{
+
+    border:none;
+
+    padding:15px 45px;
+
+    border-radius:25px;
+
+    background:#d9f1ff;
+
+    color:#55718b;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,0.08);
+
+    transition:0.2s ease;
+
+}
+
+.completion-next:active{
+
+    transform:scale(0.95);
+
+}
+
+
+/* =========================================================
+   iPad Portrait
+========================================================= */
+
+@media
+(min-width:700px)
+and
+(max-width:1100px){
+
+    .page{
+
+        padding:125px 25px 110px;
+    }
+
+
+    .title{
+
+        font-size:34px;
+    }
+
+
+    .subtitle{
+
+        font-size:19px;
+    }
+
+
+    .activity-content{
+
+        margin-top:85px;
+    }
+
+
+    .events{
+
+        width:800px;
+
+        max-width:82vw;
+
+        gap:14px;
+    }
+
+
+    .event-row{
+
+        min-height:145px;
+    }
+
+
+    .event-video{
+
+        width:320px;
+
+        height:145px;
+    }
+
+
+    .event-description{
+
+        font-size:19px;
+    }
+
+
+    .question{
+
+        font-size:24px;
+
+        margin-top:30px;
+
+        margin-bottom:16px;
+    }
+
+
+    .answer{
+
+        min-width:150px;
+
+        font-size:19px;
+
+        background:#d9f1ff;
+    }
+
+}
+
+
+/* =========================================================
+   الشاشات الأقصر
+========================================================= */
+
+@media(max-height:900px){
+
+    .page{
+
+        padding-top:100px;
+
+        padding-bottom:90px;
+    }
+
+
+    .title{
+
+        font-size:30px;
+    }
+
+
+    .subtitle{
+
+        font-size:17px;
+    }
+
+
+    .activity-content{
+
+        margin-top:55px;
+    }
+
+
+    .event-row{
+
+        min-height:120px;
+    }
+
+
+    .event-video{
+
+        width:270px;
+
+        height:120px;
+    }
+
+
+    .event-description{
+
+        font-size:17px;
+    }
+
+
+    .question{
+
+        font-size:21px;
+
+        margin-top:20px;
+    }
+
+
+    .answer{
+
+        font-size:17px;
+
+        min-width:135px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL SCREENS
+========================================================= */
+
+@media(max-width:699px){
+
+    body{
+
+        overflow:auto;
+    }
+
+
+    .page{
+
+        height:auto;
+
+        min-height:100vh;
+
+        padding-top:100px;
+
+        padding-bottom:110px;
+    }
+
+
+    .title{
+
+        font-size:25px;
+    }
+
+
+    .subtitle{
+
+        font-size:16px;
+    }
+
+
+    .activity-content{
+
+        margin-top:40px;
+    }
+
+
+    .events{
+
+        width:92vw;
+
+        max-width:none;
+    }
+
+
+    .event-row{
+
+        flex-direction:column;
+
+        gap:8px;
+
+        padding:10px;
+    }
+
+
+    .event-video{
+
+        width:100%;
+
+        height:170px;
+    }
+
+
+    .event-description{
+
+        text-align:center;
+
+        font-size:16px;
+    }
+
+
+    .question{
+
+        font-size:20px;
+
+        margin-top:30px;
+    }
+
+
+    .answers{
+
+        gap:8px;
+    }
+
+
+    .answer{
+
+        min-width:100px;
+
+        padding:10px 12px;
+
+        font-size:16px;
+
+        background:#d9f1ff;
+    }
+
+
+    .back-btn{
+
+        left:12px;
+
+        top:15px;
+    }
+
+
+    .menu-btn{
+
+        right:12px;
+
+        top:15px;
+    }
+
+
+    .hint-btn{
+
+        right:12px;
+
+        top:75px;
+    }
+
+
+    .hint-box{
+
+        right:12px;
+
+        top:125px;
+
+        width:220px;
+    }
+
+
+    .stars{
+
+        top:15px;
+    }
+
+
+    .completion-popup{
+
+        width:88vw;
+
+        padding:28px 22px 25px;
+
+    }
+
+
+    .completion-icon{
+
+        font-size:48px;
+
+    }
+
+
+    .completion-title{
+
+        font-size:26px;
+
+    }
+
+
+    .completion-text{
+
+        font-size:18px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     STARS
+================================================== -->
+
+<div class="stars">
+
+    <div
+    class="star-icons"
+    id="stars">
+
+        👨‍🚀👨‍🚀👨‍🚀
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     BACK
+================================================== -->
+
+<button
+class="back-btn"
+onclick="goBack()">
+
+    السابق 
+
+</button>
+
+
+<!-- ==================================================
+     MENU
+================================================== -->
+
+<button
+class="menu-btn"
+onclick="toggleMenu()">
+
+    ☰
+
+</button>
+
+
+<div
+class="menu"
+id="menu">
+
+    <button
+    onclick="location.href='home.html'">
+
+        🏠 الرئيسية
+
+    </button>
+
+
+    <button
+    onclick="location.href='profile.html'">
+
+        👤 ملفي
+
+    </button>
+
+
+    <button
+    onclick="location.href='reports.html'">
+
+        📊 تقاريري
+
+    </button>
+
+</div>
+
+
+<!-- ==================================================
+     HINT
+================================================== -->
+
+<button
+class="hint-btn"
+onclick="showHint()">
+
+    💡 تلميح
+
+</button>
+
+
+<div
+class="hint-box"
+id="hintBox">
+
+    اضغط على التلميح إذا احتجت إلى مساعدة.
+
+</div>
+
+
+<!-- ==================================================
+     PAGE
+================================================== -->
+
+<div class="page">
+
+
+    <!-- ==========================
+         TITLE
+    =========================== -->
+
+    <div class="title">
+
+         اربط الحدث بالشعور
+
+    </div>
+
+
+    <div class="subtitle">
+
+        شاهد ما حدث جيدًا، ثم اختر الشعور المناسب.
+
+    </div>
+
+
+    <!-- ==========================
+         ACTIVITY CONTENT
+    =========================== -->
+
+    <div class="activity-content">
+
+
+        <!-- ==========================
+             EVENTS
+        =========================== -->
+
+        <div class="events">
+
+
+            <!-- الحدث الأول -->
+
+            <div class="event-row">
+
+
+                <video
+                class="event-video"
+                id="video1"
+                src="videos/b1.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto">
+
+                </video>
+
+
+                <div class="event-description">
+
+                    <span class="event-number">
+
+                        ١
+
+                    </span>
+
+                    كان الطفل يرسم لوحة جميلة.
+
+                </div>
+
+
+            </div>
+
+
+            <!-- الحدث الثاني -->
+
+            <div class="event-row">
+
+
+                <video
+                class="event-video"
+                id="video2"
+                src="videos/b2.mp4"
+                autoplay
+                muted
+                loop
+                playsinline
+                preload="auto">
+
+                </video>
+
+
+                <div class="event-description">
+
+                    <span class="event-number">
+
+                        ٢
+
+                    </span>
+
+                    وبينما كان يرسم، سقط الماء وانسكب على اللوحة.
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ==========================
+             QUESTION
+        =========================== -->
+
+        <div class="question">
+
+            برأيك، بماذا يشعر هذا الطفل بعد ما حدث؟
+
+        </div>
+
+
+        <!-- ==========================
+             ANSWERS
+        =========================== -->
+
+        <div class="answers">
+
+
+            <button
+            class="answer"
+            onclick="checkAnswer('السعادة', this)">
+
+                السعادة
+
+            </button>
+
+
+            <button
+            class="answer"
+            onclick="checkAnswer('الحزن', this)">
+
+                الحزن
+
+            </button>
+
+
+            <button
+            class="answer"
+            onclick="checkAnswer('القلق', this)">
+
+                القلق
+
+            </button>
+
+
+        </div>
+
+
+        <div
+        class="result"
+        id="result">
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     SOUND
+================================================== -->
+
+<button
+class="sound-btn"
+onclick="speakQuestion()">
+
+    🔊
+
+</button>
+
+
+<!-- ==================================================
+     NEXT
+================================================== -->
+
+<button
+class="next-btn"
+id="nextBtn"
+onclick="goNext()">
+
+    التالي 
+
+</button>
+
+
+<!-- ==================================================
+     SUCCESS MESSAGE
+================================================== -->
+
+<div
+class="success-message"
+id="successMessage">
+
+     أحسنت! 🚀
+
+    <br>
+
+    لقد عرفت الشعور الصحيح.
+
+</div>
+
+
+<!-- ==================================================
+     SPACE CELEBRATION CANVAS
+================================================== -->
+
+<canvas
+id="spaceCelebrationCanvas">
+</canvas>
+
+
+<!-- ==================================================
+     COMPLETION POPUP
+================================================== -->
+
+<div
+class="completion-overlay"
+id="completionOverlay">
+
+    <div class="completion-popup">
+
+        <div class="completion-icon">
+
+            🚀⭐
+
+        </div>
+
+
+        <div class="completion-title">
+
+            أحسنت! 
+
+        </div>
+
+
+        <div class="completion-text">
+
+            لقد أنهيت هذه المرحلة بنجاح!<br>
+
+            أنت رائع! 🚀
+
+        </div>
+
+
+        <button
+        class="completion-next"
+        onclick="goToEmotions()">
+
+            التالي →
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ==================================================
+   VARIABLES
+================================================== */
+
+const video1 =
+document.getElementById("video1");
+
+const video2 =
+document.getElementById("video2");
+
+let answered = false;
+
+let attempts = 0;
+
+let hintsUsed = 0;
+
+let currentHint = 0;
+
+
+/* ==================================================
+   PLAY VIDEOS
+================================================== */
+
+function playVideos(){
+
+    video1.play().catch(() => {});
+
+    video2.play().catch(() => {});
+
+}
+
+window.addEventListener(
+    "load",
+    playVideos
+);
+
+
+/* ==================================================
+   MENU
+================================================== */
+
+function toggleMenu(){
+
+    document
+    .getElementById("menu")
+    .classList
+    .toggle("show");
+
+}
+
+
+/* ==================================================
+   BACK
+================================================== */
+
+function goBack(){
+
+    window.location.href =
+    "choose-space-emotion.html";
+
+}
+
+
+/* ==================================================
+   HINTS
+================================================== */
+
+function showHint(){
+
+    if(answered){
+
+        return;
+
+    }
+
+
+    currentHint++;
+
+    hintsUsed++;
+
+
+    const hintBox =
+    document.getElementById(
+        "hintBox"
+    );
+
+
+    if(currentHint === 1){
+
+        hintBox.innerHTML =
+        "💡 انظر جيدًا إلى ما حدث للوحة.";
+
+    }
+
+    else if(currentHint === 2){
+
+        hintBox.innerHTML =
+        "💡 الطفل كان سعيدًا بالرسم، لكن شيئًا أفسد لوحته.";
+
+    }
+
+    else{
+
+        hintBox.innerHTML =
+        "💡 عندما يحدث شيء يزعجنا ويفسد شيئًا نحبه، قد نشعر بالحزن.";
+
+    }
+
+
+    hintBox.classList.add(
+        "show"
+    );
+
+}
+
+
+/* ==================================================
+   CHECK ANSWER
+================================================== */
+
+function checkAnswer(
+    answer,
+    button
+){
+
+    if(answered){
+
+        return;
+
+    }
+
+
+    attempts++;
+
+
+    const result =
+    document.getElementById(
+        "result"
+    );
+
+
+    /* ==========================
+       CORRECT
+    =========================== */
+
+    if(answer === "الحزن"){
+
+        answered = true;
+
+
+        video1.pause();
+
+        video2.pause();
+
+
+        document
+        .querySelectorAll(".answer")
+        .forEach(btn => {
+
+            btn.disabled = true;
+
+        });
+
+
+        button.classList.add(
+            "correct"
+        );
+
+
+        document
+        .getElementById("stars")
+        .innerHTML =
+        "⭐ ⭐ ⭐";
+
+
+        result.innerHTML =
+        "أحسنت! إجابتك صحيحة 🌟";
+
+
+        saveGameData(true);
+
+
+        document
+        .getElementById("nextBtn")
+        .classList
+        .add("enabled");
+
+
+        showSuccess();
+
+
+        createSpaceCelebration();
+
+    }
+
+    else{
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        result.innerHTML =
+        "حاول مرة أخرى 🚀";
+
+
+        setTimeout(() => {
+
+            button.classList.remove(
+                "wrong"
+            );
+
+        },700);
+
+
+        saveGameData(false);
+
+    }
+
+}
+
+
+/* ==================================================
+   SUCCESS
+================================================== */
+
+function showSuccess(){
+
+    const box =
+    document.getElementById(
+        "successMessage"
+    );
+
+
+    box.classList.add(
+        "show"
+    );
+
+
+    setTimeout(() => {
+
+        box.classList.remove(
+            "show"
+        );
+
+    },2500);
+
+}
+
+
+/* ==================================================
+   SAVE DATA
+================================================== */
+
+function saveGameData(correct){
+
+    const oldData =
+    JSON.parse(
+        localStorage.getItem(
+            "rafiqGameData"
+        ) || "{}"
+    );
+
+
+    oldData.eventSadEmotion = {
+
+        attempts:
+        attempts,
+
+        hintsUsed:
+        hintsUsed,
+
+        correct:
+        correct,
+
+        stars:
+        correct ? 3 : 0,
+
+        completed:
+        correct,
+
+        date:
+        new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+        "rafiqGameData",
+        JSON.stringify(oldData)
+    );
+
+}
+
+
+/* ==================================================
+   SPEECH
+================================================== */
+
+function speakQuestion(){
+
+    if(
+        !("speechSynthesis" in window)
+    ){
+
+        return;
+
+    }
+
+
+    speechSynthesis.cancel();
+
+
+    const text =
+    "برأيك، بماذا يشعر هذا الطفل بعد ما حدث؟ السعادة، الحزن، أم القلق؟";
+
+
+    const speech =
+    new SpeechSynthesisUtterance(
+        text
+    );
+
+
+    speech.lang =
+    "ar-SA";
+
+
+    speech.rate =
+    0.85;
+
+
+    speech.pitch =
+    1.1;
+
+
+    speechSynthesis.speak(
+        speech
+    );
+
+}
+
+
+/* ==================================================
+   NEXT
+================================================== */
+
+function goNext(){
+
+    if(!answered){
+
+        return;
+
+    }
+
+
+    /* إظهار نافذة إكمال المرحلة */
+
+    document
+    .getElementById("completionOverlay")
+    .classList
+    .add("show");
+
+}
+
+
+/* ==================================================
+   GO TO EMOTIONS PAGE
+================================================== */
+
+function goToEmotions(){
+
+    window.location.href =
+    "emotions.html";
+
+}
+
+
+/* ==================================================
+   CANVAS
+================================================== */
+
+const canvas =
+document.getElementById(
+    "spaceCelebrationCanvas"
+);
+
+const ctx =
+canvas.getContext("2d");
+
+
+function resizeCanvas(){
+
+    canvas.width =
+    window.innerWidth;
+
+    canvas.height =
+    window.innerHeight;
+
+}
+
+
+window.addEventListener(
+    "resize",
+    resizeCanvas
+);
+
+
+resizeCanvas();
+
+
+/* ==================================================
+   DRAW ROCKET
+================================================== */
+
+function drawSpaceRocket(
+    ctx,
+    x,
+    y,
+    size,
+    rotation
+){
+
+    ctx.save();
+
+    ctx.translate(
+        x,
+        y
+    );
+
+    ctx.rotate(
+        rotation
+    );
+
+
+    const s =
+    size / 100;
+
+    ctx.scale(
+        s,
+        s
+    );
+
+
+    /* FLAME */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -11,
+        35
+    );
+
+    ctx.quadraticCurveTo(
+        0,
+        70,
+        11,
+        35
+    );
+
+    ctx.fillStyle =
+    "#FFD166";
+
+    ctx.fill();
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -6,
+        35
+    );
+
+    ctx.quadraticCurveTo(
+        0,
+        57,
+        6,
+        35
+    );
+
+    ctx.fillStyle =
+    "#FF9F68";
+
+    ctx.fill();
+
+
+    /* ROCKET BODY */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        0,
+        -55
+    );
+
+    ctx.bezierCurveTo(
+        30,
+        -35,
+        34,
+        5,
+        0,
+        42
+    );
+
+    ctx.bezierCurveTo(
+        -34,
+        5,
+        -30,
+        -35,
+        0,
+        -55
+    );
+
+    ctx.closePath();
+
+    ctx.fillStyle =
+    "#FFFFFF";
+
+    ctx.fill();
+
+
+    ctx.strokeStyle =
+    "rgba(90,120,170,0.35)";
+
+    ctx.lineWidth =
+    2;
+
+    ctx.stroke();
+
+
+    /* WINDOW */
+
+    ctx.beginPath();
+
+    ctx.arc(
+        0,
+        -12,
+        12,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+    "#A9DDF7";
+
+    ctx.fill();
+
+
+    ctx.strokeStyle =
+    "#6D9FC3";
+
+    ctx.lineWidth =
+    2;
+
+    ctx.stroke();
+
+
+    /* LEFT WING */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        -22,
+        16
+    );
+
+    ctx.lineTo(
+        -48,
+        37
+    );
+
+    ctx.lineTo(
+        -24,
+        40
+    );
+
+    ctx.closePath();
+
+    ctx.fillStyle =
+    "#B9D5FF";
+
+    ctx.fill();
+
+
+    /* RIGHT WING */
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        22,
+        16
+    );
+
+    ctx.lineTo(
+        48,
+        37
+    );
+
+    ctx.lineTo(
+        24,
+        40
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    ctx.restore();
+
+}
+
+
+/* ==================================================
+   DRAW PLANET
+================================================== */
+
+function drawSpacePlanet(
+    ctx,
+    x,
+    y,
+    size
+){
+
+    ctx.save();
+
+    ctx.translate(
+        x,
+        y
+    );
+
+
+    /* RING */
+
+    ctx.beginPath();
+
+    ctx.ellipse(
+        0,
+        5,
+        size * 0.62,
+        size * 0.20,
+        -0.15,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.strokeStyle =
+    "#C8B6E9";
+
+    ctx.lineWidth =
+    size * 0.10;
+
+    ctx.stroke();
+
+
+    /* PLANET */
+
+    const gradient =
+    ctx.createRadialGradient(
+        -size * 0.20,
+        -size * 0.20,
+        size * 0.05,
+        0,
+        0,
+        size * 0.52
+    );
+
+
+    gradient.addColorStop(
+        0,
+        "#EEE4FF"
+    );
+
+
+    gradient.addColorStop(
+        1,
+        "#B7A4DD"
+    );
+
+
+    ctx.beginPath();
+
+    ctx.arc(
+        0,
+        0,
+        size * 0.45,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+    gradient;
+
+    ctx.fill();
+
+
+    /* SMALL HIGHLIGHT */
+
+    ctx.globalAlpha =
+    0.28;
+
+    ctx.beginPath();
+
+    ctx.arc(
+        -size * 0.15,
+        -size * 0.12,
+        size * 0.10,
+        0,
+        Math.PI * 2
+    );
+
+    ctx.fillStyle =
+    "#FFFFFF";
+
+    ctx.fill();
+
+
+    ctx.restore();
+
+}
+
+
+/* ==================================================
+   DRAW STAR
+================================================== */
+
+function drawSpaceStar(
+    ctx,
+    x,
+    y,
+    size,
+    rotation
+){
+
+    ctx.save();
+
+    ctx.translate(
+        x,
+        y
+    );
+
+    ctx.rotate(
+        rotation
+    );
+
+
+    const spikes = 5;
+
+    const outerRadius =
+    size * 0.50;
+
+    const innerRadius =
+    size * 0.22;
+
+
+    ctx.beginPath();
+
+
+    for(
+        let i = 0;
+        i < spikes * 2;
+        i++
+    ){
+
+        const angle =
+        -Math.PI / 2 +
+        i * Math.PI / spikes;
+
+
+        const radius =
+        i % 2 === 0
+        ? outerRadius
+        : innerRadius;
+
+
+        const px =
+        Math.cos(angle) *
+        radius;
+
+
+        const py =
+        Math.sin(angle) *
+        radius;
+
+
+        if(i === 0){
+
+            ctx.moveTo(
+                px,
+                py
+            );
+
+        }
+
+        else{
+
+            ctx.lineTo(
+                px,
+                py
+            );
+
+        }
+
+    }
+
+
+    ctx.closePath();
+
+
+    ctx.fillStyle =
+    "#FFD75E";
+
+    ctx.fill();
+
+
+    ctx.restore();
+
+}
+
+
+/* ==================================================
+   DRAW SPARKLE
+================================================== */
+
+function drawSpaceSparkle(
+    ctx,
+    x,
+    y,
+    size
+){
+
+    ctx.save();
+
+    ctx.translate(
+        x,
+        y
+    );
+
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+        0,
+        -size
+    );
+
+    ctx.lineTo(
+        size * 0.25,
+        -size * 0.25
+    );
+
+    ctx.lineTo(
+        size,
+        0
+    );
+
+    ctx.lineTo(
+        size * 0.25,
+        size * 0.25
+    );
+
+    ctx.lineTo(
+        0,
+        size
+    );
+
+    ctx.lineTo(
+        -size * 0.25,
+        size * 0.25
+    );
+
+    ctx.lineTo(
+        -size,
+        0
+    );
+
+    ctx.lineTo(
+        -size * 0.25,
+        -size * 0.25
+    );
+
+    ctx.closePath();
+
+
+    ctx.fillStyle =
+    "#FFFFFF";
+
+    ctx.shadowColor =
+    "rgba(255,255,255,0.9)";
+
+    ctx.shadowBlur =
+    10;
+
+    ctx.fill();
+
+
+    ctx.restore();
+
+}
+
+
+/* ==================================================
+   SPACE CELEBRATION
+================================================== */
+
+function createSpaceCelebration(){
+
+    canvas.style.display =
+    "block";
+
+
+    const start =
+    performance.now();
+
+
+    const duration =
+    5000;
+
+
+    const objects = [
+
+        /* ROCKETS */
+
+        {
+            type:"rocket",
+            x:0.10,
+            delay:0,
+            size:105,
+            rotation:-0.08
+        },
+
+        {
+            type:"rocket",
+            x:0.36,
+            delay:0.10,
+            size:90,
+            rotation:0.06
+        },
+
+        {
+            type:"rocket",
+            x:0.63,
+            delay:0.04,
+            size:115,
+            rotation:-0.05
+        },
+
+        {
+            type:"rocket",
+            x:0.87,
+            delay:0.16,
+            size:95,
+            rotation:0.07
+        },
+
+
+        /* PLANETS */
+
+        {
+            type:"planet",
+            x:0.24,
+            delay:0.06,
+            size:80,
+            rotation:0
+        },
+
+        {
+            type:"planet",
+            x:0.76,
+            delay:0.15,
+            size:65,
+            rotation:0
+        },
+
+
+        /* STARS */
+
+        {
+            type:"star",
+            x:0.16,
+            delay:0.12,
+            size:35,
+            rotation:0
+        },
+
+        {
+            type:"star",
+            x:0.48,
+            delay:0.02,
+            size:28,
+            rotation:0
+        },
+
+        {
+            type:"star",
+            x:0.91,
+            delay:0.08,
+            size:38,
+            rotation:0
+        },
+
+
+        /* SPARKLES */
+
+        {
+            type:"sparkle",
+            x:0.05,
+            delay:0.05,
+            size:11,
+            rotation:0
+        },
+
+        {
+            type:"sparkle",
+            x:0.30,
+            delay:0.20,
+            size:9,
+            rotation:0
+        },
+
+        {
+            type:"sparkle",
+            x:0.55,
+            delay:0.10,
+            size:13,
+            rotation:0
+        },
+
+        {
+            type:"sparkle",
+            x:0.72,
+            delay:0.18,
+            size:10,
+            rotation:0
+        },
+
+        {
+            type:"sparkle",
+            x:0.97,
+            delay:0.04,
+            size:12,
+            rotation:0
+        }
+
+    ];
+
+
+    function animate(now){
+
+        const elapsed =
+        now - start;
+
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        objects.forEach(obj => {
+
+            let progress =
+            elapsed / duration;
+
+
+            progress =
+            progress -
+            obj.delay;
+
+
+            if(progress < 0){
+
+                return;
+
+            }
+
+
+            if(progress > 1){
+
+                return;
+
+            }
+
+
+            /* START FROM BOTTOM */
+
+            const startY =
+            canvas.height + 150;
+
+
+            /* END ABOVE SCREEN */
+
+            const endY =
+            -180;
+
+
+            const y =
+            startY +
+            (endY - startY) *
+            progress;
+
+
+            /* SOFT SIDE MOVEMENT */
+
+            const wave =
+            Math.sin(
+                progress *
+                Math.PI *
+                4 +
+                obj.x * 5
+            ) * 35;
+
+
+            const x =
+            canvas.width *
+            obj.x +
+            wave;
+
+
+            /* FADE IN / OUT */
+
+            let alpha = 1;
+
+
+            if(progress < 0.10){
+
+                alpha =
+                progress / 0.10;
+
+            }
+
+
+            if(progress > 0.88){
+
+                alpha =
+                (1 - progress) / 0.12;
+
+            }
+
+
+            ctx.globalAlpha =
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    alpha
+                )
+            );
+
+
+            /* SMALL FLOATING EFFECT */
+
+            const floating =
+            Math.sin(
+                progress *
+                Math.PI *
+                8
+            ) * 0.04;
+
+
+            const rotation =
+            (obj.rotation || 0) +
+            floating;
+
+
+            if(obj.type === "rocket"){
+
+                drawSpaceRocket(
+                    ctx,
+                    x,
+                    y,
+                    obj.size,
+                    rotation
+                );
+
+            }
+
+
+            else if(obj.type === "planet"){
+
+                drawSpacePlanet(
+                    ctx,
+                    x,
+                    y,
+                    obj.size
+                );
+
+            }
+
+
+            else if(obj.type === "star"){
+
+                drawSpaceStar(
+                    ctx,
+                    x,
+                    y,
+                    obj.size,
+                    rotation
+                );
+
+            }
+
+
+            else if(obj.type === "sparkle"){
+
+                drawSpaceSparkle(
+                    ctx,
+                    x,
+                    y,
+                    obj.size
+                );
+
+            }
+
+        });
+
+
+        ctx.globalAlpha = 1;
+
+
+        if(elapsed < duration){
+
+            requestAnimationFrame(
+                animate
+            );
+
+        }
+
+        else{
+
+            canvas.style.display =
+            "none";
+
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+        }
+
+    }
+
+
+    requestAnimationFrame(
+        animate
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>

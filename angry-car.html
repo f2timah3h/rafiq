@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
+
+<title>تعرف على المشاعر</title>
+
+
+<style>
+
+/* ==================================================
+   BASIC
+================================================== */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+}
+
+body{
+
+    font-family:
+    "Tajawal",
+    "Tahoma",
+    "Arial",
+    sans-serif;
+
+    background-image:url("images/car15.jpeg");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    color:#555;
+
+    overflow:hidden;
+}
+
+
+/* ==================================================
+   BACK BUTTON
+================================================== */
+
+.back-btn{
+
+    position:fixed;
+
+    top:25px;
+    left:25px;
+
+    border:none;
+
+    background:rgba(255,255,255,0.92);
+
+    padding:11px 22px;
+
+    border-radius:30px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.08);
+
+    z-index:50;
+}
+
+
+/* ==================================================
+   MENU BUTTON
+================================================== */
+
+.menu-btn{
+
+    position:fixed;
+
+    top:25px;
+    right:25px;
+
+    width:52px;
+    height:52px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.92);
+
+    font-size:25px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 4px 12px rgba(0,0,0,0.08);
+
+    z-index:60;
+}
+
+
+/* ==================================================
+   MENU
+================================================== */
+
+.menu{
+
+    position:fixed;
+
+    top:88px;
+    right:25px;
+
+    width:185px;
+
+    padding:10px;
+
+    background:rgba(255,255,255,0.97);
+
+    border-radius:20px;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,0.15);
+
+    display:none;
+
+    z-index:100;
+}
+
+.menu.show{
+    display:block;
+}
+
+.menu button{
+
+    width:100%;
+
+    border:none;
+
+    background:transparent;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    font-size:17px;
+
+    color:#555;
+
+    cursor:pointer;
+}
+
+.menu button:hover{
+
+    background:#eaf6ff;
+}
+
+
+/* ==================================================
+   HINT BUTTON
+================================================== */
+
+.hint-btn{
+
+    position:fixed;
+
+    top:25px;
+
+    right:95px;
+
+    width:52px;
+    height:52px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.92);
+
+    font-size:25px;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 4px 12px
+    rgba(0,0,0,0.08);
+
+    z-index:60;
+
+    transition:
+    transform 0.2s ease;
+}
+
+
+.hint-btn:hover{
+
+    transform:scale(1.08);
+}
+
+
+/* ==================================================
+   HINT BOX
+================================================== */
+
+.hint-box{
+
+    position:fixed;
+
+    top:88px;
+
+    right:95px;
+
+    width:300px;
+
+    max-width:80vw;
+
+    padding:18px 22px;
+
+    background:
+    rgba(255,255,255,0.97);
+
+    border-radius:22px;
+
+    box-shadow:
+    0 8px 25px
+    rgba(0,0,0,0.15);
+
+    font-size:18px;
+
+    line-height:1.7;
+
+    color:#55718b;
+
+    text-align:center;
+
+    display:none;
+
+    z-index:110;
+
+    animation:
+    hintIn 0.25s ease;
+}
+
+
+.hint-box.show{
+
+    display:block;
+}
+
+
+@keyframes hintIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-8px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+
+}
+
+
+/* ==================================================
+   MAIN PAGE
+================================================== */
+
+.page{
+
+    width:100%;
+
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding-top:300px;
+
+    position:relative;
+
+    z-index:10;
+}
+
+
+/* ==================================================
+   TITLE
+================================================== */
+
+.title{
+
+    font-size:34px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    line-height:1.4;
+
+    margin-top:200;
+}
+
+
+.subtitle{
+
+    font-size:19px;
+
+    color:#555;
+
+    line-height:1.6;
+
+    margin-top:4px;
+}
+
+
+/* ==================================================
+   QUESTION
+================================================== */
+
+.question{
+
+    font-size:25px;
+
+    font-weight:bold;
+
+    color:#555;
+
+    margin-top:28px;
+
+    margin-bottom:5px;
+
+    line-height:1.5;
+}
+
+
+/* ==================================================
+   CHILD IMAGE
+================================================== */
+
+.child-image{
+
+    width:270px;
+
+    height:315px;
+
+    object-fit:contain;
+
+    display:block;
+
+    margin:0;
+
+    filter:
+    drop-shadow(
+        0 7px 12px
+        rgba(0,0,0,0.10)
+    );
+
+    /*
+       حركة لطيفة للولد
+    */
+
+    animation:
+    childFloat 2.8s ease-in-out infinite;
+}
+
+
+/* ==================================================
+   CHILD MOVEMENT
+================================================== */
+
+@keyframes childFloat{
+
+    0%{
+
+        transform:
+        translateY(0)
+        rotate(0deg);
+    }
+
+    25%{
+
+        transform:
+        translateY(-5px)
+        rotate(-1deg);
+    }
+
+    50%{
+
+        transform:
+        translateY(0)
+        rotate(0deg);
+    }
+
+    75%{
+
+        transform:
+        translateY(-4px)
+        rotate(1deg);
+    }
+
+    100%{
+
+        transform:
+        translateY(0)
+        rotate(0deg);
+    }
+
+}
+
+
+/* ==================================================
+   ANSWERS
+================================================== */
+
+.answers{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:18px;
+
+    direction:rtl;
+
+    margin-top:2px;
+}
+
+
+.answer{
+
+    min-width:145px;
+
+    min-height:56px;
+
+    border:none;
+
+    border-radius:22px;
+
+    padding:11px 22px;
+
+    background:
+    rgba(255,255,255,0.90);
+
+    color:#55718b;
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 5px 15px
+    rgba(0,0,0,0.08);
+
+    transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+
+.answer:hover{
+
+    transform:
+    translateY(-3px);
+}
+
+
+.answer.correct{
+
+    background:#d9f5d9;
+}
+
+
+.answer.wrong{
+
+    background:#ffe0e0;
+
+    animation:
+    shake 0.35s ease;
+}
+
+
+.answer:disabled{
+
+    cursor:default;
+}
+
+
+@keyframes shake{
+
+    0%{
+        transform:translateX(0);
+    }
+
+    25%{
+        transform:translateX(-6px);
+    }
+
+    50%{
+        transform:translateX(6px);
+    }
+
+    75%{
+        transform:translateX(-4px);
+    }
+
+    100%{
+        transform:translateX(0);
+    }
+
+}
+
+
+/* ==================================================
+   RESULT
+================================================== */
+
+.result{
+
+    min-height:27px;
+
+    margin-top:6px;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    color:#55718b;
+}
+
+
+/* ==================================================
+   NEXT BUTTON
+================================================== */
+
+.next-btn{
+
+    border:none;
+
+    padding:15px 55px;
+
+    margin-top:60px;
+
+    border-radius:28px;
+
+    background:#d9f1ff;
+
+    color:#55718b;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    opacity:0.5;
+
+    pointer-events:none;
+
+    box-shadow:
+    0 5px 15px
+    rgba(0,0,0,0.08);
+
+    transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+
+    z-index:30;
+}
+
+
+.next-btn.enabled{
+
+    opacity:1;
+
+    pointer-events:auto;
+}
+
+
+.next-btn.enabled:hover{
+
+    transform:
+    translateY(-3px);
+}
+
+
+/* ==================================================
+   CAR BALLOON CELEBRATION
+================================================== */
+
+#carCelebration{
+
+    position:fixed;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:200;
+
+    display:none;
+}
+
+
+/* ==================================================
+   ONE CAR BALLOON
+================================================== */
+
+.car-balloon{
+
+    position:absolute;
+
+    bottom:-220px;
+
+    width:145px;
+
+    height:225px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    animation:
+    carFly
+    var(--duration)
+    ease-in-out
+    var(--delay)
+    forwards;
+}
+
+
+/* ==================================================
+   BALLOON CAR BODY
+================================================== */
+
+.car-balloon-body{
+
+    position:relative;
+
+    width:135px;
+
+    height:88px;
+
+    border-radius:
+    50% 50% 43% 43%;
+
+    background:
+    var(--car-color);
+
+    border:
+    3px solid
+    rgba(255,255,255,0.80);
+
+    box-shadow:
+
+    inset
+    9px 8px 15px
+    rgba(255,255,255,0.48),
+
+    inset
+    -8px -9px 14px
+    rgba(0,0,0,0.12),
+
+    0 8px 15px
+    rgba(0,0,0,0.12);
+
+    transform:
+    scaleY(1.05);
+}
+
+
+.car-balloon-body::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:9px;
+
+    left:18px;
+
+    width:40px;
+
+    height:15px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,0.70);
+
+    transform:
+    rotate(-20deg);
+}
+
+
+.car-balloon-body::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:-8px;
+
+    width:13px;
+
+    height:13px;
+
+    background:
+    var(--car-color-dark);
+
+    transform:
+    translateX(-50%)
+    rotate(45deg);
+
+    border-radius:3px;
+}
+
+
+/* ==================================================
+   CAR ROOF
+================================================== */
+
+.car-roof{
+
+    position:absolute;
+
+    left:31px;
+
+    top:-29px;
+
+    width:73px;
+
+    height:45px;
+
+    border-radius:
+    45px 45px 12px 12px;
+
+    background:
+    var(--car-color-light);
+
+    border:
+    3px solid
+    rgba(255,255,255,0.70);
+
+    box-shadow:
+
+    inset
+    5px 5px 8px
+    rgba(255,255,255,0.38),
+
+    inset
+    -4px -4px 7px
+    rgba(0,0,0,0.08);
+}
+
+
+/* ==================================================
+   WINDOWS
+================================================== */
+
+.car-window{
+
+    position:absolute;
+
+    top:7px;
+
+    width:27px;
+
+    height:21px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #e5f8ff,
+        #8bcbe9
+    );
+
+    border:
+    2px solid
+    rgba(75,115,140,0.45);
+}
+
+
+.car-window.left{
+
+    left:7px;
+
+    border-radius:
+    12px 4px 4px 4px;
+}
+
+
+.car-window.right{
+
+    right:7px;
+
+    border-radius:
+    4px 12px 4px 4px;
+}
+
+
+/* ==================================================
+   WHEELS
+================================================== */
+
+.car-wheel{
+
+    position:absolute;
+
+    bottom:-15px;
+
+    width:34px;
+
+    height:34px;
+
+    border-radius:50%;
+
+    background:#3e4c61;
+
+    border:
+    4px solid
+    rgba(255,255,255,0.85);
+}
+
+
+.car-wheel.left{
+    left:12px;
+}
+
+
+.car-wheel.right{
+    right:12px;
+}
+
+
+.car-wheel::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:11px;
+
+    height:11px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+    border-radius:50%;
+
+    background:#dce8ef;
+}
+
+
+/* ==================================================
+   LIGHTS
+================================================== */
+
+.car-light{
+
+    position:absolute;
+
+    top:39px;
+
+    width:14px;
+
+    height:11px;
+
+    border-radius:50%;
+
+    background:#fff5a8;
+
+    box-shadow:
+    0 0 8px
+    rgba(255,230,100,0.75);
+}
+
+
+.car-light.left{
+    left:3px;
+}
+
+
+.car-light.right{
+    right:3px;
+}
+
+
+/* ==================================================
+   SMILE
+================================================== */
+
+.car-smile{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:13px;
+
+    width:30px;
+
+    height:12px;
+
+    transform:
+    translateX(-50%);
+
+    border-bottom:
+    3px solid
+    rgba(70,70,70,0.55);
+
+    border-radius:
+    0 0 50% 50%;
+}
+
+
+/* ==================================================
+   BUMPER
+================================================== */
+
+.car-bumper{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:2px;
+
+    width:78px;
+
+    height:6px;
+
+    transform:
+    translateX(-50%);
+
+    border-radius:10px;
+
+    background:
+    rgba(255,255,255,0.55);
+}
+
+
+/* ==================================================
+   STRING
+================================================== */
+
+.car-string{
+
+    width:3px;
+
+    height:105px;
+
+    margin-top:8px;
+
+    background:
+    linear-gradient(
+        90deg,
+        rgba(80,80,80,0.15),
+        rgba(80,80,80,0.55),
+        rgba(80,80,80,0.15)
+    );
+}
+
+
+/* ==================================================
+   FLYING
+================================================== */
+
+@keyframes carFly{
+
+    0%{
+
+        transform:
+        translate3d(0,0,0)
+        rotate(-5deg)
+        scale(.92);
+
+        opacity:0;
+    }
+
+    8%{
+        opacity:1;
+    }
+
+    20%{
+
+        transform:
+        translate3d(25px,-18vh,0)
+        rotate(5deg)
+        scale(1);
+    }
+
+    40%{
+
+        transform:
+        translate3d(-28px,-42vh,0)
+        rotate(-5deg)
+        scale(1.02);
+    }
+
+    60%{
+
+        transform:
+        translate3d(30px,-66vh,0)
+        rotate(5deg)
+        scale(1);
+    }
+
+    80%{
+
+        transform:
+        translate3d(-20px,-90vh,0)
+        rotate(-4deg)
+        scale(.98);
+
+        opacity:1;
+    }
+
+    100%{
+
+        transform:
+        translate3d(15px,-130vh,0)
+        rotate(4deg)
+        scale(.95);
+
+        opacity:0;
+    }
+
+}
+
+
+/* ==================================================
+   COMPLETION POPUP
+================================================== */
+
+.completion-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background:
+    rgba(50,65,90,0.30);
+
+    backdrop-filter:
+    blur(3px);
+
+    -webkit-backdrop-filter:
+    blur(3px);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:500;
+}
+
+
+.completion-overlay.show{
+
+    display:flex;
+}
+
+
+.completion-popup{
+
+    width:470px;
+
+    max-width:82vw;
+
+    background:
+    rgba(255,255,255,0.98);
+
+    border-radius:35px;
+
+    padding:32px 35px 30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 15px 40px
+    rgba(0,0,0,0.20);
+
+    animation:
+    popupIn .35s ease;
+}
+
+
+@keyframes popupIn{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.75);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+    }
+
+}
+
+
+.completion-icon{
+
+    font-size:58px;
+
+    line-height:1;
+
+    margin-bottom:12px;
+}
+
+
+.completion-title{
+
+    font-size:31px;
+
+    font-weight:bold;
+
+    color:#55718b;
+
+    margin-bottom:10px;
+}
+
+
+.completion-text{
+
+    font-size:21px;
+
+    line-height:1.8;
+
+    color:#555;
+
+    margin-bottom:24px;
+}
+
+
+.completion-next{
+
+    border:none;
+
+    padding:15px 48px;
+
+    border-radius:27px;
+
+    background:#d9f1ff;
+
+    color:#55718b;
+
+    font-size:21px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    box-shadow:
+    0 5px 15px
+    rgba(0,0,0,0.10);
+}
+
+
+/* ==================================================
+   iPAD
+================================================== */
+
+@media
+(min-width:700px)
+and
+(max-width:1100px){
+
+    .page{
+        padding-top:390px;
+    }
+
+   
+
+    .subtitle{
+        font-size:19px;
+    }
+
+
+
+    .child-image{
+        width:270px;
+        height:315px;
+    }
+
+    .answer{
+        min-width:145px;
+        font-size:19px;
+    }
+
+}
+
+
+/* ==================================================
+   SHORT SCREENS
+================================================== */
+
+@media(max-height:900px){
+
+    .page{
+        padding-top:75px;
+    }
+
+    .title{
+        font-size:30px;
+    }
+
+    .subtitle{
+        font-size:17px;
+    }
+
+    .question{
+        font-size:21px;
+        margin-top:18px;
+    }
+
+    .child-image{
+        width:220px;
+        height:250px;
+    }
+
+    .answer{
+        min-width:135px;
+        font-size:17px;
+    }
+
+    .next-btn{
+        padding:13px 45px;
+        font-size:19px;
+    }
+
+}
+
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media(max-width:699px){
+
+    body{
+        overflow:auto;
+    }
+
+    .page{
+
+        height:auto;
+
+        min-height:100vh;
+
+        padding-top:85px;
+
+        padding-bottom:50px;
+    }
+
+    .title{
+        font-size:27px;
+    }
+
+    .subtitle{
+        font-size:16px;
+    }
+
+    .question{
+        font-size:20px;
+        margin-top:20px;
+    }
+
+    .child-image{
+        width:220px;
+        height:270px;
+    }
+
+    .answers{
+        gap:7px;
+    }
+
+    .answer{
+
+        min-width:105px;
+
+        min-height:50px;
+
+        padding:9px 10px;
+
+        font-size:16px;
+    }
+
+    .next-btn{
+
+        padding:13px 40px;
+
+        font-size:19px;
+    }
+
+    .back-btn{
+
+        left:12px;
+
+        top:15px;
+    }
+
+    .menu-btn{
+
+        right:12px;
+
+        top:15px;
+    }
+
+    .hint-btn{
+
+        right:75px;
+
+        top:15px;
+
+        width:48px;
+
+        height:48px;
+    }
+
+    .hint-box{
+
+        top:75px;
+
+        right:50%;
+
+        transform:translateX(50%);
+
+        width:300px;
+    }
+
+    .completion-popup{
+
+        width:88vw;
+
+        padding:27px 20px 25px;
+    }
+
+    .completion-icon{
+        font-size:48px;
+    }
+
+    .completion-title{
+        font-size:27px;
+    }
+
+    .completion-text{
+        font-size:18px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     BACK
+================================================== -->
+
+<button
+class="back-btn"
+onclick="goBack()">
+
+    السابق ←
+
+</button>
+
+
+<!-- ==================================================
+     HINT BUTTON
+================================================== -->
+
+<button
+class="hint-btn"
+onclick="toggleHint()">
+
+    💡
+
+</button>
+
+
+<!-- ==================================================
+     MENU BUTTON
+================================================== -->
+
+<button
+class="menu-btn"
+onclick="toggleMenu()">
+
+    ☰
+
+</button>
+
+
+<!-- ==================================================
+     HINT BOX
+================================================== -->
+
+<div
+class="hint-box"
+id="hintBox">
+
+    💡 تلميح:<br>
+
+    انظر إلى وجه الطفل جيدًا.
+    هل يبدو سعيدًا أم خائفًا أم غاضبًا؟ 😊
+
+</div>
+
+
+<!-- ==================================================
+     MENU
+================================================== -->
+
+<div
+class="menu"
+id="menu">
+
+    <button onclick="location.href='home.html'">
+        🏠 الرئيسية
+    </button>
+
+    <button onclick="location.href='profile.html'">
+        👤 ملفي
+    </button>
+
+    <button onclick="location.href='reports.html'">
+        📊 تقاريري
+    </button>
+
+</div>
+
+
+<!-- ==================================================
+     MAIN PAGE
+================================================== -->
+
+<div class="page">
+
+
+    
+
+
+    <div class="subtitle">
+
+        شاهد الطفل جيدًا ثم اختر الشعور المناسب.
+
+    </div>
+
+
+   
+
+
+    <!-- ==================================================
+         CHILD IMAGE
+    ================================================== -->
+
+    <img
+    src="images/angry.png"
+    class="child-image"
+    alt="طفل غاضب">
+
+
+    <!-- ==================================================
+         ANSWERS
+    ================================================== -->
+
+    <div class="answers">
+
+
+        <button
+        class="answer"
+        onclick="checkAnswer('الخوف',this)">
+
+            الخوف 
+
+        </button>
+
+
+        <button
+        class="answer"
+        onclick="checkAnswer('السعادة',this)">
+
+            السعادة 
+
+        </button>
+
+
+        <button
+        class="answer"
+        onclick="checkAnswer('الغضب',this)">
+
+            الغضب 
+
+        </button>
+
+
+    </div>
+
+
+    <div
+    class="result"
+    id="result">
+
+    </div>
+
+
+    <button
+    class="next-btn"
+    id="nextBtn"
+    onclick="goNext()">
+
+        التالي 
+
+    </button>
+
+
+</div>
+
+
+<!-- ==================================================
+     CAR BALLOONS
+================================================== -->
+
+<div
+id="carCelebration">
+</div>
+
+
+<!-- ==================================================
+     COMPLETION POPUP
+================================================== -->
+
+<div
+class="completion-overlay"
+id="completionOverlay">
+
+
+    <div
+    class="completion-popup">
+
+
+        <div class="completion-icon">
+
+            🚗⭐🎈
+
+        </div>
+
+
+        <div class="completion-title">
+
+            مبروك! 🎉
+
+        </div>
+
+
+        <div class="completion-text">
+
+            أنهيت هذه المرحلة!<br>
+
+            أحسنت يا بطل! ✨
+
+        </div>
+
+
+        <button
+        class="completion-next"
+        onclick="goToEmotions()">
+
+            التالي →
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ==================================================
+   VARIABLES
+================================================== */
+
+let answered = false;
+
+let attempts = 0;
+
+
+/* ==================================================
+   MENU
+================================================== */
+
+function toggleMenu(){
+
+    document
+    .getElementById("menu")
+    .classList
+    .toggle("show");
+
+}
+
+
+/* ==================================================
+   HINT
+================================================== */
+
+function toggleHint(){
+
+    document
+    .getElementById("hintBox")
+    .classList
+    .toggle("show");
+
+}
+
+
+/* ==================================================
+   BACK
+================================================== */
+
+function goBack(){
+
+    window.location.href =
+    "feeling-car.html";
+
+}
+
+
+/* ==================================================
+   CHECK ANSWER
+================================================== */
+
+function checkAnswer(
+    answer,
+    button
+){
+
+    if(answered){
+
+        return;
+
+    }
+
+
+    attempts++;
+
+
+    const result =
+    document.getElementById(
+        "result"
+    );
+
+
+    /* ==================================================
+       CORRECT
+    ================================================== */
+
+    if(answer === "الغضب"){
+
+        answered = true;
+
+
+        document
+        .querySelectorAll(".answer")
+        .forEach(btn => {
+
+            btn.disabled = true;
+
+        });
+
+
+        button.classList.add(
+            "correct"
+        );
+
+
+        result.innerHTML =
+        "أحسنت! إجابتك صحيحة 🌟";
+
+
+        document
+        .getElementById("nextBtn")
+        .classList
+        .add("enabled");
+
+
+        saveGameData(true);
+
+
+        createCarBalloons();
+
+    }
+
+
+    /* ==================================================
+       WRONG
+    ================================================== */
+
+    else{
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        result.innerHTML =
+        "حاول مرة أخرى 🚗";
+
+
+        setTimeout(() => {
+
+            button.classList.remove(
+                "wrong"
+            );
+
+        },700);
+
+
+        saveGameData(false);
+
+    }
+
+}
+
+
+/* ==================================================
+   SAVE DATA
+================================================== */
+
+function saveGameData(correct){
+
+    const oldData =
+    JSON.parse(
+        localStorage.getItem(
+            "rafiqGameData"
+        ) || "{}"
+    );
+
+
+    oldData.angryEmotion = {
+
+        attempts:
+        attempts,
+
+        correct:
+        correct,
+
+        stars:
+        correct ? 3 : 0,
+
+        completed:
+        correct,
+
+        date:
+        new Date().toISOString()
+
+    };
+
+
+    localStorage.setItem(
+        "rafiqGameData",
+        JSON.stringify(oldData)
+    );
+
+}
+
+
+/* ==================================================
+   NEXT
+================================================== */
+
+function goNext(){
+
+    if(!answered){
+
+        return;
+
+    }
+
+
+    document
+    .getElementById(
+        "completionOverlay"
+    )
+    .classList
+    .add("show");
+
+}
+
+
+/* ==================================================
+   GO TO EMOTIONS
+================================================== */
+
+function goToEmotions(){
+
+    window.location.href =
+    "emotions.html";
+
+}
+
+
+/* ==================================================
+   CREATE CAR BALLOONS
+================================================== */
+
+function createCarBalloons(){
+
+    const container =
+    document.getElementById(
+        "carCelebration"
+    );
+
+
+    container.innerHTML = "";
+
+
+    container.style.display =
+    "block";
+
+
+    const cars = [
+
+        {
+            color:"#ff7474",
+            light:"#ffaaa8",
+            dark:"#d95757",
+            left:"5%",
+            delay:"0s",
+            duration:"5.8s"
+        },
+
+        {
+            color:"#70baf0",
+            light:"#a9dcfa",
+            dark:"#4d92c8",
+            left:"20%",
+            delay:"0.35s",
+            duration:"6.3s"
+        },
+
+        {
+            color:"#ffd45c",
+            light:"#ffeb9a",
+            dark:"#d5ad32",
+            left:"36%",
+            delay:"0.10s",
+            duration:"5.6s"
+        },
+
+        {
+            color:"#7fd489",
+            light:"#b6eabc",
+            dark:"#55ad61",
+            left:"52%",
+            delay:"0.55s",
+            duration:"6.2s"
+        },
+
+        {
+            color:"#b895e6",
+            light:"#d7c3f4",
+            dark:"#9270c2",
+            left:"68%",
+            delay:"0.20s",
+            duration:"5.9s"
+        },
+
+        {
+            color:"#ff9b68",
+            light:"#ffc19d",
+            dark:"#dc7045",
+            left:"84%",
+            delay:"0.70s",
+            duration:"6.5s"
+        }
+
+    ];
+
+
+    cars.forEach(car => {
+
+        const wrapper =
+        document.createElement("div");
+
+        wrapper.className =
+        "car-balloon";
+
+        wrapper.style.left =
+        car.left;
+
+        wrapper.style.setProperty(
+            "--delay",
+            car.delay
+        );
+
+        wrapper.style.setProperty(
+            "--duration",
+            car.duration
+        );
+
+        wrapper.style.setProperty(
+            "--car-color",
+            car.color
+        );
+
+        wrapper.style.setProperty(
+            "--car-color-light",
+            car.light
+        );
+
+        wrapper.style.setProperty(
+            "--car-color-dark",
+            car.dark
+        );
+
+
+        const body =
+        document.createElement("div");
+
+        body.className =
+        "car-balloon-body";
+
+
+        const roof =
+        document.createElement("div");
+
+        roof.className =
+        "car-roof";
+
+
+        const windowLeft =
+        document.createElement("div");
+
+        windowLeft.className =
+        "car-window left";
+
+
+        const windowRight =
+        document.createElement("div");
+
+        windowRight.className =
+        "car-window right";
+
+
+        roof.appendChild(
+            windowLeft
+        );
+
+        roof.appendChild(
+            windowRight
+        );
+
+
+        const wheelLeft =
+        document.createElement("div");
+
+        wheelLeft.className =
+        "car-wheel left";
+
+
+        const wheelRight =
+        document.createElement("div");
+
+        wheelRight.className =
+        "car-wheel right";
+
+
+        const lightLeft =
+        document.createElement("div");
+
+        lightLeft.className =
+        "car-light left";
+
+
+        const lightRight =
+        document.createElement("div");
+
+        lightRight.className =
+        "car-light right";
+
+
+        const smile =
+        document.createElement("div");
+
+        smile.className =
+        "car-smile";
+
+
+        const bumper =
+        document.createElement("div");
+
+        bumper.className =
+        "car-bumper";
+
+
+        body.appendChild(roof);
+
+        body.appendChild(wheelLeft);
+
+        body.appendChild(wheelRight);
+
+        body.appendChild(lightLeft);
+
+        body.appendChild(lightRight);
+
+        body.appendChild(smile);
+
+        body.appendChild(bumper);
+
+
+        const string =
+        document.createElement("div");
+
+        string.className =
+        "car-string";
+
+
+        wrapper.appendChild(body);
+
+        wrapper.appendChild(string);
+
+        container.appendChild(wrapper);
+
+    });
+
+
+    setTimeout(() => {
+
+        container.style.display =
+        "none";
+
+        container.innerHTML = "";
+
+    },7500);
+
+}
+
+</script>
+
+
+</body>
+
+</html>

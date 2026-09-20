@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>روتيني يتغيّر | رفيق</title>
+
+    <style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    direction: rtl;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            180deg,
+            #dff4fa 0%,
+            #eef8ed 55%,
+            #e8f4dd 100%
+        );
+
+    color: #4e4b75;
+}
+
+
+/* الصفحة كاملة */
+
+#game {
+    width: 100%;
+    max-width: 1100px;
+    min-height: 100vh;
+
+    margin: auto;
+    padding: 25px;
+}
+
+
+/* الشريط العلوي */
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    direction: ltr;
+
+    margin-bottom: 20px;
+}
+
+
+#pageNumber {
+    background: rgba(255,255,255,0.85);
+
+    padding: 12px 22px;
+
+    border-radius: 25px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    color: #575486;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+
+.circle-btn {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: #fff8f1;
+
+    color: #a75b70;
+
+    font-size: 30px;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+
+.circle-btn:hover {
+    transform: scale(1.05);
+}
+
+
+/* البطاقة الرئيسية */
+
+.page-card {
+    position: relative;
+
+    min-height: 760px;
+
+    border-radius: 45px;
+
+    overflow: hidden;
+
+    padding: 45px;
+
+    background: rgba(255,255,255,0.82);
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+
+    text-align: center;
+}
+
+
+/* العناوين */
+
+h1 {
+    color: #a54f69;
+
+    font-size: 52px;
+
+    margin: 10px 0 15px;
+}
+
+
+h2 {
+    color: #a54f69;
+
+    font-size: 42px;
+
+    margin: 10px 0 15px;
+}
+
+
+.subtitle {
+    font-size: 24px;
+
+    line-height: 1.8;
+
+    margin: 0 auto 25px;
+
+    max-width: 750px;
+}
+
+
+/* الصور العادية */
+
+.main-image {
+    display: block;
+
+    max-width: 330px;
+    max-height: 330px;
+
+    object-fit: contain;
+
+    margin: 25px auto;
+}
+
+
+.small-image {
+    width: 130px;
+    height: 130px;
+
+    object-fit: contain;
+}
+
+
+/* رفيق */
+
+.cloud-image {
+    width: 180px;
+    max-height: 180px;
+
+    object-fit: contain;
+}
+
+
+/* الأزرار */
+
+.main-btn {
+    border: none;
+
+    background: #a54f69;
+
+    color: white;
+
+    font-size: 22px;
+    font-weight: bold;
+
+    padding: 16px 55px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    margin: 15px 8px;
+
+    box-shadow: 0 8px 18px rgba(165,79,105,0.25);
+}
+
+
+.main-btn:hover {
+    transform: translateY(-2px);
+}
+
+
+.secondary-btn {
+    border: 2px solid #a54f69;
+
+    background: white;
+
+    color: #a54f69;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    padding: 14px 35px;
+
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    margin: 10px;
+}
+
+
+/* الروتين */
+
+.routine-row {
+    display: grid;
+
+    grid-template-columns: repeat(5, 1fr);
+
+    gap: 15px;
+
+    margin-top: 30px;
+
+    direction: rtl;
+}
+
+
+.routine-item {
+    background: rgba(255,255,255,0.9);
+
+    border: 2px solid #eadce0;
+
+    border-radius: 25px;
+
+    padding: 18px 10px;
+
+    min-height: 210px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+.routine-item img {
+    width: 105px;
+    height: 105px;
+
+    object-fit: contain;
+}
+
+
+.routine-item p {
+    margin: 0;
+
+    font-size: 18px;
+
+    line-height: 1.5;
+}
+
+
+/* المشاعر */
+
+.emotions {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    max-width: 850px;
+
+    margin: 35px auto;
+}
+
+
+.emotion {
+    border: 3px solid transparent;
+
+    background: #fff;
+
+    border-radius: 28px;
+
+    padding: 25px 10px;
+
+    cursor: pointer;
+
+    font-size: 19px;
+
+    transition: 0.2s;
+
+    color: #4e4b75;
+}
+
+
+.emotion .emoji {
+    font-size: 65px;
+
+    display: block;
+
+    margin-bottom: 12px;
+}
+
+
+.emotion:hover,
+.emotion.selected {
+    border-color: #a54f69;
+
+    transform: translateY(-5px);
+
+    background: #fff8fa;
+}
+
+
+/* اختيار الحذاء */
+
+.shoes {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 35px;
+
+    flex-wrap: wrap;
+
+    margin: 30px auto;
+}
+
+
+.shoe-option {
+    width: 250px;
+
+    border: 3px solid transparent;
+
+    border-radius: 30px;
+
+    padding: 20px;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.shoe-option:hover {
+    transform: translateY(-5px);
+
+    border-color: #a54f69;
+}
+
+
+.shoe-option img {
+    width: 190px;
+    height: 150px;
+
+    object-fit: contain;
+}
+
+
+.shoe-option p {
+    font-size: 21px;
+    font-weight: bold;
+
+    margin-bottom: 5px;
+}
+
+
+.unavailable {
+    opacity: 0.5;
+
+    cursor: not-allowed;
+}
+
+
+.unavailable:hover {
+    transform: none;
+
+    border-color: transparent;
+}
+
+
+/* رسالة رفيق */
+
+.rafiq-message {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 25px;
+
+    max-width: 750px;
+
+    margin: 30px auto;
+
+    background: #f5f8ff;
+
+    border-radius: 30px;
+
+    padding: 25px;
+}
+
+
+.rafiq-message p {
+    font-size: 23px;
+
+    line-height: 1.8;
+
+    text-align: right;
+}
+
+
+/* خلفيات القصص */
+
+.background-page {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: 0;
+}
+
+
+/* طبقة فوق الخلفية */
+
+.background-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 50px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(255,255,255,0.96) 0%,
+            rgba(255,255,255,0.72) 28%,
+            rgba(255,255,255,0.08) 65%
+        );
+}
+
+
+/* عشان الخلفية تبان كبيرة وواضحة */
+
+.scene-card {
+    padding: 0;
+
+    min-height: 760px;
+}
+
+
+/* صندوق النص فوق الخلفية */
+
+.scene-text {
+    background: rgba(255,255,255,0.93);
+
+    padding: 22px 35px;
+
+    border-radius: 28px;
+
+    max-width: 700px;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+}
+
+
+.scene-text h2 {
+    margin: 0 0 10px;
+
+    font-size: 38px;
+}
+
+
+.scene-text p {
+    font-size: 22px;
+
+    margin: 0;
+
+    line-height: 1.7;
+}
+
+
+/* صفحة الدروس */
+
+.lessons {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+
+    max-width: 750px;
+
+    margin: 30px auto;
+}
+
+
+.lesson {
+    background: #fff;
+
+    border-radius: 25px;
+
+    padding: 25px;
+
+    font-size: 21px;
+
+    box-shadow: 0 7px 18px rgba(0,0,0,0.06);
+}
+
+
+/* النهاية */
+
+.last-page {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    z-index: 0;
+}
+
+
+.last-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: center;
+
+    padding: 45px;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(255,255,255,0.95),
+            rgba(255,255,255,0.25) 60%,
+            transparent
+        );
+}
+
+
+.success-box {
+    background: rgba(255,255,255,0.94);
+
+    border-radius: 35px;
+
+    padding: 25px 45px;
+
+    max-width: 700px;
+}
+
+
+.success-box h1 {
+    margin: 0 0 10px;
+}
+
+
+.success-box p {
+    font-size: 23px;
+
+    line-height: 1.7;
+}
+
+
+/* الجوال */
+
+@media (max-width: 800px) {
+
+    #game {
+        padding: 12px;
+    }
+
+    .page-card {
+        min-height: 680px;
+
+        padding: 25px 15px;
+
+        border-radius: 30px;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    .subtitle {
+        font-size: 19px;
+    }
+
+    .routine-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .emotions {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .lessons {
+        grid-template-columns: 1fr;
+    }
+
+    .main-image {
+        max-width: 250px;
+    }
+}
+/* ===== إصلاح ظهور الخلفيات ===== */
+
+.scene-card {
+    position: relative;
+    overflow: hidden;
+}
+
+/* صورة الخلفية */
+.background-page {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain !important;
+    object-position: center center !important;
+
+    z-index: 0;
+
+    background-color: #f7f3ea;
+}
+
+/* الطبقة الموجودة فوق الخلفية */
+.background-overlay {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    height: 100%;
+}
+/* ===== صفحة الحذاء المفقود ===== */
+
+.lost-page {
+    position: relative;
+    overflow: hidden;
+}
+
+.lost-page .background-page {
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    z-index: 0 !important;
+}
+
+/* المحتوى فوق الخلفية */
+.lost-page .background-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+
+    padding: 30px 35px 45px !important;
+    box-sizing: border-box !important;
+
+    background: transparent !important;
+    z-index: 2 !important;
+}
+
+/* مربع الكلام */
+.lost-page .scene-text {
+    width: min(760px, 90%) !important;
+    padding: 22px 30px !important;
+    margin: 0 auto 18px !important;
+
+    background: rgba(255,255,255,0.90) !important;
+    border-radius: 28px !important;
+
+    text-align: center !important;
+}
+
+/* العنوان */
+.lost-page .scene-text h2 {
+    margin: 0 0 10px !important;
+}
+
+/* النص */
+.lost-page .scene-text p {
+    margin: 0 !important;
+}
+
+/* زر التالي */
+.lost-page .main-btn {
+    position: relative !important;
+    margin: 0 auto !important;
+    z-index: 3 !important;
+}
+/* ==================================
+   صفحة المدرسة
+================================== */
+
+.school-page {
+    position: relative;
+    overflow: hidden;
+}
+
+.school-page .background-page {
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    z-index: 0 !important;
+}
+
+.school-page .background-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+
+    padding: 30px 35px 45px !important;
+    box-sizing: border-box !important;
+
+    background: transparent !important;
+    z-index: 2 !important;
+}
+
+.school-page .scene-text {
+    width: min(760px, 90%) !important;
+    padding: 22px 30px !important;
+    margin: 0 auto 18px !important;
+
+    background: rgba(255,255,255,0.90) !important;
+    border-radius: 28px !important;
+
+    text-align: center !important;
+}
+
+.school-page .scene-text h2 {
+    margin: 0 0 10px !important;
+}
+
+.school-page .scene-text p {
+    margin: 0 !important;
+}
+
+.school-page .main-btn {
+    position: relative !important;
+    margin: 0 auto !important;
+    z-index: 5 !important;
+}
+
+
+/* ==================================
+   صفحة أحسنت
+================================== */
+
+.last-page {
+    position: relative;
+    overflow: hidden;
+}
+
+.last-page .background-page {
+    position: absolute !important;
+    inset: 0 !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    object-fit: cover !important;
+    object-position: center center !important;
+
+    z-index: 0 !important;
+}
+
+.last-page .background-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+
+    padding: 30px 35px 45px !important;
+    box-sizing: border-box !important;
+
+    background: transparent !important;
+    z-index: 2 !important;
+}
+
+.last-page .scene-text {
+    width: min(760px, 90%) !important;
+    padding: 22px 30px !important;
+    margin: 0 auto 18px !important;
+
+    background: rgba(255,255,255,0.90) !important;
+    border-radius: 28px !important;
+
+    text-align: center !important;
+}
+
+.last-page .scene-text h2 {
+    margin: 0 0 10px !important;
+}
+
+.last-page .scene-text p {
+    margin: 0 !important;
+}
+
+.last-page .main-btn {
+    position: relative !important;
+    margin: 0 auto !important;
+    z-index: 5 !important;
+}
+/* ==================================
+   الصفحة الأولى - روتيني يتغير
+================================== */
+
+.intro-page {
+    min-height: 0 !important;
+    height: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    padding: 25px 35px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+}
+
+/* الغيمة */
+.intro-page .cloud-image {
+    width: 120px !important;
+    height: auto !important;
+    max-height: 110px !important;
+
+    object-fit: contain !important;
+
+    margin: 0 auto 5px !important;
+}
+
+/* العنوان */
+.intro-page h1,
+.intro-page h2 {
+    margin: 5px 0 8px !important;
+}
+
+/* النص */
+.intro-page p {
+    margin: 0 0 15px !important;
+    line-height: 1.7 !important;
+}
+
+/* صورة الطفل */
+.intro-page .boy-image {
+    width: 280px !important;
+    height: 330px !important;
+
+    object-fit: contain !important;
+
+    margin: 5px auto 15px !important;
+}
+
+/* زر لنبدأ */
+.intro-page .main-btn {
+    margin: 5px auto 0 !important;
+}
+/* الطفل أمام المدرسة */
+.school-page .school-boy {
+    position: absolute;
+
+    width: 125px;
+    height: auto;
+    max-height: 200px;
+
+    object-fit: contain;
+
+    left: 1%;
+    bottom: 4%;
+
+    z-index: 2;
+}
+/* ===== الصفحة الأولى ===== */
+
+.intro-page {
+    position: relative;
+    overflow: hidden;
+    min-height: 850px;
+}
+
+.intro-page .intro-background {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+
+    z-index: 0;
+}
+
+.intro-page .intro-overlay {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    min-height: 850px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 35px 35px 45px;
+    box-sizing: border-box;
+
+    background: rgba(255,255,255,0.20);
+}
+
+.intro-page .cloud-image {
+    width: 150px;
+    height: auto;
+}
+
+.intro-page .intro-text {
+    background: rgba(255,255,255,0.88);
+    border-radius: 30px;
+    padding: 25px 40px;
+    text-align: center;
+    width: min(85%, 750px);
+}
+
+.intro-page .intro-text h1 {
+    margin: 0 0 15px;
+}
+
+.intro-page .intro-text .subtitle {
+    margin: 0;
+}
+/* ===== الصفحة الثانية ===== */
+
+.morning-page {
+    position: relative;
+    overflow: hidden;
+    min-height: 850px;
+}
+
+.morning-page .morning-background {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center center;
+
+    z-index: 0;
+}
+
+.morning-page .morning-overlay {
+    position: relative;
+    z-index: 1;
+
+    min-height: 850px;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+    box-sizing: border-box;
+
+    background: rgba(255, 255, 255, 0.18);
+}
+
+.morning-text {
+    background: rgba(255,255,255,0.90);
+    padding: 20px 35px;
+    border-radius: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.morning-text h2 {
+    margin: 0 0 10px;
+}
+
+.morning-text p {
+    margin: 0;
+}
+
+.routine-steps {
+    width: 90%;
+
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 12px;
+
+    background: rgba(255,255,255,0.88);
+    padding: 20px;
+    border-radius: 30px;
+
+    margin-bottom: 30px;
+}
+
+.routine-step {
+    flex: 1;
+    min-width: 0;
+
+    background: rgba(255,255,255,0.92);
+    border-radius: 20px;
+    padding: 12px 8px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    text-align: center;
+}
+
+.routine-step img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+.routine-step span {
+    font-size: 17px;
+    font-weight: 600;
+}
+    </style>
+</head>
+
+<body>
+
+    <main id="game">
+
+        <div class="top-bar">
+            <div id="pageNumber">1 / 10</div>
+
+            <button id="backBtn" class="circle-btn" onclick="previousPage()">
+                ←
+            </button>
+        </div>
+
+        <section id="pageContent" class="page-card"></section>
+
+    </main>
+
+    <script>
+let currentPage = 1;
+
+let selectedEmotion = null;
+let selectedShoe = null;
+
+
+/* أسماء الصور بالضبط */
+
+const images = {
+    bag: "images/bag.png",
+    bed: "images/bed.png",
+    black: "images/black.png",
+    red: "images/red.png",
+    blue: "images/blue.png",
+
+    boyBlack: "images/boy with black.png",
+    boyRed: "images/boy with red.png",
+    boyBlue: "images/boy with blue.png",
+
+    school: "images/school.png",
+    thoot: "images/thoot.png",
+    tshirt: "images/tshirt.png",
+    cloud: "images/cloud.png",
+    last: "images/last.png",
+    lost: "images/lost.png"
+};
+
+
+const content = document.getElementById("pageContent");
+const pageNumber = document.getElementById("pageNumber");
+
+
+function renderPage() {
+
+    pageNumber.textContent = `${currentPage} / 10`;
+
+    content.className = "page-card";
+
+    if (currentPage === 1) page1();
+
+    if (currentPage === 2) page2();
+
+    if (currentPage === 3) page3();
+
+    if (currentPage === 4) page4();
+
+    if (currentPage === 5) page5();
+
+    if (currentPage === 6) page6();
+
+    if (currentPage === 7) page7();
+
+    if (currentPage === 8) page8();
+
+    if (currentPage === 9) page9();
+
+    if (currentPage === 10) page10();
+}
+
+
+/* الصفحة 1 */
+
+   function page1() {
+    content.className = "page-card scene-card intro-page";
+
+    content.innerHTML = `
+        <img
+            src="${images.boyRed}"
+            class="background-page intro-background"
+            alt="الطفل"
+        >
+
+        <div class="background-overlay intro-overlay">
+
+          
+
+            <div class="intro-text">
+                <h1>روتيني يتغيّر</h1>
+
+                <p class="subtitle">
+                    أحيانًا تحدث تغييرات غير متوقعة، لكننا نستطيع التكيّف معها 💛
+                </p>
+            </div>
+
+            <button
+                class="main-btn"
+                onclick="nextPage()"
+            >
+                لنبدأ
+            </button>
+
+        </div>
+    `;
+}
+
+/* الصفحة 2 */
+
+function page2() {
+    content.className = "page-card scene-card morning-page";
+
+    content.innerHTML = `
+        <img
+            src="${images.boyRed}"
+            class="background-page morning-background"
+            alt="روتيني في الصباح"
+        >
+
+        <div class="background-overlay morning-overlay">
+
+            <div class="morning-text">
+                <h2>روتيني في الصباح</h2>
+                <p>كل صباح أستعد للمدرسة بخطوات أعرفها.</p>
+            </div>
+
+            <div class="routine-steps">
+
+                <div class="routine-step">
+                    <img src="${images.bed}" alt="السرير">
+                    <span>أستيقظ</span>
+                </div>
+
+                <div class="routine-step">
+                    <img src="${images.thoot}" alt="فرشاة الأسنان">
+                    <span>أنظف أسناني</span>
+                </div>
+
+                <div class="routine-step">
+                    <img src="${images.tshirt}" alt="الملابس">
+                    <span>أرتدي ملابسي</span>
+                </div>
+
+                <div class="routine-step">
+                    <img src="${images.red}" alt="الحذاء الأحمر">
+                    <span>أرتدي حذائي الأحمر</span>
+                </div>
+
+                <div class="routine-step">
+                    <img src="${images.bag}" alt="الحقيبة">
+                    <span>أذهب للمدرسة</span>
+                </div>
+
+            </div>
+
+            <button class="main-btn" onclick="nextPage()">
+                التالي
+            </button>
+
+        </div>
+    `;
+}
+/* الصفحة 3
+   خلفية الحذاء المفقود */
+
+function page3() {
+
+    content.className = "page-card scene-card lost-page";
+
+    content.innerHTML = `
+
+        <img
+            src="${images.lost}"
+            class="background-page"
+            alt="الحذاء المفقود"
+        >
+
+        <div class="background-overlay">
+
+            <div class="scene-text">
+
+                <h2>أين حذائي الأحمر؟</h2>
+
+                <p>
+                    أوه! إحدى فردتي الحذاء الأحمر غير موجودة.
+                    ماذا يمكن أن نفعل؟
+                </p>
+
+            </div>
+
+            <button
+                class="main-btn"
+                onclick="nextPage()"
+            >
+                التالي
+            </button>
+
+        </div>
+    `;
+}
+
+
+/* الصفحة 4 */
+
+function page4() {
+
+    content.innerHTML = `
+
+        <h2>كيف تشعر؟</h2>
+
+        <p class="subtitle">
+            عندما يتغيّر شيء في روتينك، كيف تشعر؟
+        </p>
+
+        <div class="emotions">
+
+            <button
+                class="emotion"
+                onclick="chooseEmotion(this,'سعيد')"
+            >
+                <span class="emoji">😊</span>
+                سعيد
+            </button>
+
+            <button
+                class="emotion"
+                onclick="chooseEmotion(this,'حزين')"
+            >
+                <span class="emoji">😢</span>
+                حزين
+            </button>
+
+            <button
+                class="emotion"
+                onclick="chooseEmotion(this,'منزعج')"
+            >
+                <span class="emoji">😠</span>
+                منزعج
+            </button>
+
+            <button
+                class="emotion"
+                onclick="chooseEmotion(this,'قلق')"
+            >
+                <span class="emoji">😟</span>
+                قلق
+            </button>
+
+        </div>
+
+        <p id="emotionMessage"></p>
+
+        <button
+            id="emotionNext"
+            class="main-btn"
+            onclick="nextPage()"
+            style="display:none;"
+        >
+            التالي
+        </button>
+    `;
+}
+
+
+function chooseEmotion(button, emotion) {
+
+    selectedEmotion = emotion;
+
+    document
+        .querySelectorAll(".emotion")
+        .forEach(item =>
+            item.classList.remove("selected")
+        );
+
+    button.classList.add("selected");
+
+    document.getElementById("emotionMessage").innerHTML =
+        `شكرًا لأنك أخبرت رفيق أنك تشعر بـ <strong>${emotion}</strong> 💛`;
+
+    document.getElementById("emotionNext").style.display =
+        "inline-block";
+}
+
+
+/* الصفحة 5 */
+
+function page5() {
+
+    content.innerHTML = `
+
+        <h2>لدينا حل!</h2>
+
+        <div class="rafiq-message">
+
+            <img
+                src="${images.cloud}"
+                class="cloud-image"
+            >
+
+            <p>
+                أعرف أنك معتاد على حذائك الأحمر.
+                اليوم لا نستطيع استخدامه،
+                لكن يمكننا تجربة حذاء مختلف.
+                <br><br>
+                <strong>
+                    التغيير قد يكون مختلفًا،
+                    لكنه لا يعني أن شيئًا سيئًا حدث.
+                </strong>
+            </p>
+
+        </div>
+
+        <button
+            class="main-btn"
+            onclick="nextPage()"
+        >
+            لنجرّب
+        </button>
+    `;
+}
+
+
+/* الصفحة 6 */
+
+function page6() {
+
+    content.innerHTML = `
+
+        <h2>اختر حذاءً جديدًا</h2>
+
+        <p class="subtitle">
+            الحذاء الأحمر غير متاح اليوم.
+            أي حذاء تريد أن تجرّب؟
+        </p>
+
+        <div class="shoes">
+
+            <div class="shoe-option unavailable">
+
+                <img src="${images.red}">
+
+                <p>الحذاء الأحمر</p>
+
+                <span>غير متاح ❌</span>
+
+            </div>
+
+
+            <div
+                class="shoe-option"
+                onclick="chooseShoe('blue')"
+            >
+
+                <img src="${images.blue}">
+
+                <p>الحذاء الأزرق</p>
+
+                <span>أختاره</span>
+
+            </div>
+
+
+            <div
+                class="shoe-option"
+                onclick="chooseShoe('black')"
+            >
+
+                <img src="${images.black}">
+
+                <p>الحذاء الأسود</p>
+
+                <span>أختاره</span>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+function chooseShoe(shoe) {
+
+    selectedShoe = shoe;
+
+    nextPage();
+}
+
+
+/* الصفحة 7 */
+
+function page7() {
+
+    let boyImage;
+    let shoeName;
+
+    if (selectedShoe === "black") {
+
+        boyImage = images.boyBlack;
+        shoeName = "الأسود";
+
+    } else {
+
+        boyImage = images.boyBlue;
+        shoeName = "الأزرق";
+    }
+
+
+    content.innerHTML = `
+
+        <h2>رائع! ⭐</h2>
+
+        <p class="subtitle">
+            اخترت الحذاء ${shoeName}.
+            لقد جرّبت شيئًا مختلفًا!
+        </p>
+
+        <img
+            src="${boyImage}"
+            class="main-image"
+        >
+
+        <h2 style="font-size:32px;">
+            +1 ⭐
+        </h2>
+
+        <button
+            class="main-btn"
+            onclick="nextPage()"
+        >
+            نكمل يومنا
+        </button>
+    `;
+}
+
+
+/* الصفحة 8
+   خلفية المدرسة واضحة */
+
+function page8() {
+
+    let boyImage =
+        selectedShoe === "black"
+        ? images.boyBlack
+        : images.boyBlue;
+
+
+    content.className = "page-card scene-card school-page";
+
+    content.innerHTML = `
+
+        <img
+            src="${images.school}"
+            class="background-page"
+            alt="المدرسة"
+        >
+
+        <div class="background-overlay">
+
+           <img
+    src="${boyImage}"
+    class="school-boy"
+        >
+
+            <div class="scene-text">
+
+                <h2>إلى المدرسة!</h2>
+
+                <p>
+                    استطعت إكمال روتينك
+                    حتى عندما حدث تغيير.
+                    أحسنت! 🌟
+                </p>
+
+            </div>
+
+            <button
+                class="main-btn"
+                onclick="nextPage()"
+            >
+                التالي
+            </button>
+
+        </div>
+    `;
+}
+
+
+/* الصفحة 9 */
+
+function page9() {
+
+    content.innerHTML = `
+
+        <img
+            src="${images.cloud}"
+            class="cloud-image"
+        >
+
+        <h2>ماذا تعلمنا؟</h2>
+
+        <div class="lessons">
+
+            <div class="lesson">
+                🌱 قد تتغيّر بعض الأشياء.
+            </div>
+
+            <div class="lesson">
+                💡 يمكنني تجربة حل آخر.
+            </div>
+
+            <div class="lesson">
+                💛 التغيير ليس شيئًا خاطئًا.
+            </div>
+
+            <div class="lesson">
+                ⭐ أستطيع التكيّف مع التغيير.
+            </div>
+
+        </div>
+
+        <button
+            class="main-btn"
+            onclick="nextPage()"
+        >
+            أنهي التحدي
+        </button>
+    `;
+}
+
+
+/* الصفحة 10
+   خلفية أحسنت */
+
+function page10() {
+
+    content.className = "page-card scene-card last-page";
+
+    content.innerHTML = `
+
+        <img
+            src="${images.last}"
+            class="last-page"
+            alt="أحسنت"
+        >
+
+        <div class="last-overlay">
+
+            <div class="success-box">
+
+                <h1>أحسنت! 🎉</h1>
+
+                <p>
+                    نجحت في التعامل مع تغيير جديد.
+                </p>
+
+                <p>
+                    <strong>
+                        أنا أستطيع تجربة أشياء جديدة 💛
+                    </strong>
+                </p>
+
+                <button
+                    class="main-btn"
+                    onclick="restartGame()"
+                >
+                    ألعب مرة أخرى
+                </button>
+
+                <button
+                    class="secondary-btn"
+                    onclick="goChallenges()"
+                >
+                    العودة إلى التحديات
+                </button>
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+/* التحكم بالصفحات */
+
+function nextPage() {
+
+    if (currentPage < 10) {
+
+        currentPage++;
+
+        renderPage();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+}
+
+
+function previousPage() {
+
+    if (currentPage > 1) {
+
+        currentPage--;
+
+        renderPage();
+
+    } else {
+
+       window.location.href = "challenges.html";
+    }
+}
+
+
+function restartGame() {
+
+    currentPage = 1;
+
+    selectedEmotion = null;
+
+    selectedShoe = null;
+
+    renderPage();
+}
+
+
+function goChallenges() {
+
+    window.location.href =
+        "challenges.html";
+}
+
+
+/* تشغيل أول صفحة */
+
+renderPage();
+    </script>
+</body>
+</html>
