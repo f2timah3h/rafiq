@@ -337,23 +337,50 @@ body {
 }
 
 
-/* =========================
+/* =====================================================
    IPAD PORTRAIT
-========================= */
+   1024 × 1366
+===================================================== */
 
 @media (min-width: 768px) {
 
+    html,
+    body {
+
+        width: 100%;
+
+        overflow-x: hidden;
+    }
+
+
     .page {
 
-        min-height: 1366px;
+        width: 100%;
 
-        padding-top: 250px;
+        min-height: 100vh;
+
+        padding:
+            250px 35px 40px;
+
+        overflow: hidden;
     }
+
 
     .content {
 
         width: 850px;
+
+        max-width: 94vw;
+
+        margin: 0 auto;
     }
+
+
+    .emotions-menu {
+
+        gap: 20px;
+    }
+
 
     .emotion-button {
 
@@ -362,6 +389,17 @@ body {
         height: 82px;
 
         font-size: 25px;
+    }
+
+
+    /*
+       إلغاء الفراغ الإضافي أسفل الصفحة
+       حتى لا يسبب تمريرًا غير ضروري.
+    */
+
+    .bottom-space {
+
+        height: 0;
     }
 
 }
@@ -507,6 +545,7 @@ body {
             ========================== -->
 
             <button
+                id="emotionLearnButton"
                 class="emotion-button"
                 onclick="goToLearnEmotions()">
 
@@ -520,6 +559,7 @@ body {
             ========================== -->
 
             <button
+                id="emotionTrainingButton"
                 class="emotion-button"
                 onclick="openEmotionTraining()">
 
@@ -533,6 +573,7 @@ body {
             ========================== -->
 
             <button
+                id="emotionEventsButton"
                 class="emotion-button"
                 onclick="openEventEmotion()">
 
@@ -546,6 +587,7 @@ body {
             ========================== -->
 
             <button
+                id="emotionDrawButton"
                 class="emotion-button"
                 onclick="openDrawFeeling()">
 
@@ -581,6 +623,181 @@ const supabaseClient =
         SUPABASE_URL,
         SUPABASE_ANON_KEY
     );
+
+
+/* =====================================================
+   PARENT SETTINGS
+===================================================== */
+
+const PARENT_SETTINGS_KEY =
+    "rafiq_parent_controls";
+
+
+/* =====================================================
+   GET PARENT SETTINGS
+===================================================== */
+
+function getParentSettings() {
+
+    const saved =
+        localStorage.getItem(
+            PARENT_SETTINGS_KEY
+        );
+
+
+    if (!saved) {
+
+        return null;
+
+    }
+
+
+    try {
+
+        return JSON.parse(saved);
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "خطأ في قراءة إعدادات الوالدين:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =====================================================
+   APPLY PARENT EMOTION CONTROLS
+===================================================== */
+
+function applyParentEmotionControls() {
+
+    const settings =
+        getParentSettings();
+
+
+    /*
+       إذا لا توجد إعدادات،
+       نترك الصفحة كما هي.
+    */
+
+    if (!settings) {
+
+        return;
+
+    }
+
+
+    /* =================================================
+       قسم المشاعر كامل
+    ================================================= */
+
+    if (
+        settings.sections &&
+        settings.sections.emotions === false
+    ) {
+
+        window.location.href =
+            "home.html";
+
+        return;
+
+    }
+
+
+    const emotions =
+        settings.activities &&
+        settings.activities.emotions
+            ? settings.activities.emotions
+            : {};
+
+
+    /* =================================================
+       تعلم المشاعر
+    ================================================= */
+
+    const learnButton =
+        document.getElementById(
+            "emotionLearnButton"
+        );
+
+    if (
+        learnButton &&
+        emotions.learn === false
+    ) {
+
+        learnButton.style.display =
+            "none";
+
+    }
+
+
+    /* =================================================
+       التدريب على المشاعر
+    ================================================= */
+
+    const trainingButton =
+        document.getElementById(
+            "emotionTrainingButton"
+        );
+
+    if (
+        trainingButton &&
+        emotions.training === false
+    ) {
+
+        trainingButton.style.display =
+            "none";
+
+    }
+
+
+    /* =================================================
+       ربط الأحداث بالمشاعر
+    ================================================= */
+
+    const eventsButton =
+        document.getElementById(
+            "emotionEventsButton"
+        );
+
+    if (
+        eventsButton &&
+        emotions.events === false
+    ) {
+
+        eventsButton.style.display =
+            "none";
+
+    }
+
+
+    /* =================================================
+       ارسم الشعور
+    ================================================= */
+
+    const drawButton =
+        document.getElementById(
+            "emotionDrawButton"
+        );
+
+    if (
+        drawButton &&
+        emotions.draw === false
+    ) {
+
+        drawButton.style.display =
+            "none";
+
+    }
+
+}
 
 
 /* =====================================================
@@ -668,6 +885,40 @@ function goProgress() {
 
 function goToLearnEmotions() {
 
+    /*
+       حماية إضافية:
+       حتى لو حاول الطفل تشغيل الدالة
+       بعد إخفاء الزر.
+    */
+
+    const settings =
+        getParentSettings();
+
+    if (
+        settings &&
+        settings.sections &&
+        settings.sections.emotions === false
+    ) {
+
+        window.location.href =
+            "home.html";
+
+        return;
+
+    }
+
+    if (
+        settings &&
+        settings.activities &&
+        settings.activities.emotions &&
+        settings.activities.emotions.learn === false
+    ) {
+
+        return;
+
+    }
+
+
     window.location.href =
         "happy.html";
 
@@ -682,7 +933,7 @@ async function getChildInterest() {
 
     const childId =
         localStorage.getItem(
-            "rafiqChildId"
+            "raf iqChildId".replace(" ", "")
         );
 
 
@@ -776,15 +1027,41 @@ function isSpace(interest) {
 
 async function openEmotionTraining() {
 
+    const settings =
+        getParentSettings();
+
+
+    if (
+        settings &&
+        settings.sections &&
+        settings.sections.emotions === false
+    ) {
+
+        window.location.href =
+            "home.html";
+
+        return;
+
+    }
+
+
+    if (
+        settings &&
+        settings.activities &&
+        settings.activities.emotions &&
+        settings.activities.emotions.training === false
+    ) {
+
+        return;
+
+    }
+
+
     try {
 
         const interest =
             await getChildInterest();
 
-
-        /* =========================
-           SPACE
-        ========================= */
 
         if (
             isSpace(interest)
@@ -798,10 +1075,6 @@ async function openEmotionTraining() {
         }
 
 
-        /* =========================
-           CARS
-        ========================= */
-
         if (
             isCars(interest)
         ) {
@@ -813,11 +1086,6 @@ async function openEmotionTraining() {
 
         }
 
-
-        /*
-           لا يوجد مسار افتراضي
-           إذا لم يكن الاهتمام معروفًا.
-        */
 
         console.warn(
             "اهتمام الطفل غير مدعوم:",
@@ -844,15 +1112,41 @@ async function openEmotionTraining() {
 
 async function openEventEmotion() {
 
+    const settings =
+        getParentSettings();
+
+
+    if (
+        settings &&
+        settings.sections &&
+        settings.sections.emotions === false
+    ) {
+
+        window.location.href =
+            "home.html";
+
+        return;
+
+    }
+
+
+    if (
+        settings &&
+        settings.activities &&
+        settings.activities.emotions &&
+        settings.activities.emotions.events === false
+    ) {
+
+        return;
+
+    }
+
+
     try {
 
         const interest =
             await getChildInterest();
 
-
-        /* =========================
-           SPACE
-        ========================= */
 
         if (
             isSpace(interest)
@@ -866,10 +1160,6 @@ async function openEventEmotion() {
         }
 
 
-        /* =========================
-           CARS
-        ========================= */
-
         if (
             isCars(interest)
         ) {
@@ -881,11 +1171,6 @@ async function openEventEmotion() {
 
         }
 
-
-        /*
-           لا يوجد مسار افتراضي
-           إذا لم يكن الاهتمام معروفًا.
-        */
 
         console.warn(
             "اهتمام الطفل غير مدعوم:",
@@ -912,15 +1197,41 @@ async function openEventEmotion() {
 
 async function openDrawFeeling() {
 
+    const settings =
+        getParentSettings();
+
+
+    if (
+        settings &&
+        settings.sections &&
+        settings.sections.emotions === false
+    ) {
+
+        window.location.href =
+            "home.html";
+
+        return;
+
+    }
+
+
+    if (
+        settings &&
+        settings.activities &&
+        settings.activities.emotions &&
+        settings.activities.emotions.draw === false
+    ) {
+
+        return;
+
+    }
+
+
     try {
 
         const interest =
             await getChildInterest();
 
-
-        /* =========================
-           SPACE
-        ========================= */
 
         if (
             isSpace(interest)
@@ -934,10 +1245,6 @@ async function openDrawFeeling() {
         }
 
 
-        /* =========================
-           CARS
-        ========================= */
-
         if (
             isCars(interest)
         ) {
@@ -949,11 +1256,6 @@ async function openDrawFeeling() {
 
         }
 
-
-        /*
-           لا يوجد مسار افتراضي
-           إذا لم يكن الاهتمام معروفًا.
-        */
 
         console.warn(
             "اهتمام الطفل غير مدعوم:",
@@ -972,6 +1274,20 @@ async function openDrawFeeling() {
     }
 
 }
+
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        applyParentEmotionControls();
+
+    }
+);
 
 </script>
 

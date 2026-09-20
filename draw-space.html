@@ -12,6 +12,8 @@
                user-scalable=no">
 
 <title>ارسم شعورك - رفيق</title>
+/
+
 
 
 <style>
@@ -1227,6 +1229,19 @@ body {
     }
 
 }
+/* =====================================================
+   IPAD - REMOVE SCROLL ONLY
+   بدون تغيير التصميم أو القياسات
+===================================================== */
+
+@media (min-width: 768px) {
+
+    html,
+    body {
+        overflow: hidden;
+    }
+
+}
 
 </style>
 
@@ -1274,8 +1289,10 @@ body {
         🏠 الرئيسية
     </button>
 
-    <button onclick="alert('👤 الملف الشخصي')">
-        👤 الملف الشخصي
+    <button onclick="window.location.href =
+
+        'profile.html'";>
+        👤 ملفي
     </button>
 
     <button onclick="alert('📊 التقدم')">

@@ -562,6 +562,10 @@ body {
     transition:
         transform .25s ease,
         box-shadow .25s ease;
+
+    display: block;
+
+    color: inherit;
 }
 
 .game-card:hover {
@@ -789,6 +793,251 @@ body {
 
 
 /* =====================================================
+   PARENT BUTTON
+===================================================== */
+
+.parent-activities-button {
+
+    display: none;
+
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    height: 100px;
+
+    border: none;
+
+    border-radius: 32px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0f2,
+            #eaf6ff
+        );
+
+    color: #40566d;
+
+    font-family: inherit;
+
+    font-size: 29px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 9px 25px
+        rgba(70,100,120,.15);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.parent-activities-button:hover {
+
+    transform:
+        translateY(-7px)
+        scale(1.015);
+
+    box-shadow:
+        0 15px 32px
+        rgba(70,100,120,.20);
+}
+
+.parent-activities-button:active {
+
+    transform:
+        scale(.97);
+}
+
+
+/* =====================================================
+   PARENT ACTIVITIES WINDOW
+===================================================== */
+
+.parent-panel {
+
+    display: none;
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 3000;
+
+    background: #ffffff;
+
+    padding:
+        110px 35px 50px;
+
+    overflow-y: auto;
+}
+
+.parent-panel.show {
+
+    display: block;
+}
+
+.parent-panel-title {
+
+    width: 850px;
+
+    max-width: 95vw;
+
+    margin: 0 auto 30px;
+
+    padding:
+        18px 35px;
+
+    border-radius: 40px;
+
+    background:
+        rgba(255,255,255,.9);
+
+    box-shadow:
+        0 8px 25px
+        rgba(90,130,160,.10);
+
+    color: #40566d;
+
+    font-size: 38px;
+
+    font-weight: 900;
+
+    text-align: center;
+}
+
+.parent-close {
+
+    position: fixed;
+
+    top: 35px;
+
+    left: 35px;
+
+    width: 60px;
+
+    height: 60px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    background: #e4f2ff;
+
+    color: #555;
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    z-index: 3001;
+}
+
+.parent-list {
+
+    width: 850px;
+
+    max-width: 95vw;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap: 25px 30px;
+}
+
+.parent-card {
+
+    position: relative;
+
+    height: 245px;
+
+    border-radius: 32px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0f2,
+            #eaf6ff
+        );
+
+    border:
+        3px solid
+        rgba(255,255,255,.9);
+
+    box-shadow:
+        0 9px 25px
+        rgba(70,100,120,.15);
+}
+
+.parent-card-title {
+
+    position: absolute;
+
+    top: 18px;
+
+    right: 20px;
+
+    left: 20px;
+
+    text-align: center;
+
+    color: #40566d;
+
+    font-size: 27px;
+
+    font-weight: 900;
+
+    z-index: 3;
+}
+
+.parent-card img {
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 5px;
+
+    transform:
+        translateX(-50%);
+
+    width: 78%;
+
+    height: 175px;
+
+    object-fit: contain;
+}
+
+.parent-file-icon {
+
+    position: absolute;
+
+    left: 50%;
+
+    top: 55%;
+
+    transform:
+        translate(-50%,-50%);
+
+    font-size: 70px;
+}
+
+
+/* =====================================================
    MOBILE
 ===================================================== */
 
@@ -894,6 +1143,65 @@ body {
         font-size: 22px;
     }
 
+    .parent-activities-button {
+
+        height: 85px;
+
+        font-size: 23px;
+    }
+
+    .parent-panel {
+
+        padding:
+            90px 15px 30px;
+    }
+
+    .parent-panel-title {
+
+        font-size: 29px;
+
+        padding:
+            14px 22px;
+    }
+
+    .parent-close {
+
+        top: 20px;
+
+        left: 20px;
+
+        width: 52px;
+
+        height: 52px;
+    }
+
+    .parent-list {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 16px;
+    }
+
+    .parent-card {
+
+        height: 220px;
+    }
+
+    .parent-card-title {
+
+        font-size: 23px;
+
+        top: 14px;
+    }
+
+    .parent-card img {
+
+        height: 155px;
+
+        width: 75%;
+    }
+
 }
 
 
@@ -932,9 +1240,6 @@ and (max-width: 1100px) {
 ===================================================== -->
 
 <div class="background">
-
-    
-
 </div>
 
 
@@ -1018,9 +1323,10 @@ id="sideMenu">
 
         <!-- COLORS -->
 
-        <div
+        <a
+        href="./colors.html"
         class="game-card colors-card"
-        onclick="openGame('colors')">
+        style="text-decoration:none;">
 
             <h2 class="card-title">
 
@@ -1033,16 +1339,15 @@ id="sideMenu">
             class="card-image"
             alt="الألوان">
 
-            
-
-        </div>
+        </a>
 
 
         <!-- SHAPES -->
 
-        <div
+        <a
+        href="./shapes-circle.html"
         class="game-card shapes-card"
-        onclick="openGame('shapes')">
+        style="text-decoration:none;">
 
             <h2 class="card-title">
 
@@ -1055,20 +1360,19 @@ id="sideMenu">
             class="card-image"
             alt="الأشكال">
 
-            
-
-        </div>
+        </a>
 
 
-        <!-- social situations -->
+        <!-- SOCIAL SITUATIONS -->
 
-        <div
+        <a
+        href="./social.html"
         class="game-card social situations-card"
-        onclick="openGame('social situations')">
+        style="text-decoration:none;">
 
             <h2 class="card-title">
 
-             المواقف الإجتماعية
+                المواقف الإجتماعية
 
             </h2>
 
@@ -1077,41 +1381,40 @@ id="sideMenu">
             class="card-image"
             alt="المواقف الاجتماعية">
 
-          
-
-        </div>
+        </a>
 
 
-        <!-- SOCIAL -->
+        <!-- COMMUNICATION -->
 
-        <div
+        <a
+        href="./communication.html"
         class="game-card social-card"
-        onclick="openGame('social')">
+        style="text-decoration:none;">
 
             <h2 class="card-title">
 
-التواصل
+                التواصل
+
             </h2>
 
             <img
             src="images/taw.png"
             class="card-image"
-            alt="التواصل ">
+            alt="التواصل">
 
-           
-
-        </div>
+        </a>
 
 
-        <!-- ROUTINE -->
+        <!-- NEW EXPERIENCE -->
 
-        <div
+        <a
+        href="./challenges_combined.html"
         class="game-card routine-card"
-        onclick="openGame('routine')">
+        style="text-decoration:none;">
 
             <h2 class="card-title">
 
-               تجربة جديدة
+                تجربة جديدة
 
             </h2>
 
@@ -1120,16 +1423,15 @@ id="sideMenu">
             class="card-image"
             alt="الروتين">
 
-           
-
-        </div>
+        </a>
 
 
         <!-- LETTERS & NUMBERS -->
 
-        <div
+        <a
+        href="./letter-number.html"
         class="game-card letters-card"
-        onclick="openGame('letters')">
+        style="text-decoration:none;">
 
             <h2 class="card-title">
 
@@ -1142,8 +1444,21 @@ id="sideMenu">
             class="card-image"
             alt="الحروف والأرقام">
 
-            
-        </div>
+        </a>
+
+
+        <!-- =================================================
+             ONE PARENT BUTTON
+        ================================================== -->
+
+        <button
+        id="parentActivitiesButton"
+        class="parent-activities-button"
+        onclick="openParentPanel()">
+
+            أنشطة من الوالدين
+
+        </button>
 
 
     </div>
@@ -1155,12 +1470,42 @@ id="sideMenu">
 
 
 <!-- =====================================================
-     BOTTOM
+     PARENT ACTIVITIES PANEL
 ===================================================== -->
 
+<div
+id="parentPanel"
+class="parent-panel">
+
+    <button
+    class="parent-close"
+    onclick="closeParentPanel()">
+
+        ×
+
+    </button>
+
+
+    <h1 class="parent-panel-title">
+
+        أنشطة من الوالدين
+
+    </h1>
+
+
+    <div
+    id="parentList"
+    class="parent-list">
+
+    </div>
+
+</div>
 
 
 <script>
+
+const SETTINGS_KEY = "rafiq_parent_controls";
+
 
 /* =====================================================
    MENU
@@ -1168,48 +1513,32 @@ id="sideMenu">
 
 function toggleMenu() {
 
-    const menu =
-        document.getElementById(
-            "sideMenu"
-        );
+    const menu = document.getElementById("sideMenu");
 
-    menu.classList.toggle(
-        "show"
-    );
+    if (menu) {
+        menu.classList.toggle("show");
+    }
+
 }
 
 
-document.addEventListener(
-    "click",
-    function(event) {
+document.addEventListener("click", function(event) {
 
-        const menu =
-            document.getElementById(
-                "sideMenu"
-            );
+    const menu = document.getElementById("sideMenu");
+    const button = document.getElementById("menuButton");
 
-        const button =
-            document.getElementById(
-                "menuButton"
-            );
+    if (
+        menu &&
+        button &&
+        !menu.contains(event.target) &&
+        !button.contains(event.target)
+    ) {
 
-        if (
-            !menu.contains(
-                event.target
-            ) &&
-            !button.contains(
-                event.target
-            )
-        ) {
-
-            menu.classList.remove(
-                "show"
-            );
-
-        }
+        menu.classList.remove("show");
 
     }
-);
+
+});
 
 
 /* =====================================================
@@ -1218,31 +1547,250 @@ document.addEventListener(
 
 function goBack() {
 
-    window.location.href =
-        "home.html";
+    window.location.href = "home.html";
+
 }
 
 
 function goHome() {
 
-    window.location.href =
-        "home.html";
+    window.location.href = "home.html";
+
 }
 
 
 function goProfile() {
 
-    alert(
-        "👤 صفحة ملفي\n\nسنصممها لاحقًا."
-    );
+    window.location.href = "profile.html";
+
 }
 
 
 function goProgress() {
 
-    alert(
-        "⭐ صفحة تقدمي\n\nسنصممها لاحقًا."
+    alert("⭐ صفحة تقدمي\n\nسنصممها لاحقًا.");
+
+}
+
+
+/* =====================================================
+   PARENT SETTINGS
+===================================================== */
+
+function getParentSettings() {
+
+    const saved =
+        localStorage.getItem(SETTINGS_KEY);
+
+    if (!saved) {
+
+        return null;
+
+    }
+
+    try {
+
+        return JSON.parse(saved);
+
+    } catch (error) {
+
+        console.error(
+            "خطأ في قراءة إعدادات الوالدين:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* =====================================================
+   APPLY GAME SETTINGS
+===================================================== */
+
+function applyParentGameControls() {
+
+    const settings = getParentSettings();
+
+
+    /* إذا لا توجد إعدادات، كل الألعاب تظهر */
+
+    if (!settings) {
+
+        return;
+
+    }
+
+
+    /* =================================================
+       قسم الألعاب كامل
+    ================================================= */
+
+    if (
+        settings.sections &&
+        settings.sections.games === false
+    ) {
+
+        window.location.href = "home.html";
+
+        return;
+
+    }
+
+
+    const games =
+        settings.activities &&
+        settings.activities.games
+            ? settings.activities.games
+            : {};
+
+
+    /* =================================================
+       الألوان
+    ================================================= */
+
+    const colors =
+        document.querySelector(".colors-card");
+
+    if (
+        colors &&
+        games.colors === false
+    ) {
+
+        colors.style.display = "none";
+
+    }
+
+
+    /* =================================================
+       الأشكال
+    ================================================= */
+
+    const shapes =
+        document.querySelector(".shapes-card");
+
+    if (
+        shapes &&
+        games.shapes === false
+    ) {
+
+        shapes.style.display = "none";
+
+    }
+
+
+    /* =================================================
+       المواقف الاجتماعية
+    ================================================= */
+
+    const situations =
+        document.querySelector(".situations-card");
+
+    if (
+        situations &&
+        games.social === false
+    ) {
+
+        situations.style.display = "none";
+
+    }
+
+
+    /* =================================================
+       التواصل
+    ================================================= */
+
+    const communication =
+        document.querySelector(".social-card");
+
+    if (
+        communication &&
+        games.communication === false
+    ) {
+
+        communication.style.display = "none";
+
+    }
+
+
+    /* =================================================
+       تجربة جديدة
+    ================================================= */
+
+    const challenges =
+        document.querySelector(".routine-card");
+
+    if (
+        challenges &&
+        games.challenges === false
+    ) {
+
+        challenges.style.display = "none";
+
+    }
+
+
+    /* =================================================
+       الحروف والأرقام
+    ================================================= */
+
+    const letters =
+        document.querySelector(".letters-card");
+
+    if (
+        letters &&
+        games.letters === false
+    ) {
+
+        letters.style.display = "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   CHECK GAME
+===================================================== */
+
+function isGameEnabled(gameName) {
+
+    const settings =
+        getParentSettings();
+
+    if (!settings) {
+
+        return true;
+
+    }
+
+
+    if (
+        settings.sections &&
+        settings.sections.games === false
+    ) {
+
+        return false;
+
+    }
+
+
+    if (
+        !settings.activities ||
+        !settings.activities.games
+    ) {
+
+        return true;
+
+    }
+
+
+    return (
+        settings.activities.games[gameName] !== false
     );
+
 }
 
 
@@ -1252,58 +1800,365 @@ function goProgress() {
 
 function openGame(game) {
 
+    if (!isGameEnabled(game)) {
+
+        return;
+
+    }
+
 
     if (game === "colors") {
 
-        window.location.href =
-            "colors.html";
+        window.location.href = "./colors.html";
 
     }
-
 
     else if (game === "shapes") {
 
-        window.location.href =
-            "shapes-circle.html";
+        window.location.href = "./shapes-circle.html";
 
     }
-
 
     else if (game === "social situations") {
 
-        window.location.href =
-            "social.html";
+        window.location.href = "./social.html";
 
     }
-
 
     else if (game === "social") {
 
-        window.location.href =
-            "communication.html";
+        window.location.href = "./communication.html";
 
     }
-
 
     else if (game === "routine") {
 
         window.location.href =
-            "challenges_combined.html";
+            "./challenges_combined.html";
 
     }
-
 
     else if (game === "letters") {
 
         window.location.href =
-            "letter-number.html";
+            "./letter-number.html";
 
     }
 
 }
 
-</script>
 
+/* =====================================================
+   PARENT ACTIVITIES
+===================================================== */
+
+function getParentActivities() {
+
+    const settings =
+        getParentSettings();
+
+    if (!settings) {
+
+        return [];
+
+    }
+
+
+    if (
+        settings.sections &&
+        settings.sections.games === false
+    ) {
+
+        return [];
+
+    }
+
+
+    const activities =
+        Array.isArray(settings.customActivities)
+            ? settings.customActivities
+            : [];
+
+
+    return activities.filter(function(activity) {
+
+        return (
+            activity &&
+            activity.enabled !== false
+        );
+
+    });
+
+}
+
+
+/* =====================================================
+   PARENT BUTTON
+===================================================== */
+
+function updateParentButton() {
+
+    const button =
+        document.getElementById(
+            "parentActivitiesButton"
+        );
+
+    if (!button) {
+
+        return;
+
+    }
+
+
+    const activities =
+        getParentActivities();
+
+
+    if (activities.length > 0) {
+
+        button.style.display = "block";
+
+    } else {
+
+        button.style.display = "none";
+
+    }
+
+}
+
+
+/* =====================================================
+   OPEN PARENT PANEL
+===================================================== */
+
+function openParentPanel() {
+
+    const activities =
+        getParentActivities();
+
+    const panel =
+        document.getElementById(
+            "parentPanel"
+        );
+
+    const list =
+        document.getElementById(
+            "parentList"
+        );
+
+
+    if (
+        !panel ||
+        !list ||
+        activities.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    list.innerHTML = "";
+
+
+    activities.forEach(function(activity) {
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "parent-card";
+
+
+        const title =
+            document.createElement("h2");
+
+        title.className =
+            "parent-card-title";
+
+        title.textContent =
+            activity.name ||
+            "نشاط من الوالدين";
+
+
+        card.appendChild(title);
+
+
+        if (
+            activity.type &&
+            activity.type.indexOf("image/") === 0
+        ) {
+
+            const image =
+                document.createElement("img");
+
+            image.src =
+                activity.data;
+
+            image.alt =
+                activity.name ||
+                "نشاط من الوالدين";
+
+            card.appendChild(image);
+
+        } else {
+
+            const icon =
+                document.createElement("div");
+
+            icon.className =
+                "parent-file-icon";
+
+            icon.textContent = "📄";
+
+            card.appendChild(icon);
+
+        }
+
+
+        card.onclick = function() {
+
+            openParentActivity(activity);
+
+        };
+
+
+        list.appendChild(card);
+
+    });
+
+
+    panel.classList.add("show");
+
+}
+
+
+/* =====================================================
+   CLOSE PARENT PANEL
+===================================================== */
+
+function closeParentPanel() {
+
+    const panel =
+        document.getElementById(
+            "parentPanel"
+        );
+
+    if (panel) {
+
+        panel.classList.remove("show");
+
+    }
+
+}
+
+
+/* =====================================================
+   OPEN PARENT ACTIVITY
+===================================================== */
+
+function openParentActivity(activity) {
+
+    if (!activity) {
+
+        return;
+
+    }
+
+
+    /* IMAGE */
+
+    if (
+        activity.type &&
+        activity.type.indexOf("image/") === 0
+    ) {
+
+        const newWindow =
+            window.open("", "_blank");
+
+
+        if (!newWindow) {
+
+            alert(
+                "السماح بفتح النوافذ الجديدة مطلوب."
+            );
+
+            return;
+
+        }
+
+
+        newWindow.document.body.style.margin = "0";
+        newWindow.document.body.style.minHeight = "100vh";
+        newWindow.document.body.style.display = "flex";
+        newWindow.document.body.style.alignItems = "center";
+        newWindow.document.body.style.justifyContent = "center";
+        newWindow.document.body.style.background = "#ffffff";
+
+
+        const image =
+            newWindow.document.createElement("img");
+
+        image.src =
+            activity.data;
+
+        image.style.maxWidth =
+            "95vw";
+
+        image.style.maxHeight =
+            "95vh";
+
+        image.style.objectFit =
+            "contain";
+
+
+        newWindow.document.body.appendChild(image);
+
+        return;
+
+    }
+
+
+    /* FILE */
+
+    if (activity.data) {
+
+        const newWindow =
+            window.open(
+                activity.data,
+                "_blank"
+            );
+
+
+        if (!newWindow) {
+
+            alert(
+                "السماح بفتح النوافذ الجديدة مطلوب."
+            );
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        applyParentGameControls();
+
+        updateParentButton();
+
+    }
+);
+
+</script>
 
 </body>
 

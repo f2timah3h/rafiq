@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>ملف الوالدين - رفيق</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    margin:0;
+    font-family:"Tajawal","Cairo",Arial,sans-serif;
+    background:#e4f2ff;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* =========================
+   CLOUDS
+========================= */
+
+.cloud{
+    position:fixed;
+    background:white;
+    border-radius:100px;
+    opacity:.8;
+    z-index:0;
+}
+
+.cloud1{
+    width:170px;
+    height:55px;
+    top:80px;
+    right:40px;
+}
+
+.cloud2{
+    width:130px;
+    height:45px;
+    top:180px;
+    left:50px;
+}
+
+.cloud3{
+    width:200px;
+    height:60px;
+    bottom:70px;
+    right:100px;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.page{
+    position:relative;
+    z-index:2;
+    width:100%;
+    min-height:100vh;
+    padding:35px 50px;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:30px;
+}
+
+.back-btn{
+    width:65px;
+    height:65px;
+    border:none;
+    border-radius:20px;
+    background:white;
+    font-size:40px;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.title{
+    font-size:42px;
+    font-weight:800;
+    color:#555;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-container{
+    width:100%;
+    max-width:600px;
+    margin:70px auto;
+    background:white;
+    border-radius:35px;
+    padding:40px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    text-align:center;
+}
+
+.lock{
+    font-size:75px;
+    margin-bottom:15px;
+}
+
+.login-title{
+    font-size:32px;
+    font-weight:800;
+    color:#555;
+    margin-bottom:10px;
+}
+
+.login-text{
+    font-size:21px;
+    color:#777;
+    margin-bottom:25px;
+}
+
+/* PIN DOTS */
+
+.pin-dots{
+    display:flex;
+    justify-content:center;
+    direction:ltr;
+    gap:18px;
+    margin:25px 0 30px;
+}
+
+.pin-dot{
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:#ddd;
+}
+
+.pin-dot.active{
+    background:#7eb6dc;
+}
+
+/* KEYPAD */
+
+.keypad{
+    width:100%;
+    max-width:380px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+    direction:ltr;
+}
+
+.key{
+    height:72px;
+    border:none;
+    border-radius:20px;
+    background:#e4f2ff;
+    color:#555;
+    font-size:28px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.key:active{
+    transform:scale(.96);
+}
+
+.key.delete{
+    background:#ffe4e4;
+}
+
+.key.empty{
+    background:transparent;
+    pointer-events:none;
+}
+
+.main-login-btn{
+    margin-top:25px;
+    width:100%;
+    max-width:380px;
+    height:60px;
+    border:none;
+    border-radius:20px;
+    background:#e4f2ff;
+    color:#555;
+    font-size:22px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+/* =========================
+   PARENT PANEL
+========================= */
+
+#parentPanel{
+    display:none;
+}
+
+.panel{
+    background:white;
+    border-radius:35px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.section{
+    border:2px solid #edf2f6;
+    border-radius:25px;
+    margin-bottom:22px;
+    overflow:hidden;
+    background:white;
+}
+
+.section-head{
+    min-height:90px;
+    padding:15px 20px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.section-title{
+    flex:1;
+    font-size:27px;
+    font-weight:800;
+    color:#555;
+}
+
+.icon-btn{
+    width:55px;
+    height:55px;
+    border:none;
+    border-radius:16px;
+    background:#e4f2ff;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.toggle{
+    width:65px;
+    height:36px;
+    border-radius:30px;
+    background:#ccc;
+    position:relative;
+    cursor:pointer;
+    flex-shrink:0;
+}
+
+.toggle::after{
+    content:"";
+    width:28px;
+    height:28px;
+    background:white;
+    border-radius:50%;
+    position:absolute;
+    top:4px;
+    right:4px;
+    transition:.2s;
+    box-shadow:0 2px 5px rgba(0,0,0,.15);
+}
+
+.toggle.on{
+    background:#8bc5e8;
+}
+
+.toggle.on::after{
+    right:33px;
+}
+
+.activities{
+    display:none;
+    padding:0 20px 20px;
+}
+
+.activities.open{
+    display:block;
+}
+
+.activity{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:15px;
+    border-radius:18px;
+    background:#f8fbfd;
+    margin-top:10px;
+}
+
+.activity-name{
+    flex:1;
+    font-size:20px;
+    color:#555;
+}
+
+.activity .toggle{
+    transform:scale(.85);
+}
+
+/* =========================
+   CUSTOM ACTIVITY
+========================= */
+
+.upload-box{
+    margin-top:30px;
+    border:2px dashed #b9d9ed;
+    border-radius:25px;
+    padding:25px;
+    text-align:center;
+}
+
+.upload-title{
+    font-size:25px;
+    font-weight:800;
+    color:#555;
+    margin-bottom:10px;
+}
+
+.upload-text{
+    font-size:18px;
+    color:#777;
+    margin-bottom:20px;
+}
+
+.upload-btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px 25px;
+    border-radius:18px;
+    background:#e4f2ff;
+    color:#555;
+    font-size:19px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+#fileInput{
+    display:none;
+}
+
+.custom-list{
+    margin-top:20px;
+}
+
+.custom-item{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:15px;
+    background:#f8fbfd;
+    border-radius:18px;
+    margin-top:10px;
+}
+
+.custom-preview{
+    width:70px;
+    height:70px;
+    border-radius:15px;
+    object-fit:cover;
+    background:#e4f2ff;
+}
+
+.custom-name{
+    flex:1;
+    font-size:19px;
+    color:#555;
+}
+
+/* =========================
+   SAVE
+========================= */
+
+.save-btn{
+    width:100%;
+    height:65px;
+    margin-top:25px;
+    border:none;
+    border-radius:22px;
+    background:#e4f2ff;
+    color:#555;
+    font-size:23px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:700px){
+
+    .page{
+        padding:20px;
+    }
+
+    .title{
+        font-size:30px;
+    }
+
+    .login-container{
+        margin:35px auto;
+        padding:25px 18px;
+    }
+
+    .panel{
+        padding:15px;
+    }
+
+    .section-title{
+        font-size:21px;
+    }
+
+    .activity-name{
+        font-size:17px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="cloud cloud1"></div>
+<div class="cloud cloud2"></div>
+<div class="cloud cloud3"></div>
+
+<div class="page">
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <button class="back-btn" onclick="goBack()">‹</button>
+
+        <div class="title">
+            ملف الوالدين
+        </div>
+
+        <div style="width:65px;"></div>
+
+    </div>
+
+
+    <!-- =========================
+         LOGIN SCREEN
+    ========================== -->
+
+    <div id="loginScreen">
+
+        <div class="login-container">
+
+            <div class="lock">🔐</div>
+
+            <div id="loginTitle" class="login-title">
+                دخول الوالدين
+            </div>
+
+            <div id="loginText" class="login-text">
+                أدخل الرقم السري للدخول
+            </div>
+
+            <div id="pinDots" class="pin-dots">
+
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+                <div class="pin-dot"></div>
+
+            </div>
+
+
+            <div class="keypad">
+
+                <button class="key" onclick="pressNumber('١')">١</button>
+                <button class="key" onclick="pressNumber('٢')">٢</button>
+                <button class="key" onclick="pressNumber('٣')">٣</button>
+
+                <button class="key" onclick="pressNumber('٤')">٤</button>
+                <button class="key" onclick="pressNumber('٥')">٥</button>
+                <button class="key" onclick="pressNumber('٦')">٦</button>
+
+                <button class="key" onclick="pressNumber('٧')">٧</button>
+                <button class="key" onclick="pressNumber('٨')">٨</button>
+                <button class="key" onclick="pressNumber('٩')">٩</button>
+
+                <button class="key empty"></button>
+
+                <button class="key" onclick="pressNumber('٠')">٠</button>
+
+                <button class="key delete" onclick="deleteNumber()">
+                    ⌫
+                </button>
+
+            </div>
+
+
+            <button class="main-login-btn"
+                    onclick="submitPin()">
+                دخول
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         PARENT PANEL
+    ========================== -->
+
+    <div id="parentPanel">
+
+        <div class="panel">
+
+            <!-- STORIES -->
+
+            <div class="section">
+
+                <div class="section-head">
+
+                    <button class="icon-btn"
+                            onclick="printPage('stories.html')">
+                        🖨️
+                    </button>
+
+                    <div class="section-title">
+                        📚 القصص
+                    </div>
+
+                    <button class="icon-btn"
+                            onclick="toggleActivities('stories')">
+                        ☰
+                    </button>
+
+                    <div id="storiesToggle"
+                         class="toggle"
+                         onclick="toggleSection('stories')">
+                    </div>
+
+                </div>
+
+
+                <div id="storiesActivities"
+                     class="activities">
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            موعد مع طبيب الأسنان
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('doctor-story.html')">
+                            🖨️
+                        </button>
+
+                        <div id="storyDoctorToggle"
+                             class="toggle"
+                             onclick="toggleActivity('stories','doctor')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            لنحافظ على البيئة
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('environment-story.html')">
+                            🖨️
+                        </button>
+
+                        <div id="storyEnvironmentToggle"
+                             class="toggle"
+                             onclick="toggleActivity('stories','environment')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            رحلة السوق مع جدي
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('market-story.html')">
+                            🖨️
+                        </button>
+
+                        <div id="storyMarketToggle"
+                             class="toggle"
+                             onclick="toggleActivity('stories','market')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            مغامرة في الحديقة
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('adventure-story.html')">
+                            🖨️
+                        </button>
+
+                        <div id="storyAdventureToggle"
+                             class="toggle"
+                             onclick="toggleActivity('stories','adventure')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            درس اليوم مع الأصدقاء
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('lesson-story.html')">
+                            🖨️
+                        </button>
+
+                        <div id="storyLessonToggle"
+                             class="toggle"
+                             onclick="toggleActivity('stories','lesson')">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- EMOTIONS -->
+
+            <div class="section">
+
+                <div class="section-head">
+
+                    <button class="icon-btn"
+                            onclick="printPage('emotions.html')">
+                        🖨️
+                    </button>
+
+                    <div class="section-title">
+                        😊 المشاعر
+                    </div>
+
+                    <button class="icon-btn"
+                            onclick="toggleActivities('emotions')">
+                        ☰
+                    </button>
+
+                    <div id="emotionsToggle"
+                         class="toggle"
+                         onclick="toggleSection('emotions')">
+                    </div>
+
+                </div>
+
+
+                <div id="emotionsActivities"
+                     class="activities">
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            تعلم المشاعر
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('happy.html')">
+                            🖨️
+                        </button>
+
+                        <div id="emotionLearnToggle"
+                             class="toggle"
+                             onclick="toggleActivity('emotions','learn')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            التدريب على المشاعر
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('feeling-car.html')">
+                            🖨️
+                        </button>
+
+                        <div id="emotionTrainingToggle"
+                             class="toggle"
+                             onclick="toggleActivity('emotions','training')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            ربط الأحداث بالمشاعر
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('choose-car-emotion.html')">
+                            🖨️
+                        </button>
+
+                        <div id="emotionEventsToggle"
+                             class="toggle"
+                             onclick="toggleActivity('emotions','events')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            ارسم الشعور
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('draw-feeling.html')">
+                            🖨️
+                        </button>
+
+                        <div id="emotionDrawToggle"
+                             class="toggle"
+                             onclick="toggleActivity('emotions','draw')">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- GAMES -->
+
+            <div class="section">
+
+                <div class="section-head">
+
+                    <button class="icon-btn"
+                            onclick="printPage('games.html')">
+                        🖨️
+                    </button>
+
+                    <div class="section-title">
+                        🎮 الألعاب
+                    </div>
+
+                    <button class="icon-btn"
+                            onclick="toggleActivities('games')">
+                        ☰
+                    </button>
+
+                    <div id="gamesToggle"
+                         class="toggle"
+                         onclick="toggleSection('games')">
+                    </div>
+
+                </div>
+
+
+                <div id="gamesActivities"
+                     class="activities">
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            الألوان
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('colors.html')">
+                            🖨️
+                        </button>
+
+                        <div id="gameColorsToggle"
+                             class="toggle"
+                             onclick="toggleActivity('games','colors')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            الأشكال
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('shapes-circle.html')">
+                            🖨️
+                        </button>
+
+                        <div id="gameShapesToggle"
+                             class="toggle"
+                             onclick="toggleActivity('games','shapes')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            المواقف الاجتماعية
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('social.html')">
+                            🖨️
+                        </button>
+
+                        <div id="gameSocialToggle"
+                             class="toggle"
+                             onclick="toggleActivity('games','social')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            التواصل
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('communication.html')">
+                            🖨️
+                        </button>
+
+                        <div id="gameCommunicationToggle"
+                             class="toggle"
+                             onclick="toggleActivity('games','communication')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            تجربة جديدة
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('challenges_combined.html')">
+                            🖨️
+                        </button>
+
+                        <div id="gameChallengesToggle"
+                             class="toggle"
+                             onclick="toggleActivity('games','challenges')">
+                        </div>
+
+                    </div>
+
+
+                    <div class="activity">
+
+                        <div class="activity-name">
+                            الحروف والأرقام
+                        </div>
+
+                        <button class="icon-btn"
+                                onclick="printPage('letter-number.html')">
+                            🖨️
+                        </button>
+
+                        <div id="gameLettersToggle"
+                             class="toggle"
+                             onclick="toggleActivity('games','letters')">
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- CUSTOM ACTIVITIES -->
+
+            <div class="upload-box">
+
+                <div class="upload-title">
+                    نشاط من الوالدين
+                </div>
+
+                <div class="upload-text">
+                    أضيفي صورة أو ملف ليظهر للطفل داخل قسم الألعاب
+                </div>
+
+                <label class="upload-btn">
+                    إضافة صورة أو ملف
+                    <input id="fileInput"
+                           type="file"
+                           accept="image/*,.pdf,.doc,.docx"
+                           onchange="addParentFile(event)">
+                </label>
+
+                <div id="customList"
+                     class="custom-list">
+                </div>
+
+            </div>
+
+
+            <button class="save-btn"
+                    onclick="saveSettings()">
+                حفظ الإعدادات
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+const PIN_KEY = "rafiq_parent_pin";
+const SETTINGS_KEY = "rafiq_parent_controls";
+
+
+/* =========================================================
+   PIN
+========================================================= */
+
+let currentPin = "";
+let pinMode = "login";
+let firstPin = "";
+
+
+/* =========================================================
+   CONVERT ARABIC NUMBERS
+========================================================= */
+
+function normalizePin(value){
+
+    return String(value)
+        .replace(/٠/g,"0")
+        .replace(/١/g,"1")
+        .replace(/٢/g,"2")
+        .replace(/٣/g,"3")
+        .replace(/٤/g,"4")
+        .replace(/٥/g,"5")
+        .replace(/٦/g,"6")
+        .replace(/٧/g,"7")
+        .replace(/٨/g,"8")
+        .replace(/٩/g,"9");
+
+}
+
+
+/* =========================================================
+   PIN SCREEN
+========================================================= */
+
+function setupPinScreen(){
+
+    const savedPin = localStorage.getItem(PIN_KEY);
+
+    if(savedPin){
+
+        pinMode = "login";
+
+        document.getElementById("loginTitle").textContent =
+            "دخول الوالدين";
+
+        document.getElementById("loginText").textContent =
+            "أدخل الرقم السري للدخول";
+
+        document.querySelector(".main-login-btn").textContent =
+            "دخول";
+
+    }else{
+
+        pinMode = "create";
+
+        document.getElementById("loginTitle").textContent =
+            "إنشاء الرقم السري";
+
+        document.getElementById("loginText").textContent =
+            "أنشئ رقمًا سريًا من 4 أرقام";
+
+        document.querySelector(".main-login-btn").textContent =
+            "التالي";
+
+    }
+
+    currentPin = "";
+    firstPin = "";
+
+    updateDots();
+
+}
+
+
+/* =========================================================
+   NUMBER BUTTON
+========================================================= */
+
+function pressNumber(number){
+
+    if(currentPin.length >= 4){
+        return;
+    }
+
+    currentPin += normalizePin(number);
+
+    updateDots();
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteNumber(){
+
+    currentPin = currentPin.slice(0,-1);
+
+    updateDots();
+
+}
+
+
+/* =========================================================
+   DOTS
+========================================================= */
+
+function updateDots(){
+
+    const dots =
+        document.querySelectorAll(".pin-dot");
+
+    dots.forEach((dot,index)=>{
+
+        if(index < currentPin.length){
+
+            dot.classList.add("active");
+
+        }else{
+
+            dot.classList.remove("active");
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   SUBMIT PIN
+========================================================= */
+
+function submitPin(){
+
+    /* إنشاء PIN */
+
+    if(pinMode === "create"){
+
+        if(currentPin.length !== 4){
+
+            alert("الرقم السري يجب أن يكون 4 أرقام.");
+
+            return;
+        }
+
+
+        if(firstPin === ""){
+
+            firstPin = currentPin;
+
+            currentPin = "";
+
+            document.getElementById("loginTitle").textContent =
+                "تأكيد الرقم السري";
+
+            document.getElementById("loginText").textContent =
+                "أدخل الرقم السري مرة أخرى";
+
+            updateDots();
+
+            return;
+
+        }
+
+
+        if(currentPin !== firstPin){
+
+            alert("الرقمان غير متطابقين، حاولي مرة أخرى.");
+
+            currentPin = "";
+            firstPin = "";
+
+            document.getElementById("loginTitle").textContent =
+                "إنشاء الرقم السري";
+
+            document.getElementById("loginText").textContent =
+                "أنشئ رقمًا سريًا من 4 أرقام";
+
+            updateDots();
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            PIN_KEY,
+            normalizePin(currentPin)
+        );
+
+        alert("تم إنشاء الرقم السري بنجاح.");
+
+        currentPin = "";
+        firstPin = "";
+
+        pinMode = "login";
+
+        document.getElementById("loginTitle").textContent =
+            "دخول الوالدين";
+
+        document.getElementById("loginText").textContent =
+            "أدخل الرقم السري للدخول";
+
+        document.querySelector(".main-login-btn").textContent =
+            "دخول";
+
+        updateDots();
+
+        return;
+
+    }
+
+
+    /* دخول */
+
+    const savedPin =
+        localStorage.getItem(PIN_KEY);
+
+    if(!savedPin){
+
+        pinMode = "create";
+        setupPinScreen();
+
+        return;
+    }
+
+
+    if(currentPin.length !== 4){
+
+        alert("أدخل الرقم السري المكون من 4 أرقام.");
+
+        return;
+    }
+
+
+    if(
+        normalizePin(currentPin) ===
+        normalizePin(savedPin)
+    ){
+
+        document.getElementById("loginScreen").style.display =
+            "none";
+
+        document.getElementById("parentPanel").style.display =
+            "block";
+
+        loadSettings();
+        renderCustomActivities();
+
+    }else{
+
+        alert("الرقم السري غير صحيح.");
+
+        currentPin = "";
+
+        updateDots();
+
+    }
+
+}
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+const defaultSettings = {
+
+    sections:{
+        stories:true,
+        emotions:true,
+        games:true
+    },
+
+    activities:{
+
+        stories:{
+            doctor:true,
+            environment:true,
+            market:true,
+            adventure:true,
+            lesson:true
+        },
+
+        emotions:{
+            learn:true,
+            training:true,
+            events:true,
+            draw:true
+        },
+
+        games:{
+            colors:true,
+            shapes:true,
+            social:true,
+            communication:true,
+            challenges:true,
+            letters:true
+        }
+
+    },
+
+    customActivities:[]
+
+};
+
+
+let settings;
+
+
+/* =========================================================
+   LOAD SETTINGS
+========================================================= */
+
+function loadSettings(){
+
+    const saved =
+        localStorage.getItem(SETTINGS_KEY);
+
+    if(saved){
+
+        try{
+
+            settings = JSON.parse(saved);
+
+        }catch(error){
+
+            settings =
+                JSON.parse(
+                    JSON.stringify(defaultSettings)
+                );
+
+        }
+
+    }else{
+
+        settings =
+            JSON.parse(
+                JSON.stringify(defaultSettings)
+            );
+
+    }
+
+    updateAllToggleVisuals();
+
+}
+
+
+/* =========================================================
+   SAVE SETTINGS
+========================================================= */
+
+function saveSettings(){
+
+    localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(settings)
+    );
+
+    alert("تم حفظ الإعدادات بنجاح.");
+
+}
+
+
+/* =========================================================
+   SECTION TOGGLE
+========================================================= */
+
+function toggleSection(section){
+
+    settings.sections[section] =
+        !settings.sections[section];
+
+    updateAllToggleVisuals();
+
+    /*
+       حفظ التغيير مباشرة
+       حتى ينتقل إلى صفحات الطفل فورًا
+    */
+
+    localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(settings)
+    );
+
+}
+
+
+/* =========================================================
+   ACTIVITY TOGGLE
+========================================================= */
+
+function toggleActivity(section, activity){
+
+    settings.activities[section][activity] =
+        !settings.activities[section][activity];
+
+    updateAllToggleVisuals();
+
+    /*
+       حفظ التغيير مباشرة
+       حتى لا نحتاج الضغط على حفظ الإعدادات
+    */
+
+    localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(settings)
+    );
+
+}
+
+
+/* =========================================================
+   ACTIVITY OPEN/CLOSE
+========================================================= */
+
+function toggleActivities(section){
+
+    const element =
+        document.getElementById(
+            section + "Activities"
+        );
+
+    if(element){
+
+        element.classList.toggle("open");
+
+    }
+
+}
+
+
+/* =========================================================
+   UPDATE TOGGLES
+========================================================= */
+
+function setToggle(id,value){
+
+    const element =
+        document.getElementById(id);
+
+    if(!element){
+        return;
+    }
+
+    if(value){
+
+        element.classList.add("on");
+
+    }else{
+
+        element.classList.remove("on");
+
+    }
+
+}
+
+
+function updateAllToggleVisuals(){
+
+    if(!settings){
+        return;
+    }
+
+
+    /* sections */
+
+    setToggle(
+        "storiesToggle",
+        settings.sections.stories
+    );
+
+    setToggle(
+        "emotionsToggle",
+        settings.sections.emotions
+    );
+
+    setToggle(
+        "gamesToggle",
+        settings.sections.games
+    );
+
+
+    /* stories */
+
+    setToggle(
+        "storyDoctorToggle",
+        settings.activities.stories.doctor
+    );
+
+    setToggle(
+        "storyEnvironmentToggle",
+        settings.activities.stories.environment
+    );
+
+    setToggle(
+        "storyMarketToggle",
+        settings.activities.stories.market
+    );
+
+    setToggle(
+        "storyAdventureToggle",
+        settings.activities.stories.adventure
+    );
+
+    setToggle(
+        "storyLessonToggle",
+        settings.activities.stories.lesson
+    );
+
+
+    /* emotions */
+
+    setToggle(
+        "emotionLearnToggle",
+        settings.activities.emotions.learn
+    );
+
+    setToggle(
+        "emotionTrainingToggle",
+        settings.activities.emotions.training
+    );
+
+    setToggle(
+        "emotionEventsToggle",
+        settings.activities.emotions.events
+    );
+
+    setToggle(
+        "emotionDrawToggle",
+        settings.activities.emotions.draw
+    );
+
+
+    /* games */
+
+    setToggle(
+        "gameColorsToggle",
+        settings.activities.games.colors
+    );
+
+    setToggle(
+        "gameShapesToggle",
+        settings.activities.games.shapes
+    );
+
+    setToggle(
+        "gameSocialToggle",
+        settings.activities.games.social
+    );
+
+    setToggle(
+        "gameCommunicationToggle",
+        settings.activities.games.communication
+    );
+
+    setToggle(
+        "gameChallengesToggle",
+        settings.activities.games.challenges
+    );
+
+    setToggle(
+        "gameLettersToggle",
+        settings.activities.games.letters
+    );
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+function printPage(page){
+
+    const printWindow =
+        window.open(page,"_blank");
+
+    if(!printWindow){
+
+        alert("السماح بفتح النوافذ الجديدة مطلوب للطباعة.");
+
+        return;
+    }
+
+}
+
+
+/* =========================================================
+   ADD PARENT FILE
+========================================================= */
+
+function addParentFile(event){
+
+    const file =
+        event.target.files[0];
+
+    if(!file){
+        return;
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload = function(e){
+
+        const item = {
+
+            id:Date.now(),
+
+            name:file.name,
+
+            type:file.type,
+
+            data:e.target.result,
+
+            enabled:true
+
+        };
+
+
+        if(!settings.customActivities){
+
+            settings.customActivities = [];
+
+        }
+
+
+        settings.customActivities.push(item);
+
+
+        localStorage.setItem(
+            SETTINGS_KEY,
+            JSON.stringify(settings)
+        );
+
+
+        renderCustomActivities();
+
+
+        event.target.value = "";
+
+    };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =========================================================
+   RENDER CUSTOM ACTIVITIES
+========================================================= */
+
+function renderCustomActivities(){
+
+    const container =
+        document.getElementById("customList");
+
+    if(!container || !settings){
+        return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    const items =
+        settings.customActivities || [];
+
+
+    if(items.length === 0){
+
+        return;
+
+    }
+
+
+    items.forEach(item=>{
+
+        const row =
+            document.createElement("div");
+
+        row.className = "custom-item";
+
+
+        if(item.type &&
+           item.type.startsWith("image/")){
+
+            const img =
+                document.createElement("img");
+
+            img.className =
+                "custom-preview";
+
+            img.src =
+                item.data;
+
+            row.appendChild(img);
+
+        }else{
+
+            const icon =
+                document.createElement("div");
+
+            icon.className =
+                "custom-preview";
+
+            icon.style.display =
+                "flex";
+
+            icon.style.alignItems =
+                "center";
+
+            icon.style.justifyContent =
+                "center";
+
+            icon.style.fontSize =
+                "30px";
+
+            icon.textContent =
+                "📄";
+
+            row.appendChild(icon);
+
+        }
+
+
+        const name =
+            document.createElement("div");
+
+        name.className =
+            "custom-name";
+
+        name.textContent =
+            item.name;
+
+        row.appendChild(name);
+
+
+        const toggle =
+            document.createElement("div");
+
+        toggle.className =
+            "toggle";
+
+        if(item.enabled !== false){
+
+            toggle.classList.add("on");
+
+        }
+
+
+        toggle.onclick = function(){
+
+            item.enabled =
+                item.enabled === false;
+
+            localStorage.setItem(
+                SETTINGS_KEY,
+                JSON.stringify(settings)
+            );
+
+            renderCustomActivities();
+
+        };
+
+
+        row.appendChild(toggle);
+
+
+        container.appendChild(row);
+
+    });
+
+}
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+function goBack(){
+
+    window.location.href =
+        "home.html";
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        setupPinScreen();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
