@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
@@ -12,6 +12,14 @@ maximum-scale=1.0,
 user-scalable=no">
 
 <title>الألعاب - رفيق</title>
+
+
+<!-- =====================================================
+     SUPABASE
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <style>
 
@@ -1175,7 +1183,8 @@ id="sideMenu">
         <!-- SHAPES -->
 
         <a
-        href="./shapes-circle.html"
+        href="#"
+        id="shapesGameCard"
         class="game-card shapes-card"
         style="text-decoration:none;">
 
@@ -1335,6 +1344,26 @@ class="parent-panel">
 
 
 <script>
+
+
+/* =====================================================
+   SUPABASE CONNECTION
+===================================================== */
+
+const SUPABASE_URL =
+    "https://ciwrwmutcrarwtounelg.supabase.co";
+
+
+const SUPABASE_KEY =
+    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
 
 const SETTINGS_KEY = "rafiq_parent_controls";
 
@@ -1707,6 +1736,186 @@ function isGameEnabled(gameName) {
 
 
 /* =====================================================
+   SHAPES PERSONALIZATION
+   فتح صفحة الأشكال حسب اهتمام الطفل
+===================================================== */
+
+async function openShapesByInterest() {
+
+    /* -----------------------------------------
+       التحقق من أن لعبة الأشكال مفعلة
+    ----------------------------------------- */
+
+    if (!isGameEnabled("shapes")) {
+
+        return;
+
+    }
+
+
+    /* -----------------------------------------
+       الحصول على ID الطفل الحالي
+    ----------------------------------------- */
+
+    const childId =
+        localStorage.getItem(
+            "rafiqChildId"
+        );
+
+
+    /* -----------------------------------------
+       إذا لم يوجد طفل مسجل
+    ----------------------------------------- */
+
+    if (!childId) {
+
+        console.warn(
+            "لا يوجد rafiqChildId"
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        /* -----------------------------------------
+           جلب اهتمام الطفل من Supabase
+        ----------------------------------------- */
+
+        const {
+            data,
+            error
+        } =
+        await supabaseClient
+
+            .from("children")
+
+            .select("interests")
+
+            .eq(
+                "id",
+                childId
+            )
+
+            .maybeSingle();
+
+
+        /* -----------------------------------------
+           في حال وجود خطأ
+        ----------------------------------------- */
+
+        if (error) {
+
+            console.error(
+                "خطأ في جلب اهتمام الطفل:",
+                error
+            );
+
+            return;
+
+        }
+
+
+        /* -----------------------------------------
+           قراءة الاهتمام
+        ----------------------------------------- */
+
+        const interest =
+            String(
+                data?.interests || ""
+            ).trim();
+
+
+        console.log(
+            "🎯 اهتمام الطفل:",
+            interest
+        );
+
+
+        /* =========================================
+           فضاء
+        ========================================= */
+
+        if (
+            interest === "فضاء"
+        ) {
+
+            window.location.href =
+                "./shapes-space.html";
+
+            return;
+
+        }
+
+
+        /* =========================================
+           سيارات
+        ========================================= */
+
+        if (
+            interest === "سيارات"
+        ) {
+
+            window.location.href =
+                "./shapes-cars.html";
+
+            return;
+
+        }
+
+
+        /* -----------------------------------------
+           إذا كانت القيمة غير معروفة
+        ----------------------------------------- */
+
+        console.warn(
+            "اهتمام الطفل غير معروف:",
+            interest
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "حدث خطأ أثناء جلب اهتمام الطفل:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   SHAPES CARD CLICK
+===================================================== */
+
+const shapesGameCard =
+    document.getElementById(
+        "shapesGameCard"
+    );
+
+
+if (shapesGameCard) {
+
+    shapesGameCard.addEventListener(
+        "click",
+        function(event) {
+
+            event.preventDefault();
+
+            openShapesByInterest();
+
+        }
+    );
+
+}
+
+
+/* =====================================================
    OPEN GAME
 ===================================================== */
 
@@ -1728,8 +1937,7 @@ function openGame(game) {
 
     else if (game === "shapes") {
 
-        window.location.href =
-            "./shapes-circle.html";
+        openShapesByInterest();
 
     }
 
