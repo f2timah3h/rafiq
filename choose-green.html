@@ -13,7 +13,6 @@
 
 <title>ما لون هذه السمكة؟</title>
 
-
 <style>
 
 /* =========================================================
@@ -345,18 +344,24 @@ body {
 @keyframes bubbleUp {
 
     0% {
+
         transform:
             translateY(0)
             translateX(0)
             scale(0.8);
-        opacity: 0;
+
+        opacity:
+            0;
     }
 
     10% {
-        opacity: 0.8;
+
+        opacity:
+            0.8;
     }
 
     50% {
+
         transform:
             translateY(-45vh)
             translateX(15px)
@@ -364,11 +369,14 @@ body {
     }
 
     100% {
+
         transform:
             translateY(-115vh)
             translateX(-12px)
             scale(1.1);
-        opacity: 0;
+
+        opacity:
+            0;
     }
 }
 
@@ -689,16 +697,19 @@ body {
 
     0%,
     100% {
+
         transform:
             translateX(0);
     }
 
     25% {
+
         transform:
             translateX(-8px);
     }
 
     75% {
+
         transform:
             translateX(8px);
     }
@@ -732,17 +743,23 @@ body {
 
 
 .feedback.show {
-    opacity: 1;
+
+    opacity:
+        1;
 }
 
 
 .feedback.correct-message {
-    color: #4f9b63;
+
+    color:
+        #4f9b63;
 }
 
 
 .feedback.wrong-message {
-    color: #c47c7c;
+
+    color:
+        #c47c7c;
 }
 
 
@@ -773,6 +790,7 @@ body {
 
 
 .celebration.show {
+
     display:
         block;
 }
@@ -799,30 +817,54 @@ body {
 
 
 .balloon.b1 {
-    left: 8%;
-    bottom: -80px;
-    animation-delay: 0s;
+
+    left:
+        8%;
+
+    bottom:
+        -80px;
+
+    animation-delay:
+        0s;
 }
 
 
 .balloon.b2 {
-    left: 25%;
-    bottom: -90px;
-    animation-delay: 0.25s;
+
+    left:
+        25%;
+
+    bottom:
+        -90px;
+
+    animation-delay:
+        0.25s;
 }
 
 
 .balloon.b3 {
-    right: 25%;
-    bottom: -90px;
-    animation-delay: 0.15s;
+
+    right:
+        25%;
+
+    bottom:
+        -90px;
+
+    animation-delay:
+        0.15s;
 }
 
 
 .balloon.b4 {
-    right: 8%;
-    bottom: -80px;
-    animation-delay: 0.35s;
+
+    right:
+        8%;
+
+    bottom:
+        -80px;
+
+    animation-delay:
+        0.35s;
 }
 
 
@@ -839,7 +881,9 @@ body {
     }
 
     20% {
-        opacity: 1;
+
+        opacity:
+            1;
     }
 
     100% {
@@ -1003,11 +1047,15 @@ body {
 @keyframes popupFade {
 
     from {
-        opacity: 0;
+
+        opacity:
+            0;
     }
 
     to {
-        opacity: 1;
+
+        opacity:
+            1;
     }
 }
 
@@ -1097,16 +1145,19 @@ body {
 @keyframes successBounce {
 
     0% {
+
         transform:
             scale(0);
     }
 
     60% {
+
         transform:
             scale(1.2);
     }
 
     100% {
+
         transform:
             scale(1);
     }
@@ -1157,7 +1208,7 @@ body {
 
 
 /* =========================================================
-   زر التالي داخل POP-UP
+   زر التالي
 ========================================================= */
 
 .success-next {
@@ -1271,15 +1322,17 @@ body {
 }
 
 
-/* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-===================================================== */
+/* =========================================================
+   IPAD - REMOVE SCROLL
+========================================================= */
 
 @media (min-width: 768px) {
 
     html,
     body {
-        overflow: hidden;
+
+        overflow:
+            hidden;
     }
 
 }
@@ -1301,10 +1354,15 @@ body {
     id="bubbles">
 
     <div class="bubble"></div>
+
     <div class="bubble"></div>
+
     <div class="bubble"></div>
+
     <div class="bubble"></div>
+
     <div class="bubble"></div>
+
     <div class="bubble"></div>
 
 </div>
@@ -1346,17 +1404,23 @@ body {
 
 
     <button onclick="goHome()">
+
         🏠 الرئيسية
+
     </button>
 
 
     <button onclick="goProfile()">
+
         👤 الملف الشخصي
+
     </button>
 
 
     <button onclick="goProgress()">
+
         ⭐ تقدمي
+
     </button>
 
 
@@ -1373,32 +1437,44 @@ body {
 
 
     <div class="balloon b1">
+
         🎈
+
     </div>
 
 
     <div class="balloon b2">
+
         🎈
+
     </div>
 
 
     <div class="balloon b3">
+
         🎈
+
     </div>
 
 
     <div class="balloon b4">
+
         🎈
+
     </div>
 
 
     <div class="celebration-car car1">
+
         🚗
+
     </div>
 
 
     <div class="celebration-car car2">
+
         🚙
+
     </div>
 
 
@@ -1413,22 +1489,28 @@ body {
 
 
     <h1 class="question">
+
         ما لون هذه السمكة؟
+
     </h1>
 
 
     <p class="hint">
+
         اختر اللون الصحيح
+
     </p>
 
 
     <div class="fish-wrapper">
+
 
         <img
             src="images/f.png"
             class="fish"
             id="fish"
             alt="سمكة">
+
 
     </div>
 
@@ -1476,6 +1558,7 @@ body {
     <div
         id="feedback"
         class="feedback">
+
     </div>
 
 
@@ -1495,12 +1578,16 @@ body {
 
 
         <div class="success-icon">
+
             🎉
+
         </div>
 
 
         <h2 class="success-title">
+
             مبارك لك! 🌟
+
         </h2>
 
 
@@ -1526,6 +1613,7 @@ body {
 
     </div>
 
+
 </div>
 
 
@@ -1543,14 +1631,28 @@ const correctAnswer =
    عدد المحاولات الخاطئة
 ========================================================= */
 
-let wrongAttempts = 0;
+let wrongAttempts =
+    0;
 
 
 /* =========================================================
-   هل تمت الإجابة الصحيحة؟
+   هل انتهى السؤال؟
 ========================================================= */
 
-let answered = false;
+let answered =
+    false;
+
+
+/* =========================================================
+   هل أخطأ الطفل قبل الإجابة الصحيحة؟
+   
+   false = صح من أول مرة
+   
+   true = أخطأ مرة واحدة أو أكثر
+========================================================= */
+
+let hasMadeMistake =
+    false;
 
 
 /* =========================================================
@@ -1558,6 +1660,7 @@ let answered = false;
 ========================================================= */
 
 function speakArabic(text) {
+
 
     if (
         !("speechSynthesis" in window)
@@ -1601,23 +1704,27 @@ function speakArabic(text) {
 
 
 /* =========================================================
-   نطق السؤال
+   نطق السؤال عند فتح الصفحة
 ========================================================= */
 
 window.addEventListener(
     "load",
     function() {
 
+
         setTimeout(
             function() {
+
 
                 speakArabic(
                     "ما لون هذه السمكة؟"
                 );
 
+
             },
             700
         );
+
 
     }
 );
@@ -1629,6 +1736,7 @@ window.addEventListener(
 
 function getErrors() {
 
+
     const saved =
         localStorage.getItem(
             "colorLearningErrors"
@@ -1637,34 +1745,44 @@ function getErrors() {
 
     if (!saved) {
 
+
         return {
 
             green: 0,
+
             red: 0,
+
             blue: 0
 
         };
+
 
     }
 
 
     try {
 
+
         return JSON.parse(
             saved
         );
+
 
     }
 
     catch (error) {
 
+
         return {
 
             green: 0,
+
             red: 0,
+
             blue: 0
 
         };
+
 
     }
 
@@ -1672,10 +1790,13 @@ function getErrors() {
 
 
 /* =========================================================
-   حفظ خطأ
+   حفظ الخطأ
 ========================================================= */
 
-function saveError(color) {
+function saveError(
+    color
+) {
+
 
     const errors =
         getErrors();
@@ -1683,8 +1804,10 @@ function saveError(color) {
 
     if (!errors[color]) {
 
+
         errors[color] =
             0;
+
 
     }
 
@@ -1713,6 +1836,7 @@ function saveReinforcementColor(
     color
 ) {
 
+
     localStorage.setItem(
 
         "colorNeedsReinforcement",
@@ -1735,10 +1859,12 @@ function checkAnswer(
 
 
     /* =====================================================
-       منع الإجابة بعد انتهاء السؤال
+       منع الضغط بعد انتهاء السؤال
     ===================================================== */
 
-    if (answered) {
+    if (
+        answered
+    ) {
 
         return;
 
@@ -1746,22 +1872,30 @@ function checkAnswer(
 
 
     /* =====================================================
-       أسماء الألوان للنطق
+       أسماء الألوان
     ===================================================== */
 
     const optionNames = {
 
+
         green:
             "أخضر",
+
 
         red:
             "أحمر",
 
+
         blue:
             "أزرق"
 
+
     };
 
+
+    /* =====================================================
+       نطق اختيار الطفل
+    ===================================================== */
 
     speakArabic(
         optionNames[selectedColor]
@@ -1777,7 +1911,8 @@ function checkAnswer(
     /* =====================================================
        ❌ الإجابة الخاطئة
        
-       الآن ينتقل مباشرة إلى صفحة التعزيز.
+       الطفل يبقى في نفس الصفحة.
+       لا ننتقل إلى Reverse هنا.
     ===================================================== */
 
     if (
@@ -1786,47 +1921,70 @@ function checkAnswer(
     ) {
 
 
-        /*
-           تسجيل وجود خطأ
-        */
+        /* -----------------------------------------------
+           زيادة عدد الأخطاء
+        ----------------------------------------------- */
 
         wrongAttempts++;
 
 
-        /*
+        /* -----------------------------------------------
+           تسجيل أن الطفل أخطأ
+        ----------------------------------------------- */
+
+        hasMadeMistake =
+            true;
+
+
+        /* -----------------------------------------------
            حفظ الخطأ
-        */
+        ----------------------------------------------- */
 
         saveError(
             correctAnswer
         );
 
 
-        /*
-           حفظ اللون الذي يحتاج تعزيز
-        */
+        /* -----------------------------------------------
+           حفظ اللون المطلوب للتعزيز
+        ----------------------------------------------- */
 
         saveReinforcementColor(
             correctAnswer
         );
 
 
-        /*
-           حفظ أن الطفل أخطأ في هذا السؤال
-        */
+        /* -----------------------------------------------
+           حفظ عدد المحاولات
+        ----------------------------------------------- */
 
         localStorage.setItem(
 
             "greenQuestionWrongAttempts",
 
-            wrongAttempts
+            String(
+                wrongAttempts
+            )
 
         );
 
 
-        /*
-           حفظ أن صفحة التعزيز مطلوبة
-        */
+        /* -----------------------------------------------
+           حفظ أن الطفل أخطأ
+        ----------------------------------------------- */
+
+        localStorage.setItem(
+
+            "greenQuestionHadMistake",
+
+            "true"
+
+        );
+
+
+        /* -----------------------------------------------
+           حفظ أن Reverse مطلوب
+        ----------------------------------------------- */
 
         localStorage.setItem(
 
@@ -1837,60 +1995,66 @@ function checkAnswer(
         );
 
 
-        /*
-           حفظ أن السؤال تمت محاولته
-        */
-
-        localStorage.setItem(
-
-            "greenQuestionCompleted",
-
-            "true"
-
-        );
-
-
-        /*
-           إظهار الاهتزاز للحظة
-        */
+        /* -----------------------------------------------
+           حركة الخطأ
+        ----------------------------------------------- */
 
         button.classList.add(
             "wrong"
         );
 
 
-        /*
-           رسالة بسيطة قبل الانتقال
-        */
+        setTimeout(
+            function() {
+
+                button.classList.remove(
+                    "wrong"
+                );
+
+            },
+            400
+        );
+
+
+        /* -----------------------------------------------
+           رسالة الخطأ
+        ----------------------------------------------- */
 
         feedback.textContent =
-            "لنراجع اللون معًا 🌱";
+            "حاول مرة أخرى 🌱";
 
 
         feedback.className =
             "feedback show wrong-message";
 
 
-        /*
-           منع الضغط مرة أخرى
-        */
+        /* -----------------------------------------------
+           مهم جدًا:
+           لا نضع answered = true
+           
+           حتى يستطيع الطفل المحاولة مرة أخرى.
+        ----------------------------------------------- */
 
         answered =
-            true;
+            false;
 
 
-        /*
-           الانتقال إلى صفحة التعزيز
-        */
+        /* -----------------------------------------------
+           إخفاء الرسالة بعد فترة
+           مع بقاء السؤال نفسه.
+        ----------------------------------------------- */
 
         setTimeout(
             function() {
 
-                window.location.href =
-                    "green-reinforcement.html";
+
+                feedback.classList.remove(
+                    "show"
+                );
+
 
             },
-            700
+            1200
         );
 
 
@@ -1907,49 +2071,72 @@ function checkAnswer(
         true;
 
 
-    /*
-       تمييز الزر الصحيح
-    */
+    /* =====================================================
+       تمييز الإجابة الصحيحة
+    ===================================================== */
 
     button.classList.add(
         "correct"
     );
 
 
-    /*
-       إيقاف حركة السمكة
-    */
+    /* =====================================================
+       إيقاف السمكة
+    ===================================================== */
 
     document
-        .getElementById("fish")
-        .classList.add("stop");
+        .getElementById(
+            "fish"
+        )
+        .classList.add(
+            "stop"
+        );
 
 
-    /*
+    /* =====================================================
        إيقاف الفقاعات
-    */
+    ===================================================== */
 
     document
-        .getElementById("bubbles")
+        .getElementById(
+            "bubbles"
+        )
         .style.opacity =
         "0";
 
 
-    /*
+    /* =====================================================
        رسالة النجاح
-    */
+    ===================================================== */
 
-    feedback.textContent =
-        "أحسنت! 🌟 هذا اللون أخضر 💚";
+    if (
+        hasMadeMistake
+    ) {
+
+
+        feedback.textContent =
+            "أحسنت! الآن عرفت اللون الصحيح 🌟";
+
+
+    }
+
+    else {
+
+
+        feedback.textContent =
+            "أحسنت! هذا اللون أخضر 💚";
+
+
+    }
 
 
     feedback.className =
         "feedback show correct-message";
 
 
-    /*
-       تسجيل الإكمال
-    */
+    /* =====================================================
+       تسجيل إكمال السؤال
+    ===================================================== */
 
     localStorage.setItem(
 
@@ -1961,34 +2148,98 @@ function checkAnswer(
 
 
     /* =====================================================
-       🟢 صحيح من أول محاولة
-       
-       لا يوجد أي انتقال إلى صفحة التعزيز.
-       تظهر الاحتفالية ثم يفتح زر التالي المرحلة الجديدة.
+       إذا صح من أول مرة
     ===================================================== */
 
-    localStorage.setItem(
-
-        "greenQuestionFirstTry",
-
-        "true"
-
-    );
+    if (
+        !hasMadeMistake
+    ) {
 
 
-    /*
-       إزالة أي حالة تعزيز قديمة
-       حتى لا يتم إرساله إلى المرجع بالخطأ
-    */
+        localStorage.setItem(
 
-    localStorage.removeItem(
-        "greenReinforcementRequired"
-    );
+            "greenQuestionFirstTry",
+
+            "true"
+
+        );
 
 
-    /*
-       زينة الاحتفال
-    */
+        /*
+           لا يحتاج Reverse
+        */
+
+        localStorage.removeItem(
+
+            "greenReinforcementRequired"
+
+        );
+
+
+        localStorage.removeItem(
+
+            "greenQuestionHadMistake"
+
+        );
+
+
+        console.log(
+            "Correct on first attempt."
+        );
+
+
+    }
+
+
+    /* =====================================================
+       إذا أخطأ ثم صح
+    ===================================================== */
+
+    else {
+
+
+        localStorage.setItem(
+
+            "greenQuestionFirstTry",
+
+            "false"
+
+        );
+
+
+        localStorage.setItem(
+
+            "greenQuestionHadMistake",
+
+            "true"
+
+        );
+
+
+        /*
+           يحتاج Reverse
+        */
+
+        localStorage.setItem(
+
+            "greenReinforcementRequired",
+
+            "true"
+
+        );
+
+
+        console.log(
+            "Wrong first, then correct."
+        );
+
+
+    }
+
+
+    /* =====================================================
+       الاحتفال
+    ===================================================== */
 
     document
         .getElementById(
@@ -1999,19 +2250,20 @@ function checkAnswer(
         );
 
 
-    /*
-       تشغيل التصفيق
-    */
+    /* =====================================================
+       التصفيق
+    ===================================================== */
 
     playApplause();
 
 
-    /*
-       إظهار POP-UP النجاح
-    */
+    /* =====================================================
+       إظهار نافذة النجاح
+    ===================================================== */
 
     setTimeout(
         function() {
+
 
             document
                 .getElementById(
@@ -2020,6 +2272,7 @@ function checkAnswer(
                 .classList.add(
                     "show"
                 );
+
 
         },
         900
@@ -2034,7 +2287,9 @@ function checkAnswer(
 
 function playApplause() {
 
+
     try {
+
 
         const AudioContext =
             window.AudioContext ||
@@ -2117,16 +2372,20 @@ function playApplause() {
                 time + 0.05
             );
 
+
         }
+
 
     }
 
     catch (error) {
 
+
         console.log(
             "Audio غير متاح:",
             error
         );
+
 
     }
 
@@ -2134,29 +2393,117 @@ function playApplause() {
 
 
 /* =========================================================
-   التالي من POP-UP
+   زر التالي
 ========================================================= */
 
 function goNext() {
 
-    /*
-       بما أن الإجابة كانت صحيحة من أول مرة،
-       نفتح المرحلة الجديدة مباشرة.
-    */
+
+    /* =====================================================
+       الحالة الأولى:
+       الطفل صح من أول مرة
+       
+       ينتقل مباشرة للصفحة الثانية.
+    ===================================================== */
+
+    if (
+        !hasMadeMistake
+    ) {
+
+
+        console.log(
+            "Correct first try → colors.html"
+        );
+
+
+        /* -----------------------------------------------
+           فتح المرحلة التالية
+        ----------------------------------------------- */
+
+        localStorage.setItem(
+
+            "greenStageUnlocked",
+
+            "true"
+
+        );
+
+
+        /* -----------------------------------------------
+           لا يحتاج Reverse
+        ----------------------------------------------- */
+
+        localStorage.removeItem(
+
+            "greenReinforcementRequired"
+
+        );
+
+
+        localStorage.removeItem(
+
+            "greenQuestionHadMistake"
+
+        );
+
+
+        /* -----------------------------------------------
+           الانتقال المباشر
+        ----------------------------------------------- */
+
+        window.location.href =
+            "colors.html";
+
+
+        return;
+
+    }
+
+
+    /* =====================================================
+       الحالة الثانية:
+       الطفل غلط ثم صح
+       
+       هنا فقط يدخل Reverse.
+    ===================================================== */
+
+    console.log(
+        "Wrong first → correct later → green-reinforcement.html"
+    );
+
+
+    /* -----------------------------------------------
+       فتح المرحلة التالية
+    ----------------------------------------------- */
 
     localStorage.setItem(
+
         "greenStageUnlocked",
+
         "true"
+
     );
 
 
-    localStorage.removeItem(
-        "greenReinforcementRequired"
+    /* -----------------------------------------------
+       إبقاء حالة Reverse
+    ----------------------------------------------- */
+
+    localStorage.setItem(
+
+        "greenReinforcementRequired",
+
+        "true"
+
     );
 
+
+    /* -----------------------------------------------
+       الانتقال إلى Reverse
+    ----------------------------------------------- */
 
     window.location.href =
-        "colors.html";
+        "green-reinforcement.html";
 
 }
 
@@ -2166,6 +2513,7 @@ function goNext() {
 ========================================================= */
 
 function goPrevious() {
+
 
     window.location.href =
         "colors.html";
@@ -2178,6 +2526,7 @@ function goPrevious() {
 ========================================================= */
 
 function toggleMenu() {
+
 
     const menu =
         document.getElementById(
@@ -2193,10 +2542,11 @@ function toggleMenu() {
 
 
 /* =========================================================
-   صفحات القائمة
+   الرئيسية
 ========================================================= */
 
 function goHome() {
+
 
     window.location.href =
         "index.html";
@@ -2204,7 +2554,12 @@ function goHome() {
 }
 
 
+/* =========================================================
+   الملف الشخصي
+========================================================= */
+
 function goProfile() {
+
 
     window.location.href =
         "profile.html";
@@ -2212,7 +2567,12 @@ function goProfile() {
 }
 
 
+/* =========================================================
+   التقدم
+========================================================= */
+
 function goProgress() {
+
 
     window.location.href =
         "progress.html";
@@ -2250,17 +2610,19 @@ document.addEventListener(
             )
         ) {
 
+
             menu.classList.remove(
                 "show"
             );
 
+
         }
+
 
     }
 );
 
 </script>
-
 
 </body>
 

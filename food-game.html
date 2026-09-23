@@ -41,7 +41,6 @@ body{
 
     color:#173d68;
 
-    /* الخلفية من مجلد images */
     background-image:
         linear-gradient(
             rgba(255,255,255,.12),
@@ -54,7 +53,6 @@ body{
     background-position:center;
 
     background-repeat:no-repeat;
-
 }
 
 
@@ -227,10 +225,6 @@ body{
 
     transform:
         translate(-50%,-47%);
-
-    /*
-       أصغر من عرض الشاشة
-    */
 
     width:700px;
 
@@ -438,7 +432,6 @@ body{
     filter:none;
 
     border:3px solid #72b9e8;
-
 }
 
 
@@ -960,7 +953,8 @@ body{
 
 
         <div class="stage-image">
-💡
+
+            💡
 
         </div>
 
@@ -981,7 +975,7 @@ body{
     ================================================== -->
 
     <div
-        class="stage stage2 locked"
+        class="stage stage2"
         id="stage2"
         onclick="openStage(2)">
 
@@ -1016,13 +1010,14 @@ body{
 
             <div class="stage-title">
 
-           طعام ام شراب؟
+                طعام أم شراب؟
 
             </div>
 
 
             <div class="stage-description">
-اختر الطعام أو الشراب
+
+                اختر الطعام أو الشراب
                 من بين مجموعة من الصور.
 
             </div>
@@ -1054,7 +1049,7 @@ body{
     ================================================== -->
 
     <div
-        class="stage stage3 locked"
+        class="stage stage3"
         id="stage3"
         onclick="openStage(3)">
 
@@ -1096,7 +1091,7 @@ body{
 
             <div class="stage-description">
 
-               هيا بنا نتعلم كيف نطلب ما نريده
+                هيا بنا نتعلم كيف نطلب ما نريده
 
             </div>
 
@@ -1106,7 +1101,7 @@ body{
 
         <div class="stage-image">
 
-              ❤️ 
+            ❤️
 
         </div>
 
@@ -1127,7 +1122,7 @@ body{
     ================================================== -->
 
     <div
-        class="stage stage4 locked"
+        class="stage stage4"
         id="stage4"
         onclick="openStage(4)">
 
@@ -1179,8 +1174,8 @@ body{
 
 
         <div class="stage-image">
-💬 
-           
+
+            💬
 
         </div>
 
@@ -1306,6 +1301,7 @@ let selectedStage = 1;
 
 /* =====================================================
    UPDATE STAGES
+   جميع المراحل مفتوحة دائمًا
 ===================================================== */
 
 function updateStages(){
@@ -1336,25 +1332,26 @@ function updateStages(){
             continue;
 
 
+        /* =============================================
+           فتح جميع المراحل دائمًا
+        ============================================= */
+
+        stage.classList.remove("locked");
+
+
+        /* =============================================
+           التحقق من اكتمال المرحلة
+        ============================================= */
+
         const completed =
             localStorage.getItem(
                 "rafiqFoodStage" + i
             ) === "completed";
 
 
-        /* =============================================
-           COMPLETED
-        ============================================= */
-
         if(completed){
 
-            stage.classList.add(
-                "completed"
-            );
-
-            stage.classList.remove(
-                "locked"
-            );
+            stage.classList.add("completed");
 
 
             if(badge){
@@ -1374,16 +1371,9 @@ function updateStages(){
 
         }
 
-
-        /* =============================================
-           NOT COMPLETED
-        ============================================= */
-
         else{
 
-            stage.classList.remove(
-                "completed"
-            );
+            stage.classList.remove("completed");
 
 
             if(badge){
@@ -1401,36 +1391,6 @@ function updateStages(){
 
             }
 
-
-            /*
-              المرحلة الأولى مفتوحة دائمًا.
-
-              المرحلة التالية تفتح عندما
-              تكون المرحلة السابقة مكتملة.
-            */
-
-            if(
-                i === 1 ||
-                localStorage.getItem(
-                    "rafiqFoodStage" +
-                    (i - 1)
-                ) === "completed"
-            ){
-
-                stage.classList.remove(
-                    "locked"
-                );
-
-            }
-
-            else{
-
-                stage.classList.add(
-                    "locked"
-                );
-
-            }
-
         }
 
     }
@@ -1440,50 +1400,10 @@ function updateStages(){
 
 /* =====================================================
    OPEN STAGE
+   جميع المراحل متاحة بدون شروط
 ===================================================== */
 
 function openStage(stage){
-
-    /*
-       التحقق من أن المرحلة السابقة مكتملة
-    */
-
-    if(
-        stage > 1 &&
-        localStorage.getItem(
-            "rafiqFoodStage" +
-            (stage - 1)
-        ) !== "completed"
-    ){
-
-        document.getElementById(
-            "popupTitle"
-        ).textContent =
-            "🔒 المرحلة غير متاحة";
-
-
-        document.getElementById(
-            "popupText"
-        ).textContent =
-            "أكمل المرحلة السابقة أولًا حتى تفتح هذه المرحلة.";
-
-
-        document.getElementById(
-            "startBtn"
-        ).style.display =
-            "none";
-
-
-        document.getElementById(
-            "overlay"
-        ).style.display =
-            "flex";
-
-
-        return;
-
-    }
-
 
     selectedStage = stage;
 
@@ -1591,6 +1511,8 @@ function finishStage(stage){
 
     /*
        فتح المرحلة التالية
+       (موجودة فقط للحفاظ على التوافق
+       مع الصفحات القديمة)
     */
 
     if(stage < totalStages){

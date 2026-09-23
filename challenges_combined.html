@@ -44,6 +44,122 @@
 }
 
 
+/* =====================================
+   زر القائمة - أعلى اليمين
+===================================== */
+
+.menu-container {
+    position: absolute;
+
+    top: 25px;
+    right: 30px;
+
+    z-index: 100;
+}
+
+
+.menu-button {
+    width: 62px;
+    height: 62px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.88);
+
+    color: #30465b;
+
+    font-size: 29px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 5px 15px
+        rgba(50,70,90,0.12);
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.menu-button:hover {
+    transform: scale(1.08);
+}
+
+
+.menu-button:active {
+    transform: scale(0.95);
+}
+
+
+/* =====================================
+   القائمة المنسدلة
+===================================== */
+
+.menu {
+    display: none;
+
+    position: absolute;
+
+    top: 72px;
+
+    right: 0;
+
+    width: 215px;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    border-radius: 22px;
+
+    padding: 12px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(50,70,90,0.18);
+
+    z-index: 101;
+
+    backdrop-filter: blur(8px);
+}
+
+
+.menu.show {
+    display: block;
+}
+
+
+.menu a {
+    display: block;
+
+    text-decoration: none;
+
+    color: #30465b;
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+    padding: 15px 18px;
+
+    border-radius: 14px;
+
+    margin: 4px 0;
+
+    text-align: right;
+
+    transition:
+        background 0.2s ease;
+}
+
+
+.menu a:hover {
+    background: #e4f2ff;
+}
+
+
 /* المحتوى فوق الخلفية */
 
 .challenges-content {
@@ -241,6 +357,27 @@
             20px 12px 30px;
     }
 
+
+    .menu-container {
+        top: 18px;
+        right: 18px;
+    }
+
+
+    .menu-button {
+        width: 55px;
+        height: 55px;
+        font-size: 26px;
+    }
+
+
+    .menu {
+        top: 64px;
+        right: 0;
+        width: 200px;
+    }
+
+
     .challenges-title h1 {
         font-size: 32px;
     }
@@ -291,56 +428,212 @@
 
     <main class="challenges-page">
 
-        <img src="images/tree.png" class="challenges-background" alt="">
+        <img src="images/tree.png"
+             class="challenges-background"
+             alt="">
+
+
+        <!-- =====================================
+             القائمة المنسدلة - أعلى اليمين
+        ====================================== -->
+
+        <div class="menu-container">
+
+            <button
+                class="menu-button"
+                onclick="toggleMenu()"
+                aria-label="القائمة">
+
+                ☰
+
+            </button>
+
+
+            <div
+                class="menu"
+                id="menu">
+
+                <a href="home.html">
+                    🏠 الرئيسية
+                </a>
+
+                <a href="profile.html">
+                    👤 ملفي
+                </a>
+
+                <a href="reports.html">
+                    📊 تقاريري
+                </a>
+
+            </div>
+
+        </div>
+
 
         <div class="challenges-content">
 
             <div class="challenges-title">
-                <h1>التحديات</h1>
-                <p>هيا نواجه تحديات جديدة ونتعلم معًا!</p>
+
+                <h1>
+                    التحديات
+                </h1>
+
+                <p>
+                    هيا نواجه تحديات جديدة ونتعلم معًا!
+                </p>
+
             </div>
+
 
             <div class="challenges-list">
 
-                <button class="new-challenge-card" type="button"
-                        onclick="window.location.href='routine_combined.html'">
-                    <img src="images/gsk.png" class="new-challenge-image" alt="روتيني يتغيّر">
+
+                <button
+                    class="new-challenge-card"
+                    type="button"
+                    onclick="window.location.href='routine_combined.html'">
+
+                    <img
+                        src="images/gsk.png"
+                        class="new-challenge-image"
+                        alt="روتيني يتغيّر">
+
                     <div class="new-challenge-info">
-                        <h2>روتيني يتغيّر</h2>
-                        <p>أتعلم كيف أتعامل مع التغييرات الصغيرة في يومي</p>
+
+                        <h2>
+                            روتيني يتغيّر
+                        </h2>
+
+                        <p>
+                            أتعلم كيف أتعامل مع التغييرات الصغيرة في يومي
+                        </p>
+
                     </div>
-                    <span class="challenge-arrow">←</span>
+
+                    <span class="challenge-arrow">
+                        ←
+                    </span>
+
                 </button>
 
-                <button class="new-challenge-card" type="button"
-                        onclick="window.location.href='order.html'">
-                    <img src="images/b.png" class="new-challenge-image" alt="ترتيبي يتغيّر">
+
+                <button
+                    class="new-challenge-card"
+                    type="button"
+                    onclick="window.location.href='order.html'">
+
+                    <img
+                        src="images/b.png"
+                        class="new-challenge-image"
+                        alt="ترتيبي يتغيّر">
+
                     <div class="new-challenge-info">
-                        <h2>ترتيبي يتغيّر</h2>
-                        <p>أتعلم أن أرتب الأشياء بطرق مختلفة</p>
+
+                        <h2>
+                            ترتيبي يتغيّر
+                        </h2>
+
+                        <p>
+                            أتعلم أن أرتب الأشياء بطرق مختلفة
+                        </p>
+
                     </div>
-                    <span class="challenge-arrow">←</span>
+
+                    <span class="challenge-arrow">
+                        ←
+                    </span>
+
                 </button>
 
-                <button class="new-challenge-card" type="button"
-                        onclick="window.location.href='number.html'">
-                    <img src="images/ten.png" class="new-challenge-image" alt="تجربة رقم جديد">
+
+                <button
+                    class="new-challenge-card"
+                    type="button"
+                    onclick="window.location.href='number.html'">
+
+                    <img
+                        src="images/ten.png"
+                        class="new-challenge-image"
+                        alt="تجربة رقم جديد">
+
                     <div class="new-challenge-info">
-                        <h2>تجربة رقم جديد</h2>
-                        <p>أجرّب رقمًا جديدًا بطريقة ممتعة وآمنة</p>
+
+                        <h2>
+                            تجربة رقم جديد
+                        </h2>
+
+                        <p>
+                            أجرّب رقمًا جديدًا بطريقة ممتعة وآمنة
+                        </p>
+
                     </div>
-                    <span class="challenge-arrow">←</span>
+
+                    <span class="challenge-arrow">
+                        ←
+                    </span>
+
                 </button>
+
 
             </div>
 
+
             <div class="challenges-footer">
+
                 ⭐ كل تحدٍ يساعدني على تجربة شيء جديد!
+
             </div>
 
         </div>
 
     </main>
+
+
+<script>
+
+/* =====================================
+   القائمة المنسدلة
+===================================== */
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById("menu");
+
+    menu.classList.toggle("show");
+
+}
+
+
+/* =====================================
+   إغلاق القائمة عند الضغط خارجها
+===================================== */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const menu =
+            document.getElementById("menu");
+
+        const menuContainer =
+            document.querySelector(".menu-container");
+
+
+        if (
+            !menuContainer.contains(
+                event.target
+            )
+        ) {
+
+            menu.classList.remove("show");
+
+        }
+
+    }
+);
+
+</script>
 
 </body>
 </html>

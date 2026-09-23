@@ -418,7 +418,7 @@ body{
 
 
 /* =====================================================
-   CIRCLE
+   SHAPE
 ===================================================== */
 
 .shape-area{
@@ -604,12 +604,6 @@ body{
     transform:scale(.94);
 
 }
-
-
-/* =====================================================
-   لا توجد Media Queries لتغيير أحجام التصميم
-   لأن الصفحة كلها يتم تصغيرها كنسبة واحدة
-===================================================== */
 
 </style>
 
@@ -815,7 +809,6 @@ const previousButton =
 
 /* =====================================================
    RESPONSIVE PAGE SCALE
-   التصميم الأساسي 1024 × 1366
 ===================================================== */
 
 function resizePage(){
@@ -839,11 +832,6 @@ function resizePage(){
         screenHeight / baseHeight;
 
 
-    /*
-       نستخدم أصغر نسبة حتى تظهر
-       الصفحة كاملة بدون قص.
-    */
-
     const scale =
         Math.min(
             scaleX,
@@ -853,20 +841,6 @@ function resizePage(){
 
     page.style.setProperty(
         "--page-scale",
-        scale
-    );
-
-
-    console.log(
-        "Rafiq Page Size:",
-        screenWidth,
-        "x",
-        screenHeight
-    );
-
-
-    console.log(
-        "Rafiq Page Scale:",
         scale
     );
 
@@ -989,82 +963,7 @@ let interest = null;
 
 
 /* =====================================================
-   APPLY PERSONALIZATION
-===================================================== */
-
-function applyPersonalization(){
-
-    /*
-       سيارات
-    */
-
-    if(
-        interest === "سيارات"
-    ){
-
-        page.style.backgroundImage =
-            "url('images/car4.jpeg')";
-
-        childImage.src =
-            "images/ad3.png";
-
-        childImage.alt =
-            "طفل مع السيارات";
-
-        console.log(
-            "Shapes Theme: CAR"
-        );
-
-        return;
-
-    }
-
-
-    /*
-       فضاء
-    */
-
-    if(
-        interest === "فضاء"
-    ){
-
-        page.style.backgroundImage =
-            "url('images/spao.jpeg')";
-
-        childImage.src =
-            "images/ad2.png";
-
-        childImage.alt =
-            "طفل مع الفضاء";
-
-        console.log(
-            "Shapes Theme: SPACE"
-        );
-
-        return;
-
-    }
-
-
-    /*
-       في حال عدم وجود قيمة
-       نستخدم سيارات.
-    */
-
-    interest =
-        "سيارات";
-
-    page.style.backgroundImage =
-        "url('images/car4.jpeg')";
-
-    childImage.src =
-        "images/ad3.png";
-
-}
-
-
-/* =====================================================
-   WAIT FOR IMAGE
+   IMAGE LOADER
 ===================================================== */
 
 function waitForImage(src){
@@ -1079,7 +978,7 @@ function waitForImage(src){
             img.onload =
                 function(){
 
-                    resolve();
+                    resolve(true);
 
                 };
 
@@ -1088,11 +987,11 @@ function waitForImage(src){
                 function(){
 
                     console.warn(
-                        "Image failed:",
+                        "Image failed to load:",
                         src
                     );
 
-                    resolve();
+                    resolve(false);
 
                 };
 
@@ -1107,7 +1006,304 @@ function waitForImage(src){
 
 
 /* =====================================================
-   SHOW PAGE AFTER THEME
+   NORMALIZE INTEREST
+===================================================== */
+
+function normalizeInterest(value){
+
+    if(
+        value === null ||
+        value === undefined
+    ){
+
+        return "";
+
+    }
+
+
+    /* ARRAY */
+
+    if(
+        Array.isArray(value)
+    ){
+
+        if(
+            value.length === 0
+        ){
+
+            return "";
+
+        }
+
+        return normalizeInterest(
+            value[0]
+        );
+
+    }
+
+
+    /* OBJECT */
+
+    if(
+        typeof value === "object"
+    ){
+
+        if(
+            value.interest !== undefined
+        ){
+
+            return normalizeInterest(
+                value.interest
+            );
+
+        }
+
+        if(
+            value.value !== undefined
+        ){
+
+            return normalizeInterest(
+                value.value
+            );
+
+        }
+
+        return "";
+
+    }
+
+
+    /* STRING */
+
+    let text =
+        String(value)
+        .trim();
+
+
+    if(
+        text === ""
+    ){
+
+        return "";
+
+    }
+
+
+    /*
+       JSON ARRAY / OBJECT
+    */
+
+    if(
+        (
+            text.startsWith("[") &&
+            text.endsWith("]")
+        ) ||
+        (
+            text.startsWith("{") &&
+            text.endsWith("}")
+        )
+    ){
+
+        try{
+
+            const parsed =
+                JSON.parse(text);
+
+            return normalizeInterest(
+                parsed
+            );
+
+        }
+
+        catch(error){
+
+            console.warn(
+                "Could not parse interest:",
+                text
+            );
+
+        }
+
+    }
+
+
+    /*
+       إزالة علامات الاقتباس
+    */
+
+    text =
+        text
+        .replace(/["']/g, "")
+        .trim()
+        .toLowerCase();
+
+
+    return text;
+
+}
+
+
+/* =====================================================
+   DETECT INTEREST
+===================================================== */
+
+function detectInterest(value){
+
+    const normalized =
+        normalizeInterest(value);
+
+
+    console.log(
+        "Normalized interest:",
+        normalized
+    );
+
+
+    /* =================================================
+       SPACE
+    ================================================= */
+
+    if(
+        normalized === "فضاء" ||
+        normalized === "الفضاء" ||
+        normalized === "space"
+    ){
+
+        return "فضاء";
+
+    }
+
+
+    /* =================================================
+       CARS
+    ================================================= */
+
+    if(
+        normalized === "سيارات" ||
+        normalized === "سيارة" ||
+        normalized === "السيارات" ||
+        normalized === "car" ||
+        normalized === "cars"
+    ){
+
+        return "سيارات";
+
+    }
+
+
+    /*
+       إذا كانت القيمة تحتوي على الكلمة
+    */
+
+    if(
+        normalized.includes("فضاء") ||
+        normalized.includes("space")
+    ){
+
+        return "فضاء";
+
+    }
+
+
+    if(
+        normalized.includes("سيار") ||
+        normalized.includes("car")
+    ){
+
+        return "سيارات";
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =====================================================
+   APPLY PERSONALIZATION
+===================================================== */
+
+function applyPersonalization(){
+
+    /* =================================================
+       SPACE
+    ================================================= */
+
+    if(
+        interest === "فضاء"
+    ){
+
+        page.style.backgroundImage =
+            "url('images/spao.jpeg')";
+
+        childImage.src =
+            "images/ad2.png";
+
+        childImage.alt =
+            "طفل مع الفضاء";
+
+
+        console.log(
+            "Shapes Theme: SPACE"
+        );
+
+
+        return;
+
+    }
+
+
+    /* =================================================
+       CARS
+    ================================================= */
+
+    if(
+        interest === "سيارات"
+    ){
+
+        page.style.backgroundImage =
+            "url('images/car4.jpeg')";
+
+        childImage.src =
+            "images/ad3.png";
+
+        childImage.alt =
+            "طفل مع السيارات";
+
+
+        console.log(
+            "Shapes Theme: CAR"
+        );
+
+
+        return;
+
+    }
+
+
+    /* =================================================
+       FALLBACK
+    ================================================= */
+
+    interest =
+        "سيارات";
+
+
+    page.style.backgroundImage =
+        "url('images/car4.jpeg')";
+
+    childImage.src =
+        "images/ad3.png";
+
+    childImage.alt =
+        "طفل مع السيارات";
+
+}
+
+
+/* =====================================================
+   SHOW PAGE
 ===================================================== */
 
 async function showPageAfterTheme(){
@@ -1156,16 +1352,8 @@ async function showPageAfterTheme(){
     applyPersonalization();
 
 
-    /*
-       إعادة حساب الحجم قبل إظهار الصفحة
-    */
-
     resizePage();
 
-
-    /*
-       إظهار الصفحة بعد تجهيز الثيم
-    */
 
     page.style.visibility =
         "visible";
@@ -1180,23 +1368,181 @@ async function showPageAfterTheme(){
 
 
 /* =====================================================
-   LOAD CHILD INTEREST FROM SUPABASE
+   LOAD LOCAL INTEREST
+===================================================== */
+
+function getLocalInterest(){
+
+    /*
+       المفاتيح المحتملة
+       حتى لو كانت الصفحة القديمة
+       تستخدم اسمًا مختلفًا.
+    */
+
+    const possibleKeys = [
+
+        "rafiqInterest",
+
+        "childInterest",
+
+        "selectedInterest",
+
+        "interest",
+
+        "favoriteInterest",
+
+        "rafiqChildInterest",
+
+        "interests"
+
+    ];
+
+
+    for(
+        const key of possibleKeys
+    ){
+
+        try{
+
+            const value =
+                localStorage.getItem(
+                    key
+                );
+
+
+            if(
+                value === null ||
+                value === ""
+            ){
+
+                continue;
+
+            }
+
+
+            console.log(
+                "LocalStorage:",
+                key,
+                value
+            );
+
+
+            const detected =
+                detectInterest(
+                    value
+                );
+
+
+            if(
+                detected
+            ){
+
+                console.log(
+                    "LocalStorage interest detected:",
+                    detected
+                );
+
+
+                return detected;
+
+            }
+
+        }
+
+        catch(error){
+
+            console.warn(
+                "LocalStorage read error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =====================================================
+   LOAD CHILD INTEREST
+   SUPABASE FIRST
+   LOCAL STORAGE BACKUP
 ===================================================== */
 
 async function loadChildInterest(){
 
+    console.log(
+        "================================"
+    );
+
+    console.log(
+        "Starting interest detection"
+    );
+
+    console.log(
+        "================================"
+    );
+
+
     /*
-       إذا ما عندنا ID
+       نقرأ LocalStorage مسبقًا
+       كنسخة احتياطية.
     */
 
-    if(!childId){
+    const localInterest =
+        getLocalInterest();
+
+
+    console.log(
+        "Local backup:",
+        localInterest || "NONE"
+    );
+
+
+    /* =================================================
+       NO CHILD ID
+    ================================================= */
+
+    if(
+        !childId
+    ){
 
         console.warn(
-            "Shapes: لا يوجد rafiqChildId."
+            "لا يوجد rafiqChildId."
         );
 
-        interest =
-            "سيارات";
+
+        if(
+            localInterest
+        ){
+
+            interest =
+                localInterest;
+
+
+            console.log(
+                "Using LocalStorage:",
+                interest
+            );
+
+        }
+
+        else{
+
+            interest =
+                "سيارات";
+
+
+            console.log(
+                "Using default:",
+                interest
+            );
+
+        }
+
 
         await showPageAfterTheme();
 
@@ -1205,7 +1551,16 @@ async function loadChildInterest(){
     }
 
 
+    /* =================================================
+       SUPABASE
+    ================================================= */
+
     try{
+
+        console.log(
+            "Checking Supabase..."
+        );
+
 
         const {
             data,
@@ -1227,15 +1582,48 @@ async function loadChildInterest(){
             .maybeSingle();
 
 
-        if(error){
+        /* =================================================
+           SUPABASE ERROR
+        ================================================= */
+
+        if(
+            error
+        ){
 
             console.error(
-                "Shapes Supabase Error:",
+                "Supabase Error:",
                 error
             );
 
-            interest =
-                "سيارات";
+
+            if(
+                localInterest
+            ){
+
+                interest =
+                    localInterest;
+
+
+                console.log(
+                    "Fallback → LocalStorage:",
+                    interest
+                );
+
+            }
+
+            else{
+
+                interest =
+                    "سيارات";
+
+
+                console.log(
+                    "Fallback → Default:",
+                    interest
+                );
+
+            }
+
 
             await showPageAfterTheme();
 
@@ -1244,14 +1632,47 @@ async function loadChildInterest(){
         }
 
 
-        if(!data){
+        /* =================================================
+           NO CHILD
+        ================================================= */
+
+        if(
+            !data
+        ){
 
             console.warn(
-                "لم يتم العثور على الطفل."
+                "Child not found in Supabase."
             );
 
-            interest =
-                "سيارات";
+
+            if(
+                localInterest
+            ){
+
+                interest =
+                    localInterest;
+
+
+                console.log(
+                    "Fallback → LocalStorage:",
+                    interest
+                );
+
+            }
+
+            else{
+
+                interest =
+                    "سيارات";
+
+
+                console.log(
+                    "Fallback → Default:",
+                    interest
+                );
+
+            }
+
 
             await showPageAfterTheme();
 
@@ -1260,67 +1681,128 @@ async function loadChildInterest(){
         }
 
 
+        /* =================================================
+           SUPABASE DATA
+        ================================================= */
+
         console.log(
-            "Shapes Child Data:",
+            "Supabase child data:",
             data
         );
 
 
-        /*
-           قراءة اهتمام الطفل
-        */
-
-        const savedInterest =
-            String(
-                data.interests || ""
-            )
-            .trim()
-            .toLowerCase();
+        console.log(
+            "Supabase interests:",
+            data.interests
+        );
 
 
-        /*
-           سيارات
-        */
+        const supabaseInterest =
+            detectInterest(
+                data.interests
+            );
+
+
+        /* =================================================
+           VALID SUPABASE INTEREST
+        ================================================= */
 
         if(
-            savedInterest === "سيارات" ||
-            savedInterest === "سيارة" ||
-            savedInterest === "car" ||
-            savedInterest === "cars"
+            supabaseInterest
         ){
 
             interest =
-                "سيارات";
+                supabaseInterest;
+
+
+            console.log(
+                "Using Supabase:",
+                interest
+            );
+
+
+            /*
+               حفظ آخر قيمة صحيحة محليًا
+            */
+
+            try{
+
+                localStorage.setItem(
+                    "rafiqInterest",
+                    interest
+                );
+
+
+                console.log(
+                    "Saved interest to LocalStorage:",
+                    interest
+                );
+
+            }
+
+            catch(error){
+
+                console.warn(
+                    "Could not save LocalStorage:",
+                    error
+                );
+
+            }
 
         }
 
 
-        /*
-           فضاء
-        */
+        /* =================================================
+           SUPABASE EMPTY → LOCAL
+        ================================================= */
 
         else if(
-            savedInterest === "فضاء" ||
-            savedInterest === "space"
+            localInterest
         ){
 
             interest =
-                "فضاء";
+                localInterest;
+
+
+            console.log(
+                "Supabase interest empty."
+            );
+
+
+            console.log(
+                "Using LocalStorage backup:",
+                interest
+            );
 
         }
 
 
-        /*
-           أي قيمة أخرى
-        */
+        /* =================================================
+           NOTHING FOUND
+        ================================================= */
 
         else{
 
             interest =
                 "سيارات";
 
+
+            console.log(
+                "No valid interest found."
+            );
+
+
+            console.log(
+                "Using default:",
+                interest
+            );
+
         }
 
+
+        /* =================================================
+           SHOW
+        ================================================= */
 
         await showPageAfterTheme();
 
@@ -1329,12 +1811,43 @@ async function loadChildInterest(){
     catch(error){
 
         console.error(
-            "Shapes Theme Error:",
+            "Unexpected interest error:",
             error
         );
 
-        interest =
-            "سيارات";
+
+        /* =================================================
+           LOCAL STORAGE BACKUP
+        ================================================= */
+
+        if(
+            localInterest
+        ){
+
+            interest =
+                localInterest;
+
+
+            console.log(
+                "Exception → LocalStorage:",
+                interest
+            );
+
+        }
+
+        else{
+
+            interest =
+                "سيارات";
+
+
+            console.log(
+                "Exception → Default:",
+                interest
+            );
+
+        }
+
 
         await showPageAfterTheme();
 

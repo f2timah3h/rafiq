@@ -443,6 +443,8 @@ body {
 
     max-width: 720px;
 
+    margin: 0 auto;
+
     text-align: center;
 
     font-size: 24px;
@@ -452,8 +454,6 @@ body {
     font-weight: 600;
 
     color: #263746;
-
-    margin-top: 0;
 }
 
 
@@ -515,7 +515,9 @@ body {
 
 .next-button {
 
-    margin-top: 42px;
+    display: block;
+
+    margin: 42px auto 0 auto;
 
     border: none;
 
@@ -532,6 +534,8 @@ body {
     border-radius: 22px;
 
     cursor: pointer;
+
+    text-align: center;
 
     box-shadow:
         0 6px 15px
@@ -781,7 +785,8 @@ const SUPABASE_URL =
     "https://ciwrwmutcrarwtounelg.supabase.co";
 
 const SUPABASE_KEY =
-    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+    "sb_publishable_m6n2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+
 
 const supabaseClient =
     window.supabase.createClient(
@@ -797,7 +802,9 @@ const supabaseClient =
 async function loadPersonalization() {
 
     const childId =
-        localStorage.getItem("rafiqChildId");
+        localStorage.getItem(
+            "rafiqChildId"
+        );
 
     if (!childId) {
         return;
@@ -812,6 +819,7 @@ async function loadPersonalization() {
                 .eq("id", childId)
                 .maybeSingle();
 
+
         if (error) {
 
             console.error(
@@ -822,9 +830,15 @@ async function loadPersonalization() {
             return;
         }
 
-        if (!data || !data.interests) {
+
+        if (
+            !data ||
+            !data.interests
+        ) {
+
             return;
         }
+
 
         const interests =
             String(data.interests)
@@ -837,10 +851,15 @@ async function loadPersonalization() {
         ========================= */
 
         if (
+
             interests === "سيارات" ||
+
             interests === "سيارة" ||
+
             interests === "cars" ||
+
             interests === "car"
+
         ) {
 
             document
@@ -856,8 +875,11 @@ async function loadPersonalization() {
         ========================= */
 
         else if (
+
             interests === "فضاء" ||
+
             interests === "space"
+
         ) {
 
             document
@@ -867,7 +889,9 @@ async function loadPersonalization() {
 
         }
 
-    } catch (error) {
+    }
+
+    catch (error) {
 
         console.error(
             "خطأ في تخصيص الصفحة:",
@@ -903,9 +927,13 @@ function goBack() {
 function toggleMenu() {
 
     const menu =
-        document.getElementById("menu");
+        document.getElementById(
+            "menu"
+        );
 
-    menu.classList.toggle("show");
+    menu.classList.toggle(
+        "show"
+    );
 
 }
 
@@ -930,8 +958,12 @@ document.addEventListener(
         ) {
 
             document
-                .getElementById("menu")
-                .classList.remove("show");
+                .getElementById(
+                    "menu"
+                )
+                .classList.remove(
+                    "show"
+                );
 
         }
 
@@ -952,16 +984,24 @@ function speakSadness() {
 
         window.speechSynthesis.cancel();
 
+
         const speech =
             new SpeechSynthesisUtterance(
                 "الحزن"
             );
 
-        speech.lang = "ar-SA";
 
-        speech.rate = 0.8;
+        speech.lang =
+            "ar-SA";
 
-        speech.pitch = 1.0;
+
+        speech.rate =
+            0.8;
+
+
+        speech.pitch =
+            1.0;
+
 
         window.speechSynthesis.speak(
             speech
