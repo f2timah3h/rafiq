@@ -15,12 +15,7 @@ user-scalable=no">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <style>
-
-/* =====================================================
-   GENERAL
-===================================================== */
 
 *{
     box-sizing:border-box;
@@ -45,6 +40,34 @@ body{
 
     color:#173d68;
 
+    background:#ffffff;
+
+    overflow:hidden;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+
+    position:absolute;
+
+    width:1024px;
+    height:1366px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(var(--page-scale,1));
+
+    transform-origin:center center;
+
+    overflow:hidden;
+
     background-color:#ffffff;
 
     background-repeat:no-repeat;
@@ -55,21 +78,6 @@ body{
 
     transition:
         background-image .4s ease;
-}
-
-
-/* =====================================================
-   PAGE
-===================================================== */
-
-.page{
-
-    position:relative;
-
-    width:100vw;
-    height:100vh;
-
-    overflow:hidden;
 }
 
 
@@ -236,9 +244,7 @@ body{
 
     width:850px;
 
-    max-width:88vw;
-
-    height:82vh;
+    height:1120px;
 
     display:flex;
 
@@ -948,7 +954,7 @@ body{
 
 .overlay{
 
-    position:fixed;
+    position:absolute;
 
     inset:0;
 
@@ -967,8 +973,6 @@ body{
 .popup{
 
     width:520px;
-
-    max-width:85vw;
 
     padding:
         35px 30px;
@@ -1060,238 +1064,6 @@ body{
     cursor:pointer;
 }
 
-
-/* =====================================================
-   IPAD PORTRAIT
-===================================================== */
-
-@media (orientation:portrait){
-
-    .previous-button{
-
-        top:16px;
-        left:16px;
-
-        width:54px;
-        height:50px;
-
-        font-size:28px;
-    }
-
-
-    .menu-button{
-
-        top:16px;
-        right:16px;
-
-        width:54px;
-        height:50px;
-    }
-
-
-    .side-menu{
-
-        top:75px;
-        right:16px;
-
-        width:210px;
-    }
-
-
-    .content{
-
-        width:90vw;
-
-        height:88vh;
-
-        top:51%;
-    }
-
-
-    .question{
-
-        font-size:25px;
-
-        padding:
-            11px 22px;
-
-        margin-bottom:12px;
-    }
-
-
-    .child-area{
-
-        width:400px;
-
-        max-width:85vw;
-
-        height:370px;
-    }
-
-
-    .boy{
-
-        width:330px;
-
-        max-height:360px;
-    }
-
-
-    .answers{
-
-        gap:18px;
-    }
-
-
-    .answer-button{
-
-        width:190px;
-
-        height:68px;
-
-        font-size:23px;
-    }
-
-
-    .feedback{
-
-        font-size:17px;
-
-        min-height:46px;
-    }
-
-
-    .example-title{
-
-        font-size:23px;
-
-        margin-bottom:18px;
-
-        padding:
-            10px 20px;
-    }
-
-
-    .example-cards{
-
-        gap:20px;
-    }
-
-
-    .example-button{
-
-        width:220px;
-
-        height:260px;
-
-        border-radius:28px;
-    }
-
-
-    .example-button img{
-
-        width:250px;
-
-        height:250px;
-    }
-
-
-    .example-label{
-
-        font-size:20px;
-    }
-
-
-    .next-button{
-
-        min-width:200px;
-
-        height:54px;
-
-        font-size:20px;
-    }
-
-
-    .car-decoration,
-    .space-decoration{
-
-        font-size:38px;
-    }
-
-}
-
-
-/* =====================================================
-   SMALL HEIGHT
-===================================================== */
-
-@media (max-height:800px){
-
-    .content{
-
-        height:90vh;
-    }
-
-
-    .question{
-
-        font-size:23px;
-
-        padding:8px 20px;
-
-        margin-bottom:7px;
-    }
-
-
-    .child-area{
-
-        height:300px;
-    }
-
-
-    .boy{
-
-        width:270px;
-
-        max-height:295px;
-    }
-
-
-    .answer-button{
-
-        height:58px;
-
-        font-size:20px;
-    }
-
-
-    .feedback{
-
-        margin-top:7px;
-
-        min-height:40px;
-
-        font-size:16px;
-
-        padding:7px 18px;
-    }
-
-
-    .example-button{
-
-        height:230px;
-    }
-
-
-    .example-button img{
-
-        width:150px;
-
-        height:150px;
-    }
-
-}
-
 </style>
 
 </head>
@@ -1302,10 +1074,6 @@ body{
 <div class="page">
 
 
-<!-- =====================================================
-     PREVIOUS
-===================================================== -->
-
 <button
     class="previous-button"
     onclick="location.href='food-game.html'">
@@ -1315,10 +1083,6 @@ body{
 </button>
 
 
-<!-- =====================================================
-     MENU
-===================================================== -->
-
 <button
     class="menu-button"
     id="menuButton">
@@ -1327,10 +1091,6 @@ body{
 
 </button>
 
-
-<!-- =====================================================
-     SIDE MENU
-===================================================== -->
 
 <div
     class="side-menu"
@@ -1364,16 +1124,10 @@ body{
 </div>
 
 
-<!-- =====================================================
-     SUCCESS DECORATION
-===================================================== -->
-
 <div
     class="success-decoration"
     id="successDecoration">
 
-
-    <!-- سيارات -->
 
     <div
         class="car-decoration car1">
@@ -1417,8 +1171,6 @@ body{
 
     </div>
 
-
-    <!-- فضاء -->
 
     <div
         class="space-decoration space1">
@@ -1466,16 +1218,8 @@ body{
 </div>
 
 
-<!-- =====================================================
-     MAIN CONTENT
-===================================================== -->
-
 <div class="content">
 
-
-<!-- =====================================================
-     QUESTION 1
-===================================================== -->
 
 <div id="questionOne">
 
@@ -1487,8 +1231,6 @@ body{
     </div>
 
 
-    <!-- الطفل -->
-
     <div class="child-area">
 
         <img
@@ -1498,8 +1240,6 @@ body{
 
     </div>
 
-
-    <!-- الخيارات -->
 
     <div class="answers">
 
@@ -1525,16 +1265,12 @@ body{
     </div>
 
 
-    <!-- feedback -->
-
     <div
         class="feedback"
         id="feedbackOne">
 
     </div>
 
-
-    <!-- next -->
 
     <button
         class="next-button"
@@ -1547,11 +1283,6 @@ body{
 
 </div>
 
-
-
-<!-- =====================================================
-     QUESTION 2
-===================================================== -->
 
 <div
     class="examples"
@@ -1570,8 +1301,6 @@ body{
     <div class="example-cards">
 
 
-        <!-- الطعام -->
-
         <button
             class="example-button"
             id="foodExample">
@@ -1589,8 +1318,6 @@ body{
 
         </button>
 
-
-        <!-- الشراب -->
 
         <button
             class="example-button"
@@ -1634,10 +1361,6 @@ body{
 
 </div>
 
-
-<!-- =====================================================
-     SUCCESS POPUP
-===================================================== -->
 
 <div
     class="overlay"
@@ -1687,10 +1410,11 @@ body{
 
 </div>
 
+
 <script>
 
 /* =====================================================
-   SUPABASE CONNECTION
+   SUPABASE
 ===================================================== */
 
 const SUPABASE_URL =
@@ -1707,28 +1431,84 @@ const supabaseClient =
     );
 
 
-/* =====================================================
-   CHILD ID
-   يتم أخذه من start.html بعد إنشاء الطفل
-===================================================== */
-
 const childId =
+    localStorage.getItem(
+        "raf iqChildId"
+    ) ||
+    localStorage.getItem(
+        "raf iqChildId"
+    ) ||
     localStorage.getItem(
         "rafiqChildId"
     );
 
 
-/* =====================================================
-   PERSONALIZATION
-===================================================== */
-
 let interest = null;
 
 
-/*
-   تطبيق الثيم فقط إذا كانت قيمة الاهتمام
-   معروفة وصحيحة.
-*/
+/* =====================================================
+   FIXED PAGE SCALE
+===================================================== */
+
+const page =
+    document.querySelector(".page");
+
+
+function resizePage(){
+
+    const baseWidth = 1024;
+
+    const baseHeight = 1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
+
+/* =====================================================
+   PERSONALIZATION
+===================================================== */
 
 function applyPersonalization(){
 
@@ -1740,10 +1520,6 @@ function applyPersonalization(){
         .toLowerCase();
 
 
-    /* ================================================
-       سيارات
-    ================================================= */
-
     if(
         normalizedInterest === "سيارات" ||
         normalizedInterest === "سيارة" ||
@@ -1751,13 +1527,9 @@ function applyPersonalization(){
         normalizedInterest === "car"
     ){
 
-        document.body.style.backgroundImage =
+        page.style.backgroundImage =
             'linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), url("images/sc3.jpeg")';
 
-
-        /*
-           زينة السيارات تظهر عند النجاح
-        */
 
         document
             .querySelectorAll(
@@ -1770,10 +1542,6 @@ function applyPersonalization(){
 
             });
 
-
-        /*
-           زينة الفضاء مخفية
-        */
 
         document
             .querySelectorAll(
@@ -1790,23 +1558,15 @@ function applyPersonalization(){
         return true;
     }
 
-
-    /* ================================================
-       فضاء
-    ================================================= */
 
     if(
         normalizedInterest === "فضاء" ||
         normalizedInterest === "space"
     ){
 
-        document.body.style.backgroundImage =
+        page.style.backgroundImage =
             'linear-gradient(rgba(255,255,255,.12), rgba(255,255,255,.12)), url("images/sc3s.jpeg")';
 
-
-        /*
-           زينة السيارات مخفية
-        */
 
         document
             .querySelectorAll(
@@ -1819,10 +1579,6 @@ function applyPersonalization(){
 
             });
 
-
-        /*
-           زينة الفضاء تظهر عند النجاح
-        */
 
         document
             .querySelectorAll(
@@ -1839,11 +1595,6 @@ function applyPersonalization(){
         return true;
     }
 
-
-    /*
-       إذا كانت القيمة فارغة أو غير معروفة:
-       لا نغير الخلفية ولا نختار أي ثيم.
-    */
 
     console.warn(
         "لم يتم تطبيق تخصيص لأن قيمة interests غير معروفة:",
@@ -1851,6 +1602,7 @@ function applyPersonalization(){
     );
 
     return false;
+
 }
 
 
@@ -1859,12 +1611,6 @@ function applyPersonalization(){
 ===================================================== */
 
 async function loadChildInterest(){
-
-    /*
-       إذا لم يوجد ID:
-       الصفحة تبقى ظاهرة طبيعيًا،
-       ولا يتم اختيار أي خلفية افتراضية.
-    */
 
     if(!childId){
 
@@ -1892,10 +1638,6 @@ async function loadChildInterest(){
             .maybeSingle();
 
 
-        /* =============================================
-           SUPABASE ERROR
-        ============================================= */
-
         if(error){
 
             console.error(
@@ -1907,10 +1649,6 @@ async function loadChildInterest(){
         }
 
 
-        /* =============================================
-           CHILD NOT FOUND
-        ============================================= */
-
         if(!data){
 
             console.warn(
@@ -1921,10 +1659,6 @@ async function loadChildInterest(){
             return;
         }
 
-
-        /* =============================================
-           INTEREST EMPTY
-        ============================================= */
 
         if(
             data.interests === null ||
@@ -1940,10 +1674,6 @@ async function loadChildInterest(){
         }
 
 
-        /* =============================================
-           SAVE INTEREST
-        ============================================= */
-
         interest =
             String(
                 data.interests
@@ -1951,22 +1681,6 @@ async function loadChildInterest(){
             .trim()
             .toLowerCase();
 
-
-        console.log(
-            "Child ID:",
-            childId
-        );
-
-
-        console.log(
-            "Child interest:",
-            interest
-        );
-
-
-        /* =============================================
-           APPLY
-        ============================================= */
 
         applyPersonalization();
 
@@ -1983,10 +1697,6 @@ async function loadChildInterest(){
 }
 
 
-/* =====================================================
-   START PERSONALIZATION
-===================================================== */
-
 loadChildInterest();
 
 
@@ -1995,10 +1705,14 @@ loadChildInterest();
 ===================================================== */
 
 const menuButton =
-    document.getElementById("menuButton");
+    document.getElementById(
+        "menuButton"
+    );
 
 const sideMenu =
-    document.getElementById("sideMenu");
+    document.getElementById(
+        "sideMenu"
+    );
 
 
 if(menuButton && sideMenu){
@@ -2110,10 +1824,6 @@ const popupNext =
     );
 
 
-/* =====================================================
-   VARIABLES
-===================================================== */
-
 let questionOneCorrect =
     false;
 
@@ -2122,7 +1832,7 @@ let questionTwoCorrect =
 
 
 /* =====================================================
-   ARABIC VOICE
+   VOICE
 ===================================================== */
 
 function speak(text){
@@ -2130,10 +1840,6 @@ function speak(text){
     if(
         !("speechSynthesis" in window)
     ){
-
-        console.log(
-            "المتصفح لا يدعم Speech Synthesis"
-        );
 
         return;
     }
@@ -2151,14 +1857,11 @@ function speak(text){
     speech.lang =
         "ar-SA";
 
-
     speech.rate =
         0.78;
 
-
     speech.pitch =
         1;
-
 
     speech.volume =
         1;
@@ -2170,10 +1873,6 @@ function speak(text){
 
 }
 
-
-/* =====================================================
-   WAIT THEN SPEAK
-===================================================== */
 
 function speakAfterDelay(
     text,
@@ -2194,32 +1893,6 @@ function speakAfterDelay(
 
 /* =====================================================
    QUESTION 1
-===================================================== */
-
-function readQuestionOne(){
-
-    speak(
-        "ما الذي يوجد بيد الطفل؟ طعام أم شراب؟"
-    );
-
-}
-
-
-/* =====================================================
-   QUESTION 2
-===================================================== */
-
-function readQuestionTwo(){
-
-    speak(
-        "شاهد الأمثلة جيدًا. أي منها يعتبر من الطعام؟"
-    );
-
-}
-
-
-/* =====================================================
-   QUESTION 1 - WRONG
 ===================================================== */
 
 if(foodAnswer){
@@ -2272,10 +1945,6 @@ if(foodAnswer){
 
 }
 
-
-/* =====================================================
-   QUESTION 1 - CORRECT
-===================================================== */
 
 if(drinkAnswer){
 
@@ -2337,7 +2006,7 @@ if(drinkAnswer){
 
 
 /* =====================================================
-   NEXT → QUESTION 2
+   NEXT QUESTION
 ===================================================== */
 
 if(nextToQuestionTwo){
@@ -2404,7 +2073,7 @@ if(nextToQuestionTwo){
 
 
 /* =====================================================
-   QUESTION 2 - CORRECT
+   QUESTION 2 CORRECT
 ===================================================== */
 
 if(foodExample){
@@ -2467,7 +2136,7 @@ if(foodExample){
 
 
 /* =====================================================
-   QUESTION 2 - WRONG
+   QUESTION 2 WRONG
 ===================================================== */
 
 if(drinkExample){
@@ -2570,7 +2239,7 @@ if(finishButton){
 
 
 /* =====================================================
-   POPUP → FOOD STAGES
+   POPUP → UNLOCK STAGE 3
 ===================================================== */
 
 if(popupNext){
@@ -2588,6 +2257,15 @@ if(popupNext){
 
             }
 
+
+            /* =========================================
+               تم تصحيح اسم المفتاح
+               كان:
+               "raf iqFoodStage2"
+
+               والصحيح:
+               "raf iqFoodStage2"
+            ========================================= */
 
             localStorage.setItem(
                 "raf iqFoodStage2",
@@ -2628,7 +2306,7 @@ window.addEventListener(
 
 
 /* =====================================================
-   STOP VOICE WHEN LEAVING PAGE
+   STOP VOICE
 ===================================================== */
 
 window.addEventListener(

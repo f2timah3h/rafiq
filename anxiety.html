@@ -27,7 +27,8 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -41,18 +42,9 @@ body {
 
     color: #263746;
 
-    background-image:
-        url("images/backh.jpeg");
+    background: transparent;
 
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    background-attachment: fixed;
-
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 
@@ -62,11 +54,23 @@ body {
 
 .page {
 
-    width: 100%;
+    position: absolute;
 
-    min-height: 100vh;
+    width: 1024px;
 
-    position: relative;
+    height: 1366px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin: center center;
+
+    overflow: hidden;
 
     display: flex;
 
@@ -74,7 +78,8 @@ body {
 
     align-items: center;
 
-    padding: 35px 45px 55px;
+    padding: 45px 45px 55px;
+
 }
 
 
@@ -355,8 +360,6 @@ body {
 
     width: 255px;
 
-    max-width: 30vw;
-
     object-fit: contain;
 
     animation:
@@ -368,7 +371,6 @@ body {
 
 /* =========================
    ANXIETY ANIMATION
-   حركة بسيطة للأعلى والأسفل
 ========================= */
 
 @keyframes anxiousMove {
@@ -429,7 +431,7 @@ body {
 
     text-align: center;
 
-    font-size: 23px;
+    font-size: 24px;
 
     line-height: 2;
 
@@ -465,9 +467,7 @@ body {
 
 .scale-image {
 
-    width: 650px;
-
-    max-width: 78%;
+    width: 600px;
 
     height: auto;
 
@@ -522,125 +522,15 @@ body {
 
 
 /* =========================
-   IPAD PORTRAIT
+   RESPONSIVE SCALING
+   القياسات نفسها، فقط تصغير
+   الصفحة كاملة حسب الشاشة
 ========================= */
 
-@media (min-width: 800px) {
+@media (max-width: 1023px) {
 
     .page {
-
-        max-width: 1024px;
-
-        min-height: 1366px;
-
-        margin: 0 auto;
-
-        padding-top: 45px;
-    }
-
-
-    .title {
-
-        font-size: 48px;
-    }
-
-
-    .anxiety-character {
-
-        width: 255px;
-    }
-
-
-    .description {
-
-        font-size: 24px;
-    }
-
-
-    .scale-image {
-
-        width: 600px;
-
-        max-width: 70%;
-    }
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 700px) {
-
-    .page {
-
-        padding: 20px;
-    }
-
-
-    .title {
-
-        font-size: 35px;
-    }
-
-
-    .sound-button {
-
-        top: 95px;
-
-        right: 25px;
-
-        width: 52px;
-
-        height: 52px;
-
-        font-size: 25px;
-    }
-
-
-    .character-area {
-
-        height: 230px;
-    }
-
-
-    .anxiety-character {
-
-        width: 200px;
-
-        max-width: 55vw;
-    }
-
-
-    .description {
-
-        font-size: 18px;
-    }
-
-
-    .level-title {
-
-        font-size: 24px;
-
-        margin-top: 35px;
-    }
-
-
-    .scale-image {
-
-        width: 90%;
-
-        max-width: 90%;
-
-        margin-top: 15px;
-    }
-
-
-    .next-button {
-
-        font-size: 20px;
-
-        padding: 13px 40px;
+        --page-scale: 1;
     }
 
 }
@@ -652,7 +542,7 @@ body {
 
 <body>
 
-<div class="page">
+<div class="page" id="page">
 
 
     <!-- =========================
@@ -782,7 +672,7 @@ body {
 
     <!-- =========================
          ANXIETY SCALE
-    ========================== -->
+========================= -->
 
     <img
         src="images/h3.png"
@@ -807,6 +697,64 @@ body {
 
 
 <script>
+
+/* =========================
+   PAGE SCALING
+========================= */
+
+function resizePage() {
+
+    const baseWidth = 1024;
+
+    const baseHeight = 1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(scaleX, scaleY);
+
+    const page =
+        document.getElementById("page");
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+window.addEventListener(
+    "orientationchange",
+    function() {
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =========================
    SUPABASE
@@ -881,6 +829,15 @@ async function loadPersonalization() {
             document.body.style.backgroundImage =
                 'url("images/ak.jpeg")';
 
+            document.body.style.backgroundSize =
+                "cover";
+
+            document.body.style.backgroundPosition =
+                "center";
+
+            document.body.style.backgroundRepeat =
+                "no-repeat";
+
         }
 
 
@@ -895,6 +852,15 @@ async function loadPersonalization() {
 
             document.body.style.backgroundImage =
                 'url("images/af.jpeg")';
+
+            document.body.style.backgroundSize =
+                "cover";
+
+            document.body.style.backgroundPosition =
+                "center";
+
+            document.body.style.backgroundRepeat =
+                "no-repeat";
 
         }
 

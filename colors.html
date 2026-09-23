@@ -33,7 +33,9 @@ body {
     padding: 0;
 
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+
+    overflow: hidden;
 }
 
 body {
@@ -46,7 +48,38 @@ body {
 
     color: #40566d;
 
-    overflow-x: hidden;
+    background-color: #ffffff;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+
+    position: absolute;
+
+    z-index: 5;
+
+    width: 1024px;
+    height: 1366px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin: center center;
+
+    overflow: hidden;
+
+    padding:
+        115px 35px 100px;
 
     background-color: #ffffff;
 
@@ -61,28 +94,6 @@ body {
 
     background-repeat:
         no-repeat;
-
-    background-attachment:
-        fixed;
-}
-
-
-/* =====================================================
-   PAGE
-===================================================== */
-
-.page {
-
-    position: relative;
-
-    z-index: 5;
-
-    width: 100%;
-
-    min-height: 1366px;
-
-    padding:
-        115px 35px 100px;
 }
 
 
@@ -92,17 +103,20 @@ body {
 
 .content {
 
-    width: 900px;
+    width:
+        900px;
 
-    max-width: 94vw;
+    margin:
+        0 auto;
 
-    margin: 0 auto;
+    display:
+        flex;
 
-    display: flex;
+    flex-direction:
+        column;
 
-    flex-direction: column;
-
-    align-items: center;
+    align-items:
+        center;
 
     transform:
         translateY(280px);
@@ -115,7 +129,7 @@ body {
 
 .previous-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
     left: 35px;
@@ -178,7 +192,7 @@ body {
 
 .menu-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
     right: 35px;
@@ -241,7 +255,7 @@ body {
 
 .side-menu {
 
-    position: fixed;
+    position: absolute;
 
     top: 115px;
     right: 35px;
@@ -432,9 +446,6 @@ body {
 
     width:
         850px;
-
-    max-width:
-        100%;
 
     display:
         flex;
@@ -895,218 +906,26 @@ body {
 
 
 /* =====================================================
-   MOBILE
+   RESPONSIVE SCALING
 ===================================================== */
 
-@media (max-width: 767px) {
+@media (max-width: 1023px) {
 
     .page {
 
-        min-height:
-            100vh;
-
-        padding:
-            90px 15px 100px;
-    }
-
-
-    .previous-button {
-
-        top:
-            20px;
-
-        left:
-            20px;
-
-        width:
-            125px;
-
-        height:
-            52px;
-
-        font-size:
-            18px;
-    }
-
-
-    .menu-button {
-
-        top:
-            20px;
-
-        right:
-            20px;
-
-        width:
-            55px;
-
-        height:
-            55px;
-
-        font-size:
-            27px;
-    }
-
-
-    .side-menu {
-
-        top:
-            90px;
-
-        right:
-            20px;
-
-        width:
-            220px;
-    }
-
-
-    .title {
-
-        font-size:
-            29px;
-
-        padding:
-            13px 22px;
-    }
-
-
-    .subtitle {
-
-        font-size:
-            17px;
-    }
-
-
-    .activity {
-
-        min-height:
-            125px;
-
-        padding:
-            15px;
-    }
-
-
-    .activity-image {
-
-        width:
-            75px;
-
-        height:
-            75px;
-    }
-
-
-    .activity-text {
-
-        padding:
-            0 15px;
-    }
-
-
-    .activity-title {
-
-        font-size:
-            21px;
-    }
-
-
-    .activity-description {
-
-        font-size:
-            14px;
-    }
-
-
-    .activity-left {
-
-        width:
-            90px;
-    }
-
-
-    .stars {
-
-        font-size:
-            20px;
-    }
-
-
-    .start-button {
-
-        font-size:
-            15px;
-
-        padding:
-            6px 15px;
-    }
-
-
-    .lock {
-
-        width:
-            42px;
-
-        height:
-            42px;
-
-        font-size:
-            20px;
-    }
-
-
-    .arrow {
-
-        width:
-            42px;
-
-        height:
-            42px;
-
-        left:
-            12px;
-
-        bottom:
-            12px;
-
-        font-size:
-            24px;
+        --page-scale:
+            min(
+                calc(100vw / 1024),
+                calc(100vh / 1366)
+            );
     }
 
 }
 
 
 /* =====================================================
-   IPAD PORTRAIT
+   SCALE SCRIPT SUPPORT
 ===================================================== */
-
-@media
-(min-width: 768px)
-and (max-width: 1100px) {
-
-    .content {
-
-        width:
-            900px;
-
-        max-width:
-            94vw;
-
-        transform:
-            translateY(280px);
-    }
-
-    .activities {
-
-        width:
-            850px;
-
-        max-width:
-            100%;
-    }
-
-}
 
 </style>
 
@@ -1114,6 +933,9 @@ and (max-width: 1100px) {
 
 
 <body>
+
+
+<main class="page">
 
 
 <!-- =====================================================
@@ -1168,8 +990,6 @@ id="sideMenu">
      MAIN
 ===================================================== -->
 
-<main class="page">
-
 <div class="content">
 
 
@@ -1210,8 +1030,6 @@ id="sideMenu">
         onclick="openActivity(1)">
 
 
-            <!-- LEFT -->
-
             <div class="activity-left">
 
                 <div class="stars">
@@ -1245,9 +1063,6 @@ id="sideMenu">
             </div>
 
 
-
-            <!-- CENTER -->
-
             <div class="activity-text">
 
                 <h2 class="activity-title">
@@ -1264,9 +1079,6 @@ id="sideMenu">
 
             </div>
 
-
-
-            <!-- RIGHT -->
 
             <img
             src="images/1.png"
@@ -1286,8 +1098,6 @@ id="sideMenu">
         id="activity2"
         class="activity activity-two locked">
 
-
-            <!-- LEFT -->
 
             <div class="activity-left">
 
@@ -1317,9 +1127,6 @@ id="sideMenu">
             </div>
 
 
-
-            <!-- CENTER -->
-
             <div class="activity-text">
 
                 <h2 class="activity-title">
@@ -1336,9 +1143,6 @@ id="sideMenu">
 
             </div>
 
-
-
-            <!-- RIGHT -->
 
             <img
             src="images/2.png"
@@ -1360,51 +1164,51 @@ id="sideMenu">
              ACTIVITY 3
         ================================================== -->
 
-       <div
-id="activity3"
-class="activity activity-three locked">
+        <div
+        id="activity3"
+        class="activity activity-three locked">
 
-    <div class="activity-left">
+            <div class="activity-left">
 
-        <div class="stars">
+                <div class="stars">
 
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+                    <span class="star">★</span>
+
+                </div>
+
+                <div class="lock">
+                    🔒
+                </div>
+
+            </div>
+
+
+            <div class="activity-text">
+
+                <h2 class="activity-title">
+                    صنّف الألوان
+                </h2>
+
+                <p class="activity-description">
+                    ضع الأشياء حسب لونها وتعلّم كيف ترتبها
+                </p>
+
+            </div>
+
+
+            <img
+            src="images/3.png"
+            class="activity-image"
+            alt="صنّف الألوان">
+
+
+            <div class="arrow">
+                ‹
+            </div>
 
         </div>
-
-        <div class="lock">
-            🔒
-        </div>
-
-    </div>
-
-
-    <div class="activity-text">
-
-        <h2 class="activity-title">
-            صنّف الألوان
-        </h2>
-
-        <p class="activity-description">
-            ضع الأشياء حسب لونها وتعلّم كيف ترتبها
-        </p>
-
-    </div>
-
-
-    <img
-    src="images/3.png"
-    class="activity-image"
-    alt="صنّف الألوان">
-
-
-    <div class="arrow">
-        ‹
-    </div>
-
-</div>
 
 
 
@@ -1416,8 +1220,6 @@ class="activity activity-three locked">
         id="activity4"
         class="activity activity-four locked">
 
-
-            <!-- LEFT -->
 
             <div class="activity-left">
 
@@ -1447,9 +1249,6 @@ class="activity activity-three locked">
             </div>
 
 
-
-            <!-- CENTER -->
-
             <div class="activity-text">
 
                 <h2 class="activity-title">
@@ -1466,9 +1265,6 @@ class="activity activity-three locked">
 
             </div>
 
-
-
-            <!-- RIGHT -->
 
             <img
             src="images/4.png"
@@ -1494,6 +1290,66 @@ class="activity activity-three locked">
 
 
 <script>
+
+/* =====================================================
+   PAGE SCALING
+===================================================== */
+
+function resizePage() {
+
+    const page =
+        document.querySelector(".page");
+
+    const baseWidth =
+        1024;
+
+    const baseHeight =
+        1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+resizePage();
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+window.addEventListener(
+    "orientationchange",
+    function() {
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =====================================================
    SUPABASE

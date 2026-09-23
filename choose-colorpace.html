@@ -67,6 +67,8 @@ body {
 
     position: relative;
 
+    overflow: hidden;
+
 }
 
 
@@ -76,12 +78,22 @@ body {
 
 .page {
 
-    position: relative;
+    position: absolute;
 
-    width: 100vw;
-    height: 100vh;
+    width: 1024px;
 
-    min-height: 1366px;
+    height: 1366px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin:
+        center center;
 
     overflow: hidden;
 
@@ -94,7 +106,7 @@ body {
 
 .previous-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
     left: 35px;
@@ -151,7 +163,7 @@ body {
 
 .menu-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
     right: 35px;
@@ -208,7 +220,7 @@ body {
 
 .side-menu {
 
-    position: fixed;
+    position: absolute;
 
     top: 115px;
     right: 35px;
@@ -310,8 +322,6 @@ body {
         translate(-50%, -50%);
 
     width: 900px;
-
-    max-width: 90vw;
 
     display: flex;
 
@@ -789,14 +799,18 @@ body {
 
 
 /* =====================================================
-   SPACE SUCCESS DECORATION 🚀🌙✨
+   SPACE SUCCESS DECORATION
 ===================================================== */
 
 .success-decoration {
 
-    position: fixed;
+    position: absolute;
 
     inset: 0;
+
+    width: 1024px;
+
+    height: 1366px;
 
     pointer-events: none;
 
@@ -921,7 +935,7 @@ body {
 
 
 /* =====================================================
-   PLANETS 🪐
+   PLANETS
 ===================================================== */
 
 .space-planet {
@@ -1009,7 +1023,7 @@ body {
 
 
 /* =====================================================
-   ROCKETS 🚀
+   ROCKETS
 ===================================================== */
 
 .space-rocket {
@@ -1123,7 +1137,7 @@ body {
 
 
 /* =====================================================
-   ASTRONAUT 👨‍🚀
+   ASTRONAUT
 ===================================================== */
 
 .astronaut {
@@ -1189,7 +1203,7 @@ body {
 
 
 /* =====================================================
-   SHOOTING STARS 🌠
+   SHOOTING STARS
 ===================================================== */
 
 .shooting-star {
@@ -1282,7 +1296,7 @@ body {
 
 
 /* =====================================================
-   STARS ✨
+   STARS
 ===================================================== */
 
 .space-star {
@@ -1399,7 +1413,7 @@ body {
 
 .next-button {
 
-    position: fixed;
+    position: absolute;
 
     bottom: 35px;
 
@@ -1469,198 +1483,13 @@ body {
 
 
 /* =====================================================
-   IPAD PORTRAIT
+   PAGE SCALING
 ===================================================== */
 
-@media
-(min-width: 768px)
-and
-(max-width: 1100px) {
+@media (max-width: 1023px) {
 
-
-    .content {
-
-        width: 850px;
-
-        max-width: 88vw;
-
-    }
-
-
-    .question {
-
-        font-size: 44px;
-
-    }
-
-
-    .question-hint {
-
-        font-size: 21px;
-
-    }
-
-
-    .cars-container {
-
-        gap: 90px;
-
-        margin-top: 55px;
-
-    }
-
-
-    .car-option {
-
-        width: 300px;
-        height: 300px;
-
-    }
-
-
-    .car-option img {
-
-        width: 300px;
-        height: 300px;
-
-    }
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:767px) {
-
-
-    .previous-button {
-
-        top: 20px;
-        left: 20px;
-
-        width: 125px;
-        height: 52px;
-
-        font-size: 18px;
-
-    }
-
-
-    .menu-button {
-
-        top: 20px;
-        right: 20px;
-
-        width: 55px;
-        height: 55px;
-
-        font-size: 27px;
-
-    }
-
-
-    .side-menu {
-
-        top: 90px;
-        right: 20px;
-
-        width: 220px;
-
-    }
-
-
-    .content {
-
-        width: 94vw;
-
-    }
-
-
-    .question {
-
-        font-size: 31px;
-
-    }
-
-
-    .question-hint {
-
-        font-size: 17px;
-
-    }
-
-
-    .cars-container {
-
-        gap: 10px;
-
-        margin-top: 40px;
-
-    }
-
-
-    .car-option {
-
-        width: 300px;
-        height: 300px;
-
-    }
-
-
-    .car-option img {
-
-        width: 300px;
-        height: 300px;
-
-    }
-
-
-    .next-button {
-
-        right: 20px;
-        bottom: 20px;
-
-        width: 145px;
-        height: 55px;
-
-        font-size: 19px;
-
-    }
-
-
-    .space-balloon {
-
-        font-size: 45px;
-
-    }
-
-
-    .space-rocket {
-
-        font-size: 50px;
-
-    }
-
-
-    .astronaut {
-
-        font-size: 50px;
-
-    }
-
-}
-/* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-   بدون تغيير التصميم أو القياسات
-===================================================== */
-
-@media (min-width: 768px) {
-
-    html,
-    body {
-        overflow: hidden;
+    .page {
+        --page-scale: 1;
     }
 
 }
@@ -1673,7 +1502,7 @@ and
 <body>
 
 
-<div class="page">
+<div class="page" id="page">
 
 
     <!-- =================================================
@@ -1744,8 +1573,6 @@ and
         id="successDecoration">
 
 
-        <!-- 🚀 صاروخ -->
-
         <div class="space-rocket rocket-1">
 
             🚀
@@ -1753,16 +1580,12 @@ and
         </div>
 
 
-        <!-- 🚀 صاروخ آخر -->
-
         <div class="space-rocket rocket-2">
 
             🚀
 
         </div>
 
-
-        <!-- 🪐 كواكب -->
 
         <div class="space-planet planet-1">
 
@@ -1785,16 +1608,12 @@ and
         </div>
 
 
-        <!-- 👨‍🚀 رائد فضاء -->
-
         <div class="astronaut">
 
             👨‍🚀
 
         </div>
 
-
-        <!-- 🎈 بالونات فضائية -->
 
         <div class="space-balloon space-balloon-1">
 
@@ -1823,8 +1642,6 @@ and
 
         </div>
 
-
-        <!-- ✨ نجوم -->
 
         <div class="space-star star-1">
 
@@ -1860,8 +1677,6 @@ and
 
         </div>
 
-
-        <!-- 🌠 نجوم ساقطة -->
 
         <div class="shooting-star shooting-star-1"></div>
 
@@ -1907,8 +1722,6 @@ and
         <div class="cars-container">
 
 
-            <!-- BLUE -->
-
             <div
                 class="car-option"
                 onclick="checkAnswer('blue', this)">
@@ -1923,8 +1736,6 @@ and
             </div>
 
 
-
-            <!-- RED - CORRECT -->
 
             <div
                 class="car-option"
@@ -1941,8 +1752,6 @@ and
             </div>
 
 
-
-            <!-- GREEN -->
 
             <div
                 class="car-option"
@@ -1994,6 +1803,69 @@ and
 
 
 <script>
+
+/* =====================================================
+   PAGE SCALING
+===================================================== */
+
+function resizePage() {
+
+    const baseWidth = 1024;
+
+    const baseHeight = 1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    const page =
+        document.getElementById(
+            "page"
+        );
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+window.addEventListener(
+    "orientationchange",
+    function() {
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =====================================================
    MENU
@@ -2098,13 +1970,11 @@ let wrongAttempts = 0;
    CHECK ANSWER
 ===================================================== */
 
-function checkAnswer(color, selectedCar) {
+function checkAnswer(
+    color,
+    selectedCar
+) {
 
-
-    /*
-       إذا انتهى السؤال
-       لا نسمح بمحاولة جديدة
-    */
 
     if (answered) {
 
@@ -2114,22 +1984,14 @@ function checkAnswer(color, selectedCar) {
 
 
     /* =================================================
-       ❌ WRONG
+       WRONG
     ================================================= */
 
     if (color !== "red") {
 
 
-        /*
-           تسجيل محاولة خاطئة
-        */
-
         wrongAttempts++;
 
-
-        /*
-           إضافة حركة الخطأ للسيارة
-        */
 
         selectedCar.classList.add(
             "wrong"
@@ -2138,10 +2000,6 @@ function checkAnswer(color, selectedCar) {
 
         showWrong();
 
-
-        /*
-           إزالة الحركة بعد انتهاء الاهتزاز
-        */
 
         setTimeout(
             function() {
@@ -2155,17 +2013,13 @@ function checkAnswer(color, selectedCar) {
         );
 
 
-        /*
-           الطفل يبقى في نفس السؤال
-        */
-
         return;
 
     }
 
 
     /* =================================================
-       ✅ CORRECT
+       CORRECT
     ================================================= */
 
     answered = true;
@@ -2174,19 +2028,11 @@ function checkAnswer(color, selectedCar) {
     stopCarAnimations();
 
 
-    /*
-       حفظ إكمال السؤال
-    */
-
     localStorage.setItem(
         "colorChoose1Completed",
         "completed"
     );
 
-
-    /*
-       حفظ عدد الأخطاء
-    */
 
     localStorage.setItem(
         "colorChoose1WrongAttempts",
@@ -2195,8 +2041,7 @@ function checkAnswer(color, selectedCar) {
 
 
     /* =================================================
-       إذا أخطأ الطفل سابقًا
-       ينتقل إلى التعزيز
+       REINFORCEMENT
     ================================================= */
 
     if (wrongAttempts > 0) {
@@ -2207,10 +2052,6 @@ function checkAnswer(color, selectedCar) {
             "red"
         );
 
-
-        /*
-           نوضح الإجابة الصحيحة أولًا
-        */
 
         showCorrectAfterMistake(
             selectedCar
@@ -2234,7 +2075,7 @@ function checkAnswer(color, selectedCar) {
 
 
     /* =================================================
-       صحيح من أول محاولة 🎉
+       SUCCESS
     ================================================= */
 
     showSuccess();
@@ -2326,7 +2167,7 @@ function showCorrectAfterMistake(
 
 
     feedback.innerHTML =
-    "أحسنت! 🎉 هذا هو الصاروخ  الأحمر ❤️";
+        "أحسنت! 🎉 هذا هو الصاروخ  الأحمر ❤️";
 
 
     const correct =
@@ -2368,7 +2209,6 @@ function showSuccess() {
         "أحسنت! 🎉🚀";
 
 
-    
     const correct =
         document.getElementById(
             "correctCar"
@@ -2385,10 +2225,6 @@ function showSuccess() {
     );
 
 
-    /*
-       تشغيل الزينة الفضائية
-    */
-
     const decoration =
         document.getElementById(
             "successDecoration"
@@ -2399,10 +2235,6 @@ function showSuccess() {
         "show"
     );
 
-
-    /*
-       تفعيل زر التالي
-    */
 
     const next =
         document.getElementById(
@@ -2530,11 +2362,6 @@ function goNext() {
 
     }
 
-
-    /*
-       الصحيح من أول محاولة
-       ينتقل للسؤال التالي
-    */
 
     if (
         wrongAttempts === 0

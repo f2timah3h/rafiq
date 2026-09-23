@@ -39,6 +39,7 @@ body{
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
+    overflow:hidden;
 }
 
 
@@ -47,12 +48,29 @@ body{
 ========================================================= */
 
 .page{
-    width:100%;
-    height:100vh;
-    position:relative;
+
+    position:absolute;
+
+    width:1024px;
+
+    height:1366px;
+
+    left:50%;
+
+    top:50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin:center center;
+
+    overflow:hidden;
 
     display:flex;
+
     flex-direction:column;
+
     align-items:center;
 }
 
@@ -358,8 +376,6 @@ body{
 
     width:600px;
 
-    max-width:70%;
-
     border-radius:25px;
 
     overflow:hidden;
@@ -569,12 +585,12 @@ body{
 
 #carBalloonCanvas{
 
-    position:fixed;
+    position:absolute;
 
     inset:0;
 
-    width:100%;
-    height:100%;
+    width:1024px;
+    height:1366px;
 
     pointer-events:none;
 
@@ -585,150 +601,11 @@ body{
 
 
 /* =========================================================
-   IPAD PORTRAIT
-========================================================= */
-
-@media
-(min-width:801px)
-and
-(max-width:1100px){
-
-    .top-left{
-        left:28px;
-    }
-
-    .top-right{
-        right:28px;
-    }
-
-    .stars{
-        top:27px;
-    }
-
-    .title{
-        margin-top:145px;
-        font-size:29px;
-    }
-
-    .scene-description{
-        font-size:18px;
-        max-width:650px;
-    }
-
-    .video-container{
-        width:620px;
-        max-width:72%;
-    }
-
-    .question{
-        font-size:25px;
-    }
-
-    .answer-btn{
-        min-width:150px;
-        font-size:20px;
-    }
-
-}
-
-
-/* =========================================================
-   SMALLER SCREENS
-========================================================= */
-
-@media(max-width:800px){
-
-    .top-left{
-        left:18px;
-    }
-
-    .top-right{
-        right:18px;
-    }
-
-    .top-btn{
-        font-size:16px;
-        padding:10px 15px;
-    }
-
-    .stars{
-        top:20px;
-        padding:8px 14px;
-    }
-
-    .star-icons{
-        font-size:27px;
-        letter-spacing:3px;
-    }
-
-    .hint-btn{
-        top:82px;
-        right:18px;
-        font-size:16px;
-        padding:10px 15px;
-    }
-
-    .hint-box{
-        top:130px;
-        right:18px;
-        width:270px;
-    }
-
-    .title{
-        margin-top:130px;
-        font-size:25px;
-    }
-
-    .scene-description{
-        margin-top:9px;
-        font-size:16px;
-        max-width:90%;
-    }
-
-    .video-container{
-        width:82%;
-        max-width:650px;
-        margin-top:15px;
-    }
-
-    .question{
-        margin-top:13px;
-        font-size:22px;
-    }
-
-    .answers{
-        gap:12px;
-        margin-top:11px;
-    }
-
-    .answer-btn{
-        min-width:125px;
-        font-size:18px;
-        padding:10px 18px;
-    }
-
-    .result{
-        font-size:19px;
-    }
-
-    .next-btn{
-        font-size:18px;
-        padding:10px 28px;
-    }
-
-    .sound-btn{
-        left:18px;
-        bottom:20px;
-    }
-
-}
-
-
-/* =========================================================
    CAR BALLOON ANIMATION
 ========================================================= */
 
 @keyframes dummy{
+
     from{
         opacity:1;
     }
@@ -736,20 +613,9 @@ and
     to{
         opacity:1;
     }
-}
-/* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-   بدون تغيير التصميم أو القياسات
-===================================================== */
-
-@media (min-width: 768px) {
-
-    html,
-    body {
-        overflow: hidden;
-    }
 
 }
+
 </style>
 
 </head>
@@ -758,7 +624,7 @@ and
 <body>
 
 
-<div class="page">
+<div class="page" id="page">
 
 
     <!-- =====================================================
@@ -1006,6 +872,69 @@ and
 
 
 <script>
+
+/* =========================================================
+   PAGE SCALING
+========================================================= */
+
+function resizePage(){
+
+    const baseWidth = 1024;
+
+    const baseHeight = 1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    const page =
+        document.getElementById(
+            "page"
+        );
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =========================================================
    VARIABLES
@@ -1347,11 +1276,11 @@ function createCarCelebration(){
 
 
     canvas.width =
-        window.innerWidth;
+        1024;
 
 
     canvas.height =
-        window.innerHeight;
+        1366;
 
 
     const carColors = [
@@ -1541,8 +1470,7 @@ function createCarCelebration(){
                 const scale =
                     Math.min(
                         Math.max(
-                            canvas.width /
-                            1024,
+                            1,
                             0.65
                         ),
                         1.25

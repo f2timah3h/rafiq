@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=1024,
+      content="width=device-width,
       initial-scale=1.0,
       maximum-scale=1.0,
       user-scalable=no">
@@ -38,32 +38,41 @@ body{
     font-family:"Tajawal","Arial",sans-serif;
     background:#e4f2ff;
     touch-action:manipulation;
+    position:relative;
 }
 
 
 /* =====================================================
    PAGE
+   BASE SIZE: 1024 × 1366
 ===================================================== */
 
 .page{
-    width:100vw;
-    height:100vh;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    position:absolute;
+
+    width:1024px;
+    height:1366px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(var(--page-scale,1));
+
+    transform-origin:center center;
 
     overflow:hidden;
 }
 
 
 .app{
+
     position:relative;
 
-    width:min(100vw,1024px);
-    height:min(100vh,1366px);
-
-    aspect-ratio:1024 / 1366;
+    width:1024px;
+    height:1366px;
 
     overflow:hidden;
 
@@ -91,7 +100,6 @@ body{
 
 /* =====================================================
    SUCCESS BALLOONS
-   مخفية حتى يجاوب الطفل صح
 ===================================================== */
 
 .number-balloons{
@@ -428,7 +436,6 @@ body{
 
 /* =====================================================
    PREVIOUS
-   أعلى اليسار
 ===================================================== */
 
 .previous-button{
@@ -448,7 +455,6 @@ body{
 
 /* =====================================================
    MENU
-   أعلى اليمين
 ===================================================== */
 
 .menu-container{
@@ -692,13 +698,13 @@ body{
     cursor:pointer;
 
     transition:transform .2s ease;
-
-   
 }
 
 
 .child img{
-transform: scale(1.6);
+
+    transform:scale(1.6);
+
     width:90%;
     height:90%;
 
@@ -1083,7 +1089,6 @@ transform: scale(1.6);
     cursor:pointer;
 
     z-index:10;
-
 }
 
 
@@ -1194,148 +1199,17 @@ transform: scale(1.6);
 
 
 /* =====================================================
-   MOBILE
+   PAGE SCALE
 ===================================================== */
 
-@media(max-width:600px){
+@media(max-width:1023px){
 
-    .topbar{
+    .page{
 
-        top:18px;
+        transform:
+            translate(-50%,-50%)
+            scale(var(--page-scale,1));
 
-        left:18px;
-
-        right:18px;
-    }
-
-
-    .circle-button{
-
-        width:52px;
-
-        height:52px;
-
-        font-size:26px;
-    }
-
-
-    .question-box{
-
-        top:90px;
-
-        width:94%;
-
-        min-height:100px;
-
-        padding:14px 15px;
-
-        border-width:3px;
-
-        border-radius:25px;
-
-        gap:10px;
-    }
-
-
-    .question-text{
-
-        font-size:21px;
-    }
-
-
-    .mic-button{
-
-        width:50px;
-
-        height:50px;
-
-        font-size:24px;
-    }
-
-
-    .children-area{
-
-        top:220px;
-
-        bottom:100px;
-
-        gap:12px;
-
-        padding:0 8px;
-    }
-
-
-    .child{
-
-        width:490%;
-
-        height:500px;
-    }
-
-
-    .answer-message{
-
-        bottom:100px;
-
-        min-width:280px;
-
-        font-size:19px;
-
-        padding:10px 15px;
-    }
-
-
-    .next-button{
-
-        right:20px;
-
-        bottom:18px;
-
-        font-size:18px;
-
-        padding:10px 28px;
-    }
-
-
-    .success-popup{
-
-        width:88%;
-
-        min-height:280px;
-
-        padding:25px;
-
-        border-width:4px;
-
-        border-radius:32px;
-    }
-
-
-    .popup-star{
-
-        font-size:52px;
-    }
-
-
-    .popup-title{
-
-        font-size:31px;
-    }
-
-
-    .popup-text{
-
-        font-size:22px;
-    }
-
-
-    .number-balloon{
-
-        width:75px;
-
-        height:100px;
-
-        font-size:55px;
     }
 
 }
@@ -1361,7 +1235,6 @@ transform: scale(1.6);
 
 <!-- =====================================================
      NUMBER 1 BALLOONS
-     تظهر فقط عند الإجابة الصحيحة
 ===================================================== -->
 
 <div
@@ -1433,8 +1306,6 @@ transform: scale(1.6);
 <div class="topbar">
 
 
-    <!-- السابق - أعلى اليسار -->
-
     <button
         class="circle-button previous-button"
         onclick="goPrevious()"
@@ -1444,8 +1315,6 @@ transform: scale(1.6);
 
     </button>
 
-
-    <!-- القائمة - أعلى اليمين -->
 
     <div class="menu-container">
 
@@ -1529,8 +1398,6 @@ transform: scale(1.6);
 <div class="children-area">
 
 
-    <!-- الصحيح -->
-
     <button
         class="child child-one"
         id="correctChild"
@@ -1545,8 +1412,6 @@ transform: scale(1.6);
 
     </button>
 
-
-    <!-- الخطأ -->
 
     <button
         class="child child-two"
@@ -1605,8 +1470,6 @@ transform: scale(1.6);
     <div class="success-popup">
 
 
-        <!-- زر الإغلاق فقط -->
-
         <button
             class="close-button"
             onclick="closeSuccessPopup()"
@@ -1652,6 +1515,65 @@ transform: scale(1.6);
 
 
 <script>
+
+/* =====================================================
+   PAGE SCALE
+   BASE: 1024 × 1366
+===================================================== */
+
+const baseWidth = 1024;
+const baseHeight = 1366;
+
+
+function resizePage(){
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+
+    const scale =
+        Math.min(scaleX,scaleY);
+
+
+    document.body.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =====================================================
    VARIABLES
@@ -1867,8 +1789,6 @@ function checkAnswer(correct){
                 "show"
             );
 
-
-        /* ظهور بالونات الرقم ١ */
 
         document
             .getElementById(

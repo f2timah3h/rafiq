@@ -41,6 +41,30 @@ body{
 
 
 /* =========================================
+   FIXED DESIGN SCALE
+   1024 × 1366
+========================================= */
+
+.page-scale{
+    position:absolute;
+
+    width:1024px;
+    height:1366px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin:center center;
+
+    overflow:hidden;
+}
+
+
+/* =========================================
    BACKGROUND
 ========================================= */
 
@@ -510,8 +534,6 @@ body{
 }
 
 
-/* خيط بالون الألف */
-
 .letter-balloon::after{
 
     content:"";
@@ -554,8 +576,6 @@ body{
 }
 
 
-/* سقف السيارة */
-
 .car-balloon .car-roof{
 
     position:absolute;
@@ -576,8 +596,6 @@ body{
         40px 40px 0 0;
 }
 
-
-/* نوافذ السيارة */
 
 .car-balloon .window{
 
@@ -601,8 +619,6 @@ body{
     right:43px;
 }
 
-
-/* عجلات السيارة */
 
 .car-balloon .wheel{
 
@@ -628,8 +644,6 @@ body{
     right:18px;
 }
 
-
-/* خيط السيارة */
 
 .car-balloon::after{
 
@@ -921,8 +935,6 @@ body{
 }
 
 
-/* أزرار البوب أب */
-
 .finish-buttons{
 
     display:flex;
@@ -995,89 +1007,40 @@ body{
 
 
 /* =========================================
-   RESPONSIVE
+   NO RESPONSIVE RESIZING
+   الصفحة كلها تتغير كنسبة واحدة
 ========================================= */
 
 @media(max-width:900px){
 
-    .topbar{
-        top:20px;
-        left:20px;
-        right:20px;
-    }
+    /*
+       تم إلغاء تغيير أحجام العناصر.
+       التصميم الأساسي 1024 × 1366
+       ويتم تصغيره كاملًا كنسبة واحدة.
+    */
 
-    .previous-button{
-        width:125px;
-        height:52px;
-        font-size:18px;
-    }
+}
 
-    .menu-button{
-        width:52px;
-        height:52px;
-    }
 
-    .question-box{
-        top:170px;
-        width:90%;
-    }
+/* =========================================
+   FINISH POPUP SCALE
+========================================= */
 
-    .question-text{
-        font-size:23px;
-    }
+.finish-overlay{
+    position:absolute;
+    width:1024px;
+    height:1366px;
 
-    .answers{
-        width:90%;
-        top:34%;
-        gap:20px;
-    }
+    left:50%;
+    top:50%;
 
-    .answer{
-        height:310px;
-    }
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
 
-    .answer img{
-        width:220px;
-        height:220px;
-    }
+    transform-origin:center center;
 
-    .answer-word{
-        font-size:22px;
-    }
-
-    .feedback{
-        min-width:70%;
-        top:77%;
-    }
-
-    .next-button{
-        right:30px;
-        bottom:25px;
-    }
-
-    .finish-popup{
-        width:90%;
-        padding:30px 20px 25px;
-    }
-
-    .finish-title{
-        font-size:27px;
-    }
-
-    .finish-text{
-        font-size:21px;
-    }
-
-    .finish-buttons{
-        gap:10px;
-    }
-
-    .cancel-button,
-    .continue-button{
-        padding:0 22px;
-        font-size:19px;
-    }
-
+    padding:30px;
 }
 
 </style>
@@ -1086,6 +1049,15 @@ body{
 
 
 <body>
+
+
+<!-- =========================================
+     FIXED DESIGN PAGE
+========================================= -->
+
+<div
+    class="page-scale"
+    id="page">
 
 
 <!-- الخلفية -->
@@ -1099,8 +1071,6 @@ body{
 
 <div class="topbar">
 
-    <!-- السابق: يسار -->
-
     <button
         class="previous-button"
         onclick="goPrevious()">
@@ -1109,8 +1079,6 @@ body{
 
     </button>
 
-
-    <!-- القائمة: يمين -->
 
     <div class="menu-container">
 
@@ -1147,7 +1115,7 @@ body{
 
 
 <!-- =========================================
-     QUESTION ONLY
+     QUESTION
 ========================================= -->
 
 <div class="question-box">
@@ -1168,8 +1136,6 @@ body{
 <div class="answers">
 
 
-    <!-- أسد -->
-
     <button
         class="answer"
         id="lionAnswer"
@@ -1187,8 +1153,6 @@ body{
 
     </button>
 
-
-    <!-- رمانة -->
 
     <button
         class="answer"
@@ -1230,8 +1194,6 @@ body{
     id="celebration">
 
 
-    <!-- سيارة -->
-
     <div class="balloon car-balloon car1">
 
         <div class="car-roof"></div>
@@ -1245,16 +1207,12 @@ body{
     </div>
 
 
-    <!-- ألف -->
-
     <div class="balloon letter-balloon alif1">
 
         <span>أ</span>
 
     </div>
 
-
-    <!-- سيارة -->
 
     <div class="balloon car-balloon car2">
 
@@ -1269,16 +1227,12 @@ body{
     </div>
 
 
-    <!-- ألف -->
-
     <div class="balloon letter-balloon alif2">
 
         <span>أ</span>
 
     </div>
 
-
-    <!-- سيارة -->
 
     <div class="balloon car-balloon car3">
 
@@ -1292,8 +1246,6 @@ body{
 
     </div>
 
-
-    <!-- ألف -->
 
     <div class="balloon letter-balloon alif3">
 
@@ -1385,8 +1337,72 @@ body{
 
 </div>
 
+</div>
+
 
 <script>
+
+/* =========================================
+   PAGE SCALE
+   التصميم الأساسي 1024 × 1366
+========================================= */
+
+const page =
+    document.getElementById("page");
+
+
+function resizePage(){
+
+    const baseWidth = 1024;
+    const baseHeight = 1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =========================================
    SPEECH

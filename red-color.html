@@ -32,7 +32,9 @@ body {
     padding: 0;
 
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+
+    overflow: hidden;
 
 }
 
@@ -46,7 +48,38 @@ body {
 
     color: #40566d;
 
-    overflow-x: hidden;
+    background-color: #ffffff;
+
+    touch-action: manipulation;
+
+    position: relative;
+}
+
+
+/* =====================================================
+   FIXED PAGE
+   1024 × 1366
+===================================================== */
+
+.page {
+
+    position: absolute;
+
+    width: 1024px;
+    height: 1366px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin: center center;
+
+    overflow: hidden;
+
+    z-index: 5;
 
     background-color: #ffffff;
 
@@ -61,34 +94,6 @@ body {
 
     background-repeat:
         no-repeat;
-
-    background-attachment:
-        fixed;
-}
-
-
-/* =====================================================
-   PAGE
-===================================================== */
-
-.page {
-
-    position: relative;
-
-    z-index: 5;
-
-    width: 100%;
-
-    min-height: 1366px;
-
-    /*
-       رفع المحتوى للأعلى حتى يكون
-       هناك مساحة واضحة أسفل البطاقات
-       للقلم
-    */
-
-    padding:
-        150px 35px 100px;
 }
 
 
@@ -102,7 +107,7 @@ body {
         900px;
 
     max-width:
-        92vw;
+        none;
 
     margin:
         0 auto;
@@ -150,7 +155,7 @@ body {
 .previous-button {
 
     position:
-        fixed;
+        absolute;
 
     top:
         35px;
@@ -222,7 +227,7 @@ body {
 .menu-button {
 
     position:
-        fixed;
+        absolute;
 
     top:
         35px;
@@ -294,7 +299,7 @@ body {
 .side-menu {
 
     position:
-        fixed;
+        absolute;
 
     top:
         115px;
@@ -435,7 +440,6 @@ body {
 
 /* =====================================================
    RED SPLASH
-   300 × 300
 ===================================================== */
 
 .red-splash {
@@ -781,8 +785,6 @@ body {
 
 /* =====================================================
    PENCIL
-   300 × 300
-   أسفل البطاقات جهة اليسار
 ===================================================== */
 
 .pencil {
@@ -798,11 +800,6 @@ body {
 
     object-fit:
         contain;
-
-    /*
-       جهة اليسار
-       وأسفل بطاقات الأمثلة
-    */
 
     left:
         5px;
@@ -908,448 +905,6 @@ body {
         scale(.96);
 }
 
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 767px) {
-
-    .page {
-
-        min-height:
-            100vh;
-
-        padding:
-            90px 15px 80px;
-    }
-
-
-    .content {
-
-        max-width:
-            94vw;
-    }
-
-
-    .previous-button {
-
-        top:
-            20px;
-
-        left:
-            20px;
-
-        width:
-            125px;
-
-        height:
-            52px;
-
-        font-size:
-            18px;
-    }
-
-
-    .menu-button {
-
-        top:
-            20px;
-
-        right:
-            20px;
-
-        width:
-            55px;
-
-        height:
-            55px;
-
-        font-size:
-            27px;
-    }
-
-
-    .side-menu {
-
-        top:
-            90px;
-
-        right:
-            20px;
-
-        width:
-            220px;
-    }
-
-
-    .splash-area {
-
-        width:
-            180px;
-
-        height:
-            180px;
-    }
-
-
-    .red-splash {
-
-        width:
-            180px;
-
-        height:
-            180px;
-    }
-
-
-    .title {
-
-        font-size:
-            40px;
-    }
-
-
-    .speaker-button {
-
-        width:
-            50px;
-
-        height:
-            50px;
-
-        font-size:
-            24px;
-    }
-
-
-    .instruction {
-
-        font-size:
-            18px;
-
-        margin:
-            15px 0 25px;
-    }
-
-
-    .objects {
-
-        gap:
-            10px;
-    }
-
-
-    .object-card {
-
-        width:
-            105px;
-
-        height:
-            135px;
-
-        border-radius:
-            20px;
-    }
-
-
-    .object-card img {
-
-        width:
-            85px;
-
-        height:
-            85px;
-    }
-
-
-    .object-name {
-
-        font-size:
-            15px;
-    }
-
-
-    .message {
-
-        font-size:
-            18px;
-    }
-
-
-    .pencil {
-
-        width:
-            120px;
-
-        height:
-            120px;
-
-        left:
-            5px;
-
-        top:
-            600px;
-    }
-
-
-    .next-button {
-
-        width:
-            140px;
-
-        height:
-            54px;
-
-        font-size:
-            19px;
-    }
-
-}
-
-
-/* =====================================================
-   IPAD PORTRAIT
-   1024 × 1366
-===================================================== */
-
-@media
-(min-width: 768px)
-and (max-width: 1100px) {
-
-
-    .page {
-
-        min-height:
-            1366px;
-
-        /*
-           المحتوى أعلى من السابق
-           حتى يكون للقلم مساحة
-        */
-
-        padding:
-            150px 35px 100px;
-    }
-
-
-    .content {
-
-        width:
-            900px;
-
-        max-width:
-            92vw;
-    }
-
-
-    /* =================================================
-       SPLASH
-    ================================================= */
-
-    .splash-area {
-
-        width:
-            300px;
-
-        height:
-            300px;
-
-        margin:
-            0 0 0;
-    }
-
-
-    /* =================================================
-       RED SPLASH — 300 × 300
-    ================================================= */
-
-    .red-splash {
-
-        width:
-            400px;
-
-        height:
-           400Spx;
-    }
-
-
-    /* =================================================
-       TITLE
-    ================================================= */
-
-    .title {
-
-        font-size:
-            54px;
-
-        margin:
-            0 0 8px;
-    }
-
-
-    /* =================================================
-       SPEAKER
-    ================================================= */
-
-    .speaker-button {
-
-        width:
-            58px;
-
-        height:
-            58px;
-
-        font-size:
-            28px;
-    }
-
-
-    /* =================================================
-       INSTRUCTION
-    ================================================= */
-
-    .instruction {
-
-        font-size:
-            24px;
-
-        margin:
-            18px 0 28px;
-    }
-
-
-    /* =================================================
-       OBJECTS
-    ================================================= */
-
-    .objects {
-
-        gap:
-            45px;
-
-        justify-content:
-            center;
-    }
-
-
-    /* =================================================
-       OBJECT CARDS
-    ================================================= */
-
-    .object-card {
-
-        width:
-            200px;
-
-        height:
-            220px;
-    }
-
-
-    /* =================================================
-       OBJECT IMAGES
-    ================================================= */
-
-    .object-card img {
-
-        width:
-            160px;
-
-        height:
-            160px;
-    }
-
-
-    /* =================================================
-       OBJECT NAMES
-    ================================================= */
-
-    .object-name {
-
-        font-size:
-            21px;
-    }
-
-
-    /* =================================================
-       PENCIL
-       كبير 300×300
-       أسفل البطاقات جهة اليسار
-    ================================================= */
-
-    .pencil {
-
-        width:
-            300px;
-
-        height:
-            300px;
-
-        left:
-            5px;
-
-        top:
-            720px;
-
-        z-index:
-            15;
-    }
-
-
-    /* =================================================
-       MESSAGE
-    ================================================= */
-
-    .message {
-
-        font-size:
-            22px;
-
-        min-height:
-            38px;
-    }
-
-
-    /* =================================================
-       NEXT
-    ================================================= */
-
-    .next-button {
-
-        width:
-            170px;
-
-        height:
-            64px;
-
-        margin:
-            25px 0 0;
-
-        font-size:
-            23px;
-
-        background:
-            #e4f2ff;
-
-        color:
-            #55718b;
-    }
-
-}
-/* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-   بدون تغيير التصميم أو القياسات
-===================================================== */
-
-@media (min-width: 768px) {
-
-    html,
-    body {
-        overflow: hidden;
-    }
-
-}
 </style>
 
 </head>
@@ -1553,8 +1108,6 @@ id="sideMenu">
 
     <!-- =================================================
          PENCIL
-         خارج الـ splash-area
-         حتى لا يختفي
     ================================================== -->
 
     <img
@@ -1598,6 +1151,64 @@ id="sideMenu">
 
 
 <script>
+
+/* =====================================================
+   FIXED PAGE SCALE
+===================================================== */
+
+const baseWidth = 1024;
+const baseHeight = 1366;
+
+
+function resizePage(){
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    document.body.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =====================================================
    MENU
@@ -1744,10 +1355,6 @@ function playObject(
     text
 ) {
 
-    /*
-       إزالة التأثير من البطاقات السابقة
-    */
-
     document
         .querySelectorAll(
             ".object-card"
@@ -1763,18 +1370,10 @@ function playObject(
         );
 
 
-    /*
-       تحديد العنصر الحالي
-    */
-
     element.classList.add(
         "playing"
     );
 
-
-    /*
-       الرسالة
-    */
 
     const message =
         document.getElementById(
@@ -1789,16 +1388,8 @@ function playObject(
     );
 
 
-    /*
-       تشغيل الصوت
-    */
-
     speak(text);
 
-
-    /*
-       إزالة التحديد بعد ثانية
-    */
 
     setTimeout(
         function() {

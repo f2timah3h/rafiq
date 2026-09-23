@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>السعادة - رفيق</title>
 
@@ -27,7 +27,8 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -41,18 +42,11 @@ body {
 
     color: #263746;
 
-    background-image:
-        url("images/backh.jpeg");
+    /* إزالة الخلفية الافتراضية */
 
-    background-size: cover;
+    background-color: transparent;
 
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    background-attachment: fixed;
-
-    overflow-x: hidden;
+    position: relative;
 }
 
 
@@ -62,11 +56,22 @@ body {
 
 .page {
 
-    width: 100%;
+    position: absolute;
 
-    min-height: 100vh;
+    width: 1024px;
 
-    position: relative;
+    height: 1366px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin:
+        center center;
 
     display: flex;
 
@@ -74,7 +79,11 @@ body {
 
     align-items: center;
 
-    padding: 35px 45px 55px;
+    padding:
+        45px 45px 55px;
+
+    overflow: hidden;
+
 }
 
 
@@ -346,8 +355,6 @@ body {
 
     width: 255px;
 
-    max-width: 30vw;
-
     object-fit: contain;
 
     animation:
@@ -465,8 +472,6 @@ body {
 
     width: 520px;
 
-    max-width: 75%;
-
     margin: 0 auto;
 
     display: flex;
@@ -532,46 +537,17 @@ body {
 
 
 /* =========================
-   IPAD PORTRAIT
+   PAGE SCALING
 ========================= */
 
-@media (min-width: 800px) {
+@media (max-width: 1023px) {
 
     .page {
-
-        max-width: 1024px;
-
-        min-height: 1366px;
-
-        margin: 0 auto;
-
-        padding-top: 45px;
+        transform:
+            translate(-50%, -50%)
+            scale(var(--page-scale, 1));
     }
 
-    .title {
-
-        font-size: 48px;
-    }
-
-    .happy-character {
-
-        width: 255px;
-    }
-
-    .description {
-
-        font-size: 24px;
-    }
-
-    .happiness-scale {
-
-        width: 520px;
-    }
-
-    .happiness-image {
-
-        max-width: 520px;
-    }
 }
 
 
@@ -582,72 +558,16 @@ body {
 @media (max-width: 700px) {
 
     .page {
-
-        padding: 20px;
-    }
-
-    .title {
-
-        font-size: 35px;
-    }
-
-    .sound-button {
-
-        top: 95px;
-
-        right: 25px;
-
-        width: 52px;
-
-        height: 52px;
-
-        font-size: 25px;
-    }
-
-    .character-area {
-
-        height: 230px;
-    }
-
-    .happy-character {
-
-        width: 200px;
-
-        max-width: 55vw;
-    }
-
-    .description {
-
-        font-size: 18px;
-    }
-
-    .level-title {
-
-        margin-top: 60px;
-
-        font-size: 24px;
-    }
-
-    .happiness-scale {
-
-        width: 90%;
-
-        max-width: 90%;
-    }
-
-    .happiness-image {
-
-        max-width: 100%;
-    }
-
-    .next-button {
-
-        font-size: 20px;
-
-        padding: 13px 40px;
+        padding:
+            45px 45px 55px;
     }
 
 }
+
+
+/* =========================
+   SCALE SCRIPT SUPPORT
+========================= */
 
 </style>
 
@@ -715,7 +635,7 @@ body {
 
     <!-- =========================
          TITLE
-    ========================== -->
+    ========================= -->
 
     <h1 class="title">
 
@@ -726,7 +646,7 @@ body {
 
     <!-- =========================
          SOUND
-    ========================== -->
+    ========================= -->
 
     <button
         class="sound-button"
@@ -740,7 +660,7 @@ body {
 
     <!-- =========================
          CHARACTER
-    ========================== -->
+    ========================= -->
 
     <div class="character-area">
 
@@ -754,7 +674,7 @@ body {
 
     <!-- =========================
          DESCRIPTION
-    ========================== -->
+    ========================= -->
 
     <div class="description">
 
@@ -774,7 +694,7 @@ body {
 
     <!-- =========================
          LEVEL TITLE
-    ========================== -->
+    ========================= -->
 
     <div class="level-title">
 
@@ -785,7 +705,7 @@ body {
 
     <!-- =========================
          HAPPINESS SCALE IMAGE
-    ========================== -->
+    ========================= -->
 
     <div class="happiness-scale">
 
@@ -794,19 +714,18 @@ body {
             alt="درجات السعادة"
             class="happiness-image">
 
-
     </div>
 
 
     <!-- =========================
          NEXT
-    ========================== -->
+    ========================= -->
 
     <button
         class="next-button"
         onclick="goNext()">
 
-        التالي 
+        التالي
 
     </button>
 
@@ -815,6 +734,60 @@ body {
 
 
 <script>
+
+/* =========================
+   FIXED PAGE SCALING
+========================= */
+
+const baseWidth = 1024;
+const baseHeight = 1366;
+
+function resizePage() {
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    document.body.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+resizePage();
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+window.addEventListener(
+    "orientationchange",
+    function() {
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =========================
    SUPABASE

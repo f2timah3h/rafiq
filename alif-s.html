@@ -41,6 +41,31 @@ body{
 
 
 /* =========================================
+   FIXED DESIGN
+   1024 × 1366
+========================================= */
+
+.page-scale{
+
+    position:absolute;
+
+    width:1024px;
+    height:1366px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(var(--page-scale,1));
+
+    transform-origin:center center;
+
+    overflow:hidden;
+}
+
+
+/* =========================================
    BACKGROUND
 ========================================= */
 
@@ -476,8 +501,6 @@ body{
 }
 
 
-/* الصواريخ */
-
 .rocket{
 
     font-size:65px;
@@ -489,8 +512,6 @@ body{
         );
 }
 
-
-/* الكواكب */
 
 .planet{
 
@@ -504,8 +525,6 @@ body{
 }
 
 
-/* النجوم */
-
 .star{
 
     font-size:48px;
@@ -517,8 +536,6 @@ body{
         );
 }
 
-
-/* الأقمار */
 
 .moon{
 
@@ -772,7 +789,7 @@ body{
 
 .finish-overlay{
 
-    position:fixed;
+    position:absolute;
 
     inset:0;
 
@@ -930,89 +947,23 @@ body{
 
 /* =========================================
    RESPONSIVE
+   لا نغير التصميم
+   الصفحة كلها تتصغر كنسبة واحدة
 ========================================= */
 
 @media(max-width:900px){
 
-    .topbar{
-        top:20px;
-        left:20px;
-        right:20px;
-    }
-
-    .previous-button{
-        width:125px;
-        height:52px;
-        font-size:18px;
-    }
-
-    .menu-button{
-        width:52px;
-        height:52px;
-    }
-
-    .question-box{
-        top:170px;
-        width:90%;
-    }
-
-    .question-text{
-        font-size:23px;
-    }
-
-    .answers{
-        width:90%;
-        top:34%;
-        gap:20px;
-    }
-
-    .answer{
-        height:310px;
-    }
-
-    .answer img{
-        width:220px;
-        height:220px;
-    }
-
-    .answer-word{
-        font-size:22px;
-    }
-
-    .feedback{
-        min-width:70%;
-        top:77%;
-    }
-
-    .next-button{
-        right:30px;
-        bottom:25px;
-    }
-
-    .finish-popup{
-        width:90%;
-        padding:30px 20px 25px;
-    }
-
-    .finish-title{
-        font-size:27px;
-    }
-
-    .finish-text{
-        font-size:21px;
-    }
-
-    .finish-buttons{
-        gap:10px;
-    }
-
-    .cancel-button,
-    .continue-button{
-        padding:0 22px;
-        font-size:19px;
-    }
+    /*
+       تم تعطيل تغيير قياسات العناصر.
+       القياسات الأساسية تبقى 1024 × 1366.
+    */
 
 }
+
+
+/* =========================================
+   PAGE SCALE
+========================================= */
 
 </style>
 
@@ -1022,7 +973,14 @@ body{
 <body>
 
 
-<!-- الخلفية -->
+<div
+    class="page-scale"
+    id="page">
+
+
+<!-- =========================================
+     BACKGROUND
+========================================= -->
 
 <div class="background"></div>
 
@@ -1034,8 +992,6 @@ body{
 <div class="topbar">
 
 
-    <!-- السابق: يسار -->
-
     <button
         class="previous-button"
         onclick="goPrevious()">
@@ -1044,8 +1000,6 @@ body{
 
     </button>
 
-
-    <!-- القائمة: يمين -->
 
     <div class="menu-container">
 
@@ -1103,8 +1057,6 @@ body{
 <div class="answers">
 
 
-    <!-- أسد -->
-
     <button
         class="answer"
         id="lionAnswer"
@@ -1122,8 +1074,6 @@ body{
 
     </button>
 
-
-    <!-- رمانة -->
 
     <button
         class="answer"
@@ -1157,7 +1107,7 @@ body{
 
 
 <!-- =========================================
-     SPACE ZINA
+     SPACE CELEBRATION
 ========================================= -->
 
 <div
@@ -1309,7 +1259,72 @@ body{
 </div>
 
 
+</div>
+
+
 <script>
+
+/* =========================================
+   PAGE SCALE
+   1024 × 1366
+========================================= */
+
+const page =
+    document.getElementById("page");
+
+
+function resizePage(){
+
+    const baseWidth = 1024;
+    const baseHeight = 1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =========================================
    SPEECH

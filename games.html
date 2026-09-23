@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
@@ -29,7 +29,8 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -42,9 +43,62 @@ body {
 
     color: #555;
 
-    overflow-x: hidden;
-
     background-color: #ffffff;
+
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   FIXED PAGE SCALE
+===================================================== */
+
+.page {
+
+    position: absolute;
+
+    width: 1024px;
+
+    height: 1366px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin: center center;
+
+    overflow: hidden;
+
+    z-index: 5;
+
+    padding:
+        115px 35px 180px;
+}
+
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.background {
+
+    position: absolute;
+
+    inset: 0;
+
+    width: 1024px;
+
+    height: 1366px;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 0;
 
     background-image:
         url("images/play.jpeg");
@@ -55,26 +109,6 @@ body {
         center bottom;
 
     background-repeat: no-repeat;
-
-    background-attachment: fixed;
-}
-
-
-/* =====================================================
-   BACKGROUND
-===================================================== */
-
-.background {
-
-    position: fixed;
-
-    inset: 0;
-
-    overflow: hidden;
-
-    pointer-events: none;
-
-    z-index: 0;
 }
 
 
@@ -230,7 +264,7 @@ body {
 
 .previous-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
 
@@ -287,7 +321,7 @@ body {
 
 .menu-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
 
@@ -344,7 +378,7 @@ body {
 
 .side-menu {
 
-    position: fixed;
+    position: absolute;
 
     top: 115px;
 
@@ -430,25 +464,6 @@ body {
 
 
 /* =====================================================
-   PAGE
-===================================================== */
-
-.page {
-
-    position: relative;
-
-    z-index: 5;
-
-    width: 100%;
-
-    min-height: 1366px;
-
-    padding:
-        115px 35px 180px;
-}
-
-
-/* =====================================================
    CONTENT
 ===================================================== */
 
@@ -457,7 +472,7 @@ body {
     width:
         900px;
 
-    max-width: 95vw;
+    max-width: 95%;
 
     margin: 0 auto;
 
@@ -765,11 +780,11 @@ body {
 
 .playground {
 
-    width: 100%;
+    width: 1024px;
 
     height: 170px;
 
-    position: fixed;
+    position: absolute;
 
     bottom: 0;
 
@@ -862,9 +877,13 @@ body {
 
     display: none;
 
-    position: fixed;
+    position: absolute;
 
     inset: 0;
+
+    width: 1024px;
+
+    height: 1366px;
 
     z-index: 3000;
 
@@ -885,7 +904,7 @@ body {
 
     width: 850px;
 
-    max-width: 95vw;
+    max-width: 95%;
 
     margin: 0 auto 30px;
 
@@ -912,7 +931,7 @@ body {
 
 .parent-close {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
 
@@ -943,7 +962,7 @@ body {
 
     width: 850px;
 
-    max-width: 95vw;
+    max-width: 95%;
 
     margin: auto;
 
@@ -1036,197 +1055,6 @@ body {
     font-size: 70px;
 }
 
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 767px) {
-
-    .page {
-
-        min-height: 100vh;
-
-        padding:
-            90px 15px 100px;
-    }
-
-    .previous-button {
-
-        top: 20px;
-
-        left: 20px;
-
-        width: 125px;
-
-        height: 52px;
-
-        font-size: 18px;
-    }
-
-    .menu-button {
-
-        top: 20px;
-
-        right: 20px;
-
-        width: 55px;
-
-        height: 55px;
-
-        font-size: 27px;
-    }
-
-    .side-menu {
-
-        top: 90px;
-
-        right: 20px;
-
-        width: 220px;
-    }
-
-    .title {
-
-        font-size: 29px;
-
-        padding:
-            14px 22px;
-
-        margin-top: 10px;
-    }
-
-    .subtitle {
-
-        font-size: 17px;
-
-        margin-bottom: 25px;
-    }
-
-    .games-grid {
-
-        grid-template-columns:
-            1fr;
-
-        gap: 16px;
-    }
-
-    .game-card {
-
-        height: 220px;
-    }
-
-    .card-title {
-
-        font-size: 23px;
-
-        top: 14px;
-    }
-
-    .card-image {
-
-        height: 155px;
-
-        width: 75%;
-    }
-
-    .card-arrow {
-
-        width: 43px;
-
-        height: 43px;
-
-        left: 14px;
-
-        bottom: 12px;
-
-        font-size: 22px;
-    }
-
-    .parent-activities-button {
-
-        height: 85px;
-
-        font-size: 23px;
-    }
-
-    .parent-panel {
-
-        padding:
-            90px 15px 30px;
-    }
-
-    .parent-panel-title {
-
-        font-size: 29px;
-
-        padding:
-            14px 22px;
-    }
-
-    .parent-close {
-
-        top: 20px;
-
-        left: 20px;
-
-        width: 52px;
-
-        height: 52px;
-    }
-
-    .parent-list {
-
-        grid-template-columns:
-            1fr;
-
-        gap: 16px;
-    }
-
-    .parent-card {
-
-        height: 220px;
-    }
-
-    .parent-card-title {
-
-        font-size: 23px;
-
-        top: 14px;
-    }
-
-    .parent-card img {
-
-        height: 155px;
-
-        width: 75%;
-    }
-
-}
-
-
-/* =====================================================
-   TABLET / IPAD PORTRAIT
-===================================================== */
-
-@media
-(min-width: 768px)
-and (max-width: 1100px) {
-
-    .games-grid {
-
-        width: 850px;
-
-        max-width: 94vw;
-    }
-
-    .game-card {
-
-        height: 235px;
-    }
-
-}
-
 </style>
 
 </head>
@@ -1238,6 +1066,8 @@ and (max-width: 1100px) {
 <!-- =====================================================
      BACKGROUND
 ===================================================== -->
+
+<div class="page" id="page">
 
 <div class="background">
 </div>
@@ -1293,9 +1123,9 @@ id="sideMenu">
      MAIN
 ===================================================== -->
 
-<main class="page">
+<main class="content">
 
-<div class="content">
+<div>
 
 
     <!-- TITLE -->
@@ -1501,10 +1331,74 @@ class="parent-panel">
 
 </div>
 
+</div>
+
 
 <script>
 
 const SETTINGS_KEY = "rafiq_parent_controls";
+
+
+/* =====================================================
+   PAGE SCALE
+===================================================== */
+
+const page =
+    document.getElementById("page");
+
+
+function resizePage() {
+
+    const baseWidth = 1024;
+
+    const baseHeight = 1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+window.addEventListener(
+    "orientationchange",
+    function() {
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
 
 
 /* =====================================================
@@ -1513,32 +1407,51 @@ const SETTINGS_KEY = "rafiq_parent_controls";
 
 function toggleMenu() {
 
-    const menu = document.getElementById("sideMenu");
+    const menu =
+        document.getElementById(
+            "sideMenu"
+        );
 
     if (menu) {
-        menu.classList.toggle("show");
+
+        menu.classList.toggle(
+            "show"
+        );
+
     }
 
 }
 
 
-document.addEventListener("click", function(event) {
+document.addEventListener(
+    "click",
+    function(event) {
 
-    const menu = document.getElementById("sideMenu");
-    const button = document.getElementById("menuButton");
+        const menu =
+            document.getElementById(
+                "sideMenu"
+            );
 
-    if (
-        menu &&
-        button &&
-        !menu.contains(event.target) &&
-        !button.contains(event.target)
-    ) {
+        const button =
+            document.getElementById(
+                "menuButton"
+            );
 
-        menu.classList.remove("show");
+        if (
+            menu &&
+            button &&
+            !menu.contains(event.target) &&
+            !button.contains(event.target)
+        ) {
+
+            menu.classList.remove(
+                "show"
+            );
+
+        }
 
     }
-
-});
+);
 
 
 /* =====================================================
@@ -1547,28 +1460,33 @@ document.addEventListener("click", function(event) {
 
 function goBack() {
 
-    window.location.href = "home.html";
+    window.location.href =
+        "home.html";
 
 }
 
 
 function goHome() {
 
-    window.location.href = "home.html";
+    window.location.href =
+        "home.html";
 
 }
 
 
 function goProfile() {
 
-    window.location.href = "profile.html";
+    window.location.href =
+        "profile.html";
 
 }
 
 
 function goProgress() {
 
-    alert("⭐ صفحة تقدمي\n\nسنصممها لاحقًا.");
+    alert(
+        "⭐ صفحة تقدمي\n\nسنصممها لاحقًا."
+    );
 
 }
 
@@ -1580,7 +1498,9 @@ function goProgress() {
 function getParentSettings() {
 
     const saved =
-        localStorage.getItem(SETTINGS_KEY);
+        localStorage.getItem(
+            SETTINGS_KEY
+        );
 
     if (!saved) {
 
@@ -1590,7 +1510,9 @@ function getParentSettings() {
 
     try {
 
-        return JSON.parse(saved);
+        return JSON.parse(
+            saved
+        );
 
     } catch (error) {
 
@@ -1612,10 +1534,9 @@ function getParentSettings() {
 
 function applyParentGameControls() {
 
-    const settings = getParentSettings();
+    const settings =
+        getParentSettings();
 
-
-    /* إذا لا توجد إعدادات، كل الألعاب تظهر */
 
     if (!settings) {
 
@@ -1624,16 +1545,13 @@ function applyParentGameControls() {
     }
 
 
-    /* =================================================
-       قسم الألعاب كامل
-    ================================================= */
-
     if (
         settings.sections &&
         settings.sections.games === false
     ) {
 
-        window.location.href = "home.html";
+        window.location.href =
+            "home.html";
 
         return;
 
@@ -1647,104 +1565,98 @@ function applyParentGameControls() {
             : {};
 
 
-    /* =================================================
-       الألوان
-    ================================================= */
-
     const colors =
-        document.querySelector(".colors-card");
+        document.querySelector(
+            ".colors-card"
+        );
 
     if (
         colors &&
         games.colors === false
     ) {
 
-        colors.style.display = "none";
+        colors.style.display =
+            "none";
 
     }
 
 
-    /* =================================================
-       الأشكال
-    ================================================= */
-
     const shapes =
-        document.querySelector(".shapes-card");
+        document.querySelector(
+            ".shapes-card"
+        );
 
     if (
         shapes &&
         games.shapes === false
     ) {
 
-        shapes.style.display = "none";
+        shapes.style.display =
+            "none";
 
     }
 
 
-    /* =================================================
-       المواقف الاجتماعية
-    ================================================= */
-
     const situations =
-        document.querySelector(".situations-card");
+        document.querySelector(
+            ".situations-card"
+        );
 
     if (
         situations &&
         games.social === false
     ) {
 
-        situations.style.display = "none";
+        situations.style.display =
+            "none";
 
     }
 
 
-    /* =================================================
-       التواصل
-    ================================================= */
-
     const communication =
-        document.querySelector(".social-card");
+        document.querySelector(
+            ".social-card"
+        );
 
     if (
         communication &&
         games.communication === false
     ) {
 
-        communication.style.display = "none";
+        communication.style.display =
+            "none";
 
     }
 
 
-    /* =================================================
-       تجربة جديدة
-    ================================================= */
-
     const challenges =
-        document.querySelector(".routine-card");
+        document.querySelector(
+            ".routine-card"
+        );
 
     if (
         challenges &&
         games.challenges === false
     ) {
 
-        challenges.style.display = "none";
+        challenges.style.display =
+            "none";
 
     }
 
 
-    /* =================================================
-       الحروف والأرقام
-    ================================================= */
-
     const letters =
-        document.querySelector(".letters-card");
+        document.querySelector(
+            ".letters-card"
+        );
 
     if (
         letters &&
         games.letters === false
     ) {
 
-        letters.style.display = "none";
+        letters.style.display =
+            "none";
 
     }
 
@@ -1809,25 +1721,29 @@ function openGame(game) {
 
     if (game === "colors") {
 
-        window.location.href = "./colors.html";
+        window.location.href =
+            "./colors.html";
 
     }
 
     else if (game === "shapes") {
 
-        window.location.href = "./shapes-circle.html";
+        window.location.href =
+            "./shapes-circle.html";
 
     }
 
     else if (game === "social situations") {
 
-        window.location.href = "./social.html";
+        window.location.href =
+            "./social.html";
 
     }
 
     else if (game === "social") {
 
-        window.location.href = "./communication.html";
+        window.location.href =
+            "./communication.html";
 
     }
 
@@ -1875,19 +1791,23 @@ function getParentActivities() {
 
 
     const activities =
-        Array.isArray(settings.customActivities)
+        Array.isArray(
+            settings.customActivities
+        )
             ? settings.customActivities
             : [];
 
 
-    return activities.filter(function(activity) {
+    return activities.filter(
+        function(activity) {
 
-        return (
-            activity &&
-            activity.enabled !== false
-        );
+            return (
+                activity &&
+                activity.enabled !== false
+            );
 
-    });
+        }
+    );
 
 }
 
@@ -1916,11 +1836,13 @@ function updateParentButton() {
 
     if (activities.length > 0) {
 
-        button.style.display = "block";
+        button.style.display =
+            "block";
 
     } else {
 
-        button.style.display = "none";
+        button.style.display =
+            "none";
 
     }
 
@@ -1958,77 +1880,104 @@ function openParentPanel() {
     }
 
 
-    list.innerHTML = "";
+    list.innerHTML =
+        "";
 
 
-    activities.forEach(function(activity) {
+    activities.forEach(
+        function(activity) {
 
-        const card =
-            document.createElement("div");
+            const card =
+                document.createElement(
+                    "div"
+                );
 
-        card.className =
-            "parent-card";
-
-
-        const title =
-            document.createElement("h2");
-
-        title.className =
-            "parent-card-title";
-
-        title.textContent =
-            activity.name ||
-            "نشاط من الوالدين";
+            card.className =
+                "parent-card";
 
 
-        card.appendChild(title);
+            const title =
+                document.createElement(
+                    "h2"
+                );
 
+            title.className =
+                "parent-card-title";
 
-        if (
-            activity.type &&
-            activity.type.indexOf("image/") === 0
-        ) {
-
-            const image =
-                document.createElement("img");
-
-            image.src =
-                activity.data;
-
-            image.alt =
+            title.textContent =
                 activity.name ||
                 "نشاط من الوالدين";
 
-            card.appendChild(image);
 
-        } else {
+            card.appendChild(
+                title
+            );
 
-            const icon =
-                document.createElement("div");
 
-            icon.className =
-                "parent-file-icon";
+            if (
+                activity.type &&
+                activity.type.indexOf(
+                    "image/"
+                ) === 0
+            ) {
 
-            icon.textContent = "📄";
+                const image =
+                    document.createElement(
+                        "img"
+                    );
 
-            card.appendChild(icon);
+                image.src =
+                    activity.data;
+
+                image.alt =
+                    activity.name ||
+                    "نشاط من الوالدين";
+
+                card.appendChild(
+                    image
+                );
+
+            } else {
+
+                const icon =
+                    document.createElement(
+                        "div"
+                    );
+
+                icon.className =
+                    "parent-file-icon";
+
+                icon.textContent =
+                    "📄";
+
+                card.appendChild(
+                    icon
+                );
+
+            }
+
+
+            card.onclick =
+                function() {
+
+                    openParentActivity(
+                        activity
+                    );
+
+                };
+
+
+            list.appendChild(
+                card
+            );
 
         }
+    );
 
 
-        card.onclick = function() {
-
-            openParentActivity(activity);
-
-        };
-
-
-        list.appendChild(card);
-
-    });
-
-
-    panel.classList.add("show");
+    panel.classList.add(
+        "show"
+    );
 
 }
 
@@ -2046,7 +1995,9 @@ function closeParentPanel() {
 
     if (panel) {
 
-        panel.classList.remove("show");
+        panel.classList.remove(
+            "show"
+        );
 
     }
 
@@ -2057,7 +2008,9 @@ function closeParentPanel() {
    OPEN PARENT ACTIVITY
 ===================================================== */
 
-function openParentActivity(activity) {
+function openParentActivity(
+    activity
+) {
 
     if (!activity) {
 
@@ -2066,15 +2019,18 @@ function openParentActivity(activity) {
     }
 
 
-    /* IMAGE */
-
     if (
         activity.type &&
-        activity.type.indexOf("image/") === 0
+        activity.type.indexOf(
+            "image/"
+        ) === 0
     ) {
 
         const newWindow =
-            window.open("", "_blank");
+            window.open(
+                "",
+                "_blank"
+            );
 
 
         if (!newWindow) {
@@ -2088,16 +2044,29 @@ function openParentActivity(activity) {
         }
 
 
-        newWindow.document.body.style.margin = "0";
-        newWindow.document.body.style.minHeight = "100vh";
-        newWindow.document.body.style.display = "flex";
-        newWindow.document.body.style.alignItems = "center";
-        newWindow.document.body.style.justifyContent = "center";
-        newWindow.document.body.style.background = "#ffffff";
+        newWindow.document.body.style.margin =
+            "0";
+
+        newWindow.document.body.style.minHeight =
+            "100vh";
+
+        newWindow.document.body.style.display =
+            "flex";
+
+        newWindow.document.body.style.alignItems =
+            "center";
+
+        newWindow.document.body.style.justifyContent =
+            "center";
+
+        newWindow.document.body.style.background =
+            "#ffffff";
 
 
         const image =
-            newWindow.document.createElement("img");
+            newWindow.document.createElement(
+                "img"
+            );
 
         image.src =
             activity.data;
@@ -2112,14 +2081,14 @@ function openParentActivity(activity) {
             "contain";
 
 
-        newWindow.document.body.appendChild(image);
+        newWindow.document.body.appendChild(
+            image
+        );
 
         return;
 
     }
 
-
-    /* FILE */
 
     if (activity.data) {
 

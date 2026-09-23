@@ -15,10 +15,6 @@ user-scalable=no">
 
 <style>
 
-/* =====================================================
-   GENERAL
-===================================================== */
-
 * {
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
@@ -29,7 +25,8 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -53,7 +50,7 @@ body {
 
     background-attachment: fixed;
 
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 
@@ -63,7 +60,7 @@ body {
 
 .cloud {
 
-    position: fixed;
+    position: absolute;
 
     font-size: 85px;
 
@@ -102,7 +99,7 @@ body {
 
 .star {
 
-    position: fixed;
+    position: absolute;
 
     font-size: 25px;
 
@@ -152,19 +149,32 @@ body {
 
 
 /* =====================================================
-   PAGE
+   FIXED PAGE CANVAS
 ===================================================== */
 
 .page {
 
-    width: 100%;
+    position: absolute;
 
-    min-height: 100vh;
+    width: 1024px;
+
+    height: 1366px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(var(--page-scale,1));
+
+    transform-origin:
+        center center;
+
+    overflow: hidden;
 
     padding:
-        85px 20px 120px;
-
-    position: relative;
+        105px 20px 120px;
 
     z-index: 5;
 }
@@ -176,7 +186,7 @@ body {
 
 .previous-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
     left: 35px;
@@ -224,7 +234,7 @@ body {
 
 .menu-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
     right: 35px;
@@ -274,7 +284,7 @@ body {
 
 .side-menu {
 
-    position: fixed;
+    position: absolute;
 
     top: 115px;
     right: 35px;
@@ -360,8 +370,7 @@ body {
 
 .content {
 
-    width:
-        min(900px,95vw);
+    width: 900px;
 
     margin: 0 auto;
 
@@ -374,29 +383,6 @@ body {
     position: relative;
 
     z-index: 10;
-}
-
-
-/* =====================================================
-   TITLE
-===================================================== */
-
-.title {
-
-    margin:
-        20px 0 8px;
-
-    font-size: 42px;
-
-    font-weight: 900;
-
-    color: #555;
-
-    text-align: center;
-
-    text-shadow:
-        0 3px 5px
-        rgba(255,255,255,.95);
 }
 
 
@@ -461,8 +447,6 @@ body {
 .animation-area {
 
     width: 650px;
-
-    max-width: 95vw;
 
     height: 420px;
 
@@ -604,8 +588,6 @@ body {
 
     width: 650px;
 
-    max-width: 95vw;
-
     margin:
         0 auto;
 
@@ -746,8 +728,6 @@ body {
 
     width: 620px;
 
-    max-width: 95vw;
-
     min-height: 65px;
 
     margin:
@@ -797,8 +777,6 @@ body {
 .feedback {
 
     width: 620px;
-
-    max-width: 95vw;
 
     min-height: 65px;
 
@@ -877,7 +855,7 @@ body {
 
 .next-button {
 
-    position: fixed;
+    position: absolute;
 
     right: 35px;
 
@@ -977,8 +955,6 @@ body {
 
     width: 650px;
 
-    max-width: 94vw;
-
     margin-top: 50px;
 
     padding: 35px 25px;
@@ -1053,13 +1029,14 @@ body {
 
 #carCelebration {
 
-    position: fixed;
+    position: absolute;
 
-    inset: 0;
+    left: 0;
+    top: 0;
 
-    width: 100%;
+    width: 1024px;
 
-    height: 100%;
+    height: 1366px;
 
     pointer-events: none;
 
@@ -1534,173 +1511,8 @@ body {
 
 
 /* =====================================================
-   IPAD
+   PAGE SCALE
 ===================================================== */
-
-@media (min-width:768px) {
-
-    .page {
-
-        min-height: 1366px;
-
-        padding-top: 105px;
-
-        padding-bottom: 120px;
-    }
-
-    .title {
-        font-size: 42px;
-    }
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width:767px) {
-
-    .page {
-
-        padding:
-            90px 10px 110px;
-    }
-
-    .previous-button {
-
-        top: 20px;
-        left: 20px;
-
-        width: 125px;
-        height: 52px;
-
-        font-size: 18px;
-    }
-
-    .menu-button {
-
-        top: 20px;
-        right: 20px;
-
-        width: 55px;
-        height: 55px;
-
-        font-size: 27px;
-    }
-
-    .side-menu {
-
-        top: 90px;
-        right: 20px;
-
-        width: 220px;
-    }
-
-    .title {
-        font-size: 30px;
-        margin-top: 15px;
-    }
-
-    .question {
-
-        font-size: 23px;
-
-        margin-top: 25px;
-    }
-
-    .animation-area {
-
-        height: 330px;
-    }
-
-    .child-svg {
-
-        width: 310px;
-        height: 310px;
-    }
-
-    .happy-scene {
-
-        width: 310px;
-        height: 310px;
-        font-size: 120px;
-    }
-
-    .answers {
-
-        grid-template-columns:
-            1fr;
-
-        gap: 10px;
-    }
-
-    .answer-button {
-
-        min-height: 60px;
-
-        font-size: 19px;
-    }
-
-    .hint-button {
-
-        width: 210px;
-
-        height: 56px;
-
-        font-size: 19px;
-    }
-
-    .hint-box,
-    .feedback {
-
-        font-size: 18px;
-    }
-
-    .progress-box {
-
-        font-size: 16px;
-    }
-
-    .next-button {
-
-        right: 20px;
-
-        bottom: 20px;
-
-        width: 190px;
-
-        height: 58px;
-
-        font-size: 19px;
-    }
-
-    .final-message h2 {
-        font-size: 26px;
-    }
-
-    .final-stars {
-        font-size: 38px;
-    }
-
-}
-
-
-/* =====================================================
-   SMALL CAR BALLOONS
-===================================================== */
-
-@media (max-width:767px) {
-
-    .car-balloon {
-
-        transform: scale(.72);
-
-        transform-origin:
-            center bottom;
-    }
-
-}
 
 </style>
 
@@ -1708,6 +1520,13 @@ body {
 
 
 <body>
+
+
+<!-- =====================================================
+     FIXED CANVAS WRAPPER
+===================================================== -->
+
+<div class="page" id="page">
 
 
 <!-- =====================================================
@@ -1760,9 +1579,7 @@ id="sideMenu">
      MAIN
 ===================================================== -->
 
-<main class="page">
-
-<div class="content">
+<main class="content">
 
 
 <!-- AUDIO -->
@@ -2257,8 +2074,6 @@ id="finalStars">
 </div>
 
 
-</div>
-
 </main>
 
 
@@ -2337,6 +2152,63 @@ let totalResponseTime = 0;
 let hintsUsed = 0;
 
 let currentHint = 0;
+
+
+/* =====================================================
+   PAGE SCALE
+===================================================== */
+
+const page =
+    document.getElementById("page");
+
+function resizePage(){
+
+    const baseWidth = 1024;
+
+    const baseHeight = 1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+}
+
+resizePage();
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
 
 
 /* =====================================================
@@ -2866,10 +2738,6 @@ function chooseAnswer(answer) {
         );
 
 
-    /* =================================================
-       WRONG
-    ================================================= */
-
     if (
         answer !==
         question.correctAnswer
@@ -2933,10 +2801,6 @@ function chooseAnswer(answer) {
         return;
     }
 
-
-    /* =================================================
-       CORRECT
-    ================================================= */
 
     answered = true;
 
@@ -3008,10 +2872,6 @@ function chooseAnswer(answer) {
     );
 
 
-    /* =================================================
-       🚗 CAR DECORATION
-    ================================================= */
-
     createCarBalloons();
 
 }
@@ -3082,12 +2942,6 @@ function showHint() {
 ===================================================== */
 
 function nextQuestion() {
-
-    /*
-       عند الضغط على التالي
-       ينتقل مباشرة إلى لعبة
-       angry-car.html
-    */
 
     window.location.href =
         "angry-car.html";
@@ -3488,10 +3342,6 @@ function createCarBalloons() {
         );
 
 
-        /* ==========================
-           BODY
-        ========================== */
-
         const body =
             document.createElement(
                 "div"
@@ -3502,10 +3352,6 @@ function createCarBalloons() {
             "car-balloon-body";
 
 
-        /* ==========================
-           ROOF
-        ========================== */
-
         const roof =
             document.createElement(
                 "div"
@@ -3515,10 +3361,6 @@ function createCarBalloons() {
         roof.className =
             "car-roof";
 
-
-        /* ==========================
-           WINDOWS
-        ========================== */
 
         const windowLeft =
             document.createElement(
@@ -3550,10 +3392,6 @@ function createCarBalloons() {
         );
 
 
-        /* ==========================
-           WHEELS
-        ========================== */
-
         const wheelLeft =
             document.createElement(
                 "div"
@@ -3573,10 +3411,6 @@ function createCarBalloons() {
         wheelRight.className =
             "car-wheel right";
 
-
-        /* ==========================
-           LIGHTS
-        ========================== */
 
         const lightLeft =
             document.createElement(
@@ -3598,10 +3432,6 @@ function createCarBalloons() {
             "car-light right";
 
 
-        /* ==========================
-           SMILE
-        ========================== */
-
         const smile =
             document.createElement(
                 "div"
@@ -3612,10 +3442,6 @@ function createCarBalloons() {
             "car-smile";
 
 
-        /* ==========================
-           BUMPER
-        ========================== */
-
         const bumper =
             document.createElement(
                 "div"
@@ -3625,10 +3451,6 @@ function createCarBalloons() {
         bumper.className =
             "car-bumper";
 
-
-        /* ==========================
-           BUILD CAR
-        ========================== */
 
         body.appendChild(
             roof
@@ -3659,10 +3481,6 @@ function createCarBalloons() {
         );
 
 
-        /* ==========================
-           STRING
-        ========================== */
-
         const string =
             document.createElement(
                 "div"
@@ -3672,10 +3490,6 @@ function createCarBalloons() {
         string.className =
             "car-string";
 
-
-        /* ==========================
-           COMPLETE CAR BALLOON
-        ========================== */
 
         wrapper.appendChild(
             body
@@ -3692,10 +3506,6 @@ function createCarBalloons() {
 
     });
 
-
-    /* =================================================
-       REMOVE AFTER ANIMATION
-    ================================================= */
 
     setTimeout(
         () => {
@@ -3728,6 +3538,8 @@ document
 loadQuestion();
 
 </script>
+
+</div>
 
 </body>
 

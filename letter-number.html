@@ -50,6 +50,8 @@ body {
 
     background: white;
 
+    position: relative;
+
 }
 
 
@@ -59,10 +61,22 @@ body {
 
 .page {
 
-    width: 100%;
-    height: 100vh;
+    position: absolute;
 
-    position: relative;
+    width: 1024px;
+
+    height: 1366px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin:
+        center center;
 
     overflow: hidden;
 
@@ -102,7 +116,7 @@ body {
 
 .previous-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 20px;
 
@@ -158,7 +172,7 @@ body {
 
 .menu-wrapper {
 
-    position: fixed;
+    position: absolute;
 
     top: 20px;
 
@@ -340,8 +354,7 @@ body {
 
 .choice-button {
 
-    width:
-        min(650px, 78vw);
+    width: 650px;
 
     height: 145px;
 
@@ -499,38 +512,38 @@ body {
 
 
 /* =========================
-   استجابة الآيباد
+   الاستجابة
 ========================= */
 
 @media (max-width: 900px) {
 
     .choice-button {
 
-        width: 82vw;
+        width: 650px;
 
-        height: 125px;
+        height: 145px;
 
-        font-size: 32px;
+        font-size: 38px;
 
     }
 
     .symbol {
 
-        width: 54px;
+        width: 62px;
 
-        height: 54px;
+        height: 62px;
 
-        font-size: 36px;
+        font-size: 42px;
 
     }
 
     .arrow {
 
-        width: 48px;
+        width: 54px;
 
-        height: 48px;
+        height: 54px;
 
-        font-size: 28px;
+        font-size: 32px;
 
     }
 
@@ -538,47 +551,52 @@ body {
 
 
 /* =========================
-   شاشة صغيرة
+   الارتفاعات الصغيرة
 ========================= */
 
 @media (max-height: 750px) {
 
     .content {
 
-        gap: 18px;
+        gap: 28px;
 
-        padding-top: 70px;
+        padding:
+            90px 30px 40px;
 
     }
 
     .title {
 
-        top: 70px;
+        top: 95px;
 
-        font-size: 30px;
+        font-size: 38px;
 
     }
 
     .choice-button {
 
-        height: 110px;
+        height: 145px;
 
     }
 
 }
-/* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-   بدون تغيير التصميم أو القياسات
-===================================================== */
+
+
+/* =========================
+   إزالة Scroll
+========================= */
 
 @media (min-width: 768px) {
 
     html,
     body {
+
         overflow: hidden;
+
     }
 
 }
+
 </style>
 
 </head>
@@ -627,7 +645,7 @@ body {
 
 
             <a
-                href="index.html"
+                href="home.html"
                 class="menu-item">
 
                 <span class="menu-icon">
@@ -657,7 +675,7 @@ body {
 
 
             <a
-                href="progress.html"
+                href="profile.html"
                 class="menu-item">
 
                 <span class="menu-icon">
@@ -665,7 +683,7 @@ body {
                 </span>
 
                 <span>
-                    تقدمي
+                    ملفي
                 </span>
 
             </a>
@@ -783,6 +801,60 @@ body {
 
 
 <script>
+
+/* =====================================================
+   RESPONSIVE PAGE SCALING
+===================================================== */
+
+const baseWidth = 1024;
+const baseHeight = 1366;
+
+function resizePage() {
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    document.body.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+resizePage();
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+window.addEventListener(
+    "orientationchange",
+    function() {
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =====================================================
    SUPABASE

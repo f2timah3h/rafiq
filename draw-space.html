@@ -12,8 +12,6 @@
                user-scalable=no">
 
 <title>ارسم شعورك - رفيق</title>
-/
-
 
 
 <style>
@@ -32,7 +30,8 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -43,20 +42,9 @@ body {
         Arial,
         sans-serif;
 
-    background-image:
-        url("images/spao.jpeg");
-
-    background-size: cover;
-
-    background-position: center;
-
-    background-repeat: no-repeat;
-
-    background-attachment: fixed;
-
     color: #555;
 
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 
@@ -66,14 +54,35 @@ body {
 
 .page {
 
-    width: 100%;
+    position: absolute;
 
-    min-height: 100vh;
+    width: 1024px;
+
+    height: 1366px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin: center center;
+
+    overflow: hidden;
 
     padding:
         90px 20px 70px;
 
-    position: relative;
+    background-image:
+        url("images/spao.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
 }
 
 
@@ -83,7 +92,7 @@ body {
 
 .previous-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
 
@@ -141,7 +150,7 @@ body {
 
 .menu-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
 
@@ -184,7 +193,7 @@ body {
 
 .side-menu {
 
-    position: fixed;
+    position: absolute;
 
     top: 115px;
 
@@ -271,8 +280,9 @@ body {
 
 .content {
 
-    width:
-        min(1100px, 96vw);
+    width: 984px;
+
+    height: 100%;
 
     margin: 0 auto;
 
@@ -295,8 +305,6 @@ body {
 .feeling-card {
 
     width: 650px;
-
-    max-width: 92vw;
 
     min-height: 125px;
 
@@ -321,6 +329,8 @@ body {
 
     animation:
         cardFloat 4s ease-in-out infinite;
+
+    margin-top: 80px;
 }
 
 @keyframes cardFloat {
@@ -452,6 +462,8 @@ body {
     position: relative;
 
     z-index: 30;
+
+    width: 100%;
 }
 
 .color {
@@ -676,13 +688,11 @@ body {
 
     position: relative;
 
-    width: 955px;
+    width: 900px;
 
-    height: 580px;
+    height: 547px;
 
-    max-width: 96vw;
-
-    margin-top: 100px;
+    margin-top: 120px;
 
     overflow: visible;
 
@@ -747,7 +757,6 @@ body {
     touch-action: none;
 
     cursor: crosshair;
-
 }
 
 
@@ -757,9 +766,15 @@ body {
 
 .success-message {
 
-    position: fixed;
+    position: absolute;
 
-    inset: 0;
+    left: 0;
+
+    top: 0;
+
+    width: 1024px;
+
+    height: 1366px;
 
     background:
         rgba(35,55,75,0.35);
@@ -776,8 +791,6 @@ body {
 .success-box {
 
     width: 520px;
-
-    max-width: 88vw;
 
     background: white;
 
@@ -894,354 +907,8 @@ body {
 
 
 /* =====================================================
-   iPAD PORTRAIT
+   PAGE SCALING
 ===================================================== */
-
-@media (min-width: 768px) {
-
-    .page {
-
-        min-height: 1366px;
-
-        padding-top: 105px;
-    }
-
-
-    .feeling-card {
-
-        width: 650px;
-
-        margin-top: 80px;
-    }
-
-
-    .drawing-tools-area {
-
-        margin-top: 22px;
-
-        width: 100%;
-
-        align-items: center;
-    }
-
-
-    .colors {
-
-        justify-content: center;
-
-        width: 100%;
-    }
-
-
-    .tools {
-
-        justify-content: center;
-
-        width: 100%;
-    }
-
-
-    .send-button {
-
-        align-self: center;
-    }
-
-
-    .rocket-stage {
-
-        width: 900px;
-
-        height: 547px;
-
-        margin-top: 120px;
-    }
-
-}
-
-
-/* =====================================================
-   MOBILE / SMALL SCREEN
-===================================================== */
-
-@media (max-width: 767px) {
-
-    .page {
-
-        padding:
-            95px 10px 50px;
-    }
-
-
-    .previous-button {
-
-        top: 20px;
-
-        left: 20px;
-
-        width: 125px;
-
-        height: 52px;
-
-        font-size: 18px;
-    }
-
-
-    .menu-button {
-
-        top: 20px;
-
-        right: 20px;
-
-        width: 55px;
-
-        height: 55px;
-
-        font-size: 27px;
-    }
-
-
-    .side-menu {
-
-        top: 90px;
-
-        right: 20px;
-
-        width: 220px;
-    }
-
-
-    /* =================================================
-       FEELING CARD
-    ================================================= */
-
-    .feeling-card {
-
-        width: 94vw;
-
-        min-height: 105px;
-
-        padding: 15px;
-
-        gap: 12px;
-
-        margin-top: 25px;
-    }
-
-
-    .robot {
-
-        font-size: 48px;
-    }
-
-
-    .feeling-text h2 {
-
-        font-size: 21px;
-    }
-
-
-    .feeling-text p {
-
-        font-size: 15px;
-    }
-
-
-    /* =================================================
-       TOOLS
-    ================================================= */
-
-    .drawing-tools-area {
-
-        margin-top: 18px;
-
-        align-items: center;
-    }
-
-
-    .colors {
-
-        gap: 9px;
-
-        justify-content: center;
-
-        width: 100%;
-    }
-
-
-    .color {
-
-        width: 42px;
-
-        height: 42px;
-
-        border-width: 4px;
-    }
-
-
-    .tools {
-
-        gap: 10px;
-
-        margin-top: 18px;
-
-        justify-content: center;
-
-        width: 100%;
-    }
-
-
-    .tool-button {
-
-        width: 160px;
-
-        height: 56px;
-
-        font-size: 17px;
-    }
-
-
-    .send-button {
-
-        width: 280px;
-
-        height: 62px;
-
-        margin-top: 18px;
-
-        font-size: 20px;
-    }
-
-
-    /* =================================================
-       ROCKET
-    ================================================= */
-
-    .rocket-stage {
-
-        width: 96vw;
-
-        height:
-            calc(96vw * 0.6073);
-
-        margin-top: 45px;
-    }
-
-
-    #drawingCanvas {
-
-        left: 17%;
-
-        top: 9%;
-
-        width: 66%;
-
-        height: 65%;
-    }
-
-
-    /* =================================================
-       POPUP
-    ================================================= */
-
-    .success-box {
-
-        width: 88vw;
-
-        padding:
-            28px 22px;
-    }
-
-
-    .success-emoji {
-
-        font-size: 55px;
-    }
-
-
-    .success-box h2 {
-
-        font-size: 28px;
-    }
-
-
-    .success-box p {
-
-        font-size: 18px;
-    }
-
-
-    .result-buttons {
-
-        flex-direction: column;
-
-        width: 100%;
-    }
-
-
-    .result-buttons button {
-
-        width: 100%;
-    }
-
-}
-
-
-/* =====================================================
-   TABLET / iPAD SMALL
-===================================================== */
-
-@media (min-width: 768px) and (max-width: 1100px) {
-
-    .feeling-card {
-
-        width: 650px;
-
-        max-width: 82vw;
-    }
-
-
-    .colors {
-
-        width: 90%;
-    }
-
-
-    .rocket-stage {
-
-        width: 90vw;
-
-        height:
-            calc(90vw * 0.6073);
-
-        margin-top: 100px;
-    }
-
-
-    #drawingCanvas {
-
-        left: 17%;
-
-        top: 9%;
-
-        width: 66%;
-
-        height: 65%;
-    }
-
-}
-/* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-   بدون تغيير التصميم أو القياسات
-===================================================== */
-
-@media (min-width: 768px) {
-
-    html,
-    body {
-        overflow: hidden;
-    }
-
-}
 
 </style>
 
@@ -1249,6 +916,13 @@ body {
 
 
 <body>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="page">
 
 
 <!-- =====================================================
@@ -1289,9 +963,7 @@ body {
         🏠 الرئيسية
     </button>
 
-    <button onclick="window.location.href =
-
-        'profile.html'";>
+    <button onclick="window.location.href = 'profile.html';">
         👤 ملفي
     </button>
 
@@ -1302,12 +974,6 @@ body {
 </div>
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
-<main class="page">
-
 <div class="content">
 
 
@@ -1317,7 +983,6 @@ body {
 
     <div class="feeling-card">
 
-
         <div class="robot">
 
             🤖
@@ -1326,7 +991,6 @@ body {
 
 
         <div class="feeling-text">
-
 
             <h2>
 
@@ -1341,9 +1005,7 @@ body {
 
             </p>
 
-
         </div>
-
 
     </div>
 
@@ -1465,11 +1127,6 @@ body {
             alt="صاروخ للرسم">
 
 
-        <!--
-             Canvas شفاف تمامًا.
-             لا يظهر أي مربع أبيض.
-        -->
-
         <canvas
             id="drawingCanvas">
         </canvas>
@@ -1550,6 +1207,66 @@ body {
 <script>
 
 /* =====================================================
+   PAGE SCALING
+===================================================== */
+
+function resizePage() {
+
+    const page =
+        document.querySelector(".page");
+
+    const baseWidth =
+        1024;
+
+    const baseHeight =
+        1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+resizePage();
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+window.addEventListener(
+    "orientationchange",
+    function() {
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
+
+/* =====================================================
    MENU
 ===================================================== */
 
@@ -1624,6 +1341,12 @@ let isErasing =
 
 let hasDrawing =
     false;
+
+let lastX =
+    0;
+
+let lastY =
+    0;
 
 
 /* =====================================================
@@ -1772,45 +1495,34 @@ canvas.addEventListener(
     "pointerdown",
     function(event) {
 
-
         event.preventDefault();
-
 
         isDrawing =
             true;
 
-
         hasDrawing =
             true;
-
 
         canvas.setPointerCapture(
             event.pointerId
         );
 
-
         const pos =
             getPosition(event);
 
+        lastX =
+            pos.x;
 
-        ctx.beginPath();
-
-
-        ctx.moveTo(
-            pos.x,
-            pos.y
-        );
-
-
-        /*
-         * نقطة البداية
-         */
-
-        ctx.fillStyle =
-            currentColor;
-
+        lastY =
+            pos.y;
 
         if (!isErasing) {
+
+            ctx.globalCompositeOperation =
+                "source-over";
+
+            ctx.fillStyle =
+                currentColor;
 
             ctx.beginPath();
 
@@ -1838,15 +1550,13 @@ canvas.addEventListener(
     "pointermove",
     function(event) {
 
-
         if (!isDrawing) {
 
             return;
+
         }
 
-
         event.preventDefault();
-
 
         const pos =
             getPosition(event);
@@ -1854,12 +1564,10 @@ canvas.addEventListener(
 
         ctx.beginPath();
 
-
         ctx.moveTo(
             lastX,
             lastY
         );
-
 
         ctx.lineTo(
             pos.x,
@@ -1869,10 +1577,8 @@ canvas.addEventListener(
 
         if (isErasing) {
 
-
             ctx.globalCompositeOperation =
                 "destination-out";
-
 
             ctx.lineWidth =
                 35;
@@ -1881,14 +1587,11 @@ canvas.addEventListener(
 
         else {
 
-
             ctx.globalCompositeOperation =
                 "source-over";
 
-
             ctx.strokeStyle =
                 currentColor;
-
 
             ctx.lineWidth =
                 8;
@@ -1896,18 +1599,7 @@ canvas.addEventListener(
         }
 
 
-        /*
-         * أول حركة تحتاج lastX/lastY
-         */
-
-        if (
-            typeof lastX === "number" &&
-            typeof lastY === "number"
-        ) {
-
-            ctx.stroke();
-
-        }
+        ctx.stroke();
 
 
         lastX =
@@ -1919,27 +1611,6 @@ canvas.addEventListener(
 
         ctx.globalCompositeOperation =
             "source-over";
-
-    }
-);
-
-
-/* =====================================================
-   POINTER DOWN - SAVE LAST POSITION
-===================================================== */
-
-canvas.addEventListener(
-    "pointerdown",
-    function(event) {
-
-        const pos =
-            getPosition(event);
-
-        lastX =
-            pos.x;
-
-        lastY =
-            pos.y;
 
     }
 );
@@ -1989,15 +1660,12 @@ const colorButtons =
 colorButtons.forEach(
     button => {
 
-
         button.addEventListener(
             "click",
             function() {
 
-
                 currentColor =
                     this.dataset.color;
-
 
                 isErasing =
                     false;
@@ -2048,10 +1716,8 @@ document
         "click",
         function() {
 
-
             isErasing =
                 !isErasing;
-
 
             this.classList.toggle(
                 "active",
@@ -2074,7 +1740,6 @@ document
         "click",
         function() {
 
-
             ctx.clearRect(
                 0,
                 0,
@@ -2082,10 +1747,8 @@ document
                 canvas.height
             );
 
-
             hasDrawing =
                 false;
-
 
             isErasing =
                 false;
@@ -2110,18 +1773,232 @@ document
 
 
 /* =====================================================
+   NORMALIZE AI TEXT
+===================================================== */
+
+function normalizeAIText(value) {
+
+    return String(value || "")
+        .toLowerCase()
+        .trim();
+
+}
+
+
+/* =====================================================
+   EXTRACT AI FIELD
+===================================================== */
+
+function extractAIField(
+    aiText,
+    fieldName
+) {
+
+    const regex =
+        new RegExp(
+            fieldName +
+            "\\s*[:=]\\s*[\"']?([^\\n\\r,\"'}]+)",
+            "i"
+        );
+
+    const match =
+        String(aiText).match(
+            regex
+        );
+
+
+    if (!match) {
+
+        return "";
+
+    }
+
+
+    return match[1].trim();
+
+}
+
+
+/* =====================================================
+   GET AI TEXT SAFELY
+===================================================== */
+
+function getAIText(result) {
+
+    if (
+        result &&
+        typeof result.ai_result === "object" &&
+        result.ai_result !== null
+    ) {
+
+        try {
+
+            return JSON.stringify(
+                result.ai_result
+            );
+
+        }
+
+        catch (error) {
+
+            return "";
+
+        }
+
+    }
+
+
+    return String(
+        result?.ai_result || ""
+    ).trim();
+
+}
+
+
+/* =====================================================
+   NORMALIZE MOUTH
+===================================================== */
+
+function normalizeMouth(mouth) {
+
+    const text =
+        normalizeAIText(mouth);
+
+
+    /* =================================================
+       مهم:
+       نفحص "غير مبتسم" أولًا
+       حتى لا تحتوي كلمة "مبتسم"
+       وتُحسب بالخطأ على أنها سعيدة
+    ================================================= */
+
+    if (
+        text.includes("غير مبتسم") ||
+        text.includes("غير مبتسمة") ||
+        text.includes("ليس مبتسم") ||
+        text.includes("ليست مبتسمة") ||
+        text.includes("not smiling") ||
+        text.includes("not smile")
+    ) {
+
+        return "not-happy";
+
+    }
+
+
+    /* =================================================
+       غير موجود
+    ================================================= */
+
+    if (
+        text.includes("غير موجود") ||
+        text.includes("غير موجودة") ||
+        text.includes("لا يوجد فم") ||
+        text.includes("لا توجد فم") ||
+        text.includes("no mouth") ||
+        text.includes("missing")
+    ) {
+
+        return "missing";
+
+    }
+
+
+    /* =================================================
+       غير واضح
+    ================================================= */
+
+    if (
+        text.includes("غير واضح") ||
+        text.includes("غير واضحة") ||
+        text.includes("غير محدد") ||
+        text.includes("unclear")
+    ) {
+
+        return "unclear";
+
+    }
+
+
+    /* =================================================
+       حزين
+    ================================================= */
+
+    if (
+        text.includes("حزين") ||
+        text.includes("حزينة") ||
+        text.includes("حزن") ||
+        text.includes("sad")
+    ) {
+
+        return "sad";
+
+    }
+
+
+    /* =================================================
+       محايد
+    ================================================= */
+
+    if (
+        text.includes("محايد") ||
+        text.includes("محايدة") ||
+        text.includes("neutral") ||
+        text.includes("مستقيم") ||
+        text.includes("straight")
+    ) {
+
+        return "neutral";
+
+    }
+
+
+    /* =================================================
+       مبتسم
+    ================================================= */
+
+    if (
+        text.includes("مبتسم") ||
+        text.includes("مبتسمة") ||
+        text.includes("ابتسامة") ||
+        text.includes("smiling") ||
+        text.includes("smile")
+    ) {
+
+        return "happy";
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =====================================================
    SHOW AI RESULT
 ===================================================== */
 
 function showAIResult(result) {
 
+    console.log(
+        "🤖 Rafiq AI RESULT:",
+        result
+    );
+
+
+    /* =================================================
+       AI TEXT
+    ================================================= */
 
     const aiText =
-        result.ai_result || "";
+        getAIText(
+            result
+        );
 
 
     console.log(
-        "🤖 AI RESULT:",
+        "🤖 AI TEXT:",
         aiText
     );
 
@@ -2130,102 +2007,365 @@ function showAIResult(result) {
        MATCHES TARGET
     ================================================= */
 
-    const match =
-        aiText.match(
-            /matches_target\s*:\s*(true|false)/i
-        );
+    let matchesTarget = false;
+
+
+    /*
+       نأخذ القيمة المباشرة من الـBackend أولًا
+    */
+
+    if (
+        typeof result.matches_target ===
+        "boolean"
+    ) {
+
+        matchesTarget =
+            result.matches_target;
+
+    }
+
+
+    /*
+       إذا لم توجد، نقرأها من ai_result
+    */
+
+    else {
+
+        const match =
+            aiText.match(
+                /matches_target\s*[:=]\s*["']?(true|false)/i
+            );
+
+
+        if (match) {
+
+            matchesTarget =
+                match[1].toLowerCase()
+                === "true";
+
+        }
+
+    }
 
 
     /* =================================================
        CONFIDENCE
     ================================================= */
 
-    const confidenceMatch =
-        aiText.match(
-            /confidence\s*:\s*(\d+)/i
-        );
+    let confidence = 0;
+
+
+    /*
+       القيمة المباشرة من Backend
+    */
+
+    if (
+        result.confidence !== undefined &&
+        result.confidence !== null
+    ) {
+
+        confidence =
+            Number(
+                result.confidence
+            ) || 0;
+
+    }
+
+
+    /*
+       fallback من ai_result
+    */
+
+    else {
+
+        const confidenceMatch =
+            aiText.match(
+                /confidence\s*[:=]\s*["']?(\d+(?:\.\d+)?)/i
+            );
+
+
+        if (confidenceMatch) {
+
+            confidence =
+                Number(
+                    confidenceMatch[1]
+                ) || 0;
+
+        }
+
+    }
 
 
     /* =================================================
        MOUTH
     ================================================= */
 
-    const mouthMatch =
-        aiText.match(
-            /mouth\s*:\s*(.*)/i
-        );
+    let mouth = "";
+
+
+    /*
+       نأخذ mouth المباشر أولًا
+    */
+
+    if (
+        result.mouth !== undefined &&
+        result.mouth !== null
+    ) {
+
+        mouth =
+            String(
+                result.mouth
+            ).trim();
+
+    }
+
+
+    /*
+       fallback إلى ai_result
+    */
+
+    if (!mouth) {
+
+        mouth =
+            extractAIField(
+                aiText,
+                "mouth"
+            );
+
+    }
+
+
+    /* =================================================
+       EMOTION
+    ================================================= */
+
+    let emotion = "";
+
+
+    if (
+        result.emotion !== undefined &&
+        result.emotion !== null
+    ) {
+
+        emotion =
+            String(
+                result.emotion
+            ).trim();
+
+    }
+
+
+    if (!emotion) {
+
+        emotion =
+            extractAIField(
+                aiText,
+                "emotion"
+            );
+
+    }
 
 
     /* =================================================
        FEEDBACK
     ================================================= */
 
-    const feedbackMatch =
-        aiText.match(
-            /feedback\s*:\s*(.*)/i
-        );
+    let feedback = "";
 
 
-    let matchesTarget =
-        false;
+    if (
+        result.feedback !== undefined &&
+        result.feedback !== null
+    ) {
 
-    let confidence =
-        0;
-
-    let mouth =
-        "";
-
-    let feedback =
-        "";
-
-
-    if (match) {
-
-        matchesTarget =
-            match[1].toLowerCase()
-            === "true";
+        feedback =
+            String(
+                result.feedback
+            ).trim();
 
     }
 
 
-    if (confidenceMatch) {
+    if (!feedback) {
 
-        confidence =
-            parseInt(
-                confidenceMatch[1]
+        feedback =
+            extractAIField(
+                aiText,
+                "feedback"
             );
 
     }
 
 
-    if (mouthMatch) {
+    /* =================================================
+       MESSAGE
+    ================================================= */
 
-        mouth =
-            mouthMatch[1]
-            .trim();
+    const backendMessage =
+        String(
+            result.message || ""
+        ).trim();
 
-    }
 
+    /*
+       إذا لم يوجد feedback ولكن توجد رسالة
+       من الـBackend نستخدمها كاحتياط
+    */
 
-    if (feedbackMatch) {
+    if (
+        !feedback &&
+        backendMessage
+    ) {
 
         feedback =
-            feedbackMatch[1]
-            .trim();
+            backendMessage;
 
     }
 
 
     /* =================================================
-       FINAL DECISION
-
-       true + confidence >= 70
+       تحديد نوع الفم
     ================================================= */
 
-    const isGoodDrawing =
-        matchesTarget &&
-        confidence >= 70;
+    let mouthType =
+        normalizeMouth(
+            mouth
+        );
 
+
+    /* =================================================
+       إذا mouth غير موجود:
+       نستخدم emotion كاحتياط
+    ================================================= */
+
+    if (!mouthType) {
+
+        const normalizedEmotion =
+            normalizeAIText(
+                emotion
+            );
+
+
+        if (
+            normalizedEmotion.includes("سعيد") ||
+            normalizedEmotion.includes("سعيدة") ||
+            normalizedEmotion.includes("happy")
+        ) {
+
+            mouthType =
+                "happy";
+
+        }
+
+        else if (
+            normalizedEmotion.includes("حزين") ||
+            normalizedEmotion.includes("حزينة") ||
+            normalizedEmotion.includes("sad")
+        ) {
+
+            mouthType =
+                "sad";
+
+        }
+
+        else if (
+            normalizedEmotion.includes("غاضب") ||
+            normalizedEmotion.includes("غاضبة") ||
+            normalizedEmotion.includes("angry")
+        ) {
+
+            mouthType =
+                "angry";
+
+        }
+
+        else if (
+            normalizedEmotion.includes("محايد") ||
+            normalizedEmotion.includes("محايدة") ||
+            normalizedEmotion.includes("neutral")
+        ) {
+
+            mouthType =
+                "neutral";
+
+        }
+
+    }
+
+
+    /* =================================================
+       إذا كان الـBackend أعاد رسالة نجاح واضحة
+       ولم توجد معلومات منظمة، نستخدمها كاحتياط أخير
+    ================================================= */
+
+    if (
+        !mouthType &&
+        !aiText &&
+        backendMessage
+    ) {
+
+        const normalizedMessage =
+            normalizeAIText(
+                backendMessage
+            );
+
+
+        if (
+            normalizedMessage.includes("وجهًا مبتسمًا") ||
+            normalizedMessage.includes("وجه مبتسم") ||
+            normalizedMessage.includes("وجه سعيد") ||
+            normalizedMessage.includes("ابتسامة جميلة") ||
+            normalizedMessage.includes("سعيد") ||
+            normalizedMessage.includes("مبتسم")
+        ) {
+
+            mouthType =
+                "happy";
+
+        }
+
+        else if (
+            normalizedMessage.includes("وجه حزين") ||
+            normalizedMessage.includes("حزين")
+        ) {
+
+            mouthType =
+                "sad";
+
+        }
+
+    }
+
+
+    console.log(
+        "👄 MOUTH:",
+        mouth
+    );
+
+    console.log(
+        "👄 MOUTH TYPE:",
+        mouthType
+    );
+
+    console.log(
+        "😊 EMOTION:",
+        emotion
+    );
+
+    console.log(
+        "🎯 MATCHES:",
+        matchesTarget
+    );
+
+    console.log(
+        "📊 CONFIDENCE:",
+        confidence
+    );
+
+
+    /* =================================================
+       عناصر POPUP
+    ================================================= */
 
     const resultEmoji =
         document.getElementById(
@@ -2246,11 +2386,22 @@ function showAIResult(result) {
 
 
     /* =================================================
-       CORRECT
+       😊 سعيد
     ================================================= */
 
-    if (isGoodDrawing) {
-
+    if (
+        (
+            mouthType === "happy"
+        ) &&
+        (
+            matchesTarget ||
+            confidence >= 70 ||
+            normalizeAIText(emotion)
+                .includes("سعيد") ||
+            normalizeAIText(emotion)
+                .includes("happy")
+        )
+    ) {
 
         resultEmoji.textContent =
             "🌈😊⭐";
@@ -2262,17 +2413,128 @@ function showAIResult(result) {
 
         successText.textContent =
             feedback ||
-            "رسمتك تعبّر عن السعادة بشكل جميل! 😊";
+            "أحسنت! أرى وجهًا مبتسمًا سعيدًا 😊";
 
     }
 
 
     /* =================================================
-       NEEDS IMPROVEMENT
+       😢 حزين
     ================================================= */
 
-    else {
+    else if (
+        mouthType === "sad"
+    ) {
 
+        resultEmoji.textContent =
+            "😢💙";
+
+
+        resultTitle.textContent =
+            "هذا وجه حزين";
+
+
+        successText.textContent =
+            "هذا وجه حزين 😢 حاول أن تجعل الفم منحنيًا إلى الأعلى ليصبح الوجه سعيدًا 😊";
+
+    }
+
+
+    /* =================================================
+       😠 غاضب
+    ================================================= */
+
+    else if (
+        mouthType === "angry"
+    ) {
+
+        resultEmoji.textContent =
+            "😠💙";
+
+
+        resultTitle.textContent =
+            "هذا وجه غاضب";
+
+
+        successText.textContent =
+            "هذا وجه غاضب 😠 حاول رسم وجه سعيد بابتسامة واضحة 😊";
+
+    }
+
+
+    /* =================================================
+       😐 محايد
+    ================================================= */
+
+    else if (
+        mouthType === "neutral"
+    ) {
+
+        resultEmoji.textContent =
+            "😐🎨";
+
+
+        resultTitle.textContent =
+            "هذا وجه محايد";
+
+
+        successText.textContent =
+            "هذا وجه محايد 🙂 حاول أن تجعل الفم منحنيًا إلى الأعلى ليصبح الوجه سعيدًا 😊";
+
+    }
+
+
+    /* =================================================
+       🚫 غير مبتسم
+    ================================================= */
+
+    else if (
+        mouthType === "not-happy"
+    ) {
+
+        resultEmoji.textContent =
+            "🎨💙";
+
+
+        resultTitle.textContent =
+            "حاول مرة أخرى";
+
+
+        successText.textContent =
+            "هذا ليس وجهًا سعيدًا 😊 حاول أن تجعل الفم مبتسمًا ومنحنيًا إلى الأعلى.";
+
+    }
+
+
+    /* =================================================
+       🚫 لا يوجد فم
+    ================================================= */
+
+    else if (
+        mouthType === "missing"
+    ) {
+
+        resultEmoji.textContent =
+            "🎨😊";
+
+
+        resultTitle.textContent =
+            "حاول مرة أخرى";
+
+
+        successText.textContent =
+            "رائع! حاول إضافة فم مبتسم إلى الوجه 😊";
+
+    }
+
+
+    /* =================================================
+       ❓ غير واضح
+    ================================================= */
+
+    else if (
+        mouthType === "unclear"
+    ) {
 
         resultEmoji.textContent =
             "🎨💙";
@@ -2282,51 +2544,50 @@ function showAIResult(result) {
             "محاولة جميلة!";
 
 
+        successText.textContent =
+            "محاولة جميلة! حاول رسم الفم بشكل أوضح واجعل الابتسامة تتجه إلى الأعلى 😊";
+
+    }
+
+
+    /* =================================================
+       FALLBACK
+    ================================================= */
+
+    else {
+
         if (
-            mouth.includes(
-                "غير مبتسم"
-            )
+            matchesTarget &&
+            confidence >= 70
         ) {
 
-
-            successText.textContent =
-                "رسمتك جميلة! حاول تجعل الابتسامة أوضح قليلًا 😊";
-
-        }
+            resultEmoji.textContent =
+                "🌈😊⭐";
 
 
-        else if (
-            mouth.includes(
-                "غير واضح"
-            )
-        ) {
-
-
-            successText.textContent =
-                "أحسنت! حاول رسم فم مبتسم بشكل أوضح 😊";
-
-        }
-
-
-        else if (
-            mouth.includes(
-                "غير موجود"
-            )
-        ) {
-
-
-            successText.textContent =
-                "رائع! حاول إضافة فم مبتسم إلى الوجه 😊";
-
-        }
-
-
-        else {
+            resultTitle.textContent =
+                "أحسنت!";
 
 
             successText.textContent =
                 feedback ||
-                "محاولة جميلة! حاول إضافة ابتسامة أوضح 😊";
+                "أحسنت! رسمت وجهًا سعيدًا 😊";
+
+        }
+
+        else {
+
+            resultEmoji.textContent =
+                "🎨💙";
+
+
+            resultTitle.textContent =
+                "محاولة جميلة!";
+
+
+            successText.textContent =
+                feedback ||
+                "حاول رسم وجه سعيد بشكل أوضح، مع ابتسامة واضحة 😊";
 
         }
 
@@ -2334,7 +2595,7 @@ function showAIResult(result) {
 
 
     /* =================================================
-       SHOW
+       إظهار POPUP
     ================================================= */
 
     document
@@ -2343,6 +2604,64 @@ function showAIResult(result) {
         )
         .style.display =
         "flex";
+
+
+    /* =================================================
+       نطق النتيجة
+    ================================================= */
+
+    speakResult(
+        resultTitle.textContent +
+        ". " +
+        successText.textContent
+    );
+
+}
+
+
+/* =====================================================
+   SPEECH RESULT
+===================================================== */
+
+function speakResult(text) {
+
+    if (
+        !("speechSynthesis" in window)
+    ) {
+
+        return;
+
+    }
+
+
+    window.speechSynthesis.cancel();
+
+
+    const speech =
+        new SpeechSynthesisUtterance(
+            text
+        );
+
+
+    speech.lang =
+        "ar-SA";
+
+
+    speech.rate =
+        0.78;
+
+
+    speech.pitch =
+        1.05;
+
+
+    speech.volume =
+        1;
+
+
+    window.speechSynthesis.speak(
+        speech
+    );
 
 }
 
@@ -2358,7 +2677,6 @@ document
     .addEventListener(
         "click",
         function() {
-
 
             ctx.clearRect(
                 0,
@@ -2433,7 +2751,6 @@ document
         "click",
         function() {
 
-
             document
                 .getElementById(
                     "successMessage"
@@ -2458,18 +2775,11 @@ document
         "click",
         async function() {
 
-
-            /* ---------------------------------------------
-               NO DRAWING
-            --------------------------------------------- */
-
             if (!hasDrawing) {
-
 
                 alert(
                     "🎨 ارسم شيئًا أولًا!"
                 );
-
 
                 return;
 
@@ -2480,29 +2790,17 @@ document
                 this;
 
 
-            /* ---------------------------------------------
-               CONVERT DRAWING TO IMAGE
-            --------------------------------------------- */
-
             const imageData =
                 canvas.toDataURL(
                     "image/png"
                 );
 
 
-            /* ---------------------------------------------
-               SAVE DRAWING
-            --------------------------------------------- */
-
             localStorage.setItem(
                 "rafiqFeelingDrawing",
                 imageData
             );
 
-
-            /* ---------------------------------------------
-               LOADING
-            --------------------------------------------- */
 
             sendButton.disabled =
                 true;
@@ -2513,11 +2811,6 @@ document
 
 
             try {
-
-
-                /* -----------------------------------------
-                   SEND TO RENDER
-                ----------------------------------------- */
 
                 const response =
                     await fetch(
@@ -2549,10 +2842,6 @@ document
                     );
 
 
-                /* -----------------------------------------
-                   HTTP ERROR
-                ----------------------------------------- */
-
                 if (!response.ok) {
 
                     throw new Error(
@@ -2562,10 +2851,6 @@ document
 
                 }
 
-
-                /* -----------------------------------------
-                   GET RESULT
-                ----------------------------------------- */
 
                 const result =
                     await response.json();
@@ -2577,14 +2862,9 @@ document
                 );
 
 
-                /* -----------------------------------------
-                   SHOW AI RESULT
-                ----------------------------------------- */
-
                 if (
                     result.success
                 ) {
-
 
                     showAIResult(
                         result
@@ -2593,7 +2873,6 @@ document
                 }
 
                 else {
-
 
                     alert(
                         "😔 حدث خطأ أثناء تحليل الرسمة.\n\n" +
@@ -2610,7 +2889,6 @@ document
 
             catch (error) {
 
-
                 console.error(
                     "❌ AI Connection Error:",
                     error
@@ -2624,10 +2902,6 @@ document
 
             }
 
-
-            /* -----------------------------------------
-               RESTORE BUTTON
-            ----------------------------------------- */
 
             sendButton.disabled =
                 false;

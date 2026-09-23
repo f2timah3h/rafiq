@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=1024,
+      content="width=device-width,
                initial-scale=1.0,
                maximum-scale=1.0,
                user-scalable=no">
@@ -44,37 +44,46 @@ body{
     background:#e4f2ff;
 
     touch-action:manipulation;
+
+    position:relative;
 }
 
 
 /* =====================================================
    PAGE
-   iPad Portrait 1024 × 1366
+   BASE SIZE: 1024 × 1366
 ===================================================== */
 
 .page{
 
-    width:100vw;
-    height:100vh;
+    position:absolute;
 
-    display:flex;
+    width:1024px;
+    height:1366px;
 
-    justify-content:center;
-    align-items:center;
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(var(--page-scale,1));
+
+    transform-origin:center center;
 
     overflow:hidden;
 }
 
 
+/* =====================================================
+   APP
+===================================================== */
+
 .app{
 
     position:relative;
 
-    width:min(100vw,1024px);
-
-    height:min(100vh,1366px);
-
-    aspect-ratio:1024 / 1366;
+    width:1024px;
+    height:1366px;
 
     overflow:hidden;
 
@@ -353,7 +362,6 @@ body{
 
 /* =====================================================
    CAR ANIMATION
-   تصعد وتنزل
 ===================================================== */
 
 @keyframes carMove{
@@ -413,7 +421,6 @@ body{
 
 /* =====================================================
    BOY ANIMATION
-   يمين ويسار - بطيئة
 ===================================================== */
 
 @keyframes boyMove{
@@ -680,8 +687,7 @@ body{
 
     padding:12px 25px 8px;
 
-    background:#fff;
-    background: transparent;
+    background:transparent;
 
     border-radius:42px 42px 0 0;
 
@@ -768,7 +774,6 @@ body{
 
 /* =====================================================
    EXAMPLE IMAGES
-   الأرنب والأناناس أكبر
 ===================================================== */
 
 .example img{
@@ -867,300 +872,22 @@ body{
 
 
 /* =====================================================
-   RESPONSIVE
+   PAGE SCALE
+   لا يتم تغيير القياسات الداخلية
 ===================================================== */
 
-@media(max-width:800px){
+@media(max-width:1023px){
 
-    .title{
+    .page{
 
-        width:300px;
-    }
+        transform:
+            translate(-50%,-50%)
+            scale(var(--page-scale,1));
 
-
-    .title-small{
-
-        font-size:25px;
-    }
-
-
-    .title-big{
-
-        font-size:36px;
-    }
-
-
-    .car{
-
-        width:290px;
-    }
-
-
-    .boy{
-
-        width:225px;
-
-        left:5%;
-    }
-
-
-    .alif-sound-button{
-
-        width:58px;
-
-        height:58px;
-
-        font-size:28px;
-
-        left:27%;
-
-        top:43%;
-    }
-
-
-    .draw-area{
-
-        width:370px;
-
-        height:300px;
-    }
-
-
-    .letter{
-
-        width:180px;
-
-        height:280px;
-    }
-
-
-    #drawingCanvas{
-
-        height:280px;
-    }
-
-
-    .draw-controls{
-
-        right:-5px;
-
-        top:120px;
-
-        width:165px;
-    }
-
-
-    .instruction{
-
-        width:165px;
-
-        font-size:15px;
-    }
-
-
-    .examples{
-
-        height:210px;
     }
 
 }
 
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:600px){
-
-    .topbar{
-
-        top:18px;
-
-        left:18px;
-
-        right:18px;
-    }
-
-
-    .circle-button{
-
-        width:52px;
-
-        height:52px;
-
-        font-size:28px;
-    }
-
-
-    .title{
-
-        top:22px;
-
-        width:230px;
-
-        border-width:3px;
-    }
-
-
-    .title-small{
-
-        font-size:20px;
-    }
-
-
-    .title-big{
-
-        font-size:28px;
-    }
-
-
-    .car{
-
-        width:220px;
-
-        top:37%;
-    }
-
-
-    .boy{
-
-        width:155px;
-
-        top:34%;
-
-        left:2%;
-    }
-
-
-    .alif-sound-button{
-
-        width:48px;
-
-        height:48px;
-
-        font-size:23px;
-
-        left:24%;
-
-        top:43%;
-    }
-
-
-    .draw-area{
-
-        width:280px;
-
-        height:220px;
-
-        top:50%;
-    }
-
-
-    .letter{
-
-        width:135px;
-
-        height:200px;
-    }
-
-
-    #drawingCanvas{
-
-        height:200px;
-    }
-
-
-    .draw-controls{
-
-        top:80px;
-
-        right:-5px;
-
-        width:125px;
-    }
-
-
-    .instruction{
-
-        width:125px;
-
-        padding:6px;
-
-        font-size:12px;
-    }
-
-
-    .clear-drawing{
-
-        font-size:12px;
-
-        padding:5px 10px;
-    }
-
-
-    .examples{
-
-        left:3%;
-
-        right:3%;
-
-        height:195px;
-
-        padding:8px 12px;
-    }
-
-
-    .examples-title{
-
-        font-size:15px;
-    }
-
-
-    .example-grid{
-
-        height:105px;
-
-        gap:8px;
-    }
-
-
-    .example img{
-
-        width:110px;
-
-        height:110px;
-
-        flex-shrink:0;
-    }
-
-
-    .word{
-
-        font-size:17px;
-    }
-
-
-    .next-button{
-
-        font-size:16px;
-
-        padding:9px 22px;
-    }
-
-}
-/* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-   بدون تغيير التصميم أو القياسات
-===================================================== */
-
-@media (min-width: 768px) {
-
-    html,
-    body {
-        overflow: hidden;
-    }
-
-}
 </style>
 
 </head>
@@ -1444,6 +1171,65 @@ body{
 <script>
 
 /* =====================================================
+   PAGE SCALE
+   BASE: 1024 × 1366
+===================================================== */
+
+const baseWidth = 1024;
+const baseHeight = 1366;
+
+
+function resizePage(){
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+
+    const scale =
+        Math.min(scaleX, scaleY);
+
+
+    document.body.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
+
+/* =====================================================
    NAVIGATION
 ===================================================== */
 
@@ -1604,7 +1390,6 @@ window.addEventListener(
 
 /* =====================================================
    DRAWING
-   تعليم فقط
 ===================================================== */
 
 const canvas =
@@ -1825,3 +1610,4 @@ function clearDrawing(){
 </body>
 
 </html>
+    

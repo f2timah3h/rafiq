@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
 <head>
@@ -47,10 +47,19 @@ body{
 
 .page{
 
-    position:relative;
+    position:absolute;
 
-    width:100vw;
-    height:100vh;
+    width:1024px;
+    height:1366px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin:center center;
 
     overflow:hidden;
 
@@ -59,12 +68,6 @@ body{
     background-size:cover;
 
     background-position:center;
-
-    /*
-       مهم:
-       نخفي الصفحة مؤقتًا حتى نعرف
-       ثيم الطفل من قاعدة البيانات.
-    */
 
     visibility:hidden;
 
@@ -231,7 +234,7 @@ body{
 
     transform:translateX(-50%);
 
-    width:min(650px,88vw);
+    width:650px;
 
     min-height:82px;
 
@@ -336,7 +339,7 @@ body{
 
     transform:translateX(-50%);
 
-    width:min(850px,88vw);
+    width:850px;
 
     height:270px;
 
@@ -1024,7 +1027,7 @@ body{
 
 .popup{
 
-    width:min(600px,88vw);
+    width:600px;
 
     padding:38px 30px;
 
@@ -1126,189 +1129,25 @@ body{
 }
 
 
-/* =========================
-   iPAD
-========================= */
-
-@media(min-width:768px){
-
-    .answers{
-
-        top:300px;
-
-        height:270px;
-
-    }
-
-    .answer{
-
-        height:270px;
-
-    }
-
-    .next{
-
-        bottom:30px;
-
-    }
-
-}
-
-
-/* =========================
+/* =====================================================
    MOBILE
-========================= */
+   نفس التصميم، فقط تصغير الصفحة كاملة
+===================================================== */
 
 @media(max-width:700px){
 
-    .top-btn{
-
-        width:52px;
-        height:52px;
-
-        top:12px;
-
-        font-size:28px;
-
-    }
-
-    .back{
-        left:12px;
-    }
-
-    .menu{
-        right:12px;
-    }
-
-    .title{
-
-        min-width:235px;
-
-        font-size:22px;
-
-        padding:10px 18px;
-
-    }
-
-    .timer{
-
-        top:78px;
-
-        font-size:16px;
-
-    }
-
-    .question-box{
-
-        top:120px;
-
-        width:92vw;
-
-        min-height:70px;
-
-    }
-
-    .question{
-
-        font-size:21px;
-
-    }
-
-    .sound{
-
-        width:44px;
-        height:44px;
-
-        font-size:20px;
-
-    }
-
-    .hint{
-
-        top:200px;
-
-        font-size:15px;
-
-    }
-
-    .answers{
-
-        top:235px;
-
-        width:94vw;
-
-        height:230px;
-
-        gap:8px;
-
-    }
-
-    .answer{
-
-        height:230px;
-
-        border-radius:20px;
-
-    }
-
-    .answer img{
-
-        width:70%;
-
-        height:70%;
-
-    }
-
-    .next{
-
-        width:140px;
-
-        height:52px;
-
-        bottom:15px;
-
-        font-size:19px;
-
-    }
-
-    .popup{
-
-        padding:28px 18px;
-
-    }
-
-    .popup-icon{
-
-        font-size:55px;
-
-    }
-
-    .popup h2{
-
-        font-size:28px;
-
-    }
-
-    .popup p{
-
-        font-size:19px;
-
-    }
+    /*
+       لا نغير قياسات العناصر هنا.
+       الصفحة كلها يتم تصغيرها كنسبة واحدة.
+    */
 
 }
+
+
 /* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-   بدون تغيير التصميم أو القياسات
+   SCALE FOR ALL SCREENS
 ===================================================== */
 
-@media (min-width: 768px) {
-
-    html,
-    body {
-        overflow: hidden;
-    }
-
-}
 </style>
 
 </head>
@@ -1521,11 +1360,6 @@ const SUPABASE_URL =
     "https://ciwrwmutcrarwtounelg.supabase.co";
 
 
-/*
-   خلي نفس Publishable Key الموجود عندك
-   في start.html
-*/
-
 const SUPABASE_ANON_KEY =
     "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
 
@@ -1605,6 +1439,64 @@ let timer;
 
 
 /* =====================================================
+   FIXED DESIGN SCALE
+   1024 × 1366
+===================================================== */
+
+function resizePage(){
+
+    const baseWidth = 1024;
+    const baseHeight = 1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
+
+/* =====================================================
    WAIT FOR IMAGE
 ===================================================== */
 
@@ -1658,11 +1550,6 @@ async function loadChildTheme(){
             childId
         );
 
-
-        /*
-           إذا لم يوجد الطفل
-           نستخدم السيارات كافتراضي.
-        */
 
         if(!childId){
 
@@ -1804,27 +1691,15 @@ async function showCorrectTheme(){
         : "images/ak.jpeg";
 
 
-    /*
-       تحميل الخلفية أولًا
-    */
-
     await waitForImage(
         background
     );
 
 
-    /*
-       إزالة أي ثيم سابق
-    */
-
     page.classList.remove(
         "space"
     );
 
-
-    /*
-       تطبيق ثيم الفضاء
-    */
 
     if(theme === "space"){
 
@@ -1834,10 +1709,6 @@ async function showCorrectTheme(){
 
     }
 
-
-    /*
-       إظهار الصفحة بعد تحديد الثيم
-    */
 
     page.style.visibility =
         "visible";
@@ -1923,8 +1794,6 @@ cards.forEach(
                     === "true";
 
 
-                /* CORRECT */
-
                 if(correct){
 
                     answered =
@@ -1964,8 +1833,6 @@ cards.forEach(
 
                 }
 
-
-                /* WRONG */
 
                 else{
 
@@ -2476,20 +2343,14 @@ question.textContent =
     questionText;
 
 
-/*
-   مهم جدًا:
-   ما يبدأ السؤال ولا المؤقت
-   إلا بعد معرفة ثيم الطفل.
-*/
+/* =====================================================
+   START GAME
+===================================================== */
 
 async function startGame(){
 
     await loadChildTheme();
 
-
-    /*
-       الآن الصفحة ظهرت بالثيم الصحيح.
-    */
 
     setTimeout(
         readQuestion,
@@ -2501,10 +2362,6 @@ async function startGame(){
 
 }
 
-
-/* =====================================================
-   START GAME
-===================================================== */
 
 startGame();
 

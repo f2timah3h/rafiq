@@ -29,7 +29,7 @@ body{
     margin:0;
     padding:0;
     width:100%;
-    min-height:100%;
+    height:100%;
 }
 
 body{
@@ -38,25 +38,19 @@ body{
 
     color:#40566d;
 
-    overflow-x:hidden;
+    overflow:hidden;
 
     background-color:#fff;
 
-    /* نفس خلفية صفحات الألوان السابقة */
-    background-image:url("images/redb.jpeg");
-
-    background-size:100% auto;
-
-    background-position:center bottom;
-
-    background-repeat:no-repeat;
-
-    background-attachment:fixed;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
 
 /* =========================================================
-   الصفحة
+   الصفحة الأساسية
+   المقاس الأصلي: 1024 × 1366
 ========================================================= */
 
 .page{
@@ -65,11 +59,31 @@ body{
 
     z-index:5;
 
-    width:100%;
+    width:1024px;
+    height:1366px;
 
-    min-height:1366px;
+    flex:none;
 
     padding:150px 35px 100px;
+
+    overflow:hidden;
+
+    background-image:url("images/redb.jpeg");
+
+    background-size:100% auto;
+
+    background-position:center bottom;
+
+    background-repeat:no-repeat;
+
+    transform:
+        translate(
+            0,
+            0
+        )
+        scale(var(--page-scale,1));
+
+    transform-origin:center center;
 }
 
 
@@ -77,7 +91,7 @@ body{
 
     width:900px;
 
-    max-width:92vw;
+    max-width:none;
 
     margin:0 auto;
 
@@ -111,7 +125,7 @@ body{
 
 .previous-button{
 
-    position:fixed;
+    position:absolute;
 
     top:35px;
     left:35px;
@@ -162,7 +176,7 @@ body{
 
 .menu-button{
 
-    position:fixed;
+    position:absolute;
 
     top:35px;
     right:35px;
@@ -213,7 +227,7 @@ body{
 
 .side-menu{
 
-    position:fixed;
+    position:absolute;
 
     top:115px;
     right:35px;
@@ -349,11 +363,6 @@ body{
 .title{
 
     margin:0 0 8px;
-
-    /*
-       لون كلمة "أصفر"
-       يمكنك تغييره هنا
-    */
 
     color:#F3F315;
 
@@ -680,295 +689,22 @@ body{
 
 
 /* =========================================================
-   الجوال
+   تصغير الصفحة كاملة حسب حجم الشاشة
 ========================================================= */
 
-@media (max-width:767px){
-
-    .page{
-
-        min-height:100vh;
-
-        padding:90px 15px 80px;
-    }
-
-
-    .content{
-
-        max-width:94vw;
-    }
-
-
-    .previous-button{
-
-        top:20px;
-        left:20px;
-
-        width:125px;
-        height:52px;
-
-        font-size:18px;
-    }
-
-
-    .menu-button{
-
-        top:20px;
-        right:20px;
-
-        width:55px;
-        height:55px;
-
-        font-size:27px;
-    }
-
-
-    .side-menu{
-
-        top:90px;
-        right:20px;
-
-        width:220px;
-    }
-
-
-    .splash-area{
-
-        width:180px;
-        height:180px;
-    }
-
-
-    .yellow-splash{
-
-        width:180px;
-        height:180px;
-    }
-
-
-    .title{
-
-        font-size:40px;
-    }
-
-
-    .speaker-button{
-
-        width:50px;
-        height:50px;
-
-        font-size:24px;
-    }
-
-
-    .instruction{
-
-        font-size:18px;
-
-        margin:15px 0 25px;
-    }
-
-
-    .objects{
-
-        gap:10px;
-    }
-
-
-    .object-card{
-
-        width:105px;
-        height:135px;
-
-        border-radius:20px;
-    }
-
-
-    .object-card img{
-
-        width:85px;
-        height:85px;
-    }
-
-
-    .object-name{
-
-        font-size:15px;
-    }
-
-
-    .message{
-
-        font-size:18px;
-    }
-
-
-    .pencil{
-
-        width:120px;
-        height:120px;
-
-        left:5px;
-        top:600px;
-    }
-
-
-    .next-button{
-
-        width:140px;
-        height:54px;
-
-        font-size:19px;
-    }
-
-}
-
-
-/* =========================================================
-   iPad Portrait
-========================================================= */
-
-@media (min-width:768px) and (max-width:1100px){
-
-    .page{
-
-        min-height:1366px;
-
-        padding:150px 35px 100px;
-    }
-
-
-    .content{
-
-        width:900px;
-
-        max-width:92vw;
-    }
-
-
-    .splash-area{
-
-        width:300px;
-        height:300px;
-
-        margin:0;
-    }
-
-
-    .yellow-splash{
-
-        width:300px;
-        height:300px;
-    }
-
-
-    .title{
-
-        font-size:54px;
-
-        margin:0 0 8px;
-    }
-
-
-    .speaker-button{
-
-        width:58px;
-        height:58px;
-
-        font-size:28px;
-    }
-
-
-    .instruction{
-
-        font-size:24px;
-
-        margin:18px 0 28px;
-    }
-
-
-    .objects{
-
-        gap:45px;
-
-        justify-content:center;
-    }
-
-
-    .object-card{
-
-        width:200px;
-        height:220px;
-    }
-
-
-    .object-card img{
-
-        width:160px;
-        height:160px;
-    }
-
-
-    .object-name{
-
-        font-size:21px;
-    }
-
-
-    .pencil{
-
-        width:300px;
-        height:300px;
-
-        left:5px;
-        top:720px;
-
-        z-index:15;
-    }
-
-
-    .message{
-
-        font-size:22px;
-
-        min-height:38px;
-    }
-
-
-    .next-button{
-
-        width:170px;
-        height:64px;
-
-        margin:25px 0 0;
-
-        font-size:23px;
-
-        background:#e4f2ff;
-
-        color:#55718b;
-    }
-
-}
-/* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-   بدون تغيير التصميم أو القياسات
-===================================================== */
-
-@media (min-width: 768px) {
-
-    html,
-    body {
-        overflow: hidden;
-    }
-
-}
 </style>
 
 </head>
 
 
 <body>
+
+
+<!-- =========================================================
+     الصفحة
+========================================================= -->
+
+<main class="page">
 
 
 <!-- =========================================================
@@ -1037,8 +773,6 @@ body{
 <!-- =========================================================
      محتوى الصفحة
 ========================================================= -->
-
-<main class="page">
 
 <div class="content">
 
@@ -1236,6 +970,58 @@ body{
 
 <script>
 
+/* =========================================================
+   تحجيم الصفحة بالكامل
+========================================================= */
+
+const baseWidth = 1024;
+const baseHeight = 1366;
+
+function resizePage(){
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    document.body.style.setProperty(
+        "--page-scale",
+        scale
+    );
+}
+
+resizePage();
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =========================================================
    فتح وإغلاق القائمة
@@ -1395,10 +1181,6 @@ function playObject(
     text
 ){
 
-    /*
-       إزالة التحديد من جميع البطاقات
-    */
-
     document
         .querySelectorAll(
             ".object-card"
@@ -1414,18 +1196,10 @@ function playObject(
         );
 
 
-    /*
-       تحديد البطاقة الحالية
-    */
-
     element.classList.add(
         "playing"
     );
 
-
-    /*
-       إظهار الجملة
-    */
 
     const message =
         document.getElementById(
@@ -1442,16 +1216,8 @@ function playObject(
     );
 
 
-    /*
-       نطق الجملة
-    */
-
     speak(text);
 
-
-    /*
-       إزالة التحديد بعد ثانية
-    */
 
     setTimeout(
         function(){
@@ -1474,34 +1240,16 @@ function playObject(
 
 function goNext(){
 
-    /*
-       الأصفر هو آخر لون في المرحلة الأولى.
-
-       لذلك نسجل أن مرحلة
-       "تعلم الألوان" اكتملت.
-    */
-
     localStorage.setItem(
         "colorsStage1Completed",
         "true"
     );
 
 
-    /*
-       ننتقل إلى شاشة الاحتفال.
-
-       شاشة الاحتفال ستحتوي على:
-       🎉 أحسنت!
-       لقد أنهيت مرحلة تعلم الألوان!
-       🚗🎈 سيارات البالونات
-       ✨ اللمعات
-    */
-
     window.location.href =
         "yellow-complete.html";
 
 }
-
 
 </script>
 

@@ -29,7 +29,8 @@ body {
     margin: 0;
     padding: 0;
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 body {
@@ -53,7 +54,39 @@ body {
 
     background-attachment: fixed;
 
-    overflow-x: hidden;
+    overflow: hidden;
+}
+
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page {
+
+    position: absolute;
+
+    width: 1024px;
+
+    height: 1366px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%)
+        scale(var(--page-scale,1));
+
+    transform-origin:
+        center center;
+
+    overflow: hidden;
+
+    padding:
+        105px 20px 120px;
+
+    z-index: 5;
 }
 
 
@@ -63,7 +96,7 @@ body {
 
 .cloud {
 
-    position: fixed;
+    position: absolute;
 
     font-size: 85px;
 
@@ -102,7 +135,7 @@ body {
 
 .star {
 
-    position: fixed;
+    position: absolute;
 
     font-size: 25px;
 
@@ -152,31 +185,12 @@ body {
 
 
 /* =====================================================
-   PAGE
-===================================================== */
-
-.page {
-
-    width: 100%;
-
-    min-height: 100vh;
-
-    padding:
-        85px 20px 120px;
-
-    position: relative;
-
-    z-index: 5;
-}
-
-
-/* =====================================================
    PREVIOUS BUTTON
 ===================================================== */
 
 .previous-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
     left: 35px;
@@ -224,7 +238,7 @@ body {
 
 .menu-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
     right: 35px;
@@ -274,7 +288,7 @@ body {
 
 .side-menu {
 
-    position: fixed;
+    position: absolute;
 
     top: 115px;
     right: 35px;
@@ -360,8 +374,7 @@ body {
 
 .content {
 
-    width:
-        min(900px,95vw);
+    width: 900px;
 
     margin: 0 auto;
 
@@ -374,29 +387,6 @@ body {
     position: relative;
 
     z-index: 10;
-}
-
-
-/* =====================================================
-   TITLE
-===================================================== */
-
-.title {
-
-    margin:
-        20px 0 8px;
-
-    font-size: 42px;
-
-    font-weight: 900;
-
-    color: #555;
-
-    text-align: center;
-
-    text-shadow:
-        0 3px 5px
-        rgba(255,255,255,.95);
 }
 
 
@@ -441,8 +431,10 @@ body {
 
 .question {
 
-    margin-top:
-       300px;
+    margin:
+        300px 0 0;
+
+    padding: 0;
 
     text-align: center;
 
@@ -451,7 +443,6 @@ body {
     font-weight: 900;
 
     color: #555;
-	padding-top;300px;
 }
 
 
@@ -462,8 +453,6 @@ body {
 .animation-area {
 
     width: 650px;
-
-    max-width: 95vw;
 
     height: 420px;
 
@@ -605,8 +594,6 @@ body {
 
     width: 650px;
 
-    max-width: 95vw;
-
     margin:
         0 auto;
 
@@ -747,8 +734,6 @@ body {
 
     width: 620px;
 
-    max-width: 95vw;
-
     min-height: 65px;
 
     margin:
@@ -798,8 +783,6 @@ body {
 .feedback {
 
     width: 620px;
-
-    max-width: 95vw;
 
     min-height: 65px;
 
@@ -878,7 +861,7 @@ body {
 
 .next-button {
 
-    position: fixed;
+    position: absolute;
 
     right: 35px;
 
@@ -978,8 +961,6 @@ body {
 
     width: 650px;
 
-    max-width: 94vw;
-
     margin-top: 50px;
 
     padding: 35px 25px;
@@ -1054,12 +1035,13 @@ body {
 
 #carCelebration {
 
-    position: fixed;
+    position: absolute;
 
-    inset: 0;
+    left: 0;
+    top: 0;
 
-    width: 100%;
-    height: 100%;
+    width: 1024px;
+    height: 1366px;
 
     pointer-events: none;
 
@@ -1334,152 +1316,8 @@ body {
 
 
 /* =====================================================
-   IPAD
+   PAGE SCALE
 ===================================================== */
-
-@media (min-width:768px) {
-
-    .page {
-
-        min-height: 1366px;
-
-        padding-top: 105px;
-
-        padding-bottom: 120px;
-    }
-
-    
-
-}
-
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width:767px) {
-
-    .page {
-
-        padding:
-            90px 10px 110px;
-    }
-
-    .previous-button {
-
-        top: 20px;
-        left: 20px;
-
-        width: 125px;
-        height: 52px;
-
-        font-size: 18px;
-    }
-
-    .menu-button {
-
-        top: 20px;
-        right: 20px;
-
-        width: 55px;
-        height: 55px;
-
-        font-size: 27px;
-    }
-
-    .side-menu {
-
-        top: 90px;
-        right: 20px;
-
-        width: 220px;
-    }
-
-    
-
-    .question {
-
-        font-size: 23px;
-
-        margin-top: 650px;
-		padding-top:300px;
-    }
-
-    .animation-area {
-
-        height: 330px;
-    }
-
-    .child-svg {
-
-        width: 310px;
-        height: 310px;
-    }
-
-    .happy-scene {
-
-        width: 310px;
-        height: 310px;
-        font-size: 120px;
-    }
-
-    .answers {
-
-        grid-template-columns:
-            1fr;
-
-        gap: 10px;
-    }
-
-    .answer-button {
-
-        min-height: 60px;
-
-        font-size: 19px;
-    }
-
-    .hint-button {
-
-        width: 210px;
-
-        height: 56px;
-
-        font-size: 19px;
-    }
-
-    .hint-box,
-    .feedback {
-
-        font-size: 18px;
-    }
-
-    .progress-box {
-
-        font-size: 16px;
-    }
-
-    .next-button {
-
-        right: 20px;
-
-        bottom: 20px;
-
-        width: 190px;
-
-        height: 58px;
-
-        font-size: 19px;
-    }
-
-    .final-message h2 {
-        font-size: 26px;
-    }
-
-    .final-stars {
-        font-size: 38px;
-    }
-
-}
 
 </style>
 
@@ -1487,6 +1325,9 @@ body {
 
 
 <body>
+
+
+<main class="page" id="page">
 
 
 <!-- =====================================================
@@ -1539,8 +1380,6 @@ id="sideMenu">
      MAIN
 ===================================================== -->
 
-<main class="page">
-
 <div class="content">
 
 
@@ -1576,16 +1415,12 @@ class="animation-area"
 id="animationArea">
 
 
-<!-- SVG FIRST QUESTION -->
-
 <svg
 class="child-svg"
 id="sadChild"
 viewBox="0 0 400 400"
 xmlns="http://www.w3.org/2000/svg">
 
-
-<!-- UMBRELLA -->
 
 <g class="umbrella-group">
 
@@ -1667,8 +1502,6 @@ stroke-linecap="round"/>
 </g>
 
 
-<!-- BODY -->
-
 <path
 d="
 M145 270
@@ -1679,8 +1512,6 @@ L130 345
 Z"
 fill="#5b9bd5"/>
 
-
-<!-- SHIRT -->
 
 <path
 d="
@@ -1693,16 +1524,12 @@ Z"
 fill="#ffffff"/>
 
 
-<!-- HEAD -->
-
 <circle
 cx="200"
 cy="205"
 r="48"
 fill="#f5c9a8"/>
 
-
-<!-- HAIR -->
 
 <path
 d="
@@ -1719,8 +1546,6 @@ Z"
 fill="#4b382f"/>
 
 
-<!-- EARS -->
-
 <circle
 cx="153"
 cy="207"
@@ -1734,12 +1559,7 @@ r="9"
 fill="#f5c9a8"/>
 
 
-<!-- SAD FACE -->
-
 <g class="sad-face">
-
-
-<!-- EYES -->
 
 <ellipse
 cx="177"
@@ -1756,8 +1576,6 @@ ry="13"
 fill="#444"/>
 
 
-<!-- EYE LIGHT -->
-
 <circle
 cx="180"
 cy="200"
@@ -1770,8 +1588,6 @@ cy="200"
 r="2.5"
 fill="#ffffff"/>
 
-
-<!-- SAD EYEBROWS -->
 
 <path
 d="
@@ -1792,8 +1608,6 @@ stroke-width="5"
 stroke-linecap="round"/>
 
 
-<!-- SAD MOUTH -->
-
 <path
 d="
 M183 233
@@ -1803,8 +1617,6 @@ stroke="#555"
 stroke-width="5"
 stroke-linecap="round"/>
 
-
-<!-- TEAR LEFT -->
 
 <path
 d="
@@ -1825,8 +1637,6 @@ repeatCount="indefinite"/>
 
 </path>
 
-
-<!-- TEAR RIGHT -->
 
 <path
 d="
@@ -1850,8 +1660,6 @@ repeatCount="indefinite"/>
 </g>
 
 
-<!-- ARMS -->
-
 <path
 d="
 M145 275
@@ -1871,8 +1679,6 @@ stroke-width="18"
 stroke-linecap="round"/>
 
 
-<!-- LEGS -->
-
 <rect
 x="155"
 y="335"
@@ -1889,8 +1695,6 @@ height="45"
 rx="15"
 fill="#385c8a"/>
 
-
-<!-- SHOES -->
 
 <ellipse
 cx="168"
@@ -1918,7 +1722,6 @@ fill="#555"/>
 <div
 class="answers"
 id="answers">
-
 
 <button
 class="answer-button"
@@ -2038,16 +1841,17 @@ id="finalStars">
 
 </div>
 
-</main>
-
 
 <!-- =====================================================
-     SPACE CELEBRATION CONTAINER
+     SPACE CELEBRATION
 ===================================================== -->
 
 <div
 id="carCelebration">
 </div>
+
+
+</main>
 
 
 <script>
@@ -2116,6 +1920,63 @@ let totalResponseTime = 0;
 let hintsUsed = 0;
 
 let currentHint = 0;
+
+
+/* =====================================================
+   PAGE SCALE
+===================================================== */
+
+const page =
+    document.getElementById("page");
+
+function resizePage() {
+
+    const baseWidth = 1024;
+
+    const baseHeight = 1366;
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+}
+
+resizePage();
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+window.addEventListener(
+    "orientationchange",
+    function() {
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
 
 
 /* =====================================================
@@ -2645,10 +2506,6 @@ function chooseAnswer(answer) {
         );
 
 
-    /* =================================================
-       WRONG
-    ================================================= */
-
     if (
         answer !==
         question.correctAnswer
@@ -2712,10 +2569,6 @@ function chooseAnswer(answer) {
         return;
     }
 
-
-    /* =================================================
-       CORRECT
-    ================================================= */
 
     answered = true;
 
@@ -2787,10 +2640,6 @@ function chooseAnswer(answer) {
     );
 
 
-    /* =================================================
-       🚀 SPACE DECORATION
-    ================================================= */
-
     createCarBalloons();
 
 }
@@ -2850,7 +2699,7 @@ function showHint() {
                 "hintButton"
             )
             .style.display =
-            "none";
+        "none";
     }
 
 }

@@ -40,6 +40,7 @@ body{
     font-family:"Tahoma","Arial",sans-serif;
 
     direction:rtl;
+
 }
 
 body{
@@ -53,14 +54,24 @@ body{
 
 /* =====================================================
    PAGE
+   التصميم الأساسي = 1024 × 1366
 ===================================================== */
 
 .page{
 
-    position:relative;
+    position:absolute;
 
-    width:100vw;
-    height:100vh;
+    width:1024px;
+    height:1366px;
+
+    left:50%;
+    top:50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin:center center;
 
     overflow:hidden;
 
@@ -69,12 +80,6 @@ body{
     background-position:center;
 
     background-repeat:no-repeat;
-
-    /*
-       مهم:
-       الصفحة تكون مخفية مؤقتًا حتى نعرف الثيم
-       الصحيح من قاعدة البيانات.
-    */
 
     visibility:hidden;
 
@@ -110,6 +115,7 @@ body{
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     box-shadow:
@@ -121,11 +127,13 @@ body{
     z-index:1000;
 
     transition:.2s ease;
+
 }
 
 .previous-button:active{
 
     transform:scale(.92);
+
 }
 
 
@@ -164,11 +172,13 @@ body{
     z-index:1000;
 
     transition:.2s ease;
+
 }
 
 .menu-button:active{
 
     transform:scale(.92);
+
 }
 
 
@@ -198,6 +208,7 @@ body{
     display:none;
 
     z-index:1100;
+
 }
 
 .side-menu.show{
@@ -208,6 +219,7 @@ body{
         menuIn
         .22s
         ease;
+
 }
 
 @keyframes menuIn{
@@ -219,6 +231,7 @@ body{
         transform:
             translateY(-8px)
             scale(.96);
+
     }
 
     to{
@@ -228,7 +241,9 @@ body{
         transform:
             translateY(0)
             scale(1);
+
     }
+
 }
 
 .side-menu button{
@@ -254,11 +269,13 @@ body{
     font-weight:800;
 
     cursor:pointer;
+
 }
 
 .side-menu button:last-child{
 
     margin-bottom:0;
+
 }
 
 
@@ -278,6 +295,7 @@ body{
     z-index:20;
 
     pointer-events:none;
+
 }
 
 
@@ -307,12 +325,8 @@ body{
     direction:rtl;
 
     pointer-events:auto;
+
 }
-
-
-/* =====================================================
-   TITLE
-===================================================== */
 
 .title{
 
@@ -327,6 +341,7 @@ body{
     text-shadow:
         0 4px 8px
         rgba(40,80,110,.10);
+
 }
 
 
@@ -363,6 +378,7 @@ body{
         rgba(55,104,140,.18);
 
     transition:.2s ease;
+
 }
 
 .sound-button:active{
@@ -370,6 +386,7 @@ body{
     transform:scale(.88);
 
     background:#cce8fb;
+
 }
 
 .sound-button.speaking{
@@ -379,6 +396,7 @@ body{
         .7s
         ease-in-out
         infinite;
+
 }
 
 @keyframes speakerPulse{
@@ -387,12 +405,15 @@ body{
     100%{
 
         transform:scale(1);
+
     }
 
     50%{
 
         transform:scale(1.12);
+
     }
+
 }
 
 
@@ -422,8 +443,8 @@ body{
     justify-content:center;
 
     pointer-events:auto;
-}
 
+}
 
 .shape-image{
 
@@ -446,6 +467,7 @@ body{
         infinite;
 
     transition:.25s ease;
+
 }
 
 
@@ -462,6 +484,7 @@ body{
             translateY(0)
             scale(1)
             rotate(-2deg);
+
     }
 
     50%{
@@ -470,7 +493,9 @@ body{
             translateY(-12px)
             scale(1.035)
             rotate(2deg);
+
     }
+
 }
 
 
@@ -499,6 +524,7 @@ body{
     pointer-events:none;
 
     z-index:30;
+
 }
 
 
@@ -527,6 +553,7 @@ body{
     animation:none;
 
     transform:none;
+
 }
 
 
@@ -569,257 +596,21 @@ body{
     z-index:500;
 
     transition:.2s ease;
+
 }
 
 .next-button:active{
 
     transform:scale(.94);
-}
-
-
-/* =====================================================
-   PORTRAIT IPAD
-===================================================== */
-
-@media (orientation:portrait){
-
-    .previous-button{
-
-        top:16px;
-
-        left:16px;
-
-        width:52px;
-
-        height:48px;
-
-        font-size:27px;
-    }
-
-    .menu-button{
-
-        top:16px;
-
-        right:16px;
-
-        width:52px;
-
-        height:48px;
-    }
-
-
-    .title-row{
-
-        top:68px;
-    }
-
-    .title{
-
-        font-size:38px;
-    }
-
-    .sound-button{
-
-        width:54px;
-
-        height:54px;
-
-        font-size:27px;
-    }
-
-
-    .shape-area{
-
-        top:145px;
-
-        width:320px;
-
-        height:320px;
-    }
-
-    .shape-image{
-
-        width:320px;
-
-        height:320px;
-    }
-
-
-    .child-area{
-
-        left:-85px;
-
-        bottom:-95px;
-
-        width:1000px;
-
-        height:1000px;
-    }
-
-    .child{
-
-        width:1000px;
-
-        height:1000px;
-
-        animation:none;
-    }
 
 }
 
 
 /* =====================================================
-   SMALL HEIGHT
+   لا توجد Media Queries لتغيير أحجام التصميم
+   لأن الصفحة كلها يتم تصغيرها كنسبة واحدة
 ===================================================== */
 
-@media (max-height:900px){
-
-    .title-row{
-
-        top:60px;
-    }
-
-    .title{
-
-        font-size:32px;
-    }
-
-    .sound-button{
-
-        width:50px;
-
-        height:50px;
-
-        font-size:25px;
-    }
-
-    .shape-area{
-
-        top:125px;
-
-        width:270px;
-
-        height:270px;
-    }
-
-    .shape-image{
-
-        width:270px;
-
-        height:270px;
-    }
-
-    .child-area{
-
-        left:-90px;
-
-        bottom:-110px;
-
-        width:1000px;
-
-        height:1000px;
-    }
-
-    .child{
-
-        width:1000px;
-
-        height:1000px;
-
-        animation:none;
-    }
-
-}
-
-
-/* =====================================================
-   VERY SMALL HEIGHT
-===================================================== */
-
-@media (max-height:750px){
-
-    .title-row{
-
-        top:52px;
-    }
-
-    .title{
-
-        font-size:27px;
-    }
-
-    .sound-button{
-
-        width:46px;
-
-        height:46px;
-
-        font-size:23px;
-    }
-
-    .shape-area{
-
-        top:105px;
-
-        width:220px;
-
-        height:220px;
-    }
-
-    .shape-image{
-
-        width:220px;
-
-        height:220px;
-    }
-
-
-    .child-area{
-
-        left:-100px;
-
-        bottom:-120px;
-
-        width:1000px;
-
-        height:1000px;
-    }
-
-    .child{
-
-        width:1000px;
-
-        height:1000px;
-
-        animation:none;
-    }
-
-
-    .next-button{
-
-        height:48px;
-
-        min-width:120px;
-
-        font-size:17px;
-
-        bottom:13px;
-    }
-
-}
-/* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-   بدون تغيير التصميم أو القياسات
-===================================================== */
-
-@media (min-width: 768px) {
-
-    html,
-    body {
-        overflow: hidden;
-    }
-
-}
 </style>
 
 </head>
@@ -925,7 +716,7 @@ body{
         <img
             id="shapeImage"
             class="shape-image"
-            src="images/Adaa.png"
+            src="images/adaa.png"
             alt="شكل الدائرة">
 
     </div>
@@ -971,12 +762,8 @@ const SUPABASE_URL =
     "https://ciwrwmutcrarwtounelg.supabase.co";
 
 
-/*
-   خلي نفس Publishable Key الموجود عندك.
-*/
-
 const SUPABASE_ANON_KEY =
-    "sb_publishable_m6m2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
+    "sb_publishable_m6n2gJXfPnu_Ns6LV-jxhg_cHa00bj6";
 
 
 const supabaseClient =
@@ -1024,6 +811,104 @@ const previousButton =
     document.getElementById(
         "previousButton"
     );
+
+
+/* =====================================================
+   RESPONSIVE PAGE SCALE
+   التصميم الأساسي 1024 × 1366
+===================================================== */
+
+function resizePage(){
+
+    const baseWidth = 1024;
+
+    const baseHeight = 1366;
+
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+
+    /*
+       نستخدم أصغر نسبة حتى تظهر
+       الصفحة كاملة بدون قص.
+    */
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+
+    page.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+
+    console.log(
+        "Rafiq Page Size:",
+        screenWidth,
+        "x",
+        screenHeight
+    );
+
+
+    console.log(
+        "Rafiq Page Scale:",
+        scale
+    );
+
+}
+
+
+/* =====================================================
+   INITIAL SCALE
+===================================================== */
+
+resizePage();
+
+
+/* =====================================================
+   RESIZE
+===================================================== */
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+/* =====================================================
+   ORIENTATION CHANGE
+===================================================== */
+
+window.addEventListener(
+    "orientationchange",
+    function(){
+
+        setTimeout(
+            function(){
+
+                resizePage();
+
+            },
+            300
+        );
+
+    }
+);
 
 
 /* =====================================================
@@ -1179,7 +1064,7 @@ function applyPersonalization(){
 
 
 /* =====================================================
-   WAIT FOR IMAGES
+   WAIT FOR IMAGE
 ===================================================== */
 
 function waitForImage(src){
@@ -1190,6 +1075,7 @@ function waitForImage(src){
             const img =
                 new Image();
 
+
             img.onload =
                 function(){
 
@@ -1197,12 +1083,19 @@ function waitForImage(src){
 
                 };
 
+
             img.onerror =
                 function(){
+
+                    console.warn(
+                        "Image failed:",
+                        src
+                    );
 
                     resolve();
 
                 };
+
 
             img.src =
                 src;
@@ -1214,12 +1107,13 @@ function waitForImage(src){
 
 
 /* =====================================================
-   SHOW PAGE AFTER THEME IS READY
+   SHOW PAGE AFTER THEME
 ===================================================== */
 
 async function showPageAfterTheme(){
 
     let backgroundSrc;
+
     let childSrc;
 
 
@@ -1263,8 +1157,14 @@ async function showPageAfterTheme(){
 
 
     /*
-       إظهار الصفحة فقط بعد
-       تحديد الثيم وتحميل الصور.
+       إعادة حساب الحجم قبل إظهار الصفحة
+    */
+
+    resizePage();
+
+
+    /*
+       إظهار الصفحة بعد تجهيز الثيم
     */
 
     page.style.visibility =
@@ -1301,6 +1201,7 @@ async function loadChildInterest(){
         await showPageAfterTheme();
 
         return;
+
     }
 
 
@@ -1339,6 +1240,7 @@ async function loadChildInterest(){
             await showPageAfterTheme();
 
             return;
+
         }
 
 
@@ -1354,6 +1256,7 @@ async function loadChildInterest(){
             await showPageAfterTheme();
 
             return;
+
         }
 
 
@@ -1419,13 +1322,10 @@ async function loadChildInterest(){
         }
 
 
-        /*
-           الآن فقط نجهز الصفحة
-        */
-
         await showPageAfterTheme();
 
     }
+
     catch(error){
 
         console.error(
@@ -1477,11 +1377,14 @@ function speak(text){
     utterance.lang =
         "ar-SA";
 
+
     utterance.rate =
         0.82;
 
+
     utterance.pitch =
         1.05;
+
 
     utterance.volume =
         1;
@@ -1586,6 +1489,7 @@ document.addEventListener(
             firstInteraction =
                 true;
 
+
             setTimeout(
                 function(){
 
@@ -1626,7 +1530,7 @@ nextButton.addEventListener(
 
 const preloadImages = [
 
-    "images/Adaa.png",
+    "images/adaa.png",
 
     "images/ad3.png",
 

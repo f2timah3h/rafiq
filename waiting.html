@@ -60,6 +60,8 @@ body {
     background-attachment: fixed;
 
     visibility: hidden;
+
+    position: relative;
 }
 
 /* =====================================================
@@ -74,14 +76,24 @@ body.theme-ready {
 
 /* =====================================================
    الصفحة
+   قياس ثابت 1024 × 1366
 ===================================================== */
 
 .page {
 
-    position: relative;
+    position: absolute;
 
-    width: 100%;
-    height: 100vh;
+    width: 1024px;
+    height: 1366px;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin: center center;
 
     overflow: hidden;
 }
@@ -129,7 +141,7 @@ body.theme-ready {
 
 .previous-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 18px;
     left: 18px;
@@ -172,7 +184,7 @@ body.theme-ready {
 
 .menu-wrapper {
 
-    position: fixed;
+    position: absolute;
 
     top: 18px;
     right: 18px;
@@ -279,8 +291,8 @@ body.theme-ready {
 
     z-index: 10;
 
-    width: 100%;
-    height: 100%;
+    width: 1024px;
+    height: 1366px;
 
     padding:
         85px 25px 20px;
@@ -365,9 +377,11 @@ body.theme-ready {
 
 .video-container {
 
-    width: min(900px, 90vw);
+    width: 900px;
 
-    max-height: 55vh;
+    height: auto;
+
+    max-height: 750px;
 
     border-radius: 28px;
 
@@ -383,6 +397,8 @@ body.theme-ready {
 
     transform:
         translateY(-150px);
+
+    flex-shrink: 0;
 }
 
 .story-video {
@@ -391,7 +407,9 @@ body.theme-ready {
 
     width: 100%;
 
-    max-height: 55vh;
+    height: auto;
+
+    max-height: 742px;
 
     object-fit: contain;
 
@@ -404,7 +422,7 @@ body.theme-ready {
 
 .story-text {
 
-    width: 50%;
+    width: 500px;
 
     margin-top: 14px;
 
@@ -426,6 +444,8 @@ body.theme-ready {
 
     transform:
         translateY(75px);
+
+    flex-shrink: 0;
 }
 
 /* =====================================================
@@ -434,7 +454,7 @@ body.theme-ready {
 
 .question-box {
 
-    width: min(950px, 92vw);
+    width: 950px;
 
     padding: 22px;
 
@@ -605,7 +625,7 @@ body.theme-ready {
 
 .feedback {
 
-    width: min(850px, 90vw);
+    width: 850px;
 
     margin-top: 12px;
 
@@ -647,7 +667,7 @@ body.theme-ready {
 
 .final-message {
 
-    width: min(850px, 90vw);
+    width: 850px;
 
     padding: 35px 30px;
 
@@ -738,126 +758,6 @@ body.theme-ready {
 .hidden {
 
     display: none !important;
-}
-
-/* =====================================================
-   الآيباد بالطول
-===================================================== */
-
-@media (orientation: portrait) {
-
-    .content {
-
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-
-    .video-container {
-
-        width: 90vw;
-
-        max-height: 48vh;
-
-        transform:
-            translateY(-100px);
-    }
-
-    .story-video {
-
-        max-height: 48vh;
-    }
-
-    .story-text {
-
-        font-size: 21px;
-
-        padding: 12px 18px;
-
-        transform:
-            translateY(-75px);
-    }
-
-    .question {
-
-        font-size: 24px;
-    }
-
-    .answer-button {
-
-        min-height: 92px;
-
-        font-size: 18px;
-    }
-}
-
-/* =====================================================
-   الشاشات الصغيرة
-===================================================== */
-
-@media (max-width: 700px) {
-
-    .page-title {
-
-        font-size: 27px;
-    }
-
-    .question-row {
-
-        gap: 9px;
-    }
-
-    .mic-button {
-
-        width: 58px;
-        height: 58px;
-
-        font-size: 27px;
-    }
-
-    .answers {
-
-        grid-template-columns: 1fr;
-
-        gap: 8px;
-    }
-
-    .answer-button {
-
-        min-height: 65px;
-    }
-
-    .story-text {
-
-        font-size: 19px;
-
-        transform:
-            translateY(-75px);
-    }
-
-    .question {
-
-        font-size: 21px;
-    }
-
-    .video-container {
-
-        transform:
-            translateY(-100px);
-    }
-
-}
-/* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-   بدون تغيير التصميم أو القياسات
-===================================================== */
-
-@media (min-width: 768px) {
-
-    html,
-    body {
-        overflow: hidden;
-    }
-
 }
 
 </style>
@@ -975,6 +875,60 @@ body.theme-ready {
 <script>
 
 /* =====================================================
+   قياس الصفحة
+   1024 × 1366
+===================================================== */
+
+const baseWidth = 1024;
+const baseHeight = 1366;
+
+function resizePage() {
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    document.body.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+resizePage();
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+window.addEventListener(
+    "orientationchange",
+    function() {
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
+/* =====================================================
    SUPABASE
 ===================================================== */
 
@@ -1090,7 +1044,7 @@ async function loadChildInterest() {
     if (!childId) {
 
         console.warn(
-            "rafiqChildId غير موجود"
+            "raf iqChildId غير موجود"
         );
 
         childTheme =
@@ -1369,7 +1323,7 @@ const steps = [
     {
         type: "video",
 
-        video: "videos/v1.MP4",
+        video: "videos/v10.MP4",
 
         text:
             "قررت هذه العائلة الذهاب إلى مطعمها المفضّل."
@@ -1641,63 +1595,114 @@ function updatePreviousButton() {
 }
 
 /* =====================================================
+   تشغيل صوت الفيديو بعد تفاعل المستخدم
+===================================================== */
+
+let currentVideo = null;
+
+let videoInteractionStarted = false;
+
+function enableVideoSound() {
+
+    if (
+        !currentVideo ||
+        videoInteractionStarted
+    ) {
+
+        return;
+
+    }
+
+    videoInteractionStarted = true;
+
+    currentVideo.muted = false;
+
+    currentVideo.volume = 1;
+
+    const playPromise =
+        currentVideo.play();
+
+    if (
+        playPromise &&
+        typeof playPromise.catch === "function"
+    ) {
+
+        playPromise.catch(
+            function() {
+
+                currentVideo.muted =
+                    true;
+
+            }
+        );
+
+    }
+
+}
+
+/* =====================================================
    تشغيل الفيديو
 ===================================================== */
 
 function startVideo(video) {
 
-    /*
-       محاولة التشغيل التلقائي
-       يبدأ مكتومًا حتى يسمح iPad/Safari
-       بالتشغيل التلقائي
-    */
+    currentVideo =
+        video;
 
-    video.muted = true;
+    video.muted =
+        true;
 
-    video.play()
-        .then(
-            function() {
+    video.volume =
+        1;
 
-                /*
-                   الفيديو بدأ بالفعل.
-                   نحاول تشغيل الصوت بعد ذلك.
-                */
+    video.autoplay =
+        true;
 
-                setTimeout(
-                    function() {
+    video.playsInline =
+        true;
 
-                        video.muted = false;
+    video.setAttribute(
+        "playsinline",
+        ""
+    );
 
-                        video.play()
-                            .catch(
-                                function() {
+    video.setAttribute(
+        "webkit-playsinline",
+        ""
+    );
 
-                                    /*
-                                       إذا منع Safari الصوت،
-                                       يبقى الفيديو شغالًا Loop.
-                                    */
+    video.setAttribute(
+        "muted",
+        ""
+    );
 
-                                }
-                            );
+    video.loop =
+        true;
 
-                    },
-                    100
+    video.preload =
+        "auto";
+
+    const playPromise =
+        video.play();
+
+    if (
+        playPromise &&
+        typeof playPromise.catch === "function"
+    ) {
+
+        playPromise.catch(
+            function(error) {
+
+                console.warn(
+                    "تعذر تشغيل الفيديو تلقائيًا:",
+                    error
                 );
 
-            }
-        )
-        .catch(
-            function() {
-
-                /*
-                   إذا منع المتصفح التشغيل،
-                   أول لمسة من الطفل تشغله.
-                */
-
-                const startAfterTouch =
+                const startAfterInteraction =
                     function() {
 
-                        video.muted = false;
+                        video.muted =
+                            true;
 
                         video.play()
                             .catch(
@@ -1708,7 +1713,7 @@ function startVideo(video) {
 
                 document.addEventListener(
                     "pointerdown",
-                    startAfterTouch,
+                    startAfterInteraction,
                     {
                         once: true
                     }
@@ -1716,6 +1721,17 @@ function startVideo(video) {
 
             }
         );
+
+    }
+
+    video.addEventListener(
+        "pointerdown",
+        function() {
+
+            enableVideoSound();
+
+        }
+    );
 
 }
 
@@ -1727,14 +1743,17 @@ function renderStep() {
 
     stopSpeech();
 
-    selectedAnswer = false;
+    selectedAnswer =
+        false;
+
+    currentVideo =
+        null;
+
+    videoInteractionStarted =
+        false;
 
     const step =
         steps[currentStep];
-
-    /* =================================================
-       تغيير الخلفية حسب نوع الصفحة
-    ================================================= */
 
     if (
         step.type === "question"
@@ -1767,7 +1786,8 @@ function renderStep() {
             steps.length
         );
 
-    storyArea.innerHTML = "";
+    storyArea.innerHTML =
+        "";
 
     /* =================================================
        فيديو
@@ -1799,22 +1819,19 @@ function renderStep() {
         video.autoplay =
             true;
 
-        /*
-           مهم للـ iPad:
-           يبدأ مكتومًا للسماح بالـ autoplay
-        */
         video.muted =
             true;
 
-        /*
-           Loop دائم
-        */
         video.loop =
             true;
 
-        
         video.playsInline =
             true;
+
+        video.setAttribute(
+            "playsinline",
+            ""
+        );
 
         video.setAttribute(
             "webkit-playsinline",
@@ -1853,15 +1870,38 @@ function renderStep() {
 
         }
 
-        /*
-           تحميل الفيديو ثم تشغيله مباشرة
-        */
-
         video.load();
 
-        startVideo(
-            video
+        video.addEventListener(
+            "loadeddata",
+            function() {
+
+                startVideo(
+                    video
+                );
+
+            },
+            {
+                once: true
+            }
         );
+
+        if (
+            video.readyState >= 2
+        ) {
+
+            startVideo(
+                video
+            );
+
+        }
+
+        nextButton.classList.remove(
+            "hidden"
+        );
+
+        nextButton.textContent =
+            "التالي ›";
 
     }
 
@@ -2090,22 +2130,32 @@ function renderStep() {
 
     }
 
-    if (
-        step.type === "video"
-    ) {
-
-        nextButton.classList.remove(
-            "hidden"
-        );
-
-        nextButton.textContent =
-            "التالي ›";
-
-    }
-
     updatePreviousButton();
 
 }
+
+/* =====================================================
+   تشغيل صوت الفيديو عند أول تفاعل
+===================================================== */
+
+document.addEventListener(
+    "pointerdown",
+    function() {
+
+        if (
+            currentVideo &&
+            !currentVideo.paused
+        ) {
+
+            enableVideoSound();
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
 
 /* =====================================================
    اختيار الإجابة

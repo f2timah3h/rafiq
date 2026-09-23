@@ -28,10 +28,14 @@ user-scalable=no">
 
 html,
 body {
+
     margin: 0;
     padding: 0;
+
     width: 100%;
-    min-height: 100%;
+    height: 100%;
+
+    overflow: hidden;
 }
 
 body {
@@ -44,14 +48,7 @@ body {
 
     color: #555;
 
-    overflow-x: hidden;
-
     background-color: #ffffff;
-
-    /*
-       لا نضع خلفية افتراضية ظاهرة هنا
-       حتى لا تظهر خلفية خاطئة قبل التخصيص
-    */
 
     background-size: cover;
 
@@ -59,16 +56,14 @@ body {
 
     background-repeat: no-repeat;
 
-    background-attachment: fixed;
-
     transition:
         background-image .4s ease;
 
-    /*
-       نخفي الصفحة مؤقتًا إلى أن يتم
-       تحميل الخلفية الصحيحة
-    */
     visibility: hidden;
+
+    position: relative;
+
+    touch-action: manipulation;
 }
 
 
@@ -84,12 +79,44 @@ body.theme-ready {
 
 
 /* =====================================================
+   FIXED PAGE
+   1024 × 1366
+===================================================== */
+
+.page {
+
+    position: absolute;
+
+    width: 1024px;
+
+    height: 1366px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(var(--page-scale, 1));
+
+    transform-origin: center center;
+
+    overflow: hidden;
+
+    z-index: 5;
+
+    padding:
+        115px 35px 180px;
+}
+
+
+/* =====================================================
    PREVIOUS BUTTON
 ===================================================== */
 
 .previous-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
 
@@ -146,7 +173,7 @@ body.theme-ready {
 
 .menu-button {
 
-    position: fixed;
+    position: absolute;
 
     top: 35px;
 
@@ -203,7 +230,7 @@ body.theme-ready {
 
 .side-menu {
 
-    position: fixed;
+    position: absolute;
 
     top: 115px;
 
@@ -294,25 +321,6 @@ body.theme-ready {
 
 
 /* =====================================================
-   PAGE
-===================================================== */
-
-.page {
-
-    position: relative;
-
-    z-index: 5;
-
-    width: 100%;
-
-    min-height: 1366px;
-
-    padding:
-        115px 35px 180px;
-}
-
-
-/* =====================================================
    CONTENT
 ===================================================== */
 
@@ -320,9 +328,6 @@ body.theme-ready {
 
     width:
         900px;
-
-    max-width:
-        95vw;
 
     margin:
         0 auto;
@@ -401,9 +406,6 @@ body.theme-ready {
 
     width:
         850px;
-
-    max-width:
-        100%;
 
     display:
         grid;
@@ -725,271 +727,6 @@ body.theme-ready {
     }
 }
 
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 767px) {
-
-    .page {
-
-        min-height:
-            100vh;
-
-        padding:
-            90px 15px 100px;
-    }
-
-
-    .previous-button {
-
-        top:
-            20px;
-
-        left:
-            20px;
-
-        width:
-            125px;
-
-        height:
-            52px;
-
-        font-size:
-            18px;
-    }
-
-
-    .menu-button {
-
-        top:
-            20px;
-
-        right:
-            20px;
-
-        width:
-            55px;
-
-        height:
-            55px;
-
-        font-size:
-            27px;
-    }
-
-
-    .side-menu {
-
-        top:
-            90px;
-
-        right:
-            20px;
-
-        width:
-            220px;
-    }
-
-
-    .title {
-
-        font-size:
-            29px;
-
-        padding:
-            14px 22px;
-
-        margin-top:
-            10px;
-    }
-
-
-    .subtitle {
-
-        font-size:
-            17px;
-
-        margin-bottom:
-            25px;
-    }
-
-
-    .social-grid {
-
-        grid-template-columns:
-            1fr;
-
-        gap:
-            16px;
-    }
-
-
-    .social-card {
-
-        height:
-            220px;
-    }
-
-
-    .waiting-card {
-
-        grid-column:
-            auto;
-
-        width:
-            100%;
-    }
-
-
-    .card-title {
-
-        font-size:
-            23px;
-
-        top:
-            14px;
-    }
-
-
-    .card-image {
-
-        height:
-            155px;
-
-        width:
-            75%;
-    }
-
-
-    .card-arrow {
-
-        width:
-            43px;
-
-        height:
-            43px;
-
-        left:
-            14px;
-
-        bottom:
-            12px;
-
-        font-size:
-            22px;
-    }
-
-
-    .sound-icon {
-
-        width:
-            43px;
-
-        height:
-            43px;
-
-        right:
-            14px;
-
-        bottom:
-            12px;
-
-        font-size:
-            19px;
-    }
-
-}
-
-
-/* =====================================================
-   IPAD PORTRAIT
-===================================================== */
-
-@media
-(min-width: 768px)
-and (max-width: 1100px) {
-
-    .social-grid {
-
-        width:
-            850px;
-
-        max-width:
-            94vw;
-    }
-
-
-    .social-card {
-
-        height:
-            235px;
-    }
-
-}
-
-
-/* =====================================================
-   SMALL HEIGHT
-===================================================== */
-
-@media (max-height: 800px)
-and (min-width: 768px) {
-
-    .page {
-
-        padding-top:
-            95px;
-
-        padding-bottom:
-            50px;
-    }
-
-    .title {
-
-        font-size:
-            34px;
-
-        padding:
-            12px 35px;
-    }
-
-    .subtitle {
-
-        font-size:
-            18px;
-
-        margin-bottom:
-            20px;
-    }
-
-    .social-card {
-
-        height:
-            205px;
-    }
-
-    .card-image {
-
-        height:
-            145px;
-    }
-
-}
-/* =====================================================
-   IPAD - REMOVE SCROLL ONLY
-   بدون تغيير التصميم أو القياسات
-===================================================== */
-
-@media (min-width: 768px) {
-
-    html,
-    body {
-        overflow: hidden;
-    }
-
-}
 </style>
 
 </head>
@@ -1071,7 +808,7 @@ id="sideMenu">
     <p class="subtitle">
 
         هيا نتعلم كيف نتعامل مع الآخرين
-        في مواقفنا اليومية 
+        في مواقفنا اليومية
 
     </p>
 
@@ -1083,9 +820,7 @@ id="sideMenu">
     <div class="social-grid">
 
 
-        <!-- =============================================
-             1. الاعتذار
-        ============================================== -->
+        <!-- 1 -->
 
         <button
         class="social-card"
@@ -1112,9 +847,7 @@ id="sideMenu">
         </button>
 
 
-        <!-- =============================================
-             2. التحية والتعارف
-        ============================================== -->
+        <!-- 2 -->
 
         <button
         class="social-card"
@@ -1141,9 +874,7 @@ id="sideMenu">
         </button>
 
 
-        <!-- =============================================
-             3. طلب المساعدة
-        ============================================== -->
+        <!-- 3 -->
 
         <button
         class="social-card"
@@ -1170,9 +901,7 @@ id="sideMenu">
         </button>
 
 
-        <!-- =============================================
-             4. مساعدة الآخرين
-        ============================================== -->
+        <!-- 4 -->
 
         <button
         class="social-card"
@@ -1199,9 +928,7 @@ id="sideMenu">
         </button>
 
 
-        <!-- =============================================
-             5. المشاركة
-        ============================================== -->
+        <!-- 5 -->
 
         <button
         class="social-card"
@@ -1228,9 +955,7 @@ id="sideMenu">
         </button>
 
 
-        <!-- =============================================
-             6. الشكر
-        ============================================== -->
+        <!-- 6 -->
 
         <button
         class="social-card"
@@ -1257,9 +982,7 @@ id="sideMenu">
         </button>
 
 
-        <!-- =============================================
-             7. الانتظار
-        ============================================== -->
+        <!-- 7 -->
 
         <button
         class="social-card waiting-card"
@@ -1294,6 +1017,64 @@ id="sideMenu">
 
 
 <script>
+
+/* =====================================================
+   FIXED PAGE SCALE
+===================================================== */
+
+const baseWidth = 1024;
+const baseHeight = 1366;
+
+
+function resizePage() {
+
+    const screenWidth =
+        window.innerWidth;
+
+    const screenHeight =
+        window.innerHeight;
+
+    const scaleX =
+        screenWidth / baseWidth;
+
+    const scaleY =
+        screenHeight / baseHeight;
+
+    const scale =
+        Math.min(
+            scaleX,
+            scaleY
+        );
+
+    document.body.style.setProperty(
+        "--page-scale",
+        scale
+    );
+
+}
+
+
+resizePage();
+
+
+window.addEventListener(
+    "resize",
+    resizePage
+);
+
+
+window.addEventListener(
+    "orientationchange",
+    function() {
+
+        setTimeout(
+            resizePage,
+            300
+        );
+
+    }
+);
+
 
 /* =====================================================
    SUPABASE
@@ -1342,9 +1123,7 @@ function preloadBackground(
             image.onload =
                 function() {
 
-                    resolve(
-                        true
-                    );
+                    resolve(true);
 
                 };
 
@@ -1356,9 +1135,7 @@ function preloadBackground(
                         imagePath
                     );
 
-                    resolve(
-                        false
-                    );
+                    resolve(false);
 
                 };
 
@@ -1379,29 +1156,16 @@ async function setBackground(
     imagePath
 ) {
 
-    /*
-       نحمل الصورة أولًا
-       قبل إظهار الصفحة
-    */
-
     await preloadBackground(
         imagePath
     );
 
-
-    /*
-       وضع الخلفية
-    */
 
     document.body.style.backgroundImage =
         'url("' +
         imagePath +
         '")';
 
-
-    /*
-       إظهار الصفحة بعد تحديد الخلفية
-    */
 
     document.body.classList.add(
         "theme-ready"
@@ -1421,14 +1185,10 @@ async function loadChildInterest() {
 
 
     /* =========================================
-       إذا لم يوجد ID
+       DEFAULT BACKGROUND
     ========================================== */
 
     if (!childId) {
-
-        console.warn(
-            "rafiqChildId غير موجود"
-        );
 
         await setBackground(
             "images/af.jpeg"
@@ -1482,10 +1242,6 @@ async function loadChildInterest() {
 
         if (!data) {
 
-            console.warn(
-                "لم يتم العثور على الطفل"
-            );
-
             await setBackground(
                 "images/af.jpeg"
             );
@@ -1522,7 +1278,7 @@ async function loadChildInterest() {
 
 
         /* =========================================
-           CARS → ak.jpeg
+           CARS
         ========================================== */
 
         if (
@@ -1546,7 +1302,7 @@ async function loadChildInterest() {
 
 
         /* =========================================
-           SPACE → af.jpeg
+           SPACE
         ========================================== */
 
         if (
@@ -1566,7 +1322,7 @@ async function loadChildInterest() {
 
 
         /* =========================================
-           DEFAULT → SPACE
+           DEFAULT
         ========================================== */
 
         await setBackground(
@@ -1610,7 +1366,7 @@ function toggleMenu() {
 
 
 /* =====================================================
-   CLOSE MENU WHEN CLICKING OUTSIDE
+   CLOSE MENU
 ===================================================== */
 
 document.addEventListener(
@@ -1694,19 +1450,11 @@ function goProgress() {
 
 function openWaitingPage() {
 
-    /*
-       حفظ آخر موقف
-    */
-
     localStorage.setItem(
         "lastSocialSituation",
         "الانتظار"
     );
 
-
-    /*
-       الانتقال مباشرة
-    */
 
     window.location.href =
         "waiting.html";
@@ -1728,10 +1476,6 @@ function selectSituation(
         );
 
 
-    /* =========================================
-       VISUAL EFFECT
-    ========================================== */
-
     element.classList.remove(
         "selected"
     );
@@ -1743,19 +1487,11 @@ function selectSituation(
     );
 
 
-    /* =========================================
-       SAVE LAST SITUATION
-    ========================================== */
-
     localStorage.setItem(
         "lastSocialSituation",
         text
     );
 
-
-    /* =========================================
-       SPEECH
-    ========================================== */
 
     speakArabic(
         text

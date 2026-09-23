@@ -1,19 +1,1625 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تجربة رقم جديد</title>
 
-    <title>تجربة رقم جديد</title>
+<style>
+#numberGame {
+    width: 100%;
+    min-height: 100vh;
+}
 
-    <link rel="stylesheet" href="../css/style.css">
+.number-scene {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.number-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+}
+
+.number-boy {
+    position: absolute;
+    left: 6%;
+    bottom: 0;
+    width: auto;
+    max-height: 78%;
+    object-fit: contain;
+    z-index: 2;
+}
+
+.number-boy-cubes {
+    max-height: 75%;
+}
+
+.number-boy-think {
+    max-height: 68%;
+    bottom: 5%;
+}
+
+.number-boy-seven {
+    max-height: 75%;
+}
+
+.number-boy-happy {
+    max-height: 72%;
+}
+
+.number-text {
+    position: absolute;
+    z-index: 5;
+    background: rgba(255,255,255,0.93);
+    border-radius: 32px;
+    padding: 30px 35px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+}
+
+.number-text-right {
+    top: 50%;
+    right: 6%;
+    transform: translateY(-50%);
+    width: 42%;
+    max-width: 520px;
+}
+
+.number-text h1 {
+    font-size: 42px;
+    margin: 0 0 15px;
+}
+
+.number-text h2 {
+    font-size: 32px;
+    margin: 0 0 15px;
+}
+
+.number-text p {
+    font-size: 22px;
+    line-height: 1.8;
+}
+
+.number-btn {
+    border: none;
+    background: #9b6872;
+    color: white;
+    padding: 14px 35px;
+    border-radius: 25px;
+    font-size: 21px;
+    font-family: inherit;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.number-btn:hover {
+    transform: scale(1.04);
+}
+
+.number-btn-light {
+    background: white;
+    color: #9b6872;
+    border: 2px solid #9b6872;
+}
+
+.number-question-card {
+    position: absolute;
+    top: 50%;
+    right: 6%;
+    transform: translateY(-50%);
+    width: 48%;
+    max-width: 600px;
+    background: rgba(255,255,255,0.94);
+    border-radius: 32px;
+    padding: 28px;
+    text-align: center;
+    z-index: 5;
+}
+
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.number-choice {
+    height: 75px;
+    border: none;
+    border-radius: 20px;
+    background: #fff3d7;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 12px rgba(0,0,0,0.10);
+}
+
+.number-choice:hover {
+    background: #ffd979;
+    transform: scale(1.06);
+}
+
+.favorite-number-big {
+    font-size: 90px;
+    font-weight: bold;
+    color: #457ab5;
+    margin: 5px;
+}
+
+.new-number-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 55%;
+    max-width: 600px;
+    padding: 35px;
+    background: rgba(255,255,255,0.94);
+    border-radius: 35px;
+    text-align: center;
+    z-index: 5;
+}
+
+.new-number-big {
+    font-size: 130px;
+    font-weight: bold;
+    color: #e99b2d;
+    line-height: 1.1;
+}
+
+.number-activity-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 65%;
+    padding: 35px;
+    background: rgba(255,255,255,0.94);
+    border-radius: 35px;
+    text-align: center;
+    z-index: 5;
+}
+
+.number-objects {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 25px 0;
+}
+
+.number-object {
+    font-size: 65px;
+}
+
+.number-feeling-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 65%;
+    padding: 35px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 35px;
+    text-align: center;
+    z-index: 5;
+}
+
+.feeling-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.feeling-grid button {
+    border: none;
+    background: #fff4dc;
+    border-radius: 25px;
+    padding: 20px 10px;
+    font-size: 45px;
+    cursor: pointer;
+}
+
+.feeling-grid span {
+    display: block;
+    font-size: 18px;
+    margin-top: 8px;
+}
+
+.no-wrong-answer {
+    margin-top: 20px;
+}
+
+.number-learning-card {
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+    width: 50%;
+    max-width: 620px;
+    padding: 35px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 35px;
+    z-index: 5;
+}
+
+.number-learning-card h2 {
+    text-align: center;
+}
+
+.number-learning-card p {
+    font-size: 21px;
+    padding: 9px 0;
+}
+
+@media (max-width:800px) {
+    .number-boy {
+        max-height:55%;
+        left:0;
+    }
+
+    .number-text-right,
+    .number-question-card {
+        width:55%;
+        right:3%;
+    }
+
+    .number-grid {
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .number-text h1 {
+        font-size:30px;
+    }
+
+    .number-text p {
+        font-size:18px;
+    }
+
+    .feeling-grid {
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+.number-disabled {
+    opacity:0.38;
+    cursor:not-allowed;
+    position:relative;
+}
+
+.number-disabled small {
+    display:block;
+    font-size:10px;
+    margin-top:3px;
+}
+
+.number-center-card {
+    left:50%;
+    right:auto;
+    transform:translate(-50%,-50%);
+}
+
+.challenge-label {
+    display:inline-block;
+    background:#fff0bd;
+    padding:8px 18px;
+    border-radius:20px;
+    font-size:17px;
+    margin-bottom:8px;
+}
+
+.trace-number {
+    width:220px;
+    height:220px;
+    margin:20px auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:170px;
+    font-weight:bold;
+    color:transparent;
+    -webkit-text-stroke:4px #8f9cab;
+    border:4px dashed #c9d1d9;
+    border-radius:35px;
+    cursor:crosshair;
+    user-select:none;
+}
+
+.count-objects {
+    min-height:130px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:13px;
+    margin:20px auto;
+}
+
+.count-object {
+    font-size:58px;
+}
+
+.zero-objects {
+    background:#f6f6f6;
+    border-radius:20px;
+    padding:25px;
+    font-size:20px;
+}
+
+.answer-row {
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.answer-number {
+    width:85px;
+    height:85px;
+    border:none;
+    border-radius:25px;
+    background:#fff0c9;
+    font-size:35px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 5px 12px rgba(0,0,0,.10);
+}
+
+.answer-number:hover {
+    transform:scale(1.07);
+}
+
+.correct-answer,
+.correct-group,
+.correct-hidden {
+    background:#d9f4d5 !important;
+    border:3px solid #74b96d !important;
+}
+
+.wrong-answer {
+    animation:numberShake .3s;
+}
+
+@keyframes numberShake {
+    0% {transform:translateX(0);}
+    25% {transform:translateX(-5px);}
+    50% {transform:translateX(5px);}
+    100% {transform:translateX(0);}
+}
+
+.find-number-grid {
+    display:grid;
+    grid-template-columns:repeat(3,100px);
+    justify-content:center;
+    gap:15px;
+    margin:25px auto;
+}
+
+.find-number {
+    width:100px;
+    height:90px;
+    border:none;
+    border-radius:24px;
+    background:white;
+    font-size:37px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 5px 14px rgba(0,0,0,.12);
+}
+
+.find-number:hover {
+    transform:scale(1.05);
+}
+
+.found-number {
+    background:#fff2a9;
+}
+
+.object-groups {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+    margin-top:25px;
+}
+
+.object-group {
+    min-height:150px;
+    border:none;
+    background:white;
+    border-radius:25px;
+    padding:20px;
+    font-size:35px;
+    line-height:1.5;
+    cursor:pointer;
+    box-shadow:0 5px 15px rgba(0,0,0,.10);
+}
+
+.object-group:hover {
+    transform:translateY(-4px);
+}
+
+.empty-group {
+    font-size:17px;
+}
+
+.hidden-number-grid {
+    display:grid;
+    grid-template-columns:repeat(3,110px);
+    gap:18px;
+    justify-content:center;
+    margin:30px auto;
+}
+
+.hidden-card {
+    width:110px;
+    height:120px;
+    border:4px solid white;
+    border-radius:25px;
+    background:#9b6872;
+    color:white;
+    font-size:45px;
+    font-weight:bold;
+    cursor:pointer;
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
+}
+
+.hidden-card:hover {
+    transform:translateY(-5px);
+}
+
+.activity-feedback {
+    min-height:50px;
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+    text-align:center;
+}
+
+.number-finish-card {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:60%;
+    max-width:650px;
+    padding:35px;
+    background:rgba(255,255,255,.95);
+    border-radius:38px;
+    text-align:center;
+    z-index:5;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}.trophy {
+    font-size: 95px;
+}
+
+.finish-numbers {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 25px 0;
+}
+
+.finish-numbers > div {
+    width: 180px;
+    padding: 15px;
+    border-radius: 25px;
+    background: #fff4d9;
+}
+
+.finish-numbers span {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.finish-numbers strong {
+    display: block;
+    font-size: 55px;
+    color: #557fae;
+}
+
+@media (max-width: 700px) {
+
+    .find-number-grid {
+        grid-template-columns: repeat(3, 75px);
+    }
+
+    .find-number {
+        width: 75px;
+        height: 70px;
+    }
+
+    .hidden-number-grid {
+        grid-template-columns: repeat(3, 80px);
+    }
+
+    .hidden-card {
+        width: 80px;
+        height: 90px;
+    }
+
+    .object-groups {
+        grid-template-columns: 1fr;
+    }
+
+    .finish-numbers {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .trace-number {
+        width: 170px;
+        height: 170px;
+        font-size: 125px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <div id="numberGame"></div>
+<div id="numberGame"></div>
 
-    <script src="../js/number.js"></script>
+<script>
+
+const numberImages = {
+    numbers: "images/numbers.png",
+    cub: "images/cub.png",
+    think: "images/think.png",
+    seven: "images/seven.png",
+    happy: "images/happy.png"
+};
+
+const numberGame = document.getElementById("numberGame");
+
+let favoriteNumber = null;
+let newNumber = null;
+let feeling = null;
+let findTargetRemaining = 0;
+let hiddenTargetIndex = 0;
+
+function background() {
+    return `<img src="${numberImages.numbers}" class="number-background" alt="">`;
+}
+
+function nextPage(pageFunction) {
+    pageFunction();
+}
+
+function shuffle(array) {
+    return [...array].sort(() => Math.random() - 0.5);
+}
+
+function toArabicNumber(number) {
+    return String(number).replace(
+        /\d/g,
+        digit => "٠١٢٣٤٥٦٧٨٩"[digit]
+    );
+}
+
+
+/* ==============================
+   الصفحة 1
+============================== */
+
+function numberPage1() {
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <img
+            src="${numberImages.cub}"
+            class="number-boy number-boy-cubes"
+            alt=""
+        >
+
+        <div class="number-text number-text-right">
+
+            <h1>تجربة رقم جديد</h1>
+
+            <p>
+                لنكتشف أرقامًا جديدة معًا!
+            </p>
+
+            <button
+                class="number-btn"
+                onclick="numberPage2()"
+            >
+                ابدأ
+            </button>
+
+        </div>
+
+    </div>
+    `;
+}
+
+
+/* ==============================
+   الصفحة 2
+============================== */
+
+function numberPage2() {
+
+    let buttons = "";
+
+    for (let i = 0; i <= 9; i++) {
+
+        buttons += `
+        <button
+            class="number-choice"
+            onclick="chooseFavoriteNumber(${i})"
+        >
+            ${toArabicNumber(i)}
+        </button>`;
+    }
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <img
+            src="${numberImages.think}"
+            class="number-boy number-boy-think"
+            alt=""
+        >
+
+        <div class="number-question-card">
+
+            <h2>ما هو رقمك المفضل؟</h2>
+
+            <p>
+                اختر الرقم الذي تحبه كثيرًا!
+            </p>
+
+            <div class="number-grid">
+                ${buttons}
+            </div>
+
+        </div>
+
+    </div>`;
+}
+
+
+function chooseFavoriteNumber(number) {
+
+    favoriteNumber = number;
+
+    numberPage3();
+}
+
+
+/* ==============================
+   الصفحة 3
+============================== */
+
+function numberPage3() {
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        ${
+            favoriteNumber === 7
+
+            ? `<img
+                src="${numberImages.seven}"
+                class="number-boy number-boy-seven"
+                alt=""
+               >`
+
+            : `<img
+                src="${numberImages.cub}"
+                class="number-boy number-boy-cubes"
+                alt=""
+               >`
+        }
+
+        <div class="number-text number-text-right">
+
+            <h2>رائع! ⭐</h2>
+
+            <p>
+                رقمك المفضل هو
+            </p>
+
+            <div class="favorite-number-big">
+                ${toArabicNumber(favoriteNumber)}
+            </div>
+
+            <p>
+                وسيبقى رقمًا مميزًا بالنسبة لك 💛
+            </p>
+
+            <button
+                class="number-btn"
+                onclick="numberPage4()"
+            >
+                التالي
+            </button>
+
+        </div>
+
+    </div>`;
+}
+
+
+/* ==============================
+   الصفحة 4
+============================== */
+
+function numberPage4() {
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <img
+            src="${numberImages.think}"
+            class="number-boy number-boy-think"
+            alt=""
+        >
+
+        <div class="number-text number-text-right">
+
+            <h2>
+                اليوم سنجرب رقمًا جديدًا! 🌟
+            </h2>
+
+            <p>
+                رقمك المفضل سيبقى كما هو،
+                وسنتعرف على رقم آخر أيضًا.
+            </p>
+
+            <p>
+                تجربة أشياء جديدة تساعدنا
+                على أن نصبح أكثر مرونة 💛
+            </p>
+
+            <button
+                class="number-btn"
+                onclick="numberPage5()"
+            >
+                لنبدأ
+            </button>
+
+        </div>
+
+    </div>`;
+}
+
+
+/* ==============================
+   الصفحة 5
+============================== */
+
+function numberPage5() {
+
+    let buttons = "";
+
+    for (let i = 0; i <= 9; i++) {
+
+        if (i === favoriteNumber) {
+
+            buttons += `
+            <button
+                class="number-choice number-disabled"
+                disabled
+            >
+                ${toArabicNumber(i)}
+                <small>رقمي المفضل</small>
+            </button>`;
+
+        } else {
+
+            buttons += `
+            <button
+                class="number-choice"
+                onclick="chooseNewNumber(${i})"
+            >
+                ${toArabicNumber(i)}
+            </button>`;
+        }
+    }
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <div class="number-question-card number-center-card">
+
+            <h2>
+                اختر رقمًا جديدًا لتجربته
+            </h2>
+
+            <p>
+                اختر أي رقم غير
+                ${toArabicNumber(favoriteNumber)}
+            </p>
+
+            <div class="number-grid">
+                ${buttons}
+            </div>
+
+        </div>
+
+    </div>`;
+}
+
+
+function chooseNewNumber(number) {
+
+    newNumber = number;
+
+    numberPage6();
+}
+
+
+/* ==============================
+   الصفحة 6
+============================== */
+
+function numberPage6() {
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <img
+            src="${numberImages.happy}"
+            class="number-boy number-boy-happy"
+            alt=""
+        >
+
+        <div class="number-text number-text-right">
+
+            <h2>ممتاز! 🎉</h2>
+
+            <p>
+                اليوم سنجرب الرقم
+            </p>
+
+            <div class="new-number-big">
+                ${toArabicNumber(newNumber)}
+            </div>
+
+            <p>
+                سنلعب معه بعدة طرق ممتعة!
+            </p>
+
+            <button
+                class="number-btn"
+                onclick="numberPage7()"
+            >
+                هيا بنا
+            </button>
+
+        </div>
+
+    </div>`;
+}
+
+
+/* ==============================
+   التحدي 1
+============================== */
+
+function numberPage7() {
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <div class="number-activity-card">
+
+            <div class="challenge-label">
+                التحدي ١ ⭐
+            </div>
+
+            <h2>
+                لنكتب الرقم
+                ${toArabicNumber(newNumber)}
+            </h2>
+
+            <p>
+                مرر إصبعك أو الماوس على الرقم
+            </p>
+
+            <div
+                class="trace-number"
+                id="traceNumber"
+            >
+                ${toArabicNumber(newNumber)}
+            </div>
+
+            <button
+                class="number-btn"
+                onclick="numberPage8()"
+            >
+                انتهيت
+            </button>
+
+        </div>
+
+    </div>`;
+}
+
+
+/* ==============================
+   التحدي 2
+============================== */
+
+function numberPage8() {
+
+    const displayCount =
+        newNumber === 0 ? 0 : newNumber;
+
+    let objects = "";
+
+    if (displayCount === 0) {
+
+        objects = `
+        <div class="zero-objects">
+            لا توجد تفاحات 🍎
+        </div>`;
+
+    } else {
+
+        for (
+            let i = 0;
+            i < displayCount;
+            i++
+        ) {
+
+            objects += `
+            <span class="count-object">
+                🍎
+            </span>`;
+        }
+    }
+
+    let choices =
+        createNumberChoices(newNumber);
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <div class="number-activity-card">
+
+            <div class="challenge-label">
+                التحدي ٢ ⭐
+            </div>
+
+            <h2>
+                كم ترى هنا؟
+            </h2>
+
+            <p>
+                عد الأشياء ثم اختر الإجابة
+            </p>
+
+            <div class="count-objects">
+                ${objects}
+            </div>
+
+            <div class="answer-row">
+
+                ${choices.map(number => `
+                    <button
+                        class="answer-number"
+                        onclick="checkCounting(${number}, this)"
+                    >
+                        ${toArabicNumber(number)}
+                    </button>
+                `).join("")}
+
+            </div>
+
+            <div
+                id="countFeedback"
+                class="activity-feedback"
+            ></div>
+
+        </div>
+
+    </div>`;
+}
+
+
+function createNumberChoices(correct) {
+
+    let values = new Set();
+
+    values.add(correct);
+
+    while (values.size < 3) {
+
+        values.add(
+            Math.floor(
+                Math.random() * 10
+            )
+        );
+    }
+
+    return shuffle([...values]);
+}
+
+
+function checkCounting(answer, button) {
+
+    const feedback =
+        document.getElementById(
+            "countFeedback"
+        );
+
+    if (answer === newNumber) {
+
+        button.classList.add(
+            "correct-answer"
+        );
+
+        feedback.innerHTML = `
+            أحسنت! ⭐
+            <br>
+            <button
+                class="number-btn"
+                onclick="numberPage9()"
+            >
+                التحدي التالي
+            </button>
+        `;
+
+        disableAnswerButtons();
+
+    } else {
+
+        button.classList.add(
+            "wrong-answer"
+        );
+
+        feedback.innerHTML =
+            "قريب جدًا 💛 حاول مرة أخرى";
+    }
+}
+
+
+function disableAnswerButtons() {
+
+    document
+        .querySelectorAll(".answer-number")
+        .forEach(button => {
+
+            button.disabled = true;
+
+        });
+}
+
+
+/* ==============================
+   التحدي 3
+============================== */
+
+function numberPage9() {
+
+    let numbers = [
+        newNumber,
+        newNumber,
+        newNumber
+    ];
+
+    while (numbers.length < 9) {
+
+        let random =
+            Math.floor(
+                Math.random() * 10
+            );
+
+        if (random !== newNumber) {
+
+            numbers.push(random);
+        }
+    }
+
+    numbers = shuffle(numbers);
+
+    findTargetRemaining = 3;
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <div class="number-activity-card">
+
+            <div class="challenge-label">
+                التحدي ٣ ⭐
+            </div>
+
+            <h2>
+                ابحث عن الرقم
+                ${toArabicNumber(newNumber)}
+            </h2>
+
+            <p>
+                اضغط على كل رقم
+                ${toArabicNumber(newNumber)}
+                تجده
+            </p>
+
+            <div class="find-number-grid">
+
+                ${numbers.map(number => `
+                    <button
+                        class="find-number"
+                        data-number="${number}"
+                        onclick="findNumber(${number}, this)"
+                    >
+                        ${toArabicNumber(number)}
+                    </button>
+                `).join("")}
+
+            </div>
+
+            <div
+                id="findFeedback"
+                class="activity-feedback"
+            >
+                بقي ٣
+            </div>
+
+        </div>
+
+    </div>`;
+}
+
+
+function findNumber(number, button) {
+
+    const feedback =
+        document.getElementById(
+            "findFeedback"
+        );
+
+    if (number === newNumber) {
+
+        if (
+            button.classList.contains(
+                "found-number"
+            )
+        ) return;
+
+        button.classList.add(
+            "found-number"
+        );
+
+        button.innerHTML = "⭐";
+
+        findTargetRemaining--;
+
+        if (findTargetRemaining === 0) {
+
+            feedback.innerHTML = `
+                وجدتها كلها! 🎉
+                <br>
+                <button
+                    class="number-btn"
+                    onclick="numberPage11()"
+                >
+                    التالي
+                </button>
+            `;
+
+        } else {
+
+            feedback.innerHTML =
+                `أحسنت! بقي ${
+                    toArabicNumber(
+                        findTargetRemaining
+                    )
+                }`;
+        }
+
+    } else {
+
+        button.classList.add(
+            "wrong-answer"
+        );
+
+        feedback.innerHTML =
+            `هذا رقم ${
+                toArabicNumber(number)
+            }، ابحث عن ${
+                toArabicNumber(newNumber)
+            } 💛`;
+    }
+}
+
+
+/* ==============================
+   التحدي 4
+============================== */
+
+function numberPage11() {
+
+    hiddenTargetIndex =
+        Math.floor(
+            Math.random() * 6
+        );
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <div class="number-activity-card">
+
+            <div class="challenge-label">
+                التحدي ٤ ⭐
+            </div>
+
+            <h2>
+                أين اختبأ الرقم
+                ${toArabicNumber(newNumber)}؟
+                🔍
+            </h2>
+
+            <p>
+                افتح البطاقات حتى تجده
+            </p>
+
+            <div class="hidden-number-grid">
+
+                ${[0,1,2,3,4,5]
+                    .map(index => `
+                        <button
+                            class="hidden-card"
+                            onclick="openHiddenCard(${index}, this)"
+                        >
+                            ؟
+                        </button>
+                    `)
+                    .join("")}
+
+            </div>
+
+            <div
+                id="hiddenFeedback"
+                class="activity-feedback"
+            ></div>
+
+        </div>
+
+    </div>`;
+}
+
+
+function openHiddenCard(index, button) {
+
+    const feedback =
+        document.getElementById(
+            "hiddenFeedback"
+        );
+
+    if (index === hiddenTargetIndex) {
+
+        button.innerHTML =
+            toArabicNumber(newNumber);
+
+        button.classList.add(
+            "correct-hidden"
+        );
+
+        feedback.innerHTML = `
+            وجدته! 🎉
+            <br>
+            أصبحت تعرف الرقم
+            ${toArabicNumber(newNumber)}
+            جيدًا!
+            <br>
+
+            <button
+                class="number-btn"
+                onclick="numberPage12()"
+            >
+                التالي
+            </button>
+        `;
+
+        document
+            .querySelectorAll(".hidden-card")
+            .forEach(card => {
+
+                card.disabled = true;
+
+            });
+
+    } else {
+
+        button.innerHTML = "⭐";
+        button.disabled = true;
+
+        feedback.innerHTML =
+            "ليس هنا، لنبحث في بطاقة أخرى 💛";
+    }
+}
+
+
+/* ==============================
+   صفحة النجاح
+============================== */
+
+function numberPage12() {
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <img
+            src="${numberImages.happy}"
+            class="number-boy number-boy-happy"
+            alt=""
+        >
+
+        <div class="number-text number-text-right">
+
+            <h1>
+                أحسنت! 🌟
+            </h1>
+
+            <p>
+                لقد جربت الرقم
+            </p>
+
+            <div class="new-number-big">
+                ${toArabicNumber(newNumber)}
+            </div>
+
+            <p>
+                وكتبتَه وعددتَه وبحثتَ عنه!
+            </p>
+
+            <p>
+                تجربة شيء جديد خطوة رائعة 💛
+            </p>
+
+            <button
+                class="number-btn"
+                onclick="numberPage13()"
+            >
+                التالي
+            </button>
+
+        </div>
+
+    </div>`;
+}
+
+
+/* ==============================
+   المشاعر
+============================== */
+
+function numberPage13() {
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <div class="number-feeling-card">
+
+            <h2>
+                كيف شعرت؟
+            </h2>
+
+            <p>
+                اختر الوجه الذي يعبر عنك
+            </p>
+
+            <div class="feeling-grid">
+
+                <button
+                    onclick="chooseFeeling('ممتاز')"
+                >
+                    😊
+                    <span>ممتاز</span>
+                </button>
+
+                <button
+                    onclick="chooseFeeling('جيد')"
+                >
+                    🙂
+                    <span>جيد</span>
+                </button>
+
+                <button
+                    onclick="chooseFeeling('احتجت للمساعدة')"
+                >
+                    😕
+                    <span>
+                        احتجت للمساعدة
+                    </span>
+                </button>
+
+            </div>
+
+            <p class="no-wrong-answer">
+                كل المشاعر مقبولة 💛
+            </p>
+
+        </div>
+
+    </div>`;
+}
+
+
+function chooseFeeling(selected) {
+
+    feeling = selected;
+
+    numberPage14();
+}
+
+
+/* ==============================
+   رسالة رفيق
+============================== */
+
+function numberPage14() {
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <img
+            src="${numberImages.happy}"
+            class="number-boy number-boy-happy"
+            alt=""
+        >
+
+        <div class="number-text number-text-right">
+
+            <h2>
+                رسالة من رفيق 💛
+            </h2>
+
+            <p>
+                رقمك
+                ${toArabicNumber(favoriteNumber)}
+                ما زال رقمك المفضل.
+            </p>
+
+            <p>
+                واليوم استطعت أيضًا تجربة الرقم
+                ${toArabicNumber(newNumber)}.
+            </p>
+
+            <p>
+                كل مرة تجرب فيها شيئًا جديدًا،
+                تتعلم أن التغيير يمكن أن يكون
+                آمنًا وممتعًا 🌟
+            </p>
+
+            <button
+                class="number-btn"
+                onclick="numberPage15()"
+            >
+                التالي
+            </button>
+
+        </div>
+
+    </div>`;
+}
+
+
+/* ==============================
+   النهاية
+============================== */
+
+function numberPage15() {
+
+    numberGame.innerHTML = `
+    <div class="number-scene">
+
+        ${background()}
+
+        <div class="number-finish-card">
+
+            <div class="trophy">
+                🏆
+            </div>
+
+            <h1>
+                اكتمل التحدي!
+            </h1>
+
+            <p>
+                لقد جربت رقمًا جديدًا! رائع 🌟
+            </p>
+
+            <div class="finish-numbers">
+
+                <div>
+                    <span>
+                        رقمي المفضل
+                    </span>
+
+                    <strong>
+                        ${toArabicNumber(favoriteNumber)}
+                    </strong>
+                </div>
+
+                <div>
+                    <span>
+                        الرقم الذي جربته
+                    </span>
+
+                    <strong>
+                        ${toArabicNumber(newNumber)}
+                    </strong>
+                </div>
+
+            </div>
+
+            <button
+                class="number-btn"
+                onclick="tryAnotherNumber()"
+            >
+                تجربة رقم آخر
+            </button>
+
+            <button
+                class="number-btn number-btn-light"
+                onclick="window.location.href='challenges.html'"
+            >
+                العودة للتحديات
+            </button>
+
+        </div>
+
+    </div>`;
+}
+
+
+function tryAnotherNumber() {
+
+    newNumber = null;
+    feeling = null;
+
+    numberPage5();
+}
+
+
+/* تشغيل اللعبة */
+
+numberPage1();
+
+</script>
 
 </body>
 </html>
